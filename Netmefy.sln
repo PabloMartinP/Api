@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netmefy.Api", "Netmefy.Api\Netmefy.Api.csproj", "{FC614260-8537-46DD-BA15-20E6C86AD635}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netmefy.Data", "Netmefy.Data\Netmefy.Data.csproj", "{6A88A023-03A6-4E55-93AA-F5A2F149A3BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Netmefy.Service", "Netmefy.Service\Netmefy.Service.csproj", "{6680D771-F8AB-441C-B863-1CE5073DAA07}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC614260-8537-46DD-BA15-20E6C86AD635}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC614260-8537-46DD-BA15-20E6C86AD635}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC614260-8537-46DD-BA15-20E6C86AD635}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC614260-8537-46DD-BA15-20E6C86AD635}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A88A023-03A6-4E55-93AA-F5A2F149A3BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A88A023-03A6-4E55-93AA-F5A2F149A3BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A88A023-03A6-4E55-93AA-F5A2F149A3BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A88A023-03A6-4E55-93AA-F5A2F149A3BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6680D771-F8AB-441C-B863-1CE5073DAA07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6680D771-F8AB-441C-B863-1CE5073DAA07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6680D771-F8AB-441C-B863-1CE5073DAA07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6680D771-F8AB-441C-B863-1CE5073DAA07}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

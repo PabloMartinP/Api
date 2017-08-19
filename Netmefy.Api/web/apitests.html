@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+    <div ng-app="myApp" ng-controller="myCtrl">
+        <div>
+            username: <input type="text"  name="" ng-model="user.username" /> | password: <input type="text"  name="" ng-model="user.password" />
+        </div>
+        <br/>
+        <div>
+            <button ng-click="click_get_token()">get token </button>
+        </div>
+        <hr />
+        <button ng-click="get_usuario()">get api/usuarios/5</button>
+        <hr />
+        <h3>logs</h3>
+        <div>
+            pantalla: <input type="text" name="" ng-model="pantalla" />
+            <br />
+            descripcion: <input type="text" name="" ng-model="descripcion" />
+        </div>
+        <div>
+            <button ng-click="click_post_log()">post api/logs/</button>
+        </div>        
+        <hr />        
+        <hr noshade />
+        <div>
+            <h2>resultado: </h2>
+            {{resultado}}
+        </div>
+
+    </div>
+
+    <script>
+
+        //200.69.217.157:20100
+        //var url_root = "http://200.69.217.157:20100";
+        var url_root = "http://200.82.0.24";
+        var URL_USUARIOS = url_root + "/api/usuarios";
+        var URL_LOGS = url_root + "/api/logs";
+
+
+        var app = angular.module('myApp', []);
+        var authorizationData;
+        app.factory('authInterceptorService', ['$q', '$location', function ($q, $location, localStorageService) {
+            /*se ejecuta en cada peticion http*/
+            var authInterceptorServiceFactory = {};
+
+            var _request = function (config) {
+                config.headers = config.headers || {};
+
+                //var authData = localStorageService.get('authorizationData');
+                var authData = authorizationData;
+                if (authData) {
+                    config.headers.Authorization = 'Bearer ' + authData.token;
+                }
+
+                return config;
+            }
+
+            var _responseError = function (rejection) {
+                if (rejection.status === 401) {
+                    alert("ERRR 401------------");
+                    //$location.path('/login');
+                }
+                return $q.reject(rejection);
+            }
+
+            authInterceptorServiceFactory.request = _request;
+            authInterceptorServiceFactory.responseError = _responseError;
+
+            return authInterceptorServiceFactory;
+        }]);
+
+        app.config(function ($httpProvider) {
+            $httpProvider.interceptors.push('authInterceptorService');
+        });
+
+        app.controller('myCtrl', function ($scope, $http, $q) {
+            $scope.user = { username: 'netmefy', password: 'yfemten' };
+                        
+            $scope.pantalla = "inicial";
+            $scope.descripcion = "click en boton 1";
+
+            $scope.click_post_log = function () {
+                var data = { tipo: 200, doc_tipo: $scope.doc_tipo, doc_numero: $scope.doc_nro, pantalla: $scope.pantalla, descripcion: $scope.descripcion };
+                $http.post(URL_LOGS, data)
+                    .then(function (response) {
+                        console.log(URL_LOGS + 'ok ' + URL_LOGS, response)
+                        alert("OK " + URL_LOGS + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + URL_LOGS + " catch");
+                    });
+            }
+
+
+            $scope.get_usuario = function () {
+                var url = URL_USUARIOS + "/5";
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+
+            $scope.click_get_token = function () {
+                /*EL CLIENT_ID ES UN PARAMETRO FIJO PARA TODA LA APLICACION*/
+                var data = "grant_type=password&UserName=" + $scope.user.username + "&Password=" + $scope.user.password + "&client_id=Utn.Ba$";
+                //alert("$scope.username:" + $scope.username);
+                //alert(data);
+
+                var deferred = $q.defer();
+                $http.post(url_root + '/oauth2/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
+                  .success(function (response) {
+                      alert("Success /token");
+                      console.log(response);
+                      //localStorageService.set('authorizationData', { token: response.access_token, userName: loginData.userName });
+                      //authorizationData = { token: response.access_token, userName: loginData.userName };
+                      authorizationData = { token: response.access_token };
+                      //_authentication.isAuth = true;
+                      //_authentication.userName = loginData.userName;
+                      $scope.resultado = JSON.stringify(response);
+                      deferred.resolve(response);
+
+
+
+                  }).error(function (err, status) {
+                      //_logOut();
+                      alert("ERRRR /token");
+                      deferred.reject(err);
+                  });
+            }
+
+
+
+        });
+
+
+
+
+
+    </script>
+
+
+</body>
+</html>
