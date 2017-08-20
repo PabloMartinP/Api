@@ -85,7 +85,12 @@ namespace Netmefy.Api.Controllers.api
         [ResponseType(typeof(usuario))]
         public IHttpActionResult Postusuario(usuario usuario)
         {
-            if (!ModelState.IsValid)
+            usuario.usuario_edad = 22;
+            usuario.usuario_email = "test@gmail.com";
+            usuario.usuario_nombre = "nombre ";
+            usuario.usuario_sexo = "F";
+            return CreatedAtRoute("DefaultApi", new { id = 123 }, usuario);
+            /*if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
@@ -108,7 +113,7 @@ namespace Netmefy.Api.Controllers.api
                 }
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = usuario.usuario_sk }, usuario);
+            return CreatedAtRoute("DefaultApi", new { id = usuario.usuario_sk }, usuario);*/
         }
 
         // DELETE: api/usuarios/5

@@ -13,6 +13,8 @@
         </div>
         <hr />
         <button ng-click="get_usuario()">get api/usuarios/5</button>
+        <button ng-click="post_usuario()">post api/usuarios</button>
+
         <hr />
         <h3>logs</h3>
         <div>
@@ -35,8 +37,8 @@
     <script>
 
         //200.69.217.157:20100
-        //var url_root = "http://200.69.217.157:20100";
-        var url_root = "http://200.82.0.24";
+        //var url_root = "http://200.82.0.24";
+        var url_root = "";
         var URL_USUARIOS = url_root + "/api/usuarios";
         var URL_LOGS = url_root + "/api/logs";
 
@@ -96,6 +98,19 @@
             }
 
 
+            $scope.post_usuario = function () {
+                var data = { usuario_edad: 123, usuario_email: 'mail', usuario_nombre: 'nomm', usuario_sexo: 'F' };
+                var url = URL_USUARIOS;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
             $scope.get_usuario = function () {
                 var url = URL_USUARIOS + "/5";
                 $http.get(url)
@@ -115,9 +130,10 @@
                 var data = "grant_type=password&UserName=" + $scope.user.username + "&Password=" + $scope.user.password + "&client_id=Utn.Ba$";
                 //alert("$scope.username:" + $scope.username);
                 //alert(data);
-
+                var url = url_root + '/oauth2/token';
+                console.log(url);
                 var deferred = $q.defer();
-                $http.post(url_root + '/oauth2/token', data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
+                $http.post(url, data, { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } })
                   .success(function (response) {
                       alert("Success /token");
                       console.log(response);
