@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="NETMEFYModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NETMEFYModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="bt_notificaciones">
           <Key>
             <PropertyRef Name="usuario_sk" />
@@ -212,6 +212,16 @@
           <Property Name="usuario_sk" Type="int" Nullable="false" />
           <Property Name="cliente_sk" Type="int" Nullable="false" />
           <Property Name="entidad_sk" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="token">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_entidad" Type="int" Nullable="false" />
+          <Property Name="es_cliente" Type="bit" Nullable="false" />
+          <Property Name="es_tecnico" Type="bit" Nullable="false" />
+          <Property Name="token" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <Association Name="fk_bt_notificaciones_lk_notificacion">
           <End Role="lk_notificacion" Type="Self.lk_notificacion" Multiplicity="1" />
@@ -566,6 +576,7 @@
           <EntitySet Name="lk_usuario" EntityType="Self.lk_usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lk_web" EntityType="Self.lk_web" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rel_user_ent" EntityType="Self.rel_user_ent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="token" EntityType="Self.token" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="fk_bt_notificaciones_lk_notificacion" Association="Self.fk_bt_notificaciones_lk_notificacion">
             <End Role="lk_notificacion" EntitySet="lk_notificacion" />
             <End Role="bt_notificaciones" EntitySet="bt_notificaciones" />
@@ -675,8 +686,7 @@
             <End Role="rel_user_ent" EntitySet="rel_user_ent" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NETMEFYModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1325,7 +1335,18 @@
             <End Role="lk_entidad" EntitySet="lk_entidad" />
             <End Role="lk_usuario" EntitySet="usuarios" />
           </AssociationSet>
+          <EntitySet Name="tokens" EntityType="NETMEFYModel.token" />
         </EntityContainer>
+        <EntityType Name="token">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_entidad" Type="Int32" Nullable="false" />
+          <Property Name="es_cliente" Type="Boolean" Nullable="false" />
+          <Property Name="es_tecnico" Type="Boolean" Nullable="false" />
+          <Property Name="tokenid" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1545,6 +1566,17 @@
               <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="tokens">
+            <EntityTypeMapping TypeName="NETMEFYModel.token">
+              <MappingFragment StoreEntitySet="token">
+                <ScalarProperty Name="tokenid" ColumnName="token" />
+                <ScalarProperty Name="es_tecnico" ColumnName="es_tecnico" />
+                <ScalarProperty Name="es_cliente" ColumnName="es_cliente" />
+                <ScalarProperty Name="id_entidad" ColumnName="id_entidad" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

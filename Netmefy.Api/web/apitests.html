@@ -14,7 +14,15 @@
         <hr />
         <button ng-click="get_usuario()">get api/usuarios/5</button>
         <button ng-click="post_usuario()">post api/usuarios</button>
-
+        <hr />
+        <h3>POST Token</h3>
+        <div>
+            <!--<input type="text" name="" placeholder="idEntidad" ng-model="saveToken.id_entidad" />
+            <input type="text" name="" ng-model="saveToken.es_cliente" />
+            <input type="text" name="" ng-model="saveToken.es_tecnico" />
+            <input type="text" name="" ng-model="saveToken.token" />-->
+            <button ng-click="save_token()">post api/tokens</button>
+        </div>
         <hr />
         <h3>logs</h3>
         <div>
@@ -41,6 +49,7 @@
         var url_root = "";
         var URL_USUARIOS = url_root + "/api/usuarios";
         var URL_LOGS = url_root + "/api/logs";
+        var URL_TOKEN = url_root + "/api/tokens";
 
 
         var app = angular.module('myApp', []);
@@ -81,7 +90,7 @@
 
         app.controller('myCtrl', function ($scope, $http, $q) {
             $scope.user = { username: 'netmefy', password: 'yfemten' };
-                        
+                                    
             $scope.pantalla = "inicial";
             $scope.descripcion = "click en boton 1";
 
@@ -94,6 +103,19 @@
                     })
                     .catch(function (data) {
                         alert("ERR" + URL_LOGS + " catch");
+                    });
+            }
+
+            $scope.save_token = function () {
+                var data = { id_entidad: '1234', es_cliente: "false", es_tecnico: "true", tokenid: "asdfñlkjqwerpoi" };
+                var url = URL_TOKEN;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
                     });
             }
 
@@ -110,6 +132,8 @@
                         alert("ERR" + url + " catch");
                     });
             }
+
+
 
             $scope.get_usuario = function () {
                 var url = URL_USUARIOS + "/5";

@@ -43,5 +43,6 @@ namespace Netmefy.Data
         public virtual DbSet<lk_tiempo> lk_tiempo { get; set; }
         public virtual DbSet<usuario> usuarios { get; set; }
         public virtual DbSet<lk_web> lk_web { get; set; }
+        public virtual DbSet<token> tokens { get; set; }
     }
 }

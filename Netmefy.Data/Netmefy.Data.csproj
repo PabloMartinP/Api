@@ -203,6 +203,9 @@
     <Compile Include="tecnico.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="token.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="usuario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
