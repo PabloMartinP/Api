@@ -32,10 +32,9 @@ namespace Netmefy.Data
         public virtual DbSet<bt_solicitudes> bt_solicitudes { get; set; }
         public virtual DbSet<bt_tests> bt_tests { get; set; }
         public virtual DbSet<cliente> clientes { get; set; }
-        public virtual DbSet<lk_cliente_router> lk_cliente_router { get; set; }
-        public virtual DbSet<lk_dispositivo> lk_dispositivo { get; set; }
+        public virtual DbSet<router> routers { get; set; }
+        public virtual DbSet<dispositivo> dispositivos { get; set; }
         public virtual DbSet<lk_empresa> lk_empresa { get; set; }
-        public virtual DbSet<lk_entidad> lk_entidad { get; set; }
         public virtual DbSet<lk_estado> lk_estado { get; set; }
         public virtual DbSet<lk_localidad> lk_localidad { get; set; }
         public virtual DbSet<lk_notificacion> lk_notificacion { get; set; }
@@ -44,5 +43,7 @@ namespace Netmefy.Data
         public virtual DbSet<usuario> usuarios { get; set; }
         public virtual DbSet<lk_web> lk_web { get; set; }
         public virtual DbSet<token> tokens { get; set; }
+        public virtual DbSet<VW_Usuarios_App> VW_Usuarios_App { get; set; }
+        public virtual DbSet<pagina> paginas { get; set; }
     }
 }

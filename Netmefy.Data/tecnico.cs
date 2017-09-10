@@ -23,6 +23,7 @@ namespace Netmefy.Data
         public int tecnico_sk { get; set; }
         public string tecnico_id { get; set; }
         public string tecnico_psw { get; set; }
+        public string tecnico_desc { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bt_ord_trabajo> bt_ord_trabajo { get; set; }

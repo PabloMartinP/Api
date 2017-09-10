@@ -9,31 +9,61 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Netmefy.Data;
+using Netmefy.Service;
+using Netmefy.Api.Models;
 
 namespace Netmefy.Api.Controllers.api
 {
     public class clientesController : ApiController
     {
-        private NETMEFYEntities db = new NETMEFYEntities();
+        //private NETMEFYEntities db = new NETMEFYEntities();
+        private ClienteService _clientService = new ClienteService();
+        
+        // GET: api/clientes/5
+        [ResponseType(typeof(clientInfoModel))]
+        public IHttpActionResult Getcliente(string username)
+        {
 
+            cliente cliente = _clientService.buscar(username);
+            if (cliente == null)
+            {
+                return NotFound();
+            }
+
+            router router = _clientService.getRouterFromClient(cliente.cliente_sk);
+            List<dispositivo> devices = _clientService.getDevices(cliente.cliente_sk, router.router_sk);
+
+            List<dispositivoInfoModel> devicesModel = dispositivoInfoModel.ConvertTo(devices);
+
+            clientInfoModel info = new clientInfoModel
+            {
+                id = cliente.cliente_sk,
+                username = cliente.cliente_id,
+                mb_contratado = cliente.cliente_vel_mb_contr,
+                mb_umbral = cliente.cliente_vel_mb_umbral,
+                nombre = cliente.cliente_desc,
+                router = new routerInfoModel
+                {
+                    modelo = router.router_modelo,
+                    ssid = router.router_ssid,
+                    password = router.router_psw,
+                    devices = devicesModel
+                }
+
+            };
+
+
+
+
+            return Ok(info);
+        }
+        /*
         // GET: api/clientes
         public IQueryable<cliente> Getclientes()
         {
             return db.clientes;
         }
 
-        // GET: api/clientes/5
-        [ResponseType(typeof(cliente))]
-        public IHttpActionResult Getcliente(int id)
-        {
-            cliente cliente = db.clientes.Find(id);
-            if (cliente == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(cliente);
-        }
 
         // PUT: api/clientes/5
         [ResponseType(typeof(void))]
@@ -128,6 +158,6 @@ namespace Netmefy.Api.Controllers.api
         private bool clienteExists(int id)
         {
             return db.clientes.Count(e => e.cliente_sk == id) > 0;
-        }
+        }*/
     }
 }

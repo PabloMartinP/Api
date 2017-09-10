@@ -1,4 +1,5 @@
 ﻿using Microsoft.Owin.Security.OAuth;
+using Netmefy.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,16 +29,27 @@ namespace Netmefy.Api.App_Start
         {
             context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "*" });
 
+            LoginService ls = new LoginService();
 
+            //bool ok1 = ls.login(context.UserName, context.Password);
 
             //UsuarioRepository ur = new UsuarioRepository();
             //var ok = ur.Validar(context.UserName, context.Password);
-            bool ok = context.UserName.ToLower().Equals("netmefy") && context.Password.ToLower().Equals("yfemten");
+            //bool ok = context.UserName.ToLower().Equals("netmefy") && context.Password.ToLower().Equals("yfemten");
+            //bool ok = context.UserName.ToLower().Equals("1234") || context.UserName.ToLower().Equals("5678");
+            bool ok = ls.login(context.UserName, context.Password); 
             if (!ok)
             {
                 context.SetError("Invalido", "El nombre de usuario o constraseña es incorrecto");
                 return;
             }
+            /*
+            ok = context.UserName.ToLower().Equals("1234") && context.Password.ToLower().Equals("yfemten");
+            if (!ok)
+            {
+                context.SetError("Invalido", "El nombre de usuario o constraseña es incorrecto");
+                return;
+            }*/
 
 
             /*

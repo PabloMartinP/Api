@@ -157,16 +157,10 @@
     <Compile Include="cliente.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="lk_cliente_router.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="lk_dispositivo.cs">
+    <Compile Include="dispositivo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="lk_empresa.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="lk_entidad.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="lk_estado.cs">
@@ -199,7 +193,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="pagina.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Partial\pagina.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="router.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="tecnico.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -207,6 +208,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="usuario.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VW_Usuarios_App.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
   </ItemGroup>

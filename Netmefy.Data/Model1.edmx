@@ -54,8 +54,8 @@
             <PropertyRef Name="os_id" />
           </Key>
           <Property Name="os_id" Type="int" Nullable="false" />
-          <Property Name="cliente_sk" Type="int" />
-          <Property Name="fh_creacion" Type="date" />
+          <Property Name="cliente_sk" Type="int" Nullable="false" />
+          <Property Name="fh_creacion" Type="date" Nullable="false" />
           <Property Name="fh_cierre" Type="date" />
         </EntityType>
         <EntityType Name="bt_tests">
@@ -63,10 +63,10 @@
             <PropertyRef Name="test_id" />
           </Key>
           <Property Name="test_id" Type="int" Nullable="false" />
-          <Property Name="cliente_sk" Type="int" />
-          <Property Name="tiempo_sk" Type="date" />
+          <Property Name="cliente_sk" Type="int" Nullable="false" />
+          <Property Name="tiempo_sk" Type="date" Nullable="false" />
           <Property Name="ot_id" Type="int" />
-          <Property Name="flag_instalacion" Type="int" />
+          <Property Name="flag_instalacion" Type="int" Nullable="false" />
           <Property Name="comentario" Type="varchar" MaxLength="200" />
           <Property Name="vel_mb_medidos" Type="int" />
           <Property Name="potencia_recep" Type="int" />
@@ -88,14 +88,14 @@
             <PropertyRef Name="cliente_sk" />
           </Key>
           <Property Name="cliente_sk" Type="int" Nullable="false" />
-          <Property Name="cliente_id" Type="varchar" MaxLength="50" />
-          <Property Name="cliente_psw" Type="varchar" MaxLength="50" />
+          <Property Name="cliente_id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cliente_psw" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="cliente_desc" Type="varchar" MaxLength="100" />
           <Property Name="cliente_direccion" Type="varchar" MaxLength="200" />
-          <Property Name="empresa_sk" Type="int" />
-          <Property Name="localidad_sk" Type="int" />
-          <Property Name="cliente_vel_mb_contr" Type="int" />
-          <Property Name="cliente_vel_mb_umbral" Type="int" />
+          <Property Name="empresa_sk" Type="int" Nullable="false" />
+          <Property Name="localidad_sk" Type="int" Nullable="false" />
+          <Property Name="cliente_vel_mb_contr" Type="int" Nullable="false" />
+          <Property Name="cliente_vel_mb_umbral" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="lk_cliente_router">
           <Key>
@@ -104,10 +104,10 @@
           </Key>
           <Property Name="cliente_sk" Type="int" Nullable="false" />
           <Property Name="router_sk" Type="int" Nullable="false" />
-          <Property Name="router_modelo" Type="varchar" MaxLength="50" />
-          <Property Name="router_activo" Type="int" />
-          <Property Name="router_ssid" Type="varchar" MaxLength="50" />
-          <Property Name="router_psw" Type="varchar" MaxLength="50" />
+          <Property Name="router_modelo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="router_activo" Type="int" Nullable="false" />
+          <Property Name="router_ssid" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="router_psw" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="lk_dispositivo">
           <Key>
@@ -118,26 +118,26 @@
           <Property Name="cliente_sk" Type="int" Nullable="false" />
           <Property Name="router_sk" Type="int" Nullable="false" />
           <Property Name="dispositivo_sk" Type="int" Nullable="false" />
-          <Property Name="dispositivo_mac" Type="varchar" MaxLength="50" />
+          <Property Name="dispositivo_mac" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="dispositivo_ip" Type="varchar" MaxLength="15" />
           <Property Name="dispositivo_foto" Type="image" />
           <Property Name="dispositivo_apodo" Type="varchar" MaxLength="50" />
           <Property Name="dispositivo_tipo" Type="varchar" MaxLength="50" />
-          <Property Name="dispositivo_bloq" Type="int" />
+          <Property Name="dispositivo_bloq" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="lk_empresa">
           <Key>
             <PropertyRef Name="empresa_sk" />
           </Key>
           <Property Name="empresa_sk" Type="int" Nullable="false" />
-          <Property Name="empresa_desk" Type="varchar" MaxLength="50" />
+          <Property Name="empresa_desc" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="lk_entidad">
           <Key>
             <PropertyRef Name="entidad_sk" />
           </Key>
           <Property Name="entidad_sk" Type="int" Nullable="false" />
-          <Property Name="entidad_desc" Type="varbinary" MaxLength="200" />
+          <Property Name="entidad_desc" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="lk_estado">
           <Key>
@@ -151,10 +151,10 @@
             <PropertyRef Name="localidad_sk" />
           </Key>
           <Property Name="localidad_sk" Type="int" Nullable="false" />
-          <Property Name="localidad_cp" Type="varchar" MaxLength="50" />
-          <Property Name="localidad_desc" Type="varchar" MaxLength="100" />
-          <Property Name="localidad_provincia" Type="varchar" MaxLength="50" />
-          <Property Name="localidad_pais" Type="varchar" MaxLength="50" />
+          <Property Name="localidad_cp" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="localidad_desc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="localidad_provincia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="localidad_pais" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="lk_notificacion">
           <Key>
@@ -169,18 +169,19 @@
             <PropertyRef Name="tecnico_sk" />
           </Key>
           <Property Name="tecnico_sk" Type="int" Nullable="false" />
-          <Property Name="tecnico_id" Type="varchar" MaxLength="50" />
-          <Property Name="tecnico_psw" Type="varchar" MaxLength="50" />
+          <Property Name="tecnico_id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tecnico_psw" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="tecnico_desc" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="lk_tiempo">
           <Key>
             <PropertyRef Name="tiempo_sk" />
           </Key>
           <Property Name="tiempo_sk" Type="date" Nullable="false" />
-          <Property Name="mes" Type="int" />
-          <Property Name="mes_nombre" Type="varchar" MaxLength="20" />
-          <Property Name="trimestre" Type="varchar" MaxLength="5" />
-          <Property Name="anio" Type="int" />
+          <Property Name="mes" Type="int" Nullable="false" />
+          <Property Name="mes_nombre" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="trimestre" Type="varchar" MaxLength="5" Nullable="false" />
+          <Property Name="anio" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="lk_usuario">
           <Key>
@@ -222,6 +223,20 @@
           <Property Name="es_cliente" Type="bit" Nullable="false" />
           <Property Name="es_tecnico" Type="bit" Nullable="false" />
           <Property Name="token" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="VW_Usuarios_App">
+          <Key>
+            <PropertyRef Name="tipo" />
+            <PropertyRef Name="SK" />
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PSW" />
+          </Key>
+          <Property Name="tipo" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="SK" Type="int" Nullable="false" />
+          <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PSW" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <Association Name="fk_bt_notificaciones_lk_notificacion">
           <End Role="lk_notificacion" Type="Self.lk_notificacion" Multiplicity="1" />
@@ -370,7 +385,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_solicitudes_lk_cliente">
-          <End Role="lk_cliente" Type="Self.lk_cliente" Multiplicity="0..1" />
+          <End Role="lk_cliente" Type="Self.lk_cliente" Multiplicity="1" />
           <End Role="bt_solicitudes" Type="Self.bt_solicitudes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_cliente">
@@ -394,7 +409,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_solicitudes_lk_tiempo1">
-          <End Role="lk_tiempo" Type="Self.lk_tiempo" Multiplicity="0..1" />
+          <End Role="lk_tiempo" Type="Self.lk_tiempo" Multiplicity="1" />
           <End Role="bt_solicitudes" Type="Self.bt_solicitudes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_tiempo">
@@ -418,7 +433,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_tests_lk_cliente">
-          <End Role="lk_cliente" Type="Self.lk_cliente" Multiplicity="0..1" />
+          <End Role="lk_cliente" Type="Self.lk_cliente" Multiplicity="1" />
           <End Role="bt_tests" Type="Self.bt_tests" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_cliente">
@@ -430,7 +445,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_tests_lk_tiempo">
-          <End Role="lk_tiempo" Type="Self.lk_tiempo" Multiplicity="0..1" />
+          <End Role="lk_tiempo" Type="Self.lk_tiempo" Multiplicity="1" />
           <End Role="bt_tests" Type="Self.bt_tests" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_tiempo">
@@ -468,7 +483,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_lk_cliente_lk_empresa">
-          <End Role="lk_empresa" Type="Self.lk_empresa" Multiplicity="0..1" />
+          <End Role="lk_empresa" Type="Self.lk_empresa" Multiplicity="1" />
           <End Role="lk_cliente" Type="Self.lk_cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_empresa">
@@ -480,7 +495,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_lk_cliente_lk_localidad">
-          <End Role="lk_localidad" Type="Self.lk_localidad" Multiplicity="0..1" />
+          <End Role="lk_localidad" Type="Self.lk_localidad" Multiplicity="1" />
           <End Role="lk_cliente" Type="Self.lk_cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_localidad">
@@ -488,18 +503,6 @@
             </Principal>
             <Dependent Role="lk_cliente">
               <PropertyRef Name="localidad_sk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_lk_cliente_router_lk_cliente">
-          <End Role="lk_cliente" Type="Self.lk_cliente" Multiplicity="1" />
-          <End Role="lk_cliente_router" Type="Self.lk_cliente_router" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lk_cliente">
-              <PropertyRef Name="cliente_sk" />
-            </Principal>
-            <Dependent Role="lk_cliente_router">
-              <PropertyRef Name="cliente_sk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -514,18 +517,6 @@
             <Dependent Role="lk_dispositivo">
               <PropertyRef Name="cliente_sk" />
               <PropertyRef Name="router_sk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_lk_usuario_lk_cliente">
-          <End Role="lk_cliente" Type="Self.lk_cliente" Multiplicity="1" />
-          <End Role="lk_usuario" Type="Self.lk_usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lk_cliente">
-              <PropertyRef Name="cliente_sk" />
-            </Principal>
-            <Dependent Role="lk_usuario">
-              <PropertyRef Name="cliente_sk" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -577,6 +568,14 @@
           <EntitySet Name="lk_web" EntityType="Self.lk_web" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rel_user_ent" EntityType="Self.rel_user_ent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="token" EntityType="Self.token" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VW_Usuarios_App" EntityType="Self.VW_Usuarios_App" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [VW_Usuarios_App].[tipo] AS [tipo], 
+    [VW_Usuarios_App].[SK] AS [SK], 
+    [VW_Usuarios_App].[ID] AS [ID], 
+    [VW_Usuarios_App].[PSW] AS [PSW]
+    FROM [dbo].[VW_Usuarios_App] AS [VW_Usuarios_App]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="fk_bt_notificaciones_lk_notificacion" Association="Self.fk_bt_notificaciones_lk_notificacion">
             <End Role="lk_notificacion" EntitySet="lk_notificacion" />
             <End Role="bt_notificaciones" EntitySet="bt_notificaciones" />
@@ -665,17 +664,9 @@
             <End Role="lk_localidad" EntitySet="lk_localidad" />
             <End Role="lk_cliente" EntitySet="lk_cliente" />
           </AssociationSet>
-          <AssociationSet Name="fk_lk_cliente_router_lk_cliente" Association="Self.fk_lk_cliente_router_lk_cliente">
-            <End Role="lk_cliente" EntitySet="lk_cliente" />
-            <End Role="lk_cliente_router" EntitySet="lk_cliente_router" />
-          </AssociationSet>
           <AssociationSet Name="fk_lk_dispositivo_lk_cliente_router" Association="Self.fk_lk_dispositivo_lk_cliente_router">
             <End Role="lk_cliente_router" EntitySet="lk_cliente_router" />
             <End Role="lk_dispositivo" EntitySet="lk_dispositivo" />
-          </AssociationSet>
-          <AssociationSet Name="fk_lk_usuario_lk_cliente" Association="Self.fk_lk_usuario_lk_cliente">
-            <End Role="lk_cliente" EntitySet="lk_cliente" />
-            <End Role="lk_usuario" EntitySet="lk_usuario" />
           </AssociationSet>
           <AssociationSet Name="fk_rel_user_ent_lk_entidad" Association="Self.fk_rel_user_ent_lk_entidad">
             <End Role="lk_entidad" EntitySet="lk_entidad" />
@@ -690,6 +681,120 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NETMEFYModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="NETMEFYEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bt_notificaciones" EntityType="NETMEFYModel.bt_notificaciones" />
+          <EntitySet Name="bt_ord_trabajo" EntityType="NETMEFYModel.bt_ord_trabajo" />
+          <EntitySet Name="bt_os_status" EntityType="NETMEFYModel.bt_os_status" />
+          <EntitySet Name="bt_ot_status" EntityType="NETMEFYModel.bt_ot_status" />
+          <EntitySet Name="bt_solicitudes" EntityType="NETMEFYModel.bt_solicitudes" />
+          <EntitySet Name="bt_tests" EntityType="NETMEFYModel.bt_tests" />
+          <EntitySet Name="clientes" EntityType="NETMEFYModel.cliente" />
+          <EntitySet Name="routers" EntityType="NETMEFYModel.router" />
+          <EntitySet Name="dispositivos" EntityType="NETMEFYModel.dispositivo" />
+          <EntitySet Name="lk_empresa" EntityType="NETMEFYModel.lk_empresa" />
+          <EntitySet Name="lk_estado" EntityType="NETMEFYModel.lk_estado" />
+          <EntitySet Name="lk_localidad" EntityType="NETMEFYModel.lk_localidad" />
+          <EntitySet Name="lk_notificacion" EntityType="NETMEFYModel.lk_notificacion" />
+          <EntitySet Name="tecnicos" EntityType="NETMEFYModel.tecnico" />
+          <EntitySet Name="lk_tiempo" EntityType="NETMEFYModel.lk_tiempo" />
+          <EntitySet Name="usuarios" EntityType="NETMEFYModel.usuario" />
+          <EntitySet Name="lk_web" EntityType="NETMEFYModel.lk_web" />
+          <EntitySet Name="tokens" EntityType="NETMEFYModel.token" />
+          <EntitySet Name="VW_Usuarios_App" EntityType="NETMEFYModel.VW_Usuarios_App" />
+          <AssociationSet Name="fk_bt_notificaciones_lk_notificacion" Association="NETMEFYModel.fk_bt_notificaciones_lk_notificacion">
+            <End Role="lk_notificacion" EntitySet="lk_notificacion" />
+            <End Role="bt_notificaciones" EntitySet="bt_notificaciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_notificaciones_lk_tiempo" Association="NETMEFYModel.fk_bt_notificaciones_lk_tiempo">
+            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
+            <End Role="bt_notificaciones" EntitySet="bt_notificaciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_notificaciones_lk_usuario" Association="NETMEFYModel.fk_bt_notificaciones_lk_usuario">
+            <End Role="lk_usuario" EntitySet="usuarios" />
+            <End Role="bt_notificaciones" EntitySet="bt_notificaciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_ord_trabajo_lk_tecnico" Association="NETMEFYModel.fk_bt_ord_trabajo_lk_tecnico">
+            <End Role="lk_tecnico" EntitySet="tecnicos" />
+            <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_ord_trabajo_lk_tiempo" Association="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo">
+            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
+            <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_ord_trabajo_lk_tiempo1" Association="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo1">
+            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
+            <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_ot_status_bt_ord_trabajo" Association="NETMEFYModel.fk_bt_ot_status_bt_ord_trabajo">
+            <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
+            <End Role="bt_ot_status" EntitySet="bt_ot_status" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_tests_bt_ord_trabajo" Association="NETMEFYModel.fk_bt_tests_bt_ord_trabajo">
+            <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
+            <End Role="bt_tests" EntitySet="bt_tests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_os_status_bt_solicitudes" Association="NETMEFYModel.fk_bt_os_status_bt_solicitudes">
+            <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
+            <End Role="bt_os_status" EntitySet="bt_os_status" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_os_status_lk_estado" Association="NETMEFYModel.fk_bt_os_status_lk_estado">
+            <End Role="lk_estado" EntitySet="lk_estado" />
+            <End Role="bt_os_status" EntitySet="bt_os_status" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_os_status_lk_tiempo" Association="NETMEFYModel.fk_bt_os_status_lk_tiempo">
+            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
+            <End Role="bt_os_status" EntitySet="bt_os_status" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_ot_status_lk_estado" Association="NETMEFYModel.fk_bt_ot_status_lk_estado">
+            <End Role="lk_estado" EntitySet="lk_estado" />
+            <End Role="bt_ot_status" EntitySet="bt_ot_status" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_ot_status_lk_tiempo" Association="NETMEFYModel.fk_bt_ot_status_lk_tiempo">
+            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
+            <End Role="bt_ot_status" EntitySet="bt_ot_status" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_solicitudes_lk_cliente" Association="NETMEFYModel.fk_bt_solicitudes_lk_cliente">
+            <End Role="lk_cliente" EntitySet="clientes" />
+            <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_solicitudes_lk_tiempo" Association="NETMEFYModel.fk_bt_solicitudes_lk_tiempo">
+            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
+            <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_solicitudes_lk_tiempo1" Association="NETMEFYModel.fk_bt_solicitudes_lk_tiempo1">
+            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
+            <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_tests_lk_cliente" Association="NETMEFYModel.fk_bt_tests_lk_cliente">
+            <End Role="lk_cliente" EntitySet="clientes" />
+            <End Role="bt_tests" EntitySet="bt_tests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_tests_lk_tiempo" Association="NETMEFYModel.fk_bt_tests_lk_tiempo">
+            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
+            <End Role="bt_tests" EntitySet="bt_tests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_lk_cliente_lk_empresa" Association="NETMEFYModel.fk_lk_cliente_lk_empresa">
+            <End Role="lk_empresa" EntitySet="lk_empresa" />
+            <End Role="lk_cliente" EntitySet="clientes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_lk_cliente_lk_localidad" Association="NETMEFYModel.fk_lk_cliente_lk_localidad">
+            <End Role="lk_localidad" EntitySet="lk_localidad" />
+            <End Role="lk_cliente" EntitySet="clientes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_lk_dispositivo_lk_cliente_router" Association="NETMEFYModel.fk_lk_dispositivo_lk_cliente_router">
+            <End Role="lk_cliente_router" EntitySet="routers" />
+            <End Role="lk_dispositivo" EntitySet="dispositivos" />
+          </AssociationSet>
+          <AssociationSet Name="bt_webs_bloq" Association="NETMEFYModel.bt_webs_bloq">
+            <End Role="lk_cliente_router" EntitySet="routers" />
+            <End Role="lk_web" EntitySet="lk_web" />
+          </AssociationSet>
+          <EntitySet Name="paginas" EntityType="NETMEFYModel.pagina" />
+          <AssociationSet Name="rel_user_ent" Association="NETMEFYModel.rel_user_ent">
+            <End Role="lk_entidad" EntitySet="paginas" />
+            <End Role="usuario" EntitySet="usuarios" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="bt_notificaciones">
           <Key>
             <PropertyRef Name="usuario_sk" />
@@ -701,9 +806,9 @@
           <Property Name="cliente_sk" Type="Int32" Nullable="false" />
           <Property Name="notificacion_sk" Type="Int32" Nullable="false" />
           <Property Name="tiempo_sk" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="lk_notificacion" Relationship="Self.fk_bt_notificaciones_lk_notificacion" FromRole="bt_notificaciones" ToRole="lk_notificacion" />
-          <NavigationProperty Name="lk_tiempo" Relationship="Self.fk_bt_notificaciones_lk_tiempo" FromRole="bt_notificaciones" ToRole="lk_tiempo" />
-          <NavigationProperty Name="lk_usuario" Relationship="Self.fk_bt_notificaciones_lk_usuario" FromRole="bt_notificaciones" ToRole="lk_usuario" />
+          <NavigationProperty Name="lk_notificacion" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_notificacion" FromRole="bt_notificaciones" ToRole="lk_notificacion" />
+          <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_tiempo" FromRole="bt_notificaciones" ToRole="lk_tiempo" />
+          <NavigationProperty Name="lk_usuario" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_usuario" FromRole="bt_notificaciones" ToRole="lk_usuario" />
         </EntityType>
         <EntityType Name="bt_ord_trabajo">
           <Key>
@@ -714,11 +819,11 @@
           <Property Name="fh_creacion" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="fh_cierre" Type="DateTime" Precision="0" />
           <Property Name="calificacion" Type="Int32" />
-          <NavigationProperty Name="lk_tecnico" Relationship="Self.fk_bt_ord_trabajo_lk_tecnico" FromRole="bt_ord_trabajo" ToRole="lk_tecnico" />
-          <NavigationProperty Name="lk_tiempo" Relationship="Self.fk_bt_ord_trabajo_lk_tiempo" FromRole="bt_ord_trabajo" ToRole="lk_tiempo" />
-          <NavigationProperty Name="lk_tiempo1" Relationship="Self.fk_bt_ord_trabajo_lk_tiempo1" FromRole="bt_ord_trabajo" ToRole="lk_tiempo" />
-          <NavigationProperty Name="bt_ot_status" Relationship="Self.fk_bt_ot_status_bt_ord_trabajo" FromRole="bt_ord_trabajo" ToRole="bt_ot_status" />
-          <NavigationProperty Name="bt_tests" Relationship="Self.fk_bt_tests_bt_ord_trabajo" FromRole="bt_ord_trabajo" ToRole="bt_tests" />
+          <NavigationProperty Name="lk_tecnico" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tecnico" FromRole="bt_ord_trabajo" ToRole="lk_tecnico" />
+          <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo" FromRole="bt_ord_trabajo" ToRole="lk_tiempo" />
+          <NavigationProperty Name="lk_tiempo1" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo1" FromRole="bt_ord_trabajo" ToRole="lk_tiempo" />
+          <NavigationProperty Name="bt_ot_status" Relationship="NETMEFYModel.fk_bt_ot_status_bt_ord_trabajo" FromRole="bt_ord_trabajo" ToRole="bt_ot_status" />
+          <NavigationProperty Name="bt_tests" Relationship="NETMEFYModel.fk_bt_tests_bt_ord_trabajo" FromRole="bt_ord_trabajo" ToRole="bt_tests" />
         </EntityType>
         <EntityType Name="bt_os_status">
           <Key>
@@ -730,9 +835,9 @@
           <Property Name="tiempo_sk" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="estado_sk" Type="Int32" Nullable="false" />
           <Property Name="comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="bt_solicitudes" Relationship="Self.fk_bt_os_status_bt_solicitudes" FromRole="bt_os_status" ToRole="bt_solicitudes" />
-          <NavigationProperty Name="lk_estado" Relationship="Self.fk_bt_os_status_lk_estado" FromRole="bt_os_status" ToRole="lk_estado" />
-          <NavigationProperty Name="lk_tiempo" Relationship="Self.fk_bt_os_status_lk_tiempo" FromRole="bt_os_status" ToRole="lk_tiempo" />
+          <NavigationProperty Name="bt_solicitudes" Relationship="NETMEFYModel.fk_bt_os_status_bt_solicitudes" FromRole="bt_os_status" ToRole="bt_solicitudes" />
+          <NavigationProperty Name="lk_estado" Relationship="NETMEFYModel.fk_bt_os_status_lk_estado" FromRole="bt_os_status" ToRole="lk_estado" />
+          <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_os_status_lk_tiempo" FromRole="bt_os_status" ToRole="lk_tiempo" />
         </EntityType>
         <EntityType Name="bt_ot_status">
           <Key>
@@ -744,77 +849,74 @@
           <Property Name="tiempo_sk" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="estado_sk" Type="Int32" Nullable="false" />
           <Property Name="comentarios" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="bt_ord_trabajo" Relationship="Self.fk_bt_ot_status_bt_ord_trabajo" FromRole="bt_ot_status" ToRole="bt_ord_trabajo" />
-          <NavigationProperty Name="lk_estado" Relationship="Self.fk_bt_ot_status_lk_estado" FromRole="bt_ot_status" ToRole="lk_estado" />
-          <NavigationProperty Name="lk_tiempo" Relationship="Self.fk_bt_ot_status_lk_tiempo" FromRole="bt_ot_status" ToRole="lk_tiempo" />
+          <NavigationProperty Name="bt_ord_trabajo" Relationship="NETMEFYModel.fk_bt_ot_status_bt_ord_trabajo" FromRole="bt_ot_status" ToRole="bt_ord_trabajo" />
+          <NavigationProperty Name="lk_estado" Relationship="NETMEFYModel.fk_bt_ot_status_lk_estado" FromRole="bt_ot_status" ToRole="lk_estado" />
+          <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_ot_status_lk_tiempo" FromRole="bt_ot_status" ToRole="lk_tiempo" />
         </EntityType>
         <EntityType Name="bt_solicitudes">
           <Key>
             <PropertyRef Name="os_id" />
           </Key>
           <Property Name="os_id" Type="Int32" Nullable="false" />
-          <Property Name="cliente_sk" Type="Int32" />
-          <Property Name="fh_creacion" Type="DateTime" Precision="0" />
+          <Property Name="cliente_sk" Type="Int32" Nullable="false" />
+          <Property Name="fh_creacion" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="fh_cierre" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="bt_os_status" Relationship="Self.fk_bt_os_status_bt_solicitudes" FromRole="bt_solicitudes" ToRole="bt_os_status" />
-          <NavigationProperty Name="lk_cliente" Relationship="Self.fk_bt_solicitudes_lk_cliente" FromRole="bt_solicitudes" ToRole="lk_cliente" />
-          <NavigationProperty Name="lk_tiempo" Relationship="Self.fk_bt_solicitudes_lk_tiempo" FromRole="bt_solicitudes" ToRole="lk_tiempo" />
-          <NavigationProperty Name="lk_tiempo1" Relationship="Self.fk_bt_solicitudes_lk_tiempo1" FromRole="bt_solicitudes" ToRole="lk_tiempo" />
+          <NavigationProperty Name="bt_os_status" Relationship="NETMEFYModel.fk_bt_os_status_bt_solicitudes" FromRole="bt_solicitudes" ToRole="bt_os_status" />
+          <NavigationProperty Name="lk_cliente" Relationship="NETMEFYModel.fk_bt_solicitudes_lk_cliente" FromRole="bt_solicitudes" ToRole="lk_cliente" />
+          <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_solicitudes_lk_tiempo" FromRole="bt_solicitudes" ToRole="lk_tiempo" />
+          <NavigationProperty Name="lk_tiempo1" Relationship="NETMEFYModel.fk_bt_solicitudes_lk_tiempo1" FromRole="bt_solicitudes" ToRole="lk_tiempo" />
         </EntityType>
         <EntityType Name="bt_tests">
           <Key>
             <PropertyRef Name="test_id" />
           </Key>
           <Property Name="test_id" Type="Int32" Nullable="false" />
-          <Property Name="cliente_sk" Type="Int32" />
-          <Property Name="tiempo_sk" Type="DateTime" Precision="0" />
+          <Property Name="cliente_sk" Type="Int32" Nullable="false" />
+          <Property Name="tiempo_sk" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ot_id" Type="Int32" />
-          <Property Name="flag_instalacion" Type="Int32" />
+          <Property Name="flag_instalacion" Type="Int32" Nullable="false" />
           <Property Name="comentario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="vel_mb_medidos" Type="Int32" />
           <Property Name="potencia_recep" Type="Int32" />
           <Property Name="flag_clabeado_nuevo" Type="Int32" />
           <Property Name="flag_modem_ok" Type="Int32" />
-          <NavigationProperty Name="bt_ord_trabajo" Relationship="Self.fk_bt_tests_bt_ord_trabajo" FromRole="bt_tests" ToRole="bt_ord_trabajo" />
-          <NavigationProperty Name="lk_cliente" Relationship="Self.fk_bt_tests_lk_cliente" FromRole="bt_tests" ToRole="lk_cliente" />
-          <NavigationProperty Name="lk_tiempo" Relationship="Self.fk_bt_tests_lk_tiempo" FromRole="bt_tests" ToRole="lk_tiempo" />
+          <NavigationProperty Name="bt_ord_trabajo" Relationship="NETMEFYModel.fk_bt_tests_bt_ord_trabajo" FromRole="bt_tests" ToRole="bt_ord_trabajo" />
+          <NavigationProperty Name="lk_cliente" Relationship="NETMEFYModel.fk_bt_tests_lk_cliente" FromRole="bt_tests" ToRole="lk_cliente" />
+          <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_tests_lk_tiempo" FromRole="bt_tests" ToRole="lk_tiempo" />
         </EntityType>
         <EntityType Name="cliente">
           <Key>
             <PropertyRef Name="cliente_sk" />
           </Key>
           <Property Name="cliente_sk" Type="Int32" Nullable="false" />
-          <Property Name="cliente_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="cliente_psw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_psw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cliente_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="cliente_direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="empresa_sk" Type="Int32" />
-          <Property Name="localidad_sk" Type="Int32" />
-          <Property Name="cliente_vel_mb_contr" Type="Int32" />
-          <Property Name="cliente_vel_mb_umbral" Type="Int32" />
-          <NavigationProperty Name="bt_solicitudes" Relationship="Self.fk_bt_solicitudes_lk_cliente" FromRole="lk_cliente" ToRole="bt_solicitudes" />
-          <NavigationProperty Name="bt_tests" Relationship="Self.fk_bt_tests_lk_cliente" FromRole="lk_cliente" ToRole="bt_tests" />
-          <NavigationProperty Name="lk_empresa" Relationship="Self.fk_lk_cliente_lk_empresa" FromRole="lk_cliente" ToRole="lk_empresa" />
-          <NavigationProperty Name="lk_localidad" Relationship="Self.fk_lk_cliente_lk_localidad" FromRole="lk_cliente" ToRole="lk_localidad" />
-          <NavigationProperty Name="lk_cliente_router" Relationship="Self.fk_lk_cliente_router_lk_cliente" FromRole="lk_cliente" ToRole="lk_cliente_router" />
-          <NavigationProperty Name="lk_usuario" Relationship="Self.fk_lk_usuario_lk_cliente" FromRole="lk_cliente" ToRole="lk_usuario" />
+          <Property Name="empresa_sk" Type="Int32" Nullable="false" />
+          <Property Name="localidad_sk" Type="Int32" Nullable="false" />
+          <Property Name="cliente_vel_mb_contr" Type="Int32" Nullable="false" />
+          <Property Name="cliente_vel_mb_umbral" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="bt_solicitudes" Relationship="NETMEFYModel.fk_bt_solicitudes_lk_cliente" FromRole="lk_cliente" ToRole="bt_solicitudes" />
+          <NavigationProperty Name="bt_tests" Relationship="NETMEFYModel.fk_bt_tests_lk_cliente" FromRole="lk_cliente" ToRole="bt_tests" />
+          <NavigationProperty Name="lk_empresa" Relationship="NETMEFYModel.fk_lk_cliente_lk_empresa" FromRole="lk_cliente" ToRole="lk_empresa" />
+          <NavigationProperty Name="lk_localidad" Relationship="NETMEFYModel.fk_lk_cliente_lk_localidad" FromRole="lk_cliente" ToRole="lk_localidad" />
         </EntityType>
-        <EntityType Name="lk_cliente_router">
+        <EntityType Name="router">
           <Key>
             <PropertyRef Name="cliente_sk" />
             <PropertyRef Name="router_sk" />
           </Key>
           <Property Name="cliente_sk" Type="Int32" Nullable="false" />
           <Property Name="router_sk" Type="Int32" Nullable="false" />
-          <Property Name="router_modelo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="router_activo" Type="Int32" />
-          <Property Name="router_ssid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="router_psw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="lk_cliente" Relationship="Self.fk_lk_cliente_router_lk_cliente" FromRole="lk_cliente_router" ToRole="lk_cliente" />
-          <NavigationProperty Name="lk_dispositivo" Relationship="Self.fk_lk_dispositivo_lk_cliente_router" FromRole="lk_cliente_router" ToRole="lk_dispositivo" />
-          <NavigationProperty Name="lk_web" Relationship="Self.bt_webs_bloq" FromRole="lk_cliente_router" ToRole="lk_web" />
+          <Property Name="router_modelo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="router_activo" Type="Int32" Nullable="false" />
+          <Property Name="router_ssid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="router_psw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="lk_dispositivo" Relationship="NETMEFYModel.fk_lk_dispositivo_lk_cliente_router" FromRole="lk_cliente_router" ToRole="lk_dispositivo" />
+          <NavigationProperty Name="lk_web" Relationship="NETMEFYModel.bt_webs_bloq" FromRole="lk_cliente_router" ToRole="lk_web" />
         </EntityType>
-        <EntityType Name="lk_dispositivo">
+        <EntityType Name="dispositivo">
           <Key>
             <PropertyRef Name="cliente_sk" />
             <PropertyRef Name="router_sk" />
@@ -823,29 +925,21 @@
           <Property Name="cliente_sk" Type="Int32" Nullable="false" />
           <Property Name="router_sk" Type="Int32" Nullable="false" />
           <Property Name="dispositivo_sk" Type="Int32" Nullable="false" />
-          <Property Name="dispositivo_mac" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dispositivo_mac" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dispositivo_ip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="dispositivo_foto" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="dispositivo_apodo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="dispositivo_tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="dispositivo_bloq" Type="Int32" />
-          <NavigationProperty Name="lk_cliente_router" Relationship="Self.fk_lk_dispositivo_lk_cliente_router" FromRole="lk_dispositivo" ToRole="lk_cliente_router" />
+          <Property Name="dispositivo_bloq" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="lk_cliente_router" Relationship="NETMEFYModel.fk_lk_dispositivo_lk_cliente_router" FromRole="lk_dispositivo" ToRole="lk_cliente_router" />
         </EntityType>
         <EntityType Name="lk_empresa">
           <Key>
             <PropertyRef Name="empresa_sk" />
           </Key>
           <Property Name="empresa_sk" Type="Int32" Nullable="false" />
-          <Property Name="empresa_desk" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="lk_cliente" Relationship="Self.fk_lk_cliente_lk_empresa" FromRole="lk_empresa" ToRole="lk_cliente" />
-        </EntityType>
-        <EntityType Name="lk_entidad">
-          <Key>
-            <PropertyRef Name="entidad_sk" />
-          </Key>
-          <Property Name="entidad_sk" Type="Int32" Nullable="false" />
-          <Property Name="entidad_desc" Type="Binary" MaxLength="200" FixedLength="false" />
-          <NavigationProperty Name="lk_usuario" Relationship="Self.rel_user_ent" FromRole="lk_entidad" ToRole="lk_usuario" />
+          <Property Name="empresa_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="lk_cliente" Relationship="NETMEFYModel.fk_lk_cliente_lk_empresa" FromRole="lk_empresa" ToRole="lk_cliente" />
         </EntityType>
         <EntityType Name="lk_estado">
           <Key>
@@ -853,19 +947,19 @@
           </Key>
           <Property Name="estado_sk" Type="Int32" Nullable="false" />
           <Property Name="estado_desc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="bt_os_status" Relationship="Self.fk_bt_os_status_lk_estado" FromRole="lk_estado" ToRole="bt_os_status" />
-          <NavigationProperty Name="bt_ot_status" Relationship="Self.fk_bt_ot_status_lk_estado" FromRole="lk_estado" ToRole="bt_ot_status" />
+          <NavigationProperty Name="bt_os_status" Relationship="NETMEFYModel.fk_bt_os_status_lk_estado" FromRole="lk_estado" ToRole="bt_os_status" />
+          <NavigationProperty Name="bt_ot_status" Relationship="NETMEFYModel.fk_bt_ot_status_lk_estado" FromRole="lk_estado" ToRole="bt_ot_status" />
         </EntityType>
         <EntityType Name="lk_localidad">
           <Key>
             <PropertyRef Name="localidad_sk" />
           </Key>
           <Property Name="localidad_sk" Type="Int32" Nullable="false" />
-          <Property Name="localidad_cp" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="localidad_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="localidad_provincia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="localidad_pais" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="lk_cliente" Relationship="Self.fk_lk_cliente_lk_localidad" FromRole="lk_localidad" ToRole="lk_cliente" />
+          <Property Name="localidad_cp" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="localidad_desc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="localidad_provincia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="localidad_pais" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="lk_cliente" Relationship="NETMEFYModel.fk_lk_cliente_lk_localidad" FromRole="lk_localidad" ToRole="lk_cliente" />
         </EntityType>
         <EntityType Name="lk_notificacion">
           <Key>
@@ -874,34 +968,35 @@
           <Property Name="notificacion_sk" Type="Int32" Nullable="false" />
           <Property Name="notificacion_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="notificacion_texto" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="bt_notificaciones" Relationship="Self.fk_bt_notificaciones_lk_notificacion" FromRole="lk_notificacion" ToRole="bt_notificaciones" />
+          <NavigationProperty Name="bt_notificaciones" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_notificacion" FromRole="lk_notificacion" ToRole="bt_notificaciones" />
         </EntityType>
         <EntityType Name="tecnico">
           <Key>
             <PropertyRef Name="tecnico_sk" />
           </Key>
           <Property Name="tecnico_sk" Type="Int32" Nullable="false" />
-          <Property Name="tecnico_id" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="tecnico_psw" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="bt_ord_trabajo" Relationship="Self.fk_bt_ord_trabajo_lk_tecnico" FromRole="lk_tecnico" ToRole="bt_ord_trabajo" />
+          <Property Name="tecnico_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="tecnico_psw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="bt_ord_trabajo" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tecnico" FromRole="lk_tecnico" ToRole="bt_ord_trabajo" />
+          <Property Name="tecnico_desc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="lk_tiempo">
           <Key>
             <PropertyRef Name="tiempo_sk" />
           </Key>
           <Property Name="tiempo_sk" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="mes" Type="Int32" />
-          <Property Name="mes_nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="trimestre" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="anio" Type="Int32" />
-          <NavigationProperty Name="bt_notificaciones" Relationship="Self.fk_bt_notificaciones_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_notificaciones" />
-          <NavigationProperty Name="bt_ord_trabajo" Relationship="Self.fk_bt_ord_trabajo_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_ord_trabajo" />
-          <NavigationProperty Name="bt_ord_trabajo1" Relationship="Self.fk_bt_ord_trabajo_lk_tiempo1" FromRole="lk_tiempo" ToRole="bt_ord_trabajo" />
-          <NavigationProperty Name="bt_os_status" Relationship="Self.fk_bt_os_status_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_os_status" />
-          <NavigationProperty Name="bt_ot_status" Relationship="Self.fk_bt_ot_status_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_ot_status" />
-          <NavigationProperty Name="bt_solicitudes" Relationship="Self.fk_bt_solicitudes_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_solicitudes" />
-          <NavigationProperty Name="bt_solicitudes1" Relationship="Self.fk_bt_solicitudes_lk_tiempo1" FromRole="lk_tiempo" ToRole="bt_solicitudes" />
-          <NavigationProperty Name="bt_tests" Relationship="Self.fk_bt_tests_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_tests" />
+          <Property Name="mes" Type="Int32" Nullable="false" />
+          <Property Name="mes_nombre" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="trimestre" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="anio" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="bt_notificaciones" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_notificaciones" />
+          <NavigationProperty Name="bt_ord_trabajo" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_ord_trabajo" />
+          <NavigationProperty Name="bt_ord_trabajo1" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo1" FromRole="lk_tiempo" ToRole="bt_ord_trabajo" />
+          <NavigationProperty Name="bt_os_status" Relationship="NETMEFYModel.fk_bt_os_status_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_os_status" />
+          <NavigationProperty Name="bt_ot_status" Relationship="NETMEFYModel.fk_bt_ot_status_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_ot_status" />
+          <NavigationProperty Name="bt_solicitudes" Relationship="NETMEFYModel.fk_bt_solicitudes_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_solicitudes" />
+          <NavigationProperty Name="bt_solicitudes1" Relationship="NETMEFYModel.fk_bt_solicitudes_lk_tiempo1" FromRole="lk_tiempo" ToRole="bt_solicitudes" />
+          <NavigationProperty Name="bt_tests" Relationship="NETMEFYModel.fk_bt_tests_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_tests" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>
@@ -915,9 +1010,8 @@
           <Property Name="usuario_edad" Type="Int32" />
           <Property Name="usuario_foto" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="usuario_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="bt_notificaciones" Relationship="Self.fk_bt_notificaciones_lk_usuario" FromRole="lk_usuario" ToRole="bt_notificaciones" />
-          <NavigationProperty Name="lk_cliente" Relationship="Self.fk_lk_usuario_lk_cliente" FromRole="lk_usuario" ToRole="lk_cliente" />
-          <NavigationProperty Name="lk_entidad" Relationship="Self.rel_user_ent" FromRole="lk_usuario" ToRole="lk_entidad" />
+          <NavigationProperty Name="bt_notificaciones" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_usuario" FromRole="lk_usuario" ToRole="bt_notificaciones" />
+          <NavigationProperty Name="lk_entidad" Relationship="NETMEFYModel.rel_user_ent" FromRole="usuario" ToRole="lk_entidad" />
         </EntityType>
         <EntityType Name="lk_web">
           <Key>
@@ -926,11 +1020,33 @@
           <Property Name="web_sk" Type="Int32" Nullable="false" />
           <Property Name="web_ip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="web_url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="lk_cliente_router" Relationship="Self.bt_webs_bloq" FromRole="lk_web" ToRole="lk_cliente_router" />
+          <NavigationProperty Name="lk_cliente_router" Relationship="NETMEFYModel.bt_webs_bloq" FromRole="lk_web" ToRole="lk_cliente_router" />
+        </EntityType>
+        <EntityType Name="token">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_entidad" Type="Int32" Nullable="false" />
+          <Property Name="es_cliente" Type="Boolean" Nullable="false" />
+          <Property Name="es_tecnico" Type="Boolean" Nullable="false" />
+          <Property Name="token1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="VW_Usuarios_App">
+          <Key>
+            <PropertyRef Name="tipo" />
+            <PropertyRef Name="SK" />
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PSW" />
+          </Key>
+          <Property Name="tipo" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="SK" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PSW" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="fk_bt_notificaciones_lk_notificacion">
-          <End Role="lk_notificacion" Type="Self.lk_notificacion" Multiplicity="1" />
-          <End Role="bt_notificaciones" Type="Self.bt_notificaciones" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_notificacion" Role="lk_notificacion" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_notificaciones" Role="bt_notificaciones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_notificacion">
               <PropertyRef Name="notificacion_sk" />
@@ -941,8 +1057,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_notificaciones_lk_tiempo">
-          <End Role="lk_tiempo" Type="Self.lk_tiempo" Multiplicity="1" />
-          <End Role="bt_notificaciones" Type="Self.bt_notificaciones" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_tiempo" Role="lk_tiempo" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_notificaciones" Role="bt_notificaciones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_tiempo">
               <PropertyRef Name="tiempo_sk" />
@@ -953,8 +1069,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_notificaciones_lk_usuario">
-          <End Role="lk_usuario" Type="NETMEFYModel.usuario" Multiplicity="1" />
-          <End Role="bt_notificaciones" Type="Self.bt_notificaciones" Multiplicity="*" />
+          <End Type="NETMEFYModel.usuario" Role="lk_usuario" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_notificaciones" Role="bt_notificaciones" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_usuario">
               <PropertyRef Name="usuario_sk" />
@@ -967,8 +1083,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_ord_trabajo_lk_tecnico">
-          <End Role="lk_tecnico" Type="NETMEFYModel.tecnico" Multiplicity="0..1" />
-          <End Role="bt_ord_trabajo" Type="Self.bt_ord_trabajo" Multiplicity="*" />
+          <End Type="NETMEFYModel.tecnico" Role="lk_tecnico" Multiplicity="0..1" />
+          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_tecnico">
               <PropertyRef Name="tecnico_sk" />
@@ -979,8 +1095,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_ord_trabajo_lk_tiempo">
-          <End Role="lk_tiempo" Type="Self.lk_tiempo" Multiplicity="0..1" />
-          <End Role="bt_ord_trabajo" Type="Self.bt_ord_trabajo" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_tiempo" Role="lk_tiempo" Multiplicity="0..1" />
+          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_tiempo">
               <PropertyRef Name="tiempo_sk" />
@@ -991,8 +1107,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_ord_trabajo_lk_tiempo1">
-          <End Role="lk_tiempo" Type="Self.lk_tiempo" Multiplicity="0..1" />
-          <End Role="bt_ord_trabajo" Type="Self.bt_ord_trabajo" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_tiempo" Role="lk_tiempo" Multiplicity="0..1" />
+          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_tiempo">
               <PropertyRef Name="tiempo_sk" />
@@ -1003,8 +1119,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_ot_status_bt_ord_trabajo">
-          <End Role="bt_ord_trabajo" Type="Self.bt_ord_trabajo" Multiplicity="1" />
-          <End Role="bt_ot_status" Type="Self.bt_ot_status" Multiplicity="*" />
+          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_ot_status" Role="bt_ot_status" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="bt_ord_trabajo">
               <PropertyRef Name="ot_id" />
@@ -1015,8 +1131,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_tests_bt_ord_trabajo">
-          <End Role="bt_ord_trabajo" Type="Self.bt_ord_trabajo" Multiplicity="0..1" />
-          <End Role="bt_tests" Type="Self.bt_tests" Multiplicity="*" />
+          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="0..1" />
+          <End Type="NETMEFYModel.bt_tests" Role="bt_tests" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="bt_ord_trabajo">
               <PropertyRef Name="ot_id" />
@@ -1027,8 +1143,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_os_status_bt_solicitudes">
-          <End Role="bt_solicitudes" Type="Self.bt_solicitudes" Multiplicity="1" />
-          <End Role="bt_os_status" Type="Self.bt_os_status" Multiplicity="*" />
+          <End Type="NETMEFYModel.bt_solicitudes" Role="bt_solicitudes" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_os_status" Role="bt_os_status" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="bt_solicitudes">
               <PropertyRef Name="os_id" />
@@ -1039,8 +1155,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_os_status_lk_estado">
-          <End Role="lk_estado" Type="Self.lk_estado" Multiplicity="1" />
-          <End Role="bt_os_status" Type="Self.bt_os_status" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_estado" Role="lk_estado" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_os_status" Role="bt_os_status" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_estado">
               <PropertyRef Name="estado_sk" />
@@ -1051,8 +1167,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_os_status_lk_tiempo">
-          <End Role="lk_tiempo" Type="Self.lk_tiempo" Multiplicity="1" />
-          <End Role="bt_os_status" Type="Self.bt_os_status" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_tiempo" Role="lk_tiempo" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_os_status" Role="bt_os_status" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_tiempo">
               <PropertyRef Name="tiempo_sk" />
@@ -1063,8 +1179,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_ot_status_lk_estado">
-          <End Role="lk_estado" Type="Self.lk_estado" Multiplicity="1" />
-          <End Role="bt_ot_status" Type="Self.bt_ot_status" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_estado" Role="lk_estado" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_ot_status" Role="bt_ot_status" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_estado">
               <PropertyRef Name="estado_sk" />
@@ -1075,8 +1191,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_ot_status_lk_tiempo">
-          <End Role="lk_tiempo" Type="Self.lk_tiempo" Multiplicity="1" />
-          <End Role="bt_ot_status" Type="Self.bt_ot_status" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_tiempo" Role="lk_tiempo" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_ot_status" Role="bt_ot_status" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_tiempo">
               <PropertyRef Name="tiempo_sk" />
@@ -1087,8 +1203,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_solicitudes_lk_cliente">
-          <End Role="lk_cliente" Type="NETMEFYModel.cliente" Multiplicity="0..1" />
-          <End Role="bt_solicitudes" Type="Self.bt_solicitudes" Multiplicity="*" />
+          <End Type="NETMEFYModel.cliente" Role="lk_cliente" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_solicitudes" Role="bt_solicitudes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_cliente">
               <PropertyRef Name="cliente_sk" />
@@ -1099,8 +1215,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_solicitudes_lk_tiempo">
-          <End Role="lk_tiempo" Type="Self.lk_tiempo" Multiplicity="0..1" />
-          <End Role="bt_solicitudes" Type="Self.bt_solicitudes" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_tiempo" Role="lk_tiempo" Multiplicity="0..1" />
+          <End Type="NETMEFYModel.bt_solicitudes" Role="bt_solicitudes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_tiempo">
               <PropertyRef Name="tiempo_sk" />
@@ -1111,8 +1227,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_solicitudes_lk_tiempo1">
-          <End Role="lk_tiempo" Type="Self.lk_tiempo" Multiplicity="0..1" />
-          <End Role="bt_solicitudes" Type="Self.bt_solicitudes" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_tiempo" Role="lk_tiempo" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_solicitudes" Role="bt_solicitudes" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_tiempo">
               <PropertyRef Name="tiempo_sk" />
@@ -1123,8 +1239,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_tests_lk_cliente">
-          <End Role="lk_cliente" Type="NETMEFYModel.cliente" Multiplicity="0..1" />
-          <End Role="bt_tests" Type="Self.bt_tests" Multiplicity="*" />
+          <End Type="NETMEFYModel.cliente" Role="lk_cliente" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_tests" Role="bt_tests" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_cliente">
               <PropertyRef Name="cliente_sk" />
@@ -1135,8 +1251,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_bt_tests_lk_tiempo">
-          <End Role="lk_tiempo" Type="Self.lk_tiempo" Multiplicity="0..1" />
-          <End Role="bt_tests" Type="Self.bt_tests" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_tiempo" Role="lk_tiempo" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_tests" Role="bt_tests" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_tiempo">
               <PropertyRef Name="tiempo_sk" />
@@ -1147,8 +1263,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_lk_cliente_lk_empresa">
-          <End Role="lk_empresa" Type="Self.lk_empresa" Multiplicity="0..1" />
-          <End Role="lk_cliente" Type="NETMEFYModel.cliente" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_empresa" Role="lk_empresa" Multiplicity="1" />
+          <End Type="NETMEFYModel.cliente" Role="lk_cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_empresa">
               <PropertyRef Name="empresa_sk" />
@@ -1159,8 +1275,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_lk_cliente_lk_localidad">
-          <End Role="lk_localidad" Type="Self.lk_localidad" Multiplicity="0..1" />
-          <End Role="lk_cliente" Type="NETMEFYModel.cliente" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_localidad" Role="lk_localidad" Multiplicity="1" />
+          <End Type="NETMEFYModel.cliente" Role="lk_cliente" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_localidad">
               <PropertyRef Name="localidad_sk" />
@@ -1170,33 +1286,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_lk_cliente_router_lk_cliente">
-          <End Role="lk_cliente" Type="NETMEFYModel.cliente" Multiplicity="1" />
-          <End Role="lk_cliente_router" Type="Self.lk_cliente_router" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lk_cliente">
-              <PropertyRef Name="cliente_sk" />
-            </Principal>
-            <Dependent Role="lk_cliente_router">
-              <PropertyRef Name="cliente_sk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_lk_usuario_lk_cliente">
-          <End Role="lk_cliente" Type="NETMEFYModel.cliente" Multiplicity="1" />
-          <End Role="lk_usuario" Type="NETMEFYModel.usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lk_cliente">
-              <PropertyRef Name="cliente_sk" />
-            </Principal>
-            <Dependent Role="lk_usuario">
-              <PropertyRef Name="cliente_sk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_lk_dispositivo_lk_cliente_router">
-          <End Role="lk_cliente_router" Type="Self.lk_cliente_router" Multiplicity="1" />
-          <End Role="lk_dispositivo" Type="Self.lk_dispositivo" Multiplicity="*" />
+          <End Type="NETMEFYModel.router" Role="lk_cliente_router" Multiplicity="1" />
+          <End Type="NETMEFYModel.dispositivo" Role="lk_dispositivo" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="lk_cliente_router">
               <PropertyRef Name="cliente_sk" />
@@ -1209,144 +1301,21 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="bt_webs_bloq">
-          <End Role="lk_cliente_router" Type="Self.lk_cliente_router" Multiplicity="*" />
-          <End Role="lk_web" Type="Self.lk_web" Multiplicity="*" />
+          <End Type="NETMEFYModel.router" Role="lk_cliente_router" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_web" Role="lk_web" Multiplicity="*" />
         </Association>
-        <Association Name="rel_user_ent">
-          <End Role="lk_entidad" Type="Self.lk_entidad" Multiplicity="*" />
-          <End Role="lk_usuario" Type="NETMEFYModel.usuario" Multiplicity="*" />
-        </Association>
-        <EntityContainer Name="NETMEFYEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="bt_notificaciones" EntityType="Self.bt_notificaciones" />
-          <EntitySet Name="bt_ord_trabajo" EntityType="Self.bt_ord_trabajo" />
-          <EntitySet Name="bt_os_status" EntityType="Self.bt_os_status" />
-          <EntitySet Name="bt_ot_status" EntityType="Self.bt_ot_status" />
-          <EntitySet Name="bt_solicitudes" EntityType="Self.bt_solicitudes" />
-          <EntitySet Name="bt_tests" EntityType="Self.bt_tests" />
-          <EntitySet Name="clientes" EntityType="NETMEFYModel.cliente" />
-          <EntitySet Name="lk_cliente_router" EntityType="Self.lk_cliente_router" />
-          <EntitySet Name="lk_dispositivo" EntityType="Self.lk_dispositivo" />
-          <EntitySet Name="lk_empresa" EntityType="Self.lk_empresa" />
-          <EntitySet Name="lk_entidad" EntityType="Self.lk_entidad" />
-          <EntitySet Name="lk_estado" EntityType="Self.lk_estado" />
-          <EntitySet Name="lk_localidad" EntityType="Self.lk_localidad" />
-          <EntitySet Name="lk_notificacion" EntityType="Self.lk_notificacion" />
-          <EntitySet Name="tecnicos" EntityType="NETMEFYModel.tecnico" />
-          <EntitySet Name="lk_tiempo" EntityType="Self.lk_tiempo" />
-          <EntitySet Name="usuarios" EntityType="NETMEFYModel.usuario" />
-          <EntitySet Name="lk_web" EntityType="Self.lk_web" />
-          <AssociationSet Name="fk_bt_notificaciones_lk_notificacion" Association="Self.fk_bt_notificaciones_lk_notificacion">
-            <End Role="lk_notificacion" EntitySet="lk_notificacion" />
-            <End Role="bt_notificaciones" EntitySet="bt_notificaciones" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_notificaciones_lk_tiempo" Association="Self.fk_bt_notificaciones_lk_tiempo">
-            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
-            <End Role="bt_notificaciones" EntitySet="bt_notificaciones" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_notificaciones_lk_usuario" Association="Self.fk_bt_notificaciones_lk_usuario">
-            <End Role="lk_usuario" EntitySet="usuarios" />
-            <End Role="bt_notificaciones" EntitySet="bt_notificaciones" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_ord_trabajo_lk_tecnico" Association="Self.fk_bt_ord_trabajo_lk_tecnico">
-            <End Role="lk_tecnico" EntitySet="tecnicos" />
-            <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_ord_trabajo_lk_tiempo" Association="Self.fk_bt_ord_trabajo_lk_tiempo">
-            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
-            <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_ord_trabajo_lk_tiempo1" Association="Self.fk_bt_ord_trabajo_lk_tiempo1">
-            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
-            <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_ot_status_bt_ord_trabajo" Association="Self.fk_bt_ot_status_bt_ord_trabajo">
-            <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
-            <End Role="bt_ot_status" EntitySet="bt_ot_status" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_tests_bt_ord_trabajo" Association="Self.fk_bt_tests_bt_ord_trabajo">
-            <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
-            <End Role="bt_tests" EntitySet="bt_tests" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_os_status_bt_solicitudes" Association="Self.fk_bt_os_status_bt_solicitudes">
-            <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
-            <End Role="bt_os_status" EntitySet="bt_os_status" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_os_status_lk_estado" Association="Self.fk_bt_os_status_lk_estado">
-            <End Role="lk_estado" EntitySet="lk_estado" />
-            <End Role="bt_os_status" EntitySet="bt_os_status" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_os_status_lk_tiempo" Association="Self.fk_bt_os_status_lk_tiempo">
-            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
-            <End Role="bt_os_status" EntitySet="bt_os_status" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_ot_status_lk_estado" Association="Self.fk_bt_ot_status_lk_estado">
-            <End Role="lk_estado" EntitySet="lk_estado" />
-            <End Role="bt_ot_status" EntitySet="bt_ot_status" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_ot_status_lk_tiempo" Association="Self.fk_bt_ot_status_lk_tiempo">
-            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
-            <End Role="bt_ot_status" EntitySet="bt_ot_status" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_solicitudes_lk_cliente" Association="Self.fk_bt_solicitudes_lk_cliente">
-            <End Role="lk_cliente" EntitySet="clientes" />
-            <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_solicitudes_lk_tiempo" Association="Self.fk_bt_solicitudes_lk_tiempo">
-            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
-            <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_solicitudes_lk_tiempo1" Association="Self.fk_bt_solicitudes_lk_tiempo1">
-            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
-            <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_tests_lk_cliente" Association="Self.fk_bt_tests_lk_cliente">
-            <End Role="lk_cliente" EntitySet="clientes" />
-            <End Role="bt_tests" EntitySet="bt_tests" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_tests_lk_tiempo" Association="Self.fk_bt_tests_lk_tiempo">
-            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
-            <End Role="bt_tests" EntitySet="bt_tests" />
-          </AssociationSet>
-          <AssociationSet Name="fk_lk_cliente_lk_empresa" Association="Self.fk_lk_cliente_lk_empresa">
-            <End Role="lk_empresa" EntitySet="lk_empresa" />
-            <End Role="lk_cliente" EntitySet="clientes" />
-          </AssociationSet>
-          <AssociationSet Name="fk_lk_cliente_lk_localidad" Association="Self.fk_lk_cliente_lk_localidad">
-            <End Role="lk_localidad" EntitySet="lk_localidad" />
-            <End Role="lk_cliente" EntitySet="clientes" />
-          </AssociationSet>
-          <AssociationSet Name="fk_lk_cliente_router_lk_cliente" Association="Self.fk_lk_cliente_router_lk_cliente">
-            <End Role="lk_cliente" EntitySet="clientes" />
-            <End Role="lk_cliente_router" EntitySet="lk_cliente_router" />
-          </AssociationSet>
-          <AssociationSet Name="fk_lk_usuario_lk_cliente" Association="Self.fk_lk_usuario_lk_cliente">
-            <End Role="lk_cliente" EntitySet="clientes" />
-            <End Role="lk_usuario" EntitySet="usuarios" />
-          </AssociationSet>
-          <AssociationSet Name="fk_lk_dispositivo_lk_cliente_router" Association="Self.fk_lk_dispositivo_lk_cliente_router">
-            <End Role="lk_cliente_router" EntitySet="lk_cliente_router" />
-            <End Role="lk_dispositivo" EntitySet="lk_dispositivo" />
-          </AssociationSet>
-          <AssociationSet Name="bt_webs_bloq" Association="Self.bt_webs_bloq">
-            <End Role="lk_cliente_router" EntitySet="lk_cliente_router" />
-            <End Role="lk_web" EntitySet="lk_web" />
-          </AssociationSet>
-          <AssociationSet Name="rel_user_ent" Association="Self.rel_user_ent">
-            <End Role="lk_entidad" EntitySet="lk_entidad" />
-            <End Role="lk_usuario" EntitySet="usuarios" />
-          </AssociationSet>
-          <EntitySet Name="tokens" EntityType="NETMEFYModel.token" />
-        </EntityContainer>
-        <EntityType Name="token">
+        <EntityType Name="pagina">
           <Key>
-            <PropertyRef Name="id" />
+            <PropertyRef Name="entidad_sk" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_entidad" Type="Int32" Nullable="false" />
-          <Property Name="es_cliente" Type="Boolean" Nullable="false" />
-          <Property Name="es_tecnico" Type="Boolean" Nullable="false" />
-          <Property Name="tokenid" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="entidad_sk" Type="Int32" Nullable="false" />
+          <Property Name="entidad_desc" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="lk_usuario" Relationship="NETMEFYModel.rel_user_ent" FromRole="lk_entidad" ToRole="usuario" />
         </EntityType>
+        <Association Name="rel_user_ent">
+          <End Type="NETMEFYModel.pagina" Role="lk_entidad" Multiplicity="*" />
+          <End Type="NETMEFYModel.usuario" Role="usuario" Multiplicity="*" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1356,220 +1325,195 @@
           <EntitySetMapping Name="bt_notificaciones">
             <EntityTypeMapping TypeName="NETMEFYModel.bt_notificaciones">
               <MappingFragment StoreEntitySet="bt_notificaciones">
-                <ScalarProperty Name="usuario_sk" ColumnName="usuario_sk" />
-                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
-                <ScalarProperty Name="notificacion_sk" ColumnName="notificacion_sk" />
                 <ScalarProperty Name="tiempo_sk" ColumnName="tiempo_sk" />
+                <ScalarProperty Name="notificacion_sk" ColumnName="notificacion_sk" />
+                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
+                <ScalarProperty Name="usuario_sk" ColumnName="usuario_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="bt_ord_trabajo">
             <EntityTypeMapping TypeName="NETMEFYModel.bt_ord_trabajo">
               <MappingFragment StoreEntitySet="bt_ord_trabajo">
-                <ScalarProperty Name="ot_id" ColumnName="ot_id" />
-                <ScalarProperty Name="tecnico_sk" ColumnName="tecnico_sk" />
-                <ScalarProperty Name="fh_creacion" ColumnName="fh_creacion" />
-                <ScalarProperty Name="fh_cierre" ColumnName="fh_cierre" />
                 <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+                <ScalarProperty Name="fh_cierre" ColumnName="fh_cierre" />
+                <ScalarProperty Name="fh_creacion" ColumnName="fh_creacion" />
+                <ScalarProperty Name="tecnico_sk" ColumnName="tecnico_sk" />
+                <ScalarProperty Name="ot_id" ColumnName="ot_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="bt_os_status">
             <EntityTypeMapping TypeName="NETMEFYModel.bt_os_status">
               <MappingFragment StoreEntitySet="bt_os_status">
-                <ScalarProperty Name="os_id" ColumnName="os_id" />
-                <ScalarProperty Name="tiempo_sk" ColumnName="tiempo_sk" />
-                <ScalarProperty Name="estado_sk" ColumnName="estado_sk" />
                 <ScalarProperty Name="comentarios" ColumnName="comentarios" />
+                <ScalarProperty Name="estado_sk" ColumnName="estado_sk" />
+                <ScalarProperty Name="tiempo_sk" ColumnName="tiempo_sk" />
+                <ScalarProperty Name="os_id" ColumnName="os_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="bt_ot_status">
             <EntityTypeMapping TypeName="NETMEFYModel.bt_ot_status">
               <MappingFragment StoreEntitySet="bt_ot_status">
-                <ScalarProperty Name="ot_id" ColumnName="ot_id" />
-                <ScalarProperty Name="tiempo_sk" ColumnName="tiempo_sk" />
-                <ScalarProperty Name="estado_sk" ColumnName="estado_sk" />
                 <ScalarProperty Name="comentarios" ColumnName="comentarios" />
+                <ScalarProperty Name="estado_sk" ColumnName="estado_sk" />
+                <ScalarProperty Name="tiempo_sk" ColumnName="tiempo_sk" />
+                <ScalarProperty Name="ot_id" ColumnName="ot_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="bt_solicitudes">
             <EntityTypeMapping TypeName="NETMEFYModel.bt_solicitudes">
               <MappingFragment StoreEntitySet="bt_solicitudes">
-                <ScalarProperty Name="os_id" ColumnName="os_id" />
-                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
-                <ScalarProperty Name="fh_creacion" ColumnName="fh_creacion" />
                 <ScalarProperty Name="fh_cierre" ColumnName="fh_cierre" />
+                <ScalarProperty Name="fh_creacion" ColumnName="fh_creacion" />
+                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
+                <ScalarProperty Name="os_id" ColumnName="os_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="bt_tests">
             <EntityTypeMapping TypeName="NETMEFYModel.bt_tests">
               <MappingFragment StoreEntitySet="bt_tests">
-                <ScalarProperty Name="test_id" ColumnName="test_id" />
-                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
-                <ScalarProperty Name="tiempo_sk" ColumnName="tiempo_sk" />
-                <ScalarProperty Name="ot_id" ColumnName="ot_id" />
-                <ScalarProperty Name="flag_instalacion" ColumnName="flag_instalacion" />
-                <ScalarProperty Name="comentario" ColumnName="comentario" />
-                <ScalarProperty Name="vel_mb_medidos" ColumnName="vel_mb_medidos" />
-                <ScalarProperty Name="potencia_recep" ColumnName="potencia_recep" />
-                <ScalarProperty Name="flag_clabeado_nuevo" ColumnName="flag_clabeado_nuevo" />
                 <ScalarProperty Name="flag_modem_ok" ColumnName="flag_modem_ok" />
+                <ScalarProperty Name="flag_clabeado_nuevo" ColumnName="flag_clabeado_nuevo" />
+                <ScalarProperty Name="potencia_recep" ColumnName="potencia_recep" />
+                <ScalarProperty Name="vel_mb_medidos" ColumnName="vel_mb_medidos" />
+                <ScalarProperty Name="comentario" ColumnName="comentario" />
+                <ScalarProperty Name="flag_instalacion" ColumnName="flag_instalacion" />
+                <ScalarProperty Name="ot_id" ColumnName="ot_id" />
+                <ScalarProperty Name="tiempo_sk" ColumnName="tiempo_sk" />
+                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
+                <ScalarProperty Name="test_id" ColumnName="test_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="clientes">
             <EntityTypeMapping TypeName="NETMEFYModel.cliente">
               <MappingFragment StoreEntitySet="lk_cliente">
-                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
-                <ScalarProperty Name="cliente_id" ColumnName="cliente_id" />
-                <ScalarProperty Name="cliente_psw" ColumnName="cliente_psw" />
-                <ScalarProperty Name="cliente_desc" ColumnName="cliente_desc" />
-                <ScalarProperty Name="cliente_direccion" ColumnName="cliente_direccion" />
-                <ScalarProperty Name="empresa_sk" ColumnName="empresa_sk" />
-                <ScalarProperty Name="localidad_sk" ColumnName="localidad_sk" />
-                <ScalarProperty Name="cliente_vel_mb_contr" ColumnName="cliente_vel_mb_contr" />
                 <ScalarProperty Name="cliente_vel_mb_umbral" ColumnName="cliente_vel_mb_umbral" />
+                <ScalarProperty Name="cliente_vel_mb_contr" ColumnName="cliente_vel_mb_contr" />
+                <ScalarProperty Name="localidad_sk" ColumnName="localidad_sk" />
+                <ScalarProperty Name="empresa_sk" ColumnName="empresa_sk" />
+                <ScalarProperty Name="cliente_direccion" ColumnName="cliente_direccion" />
+                <ScalarProperty Name="cliente_desc" ColumnName="cliente_desc" />
+                <ScalarProperty Name="cliente_psw" ColumnName="cliente_psw" />
+                <ScalarProperty Name="cliente_id" ColumnName="cliente_id" />
+                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="lk_cliente_router">
-            <EntityTypeMapping TypeName="NETMEFYModel.lk_cliente_router">
+          <EntitySetMapping Name="routers">
+            <EntityTypeMapping TypeName="NETMEFYModel.router">
               <MappingFragment StoreEntitySet="lk_cliente_router">
-                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
-                <ScalarProperty Name="router_sk" ColumnName="router_sk" />
-                <ScalarProperty Name="router_modelo" ColumnName="router_modelo" />
-                <ScalarProperty Name="router_activo" ColumnName="router_activo" />
-                <ScalarProperty Name="router_ssid" ColumnName="router_ssid" />
                 <ScalarProperty Name="router_psw" ColumnName="router_psw" />
+                <ScalarProperty Name="router_ssid" ColumnName="router_ssid" />
+                <ScalarProperty Name="router_activo" ColumnName="router_activo" />
+                <ScalarProperty Name="router_modelo" ColumnName="router_modelo" />
+                <ScalarProperty Name="router_sk" ColumnName="router_sk" />
+                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="lk_dispositivo">
-            <EntityTypeMapping TypeName="NETMEFYModel.lk_dispositivo">
+          <EntitySetMapping Name="dispositivos">
+            <EntityTypeMapping TypeName="NETMEFYModel.dispositivo">
               <MappingFragment StoreEntitySet="lk_dispositivo">
-                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
-                <ScalarProperty Name="router_sk" ColumnName="router_sk" />
-                <ScalarProperty Name="dispositivo_sk" ColumnName="dispositivo_sk" />
-                <ScalarProperty Name="dispositivo_mac" ColumnName="dispositivo_mac" />
-                <ScalarProperty Name="dispositivo_ip" ColumnName="dispositivo_ip" />
-                <ScalarProperty Name="dispositivo_foto" ColumnName="dispositivo_foto" />
-                <ScalarProperty Name="dispositivo_apodo" ColumnName="dispositivo_apodo" />
-                <ScalarProperty Name="dispositivo_tipo" ColumnName="dispositivo_tipo" />
                 <ScalarProperty Name="dispositivo_bloq" ColumnName="dispositivo_bloq" />
+                <ScalarProperty Name="dispositivo_tipo" ColumnName="dispositivo_tipo" />
+                <ScalarProperty Name="dispositivo_apodo" ColumnName="dispositivo_apodo" />
+                <ScalarProperty Name="dispositivo_foto" ColumnName="dispositivo_foto" />
+                <ScalarProperty Name="dispositivo_ip" ColumnName="dispositivo_ip" />
+                <ScalarProperty Name="dispositivo_mac" ColumnName="dispositivo_mac" />
+                <ScalarProperty Name="dispositivo_sk" ColumnName="dispositivo_sk" />
+                <ScalarProperty Name="router_sk" ColumnName="router_sk" />
+                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="lk_empresa">
             <EntityTypeMapping TypeName="NETMEFYModel.lk_empresa">
               <MappingFragment StoreEntitySet="lk_empresa">
+                <ScalarProperty Name="empresa_desc" ColumnName="empresa_desc" />
                 <ScalarProperty Name="empresa_sk" ColumnName="empresa_sk" />
-                <ScalarProperty Name="empresa_desk" ColumnName="empresa_desk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="lk_entidad">
-            <EntityTypeMapping TypeName="NETMEFYModel.lk_entidad">
-              <MappingFragment StoreEntitySet="lk_entidad">
-                <ScalarProperty Name="entidad_sk" ColumnName="entidad_sk" />
-                <ScalarProperty Name="entidad_desc" ColumnName="entidad_desc" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="lk_estado">
             <EntityTypeMapping TypeName="NETMEFYModel.lk_estado">
               <MappingFragment StoreEntitySet="lk_estado">
-                <ScalarProperty Name="estado_sk" ColumnName="estado_sk" />
                 <ScalarProperty Name="estado_desc" ColumnName="estado_desc" />
+                <ScalarProperty Name="estado_sk" ColumnName="estado_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="lk_localidad">
             <EntityTypeMapping TypeName="NETMEFYModel.lk_localidad">
               <MappingFragment StoreEntitySet="lk_localidad">
-                <ScalarProperty Name="localidad_sk" ColumnName="localidad_sk" />
-                <ScalarProperty Name="localidad_cp" ColumnName="localidad_cp" />
-                <ScalarProperty Name="localidad_desc" ColumnName="localidad_desc" />
-                <ScalarProperty Name="localidad_provincia" ColumnName="localidad_provincia" />
                 <ScalarProperty Name="localidad_pais" ColumnName="localidad_pais" />
+                <ScalarProperty Name="localidad_provincia" ColumnName="localidad_provincia" />
+                <ScalarProperty Name="localidad_desc" ColumnName="localidad_desc" />
+                <ScalarProperty Name="localidad_cp" ColumnName="localidad_cp" />
+                <ScalarProperty Name="localidad_sk" ColumnName="localidad_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="lk_notificacion">
             <EntityTypeMapping TypeName="NETMEFYModel.lk_notificacion">
               <MappingFragment StoreEntitySet="lk_notificacion">
-                <ScalarProperty Name="notificacion_sk" ColumnName="notificacion_sk" />
-                <ScalarProperty Name="notificacion_desc" ColumnName="notificacion_desc" />
                 <ScalarProperty Name="notificacion_texto" ColumnName="notificacion_texto" />
+                <ScalarProperty Name="notificacion_desc" ColumnName="notificacion_desc" />
+                <ScalarProperty Name="notificacion_sk" ColumnName="notificacion_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tecnicos">
             <EntityTypeMapping TypeName="NETMEFYModel.tecnico">
               <MappingFragment StoreEntitySet="lk_tecnico">
-                <ScalarProperty Name="tecnico_sk" ColumnName="tecnico_sk" />
-                <ScalarProperty Name="tecnico_id" ColumnName="tecnico_id" />
+                <ScalarProperty Name="tecnico_desc" ColumnName="tecnico_desc" />
                 <ScalarProperty Name="tecnico_psw" ColumnName="tecnico_psw" />
+                <ScalarProperty Name="tecnico_id" ColumnName="tecnico_id" />
+                <ScalarProperty Name="tecnico_sk" ColumnName="tecnico_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="lk_tiempo">
             <EntityTypeMapping TypeName="NETMEFYModel.lk_tiempo">
               <MappingFragment StoreEntitySet="lk_tiempo">
-                <ScalarProperty Name="tiempo_sk" ColumnName="tiempo_sk" />
-                <ScalarProperty Name="mes" ColumnName="mes" />
-                <ScalarProperty Name="mes_nombre" ColumnName="mes_nombre" />
-                <ScalarProperty Name="trimestre" ColumnName="trimestre" />
                 <ScalarProperty Name="anio" ColumnName="anio" />
+                <ScalarProperty Name="trimestre" ColumnName="trimestre" />
+                <ScalarProperty Name="mes_nombre" ColumnName="mes_nombre" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="tiempo_sk" ColumnName="tiempo_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="usuarios">
             <EntityTypeMapping TypeName="NETMEFYModel.usuario">
               <MappingFragment StoreEntitySet="lk_usuario">
-                <ScalarProperty Name="usuario_sk" ColumnName="usuario_sk" />
-                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
-                <ScalarProperty Name="usuario_nombre" ColumnName="usuario_nombre" />
-                <ScalarProperty Name="usuario_sexo" ColumnName="usuario_sexo" />
-                <ScalarProperty Name="usuario_edad" ColumnName="usuario_edad" />
-                <ScalarProperty Name="usuario_foto" ColumnName="usuario_foto" />
                 <ScalarProperty Name="usuario_email" ColumnName="usuario_email" />
+                <ScalarProperty Name="usuario_foto" ColumnName="usuario_foto" />
+                <ScalarProperty Name="usuario_edad" ColumnName="usuario_edad" />
+                <ScalarProperty Name="usuario_sexo" ColumnName="usuario_sexo" />
+                <ScalarProperty Name="usuario_nombre" ColumnName="usuario_nombre" />
+                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
+                <ScalarProperty Name="usuario_sk" ColumnName="usuario_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="lk_web">
             <EntityTypeMapping TypeName="NETMEFYModel.lk_web">
               <MappingFragment StoreEntitySet="lk_web">
-                <ScalarProperty Name="web_sk" ColumnName="web_sk" />
-                <ScalarProperty Name="web_ip" ColumnName="web_ip" />
                 <ScalarProperty Name="web_url" ColumnName="web_url" />
+                <ScalarProperty Name="web_ip" ColumnName="web_ip" />
+                <ScalarProperty Name="web_sk" ColumnName="web_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="bt_webs_bloq" TypeName="NETMEFYModel.bt_webs_bloq" StoreEntitySet="bt_webs_bloq">
-            <EndProperty Name="lk_cliente_router">
-              <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
-              <ScalarProperty Name="router_sk" ColumnName="router_sk" />
-            </EndProperty>
-            <EndProperty Name="lk_web">
-              <ScalarProperty Name="web_sk" ColumnName="web_sk" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <AssociationSetMapping Name="rel_user_ent" TypeName="NETMEFYModel.rel_user_ent" StoreEntitySet="rel_user_ent">
-            <EndProperty Name="lk_entidad">
-              <ScalarProperty Name="entidad_sk" ColumnName="entidad_sk" />
-            </EndProperty>
-            <EndProperty Name="lk_usuario">
-              <ScalarProperty Name="usuario_sk" ColumnName="usuario_sk" />
-              <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="tokens">
             <EntityTypeMapping TypeName="NETMEFYModel.token">
               <MappingFragment StoreEntitySet="token">
-                <ScalarProperty Name="tokenid" ColumnName="token" />
+                <ScalarProperty Name="token1" ColumnName="token" />
                 <ScalarProperty Name="es_tecnico" ColumnName="es_tecnico" />
                 <ScalarProperty Name="es_cliente" ColumnName="es_cliente" />
                 <ScalarProperty Name="id_entidad" ColumnName="id_entidad" />
@@ -1577,6 +1521,42 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="VW_Usuarios_App">
+            <EntityTypeMapping TypeName="NETMEFYModel.VW_Usuarios_App">
+              <MappingFragment StoreEntitySet="VW_Usuarios_App">
+                <ScalarProperty Name="PSW" ColumnName="PSW" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SK" ColumnName="SK" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="bt_webs_bloq" TypeName="NETMEFYModel.bt_webs_bloq" StoreEntitySet="bt_webs_bloq">
+            <EndProperty Name="lk_web">
+              <ScalarProperty Name="web_sk" ColumnName="web_sk" />
+            </EndProperty>
+            <EndProperty Name="lk_cliente_router">
+              <ScalarProperty Name="router_sk" ColumnName="router_sk" />
+              <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="paginas">
+            <EntityTypeMapping TypeName="NETMEFYModel.pagina">
+              <MappingFragment StoreEntitySet="lk_entidad">
+                <ScalarProperty Name="entidad_desc" ColumnName="entidad_desc" />
+                <ScalarProperty Name="entidad_sk" ColumnName="entidad_sk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="rel_user_ent" TypeName="NETMEFYModel.rel_user_ent" StoreEntitySet="rel_user_ent">
+            <EndProperty Name="usuario">
+              <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
+              <ScalarProperty Name="usuario_sk" ColumnName="usuario_sk" />
+            </EndProperty>
+            <EndProperty Name="lk_entidad">
+              <ScalarProperty Name="entidad_sk" ColumnName="entidad_sk" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

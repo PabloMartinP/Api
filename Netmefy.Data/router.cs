@@ -12,18 +12,25 @@ namespace Netmefy.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class lk_empresa
+    public partial class router
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public lk_empresa()
+        public router()
         {
-            this.lk_cliente = new HashSet<cliente>();
+            this.lk_dispositivo = new HashSet<dispositivo>();
+            this.lk_web = new HashSet<lk_web>();
         }
     
-        public int empresa_sk { get; set; }
-        public string empresa_desc { get; set; }
+        public int cliente_sk { get; set; }
+        public int router_sk { get; set; }
+        public string router_modelo { get; set; }
+        public int router_activo { get; set; }
+        public string router_ssid { get; set; }
+        public string router_psw { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<cliente> lk_cliente { get; set; }
+        public virtual ICollection<dispositivo> lk_dispositivo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<lk_web> lk_web { get; set; }
     }
 }

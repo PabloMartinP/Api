@@ -28,10 +28,10 @@ namespace Netmefy.Data
         }
     
         public System.DateTime tiempo_sk { get; set; }
-        public Nullable<int> mes { get; set; }
+        public int mes { get; set; }
         public string mes_nombre { get; set; }
         public string trimestre { get; set; }
-        public Nullable<int> anio { get; set; }
+        public int anio { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bt_notificaciones> bt_notificaciones { get; set; }

@@ -9,50 +9,50 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Netmefy.Data;
-using Netmefy.Service;
 
 namespace Netmefy.Api.Controllers.api
 {
-    public class usuariosController : ApiController
+    public class paginasController : ApiController
     {
-        //private NETMEFYEntities db = new NETMEFYEntities();
-        private ClienteService _clientService = new ClienteService();
 
-        /*
-        // GET: api/usuarios
-        public IQueryable<usuario> Getusuarios()
+        private NETMEFYEntities db = new NETMEFYEntities();
+
+        // GET: api/paginas
+        public IQueryable<pagina> Getpaginas()
         {
-            return db.usuarios;
+            Data.pagina p = new pagina();
+            
+            return db.paginas;
         }
 
-        // GET: api/usuarios/5
-        [ResponseType(typeof(usuario))]
-        public IHttpActionResult Getusuario(int id)
+        // GET: api/paginas/5
+        [ResponseType(typeof(pagina))]
+        public IHttpActionResult Getpagina(int id)
         {
-            usuario usuario = db.usuarios.Find(id);
-            if (usuario == null)
+            pagina pagina = db.paginas.Find(id);
+            if (pagina == null)
             {
                 return NotFound();
             }
 
-            return Ok(usuario);
+            return Ok(pagina);
         }
 
-        // PUT: api/usuarios/5
+        // PUT: api/paginas/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult Putusuario(int id, usuario usuario)
+        public IHttpActionResult Putpagina(int id, pagina pagina)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != usuario.usuario_sk)
+            if (id != pagina.entidad_sk)
             {
                 return BadRequest();
             }
 
-            db.Entry(usuario).State = EntityState.Modified;
+            db.Entry(pagina).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace Netmefy.Api.Controllers.api
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!usuarioExists(id))
+                if (!paginaExists(id))
                 {
                     return NotFound();
                 }
@@ -71,20 +71,18 @@ namespace Netmefy.Api.Controllers.api
             }
 
             return StatusCode(HttpStatusCode.NoContent);
-        }*/
+        }
 
-        // POST: api/usuarios
-        [ResponseType(typeof(usuario))]
-        public IHttpActionResult Postusuario(usuario usuario)
+        // POST: api/paginas
+        [ResponseType(typeof(pagina))]
+        public IHttpActionResult Postpagina(pagina pagina)
         {
-
-            _clientService.saveUser(usuario);
-            /*if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.usuarios.Add(usuario);
+            db.paginas.Add(pagina);
 
             try
             {
@@ -92,7 +90,7 @@ namespace Netmefy.Api.Controllers.api
             }
             catch (DbUpdateException)
             {
-                if (usuarioExists(usuario.usuario_sk))
+                if (paginaExists(pagina.entidad_sk))
                 {
                     return Conflict();
                 }
@@ -100,26 +98,25 @@ namespace Netmefy.Api.Controllers.api
                 {
                     throw;
                 }
-            }*/
+            }
 
-            return CreatedAtRoute("DefaultApi", new { id = usuario.usuario_sk }, usuario);
+            return CreatedAtRoute("DefaultApi", new { id = pagina.entidad_sk }, pagina);
         }
 
-        /*
-        // DELETE: api/usuarios/5
-        [ResponseType(typeof(usuario))]
-        public IHttpActionResult Deleteusuario(int id)
+        // DELETE: api/paginas/5
+        [ResponseType(typeof(pagina))]
+        public IHttpActionResult Deletepagina(int id)
         {
-            usuario usuario = db.usuarios.Find(id);
-            if (usuario == null)
+            pagina pagina = db.paginas.Find(id);
+            if (pagina == null)
             {
                 return NotFound();
             }
 
-            db.usuarios.Remove(usuario);
+            db.paginas.Remove(pagina);
             db.SaveChanges();
 
-            return Ok(usuario);
+            return Ok(pagina);
         }
 
         protected override void Dispose(bool disposing)
@@ -131,9 +128,9 @@ namespace Netmefy.Api.Controllers.api
             base.Dispose(disposing);
         }
 
-        private bool usuarioExists(int id)
+        private bool paginaExists(int id)
         {
-            return db.usuarios.Count(e => e.usuario_sk == id) > 0;
-        }*/
+            return db.paginas.Count(e => e.entidad_sk == id) > 0;
+        }
     }
 }

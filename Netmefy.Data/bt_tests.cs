@@ -15,10 +15,10 @@ namespace Netmefy.Data
     public partial class bt_tests
     {
         public int test_id { get; set; }
-        public Nullable<int> cliente_sk { get; set; }
-        public Nullable<System.DateTime> tiempo_sk { get; set; }
+        public int cliente_sk { get; set; }
+        public System.DateTime tiempo_sk { get; set; }
         public Nullable<int> ot_id { get; set; }
-        public Nullable<int> flag_instalacion { get; set; }
+        public int flag_instalacion { get; set; }
         public string comentario { get; set; }
         public Nullable<int> vel_mb_medidos { get; set; }
         public Nullable<int> potencia_recep { get; set; }

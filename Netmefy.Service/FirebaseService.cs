@@ -10,13 +10,13 @@ namespace Netmefy.Service
     {
         private NETMEFYEntities db = new NETMEFYEntities();
 
-
+        /*
         public void registerToken(token token)
         {
             db.tokens.Add(token);
 
             db.SaveChanges();
-        }
+        }*/
 
 
     }

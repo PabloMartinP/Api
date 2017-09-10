@@ -17,7 +17,7 @@ namespace Netmefy.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public lk_web()
         {
-            this.lk_cliente_router = new HashSet<lk_cliente_router>();
+            this.lk_cliente_router = new HashSet<router>();
         }
     
         public int web_sk { get; set; }
@@ -25,6 +25,6 @@ namespace Netmefy.Data
         public string web_url { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<lk_cliente_router> lk_cliente_router { get; set; }
+        public virtual ICollection<router> lk_cliente_router { get; set; }
     }
 }

@@ -10,49 +10,57 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Netmefy.Data;
 using Netmefy.Service;
+using Netmefy.Api.Models;
 
 namespace Netmefy.Api.Controllers.api
 {
-    public class usuariosController : ApiController
+    public class tecnicosController : ApiController
     {
-        //private NETMEFYEntities db = new NETMEFYEntities();
-        private ClienteService _clientService = new ClienteService();
-
+        TecnicoService _tecnicoService = new TecnicoService();
         /*
-        // GET: api/usuarios
-        public IQueryable<usuario> Getusuarios()
-        {
-            return db.usuarios;
-        }
+        private NETMEFYEntities db = new NETMEFYEntities();
 
-        // GET: api/usuarios/5
-        [ResponseType(typeof(usuario))]
-        public IHttpActionResult Getusuario(int id)
+        // GET: api/tecnicos
+        public IQueryable<tecnico> Gettecnicos()
         {
-            usuario usuario = db.usuarios.Find(id);
-            if (usuario == null)
+            return db.tecnicos;
+        }*/
+
+        // GET: api/tecnicos/5
+        [ResponseType(typeof(tecnicoInfoModel))]
+        public IHttpActionResult Gettecnico(string username)
+        {
+            tecnico tecnico = _tecnicoService.buscar(username);
+            if (tecnico == null)
             {
                 return NotFound();
             }
 
-            return Ok(usuario);
-        }
+            tecnicoInfoModel tm = new tecnicoInfoModel
+            {
+                id = tecnico.tecnico_sk,
+                nombre = tecnico.tecnico_desc
+            };
 
-        // PUT: api/usuarios/5
+
+            return Ok(tm);
+        }
+        /*
+        // PUT: api/tecnicos/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult Putusuario(int id, usuario usuario)
+        public IHttpActionResult Puttecnico(int id, tecnico tecnico)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != usuario.usuario_sk)
+            if (id != tecnico.tecnico_sk)
             {
                 return BadRequest();
             }
 
-            db.Entry(usuario).State = EntityState.Modified;
+            db.Entry(tecnico).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +68,7 @@ namespace Netmefy.Api.Controllers.api
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!usuarioExists(id))
+                if (!tecnicoExists(id))
                 {
                     return NotFound();
                 }
@@ -71,20 +79,18 @@ namespace Netmefy.Api.Controllers.api
             }
 
             return StatusCode(HttpStatusCode.NoContent);
-        }*/
+        }
 
-        // POST: api/usuarios
-        [ResponseType(typeof(usuario))]
-        public IHttpActionResult Postusuario(usuario usuario)
+        // POST: api/tecnicos
+        [ResponseType(typeof(tecnico))]
+        public IHttpActionResult Posttecnico(tecnico tecnico)
         {
-
-            _clientService.saveUser(usuario);
-            /*if (!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.usuarios.Add(usuario);
+            db.tecnicos.Add(tecnico);
 
             try
             {
@@ -92,7 +98,7 @@ namespace Netmefy.Api.Controllers.api
             }
             catch (DbUpdateException)
             {
-                if (usuarioExists(usuario.usuario_sk))
+                if (tecnicoExists(tecnico.tecnico_sk))
                 {
                     return Conflict();
                 }
@@ -100,26 +106,25 @@ namespace Netmefy.Api.Controllers.api
                 {
                     throw;
                 }
-            }*/
+            }
 
-            return CreatedAtRoute("DefaultApi", new { id = usuario.usuario_sk }, usuario);
+            return CreatedAtRoute("DefaultApi", new { id = tecnico.tecnico_sk }, tecnico);
         }
 
-        /*
-        // DELETE: api/usuarios/5
-        [ResponseType(typeof(usuario))]
-        public IHttpActionResult Deleteusuario(int id)
+        // DELETE: api/tecnicos/5
+        [ResponseType(typeof(tecnico))]
+        public IHttpActionResult Deletetecnico(int id)
         {
-            usuario usuario = db.usuarios.Find(id);
-            if (usuario == null)
+            tecnico tecnico = db.tecnicos.Find(id);
+            if (tecnico == null)
             {
                 return NotFound();
             }
 
-            db.usuarios.Remove(usuario);
+            db.tecnicos.Remove(tecnico);
             db.SaveChanges();
 
-            return Ok(usuario);
+            return Ok(tecnico);
         }
 
         protected override void Dispose(bool disposing)
@@ -131,9 +136,9 @@ namespace Netmefy.Api.Controllers.api
             base.Dispose(disposing);
         }
 
-        private bool usuarioExists(int id)
+        private bool tecnicoExists(int id)
         {
-            return db.usuarios.Count(e => e.usuario_sk == id) > 0;
+            return db.tecnicos.Count(e => e.tecnico_sk == id) > 0;
         }*/
     }
 }

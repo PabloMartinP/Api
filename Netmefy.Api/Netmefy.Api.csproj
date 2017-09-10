@@ -221,6 +221,7 @@
     <Compile Include="App_Start\SimpleAuthorizationServerProvider.cs" />
     <Compile Include="App_Start\Startup.OAuth.cs" />
     <Content Include="web\apitests.html" />
+    <None Include="Properties\PublishProfiles\iislocal.pubxml" />
     <None Include="Properties\PublishProfiles\loca.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -233,12 +234,19 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\api\clientesController.cs" />
     <Compile Include="Controllers\api\ispController.cs" />
+    <Compile Include="Controllers\api\paginasController.cs" />
+    <Compile Include="Controllers\api\tecnicosController.cs" />
+    <Compile Include="Controllers\api\tipoUsuarioAppController.cs" />
     <Compile Include="Controllers\api\tokensController.cs" />
     <Compile Include="Controllers\api\usuariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\clientInfoModel.cs" />
+    <Compile Include="Models\tecnicoInfoModel.cs" />
+    <Compile Include="Models\tipoClienteModel.cs" />
+    <Compile Include="Models\token.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -265,7 +273,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Netmefy.Data\Netmefy.Data.csproj">

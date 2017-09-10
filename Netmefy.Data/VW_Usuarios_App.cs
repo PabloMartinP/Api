@@ -12,12 +12,11 @@ namespace Netmefy.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class token
+    public partial class VW_Usuarios_App
     {
-        public int id { get; set; }
-        public int id_entidad { get; set; }
-        public bool es_cliente { get; set; }
-        public bool es_tecnico { get; set; }
-        public string token1 { get; set; }
+        public string tipo { get; set; }
+        public int SK { get; set; }
+        public string ID { get; set; }
+        public string PSW { get; set; }
     }
 }
