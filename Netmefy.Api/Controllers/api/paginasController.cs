@@ -78,7 +78,7 @@ namespace Netmefy.Api.Controllers.api
         // POST: api/paginas
         [ResponseType(typeof(nuevaPaginaModel))]
         [HttpPost]
-        public IHttpActionResult nuevaPagina(nuevaPaginaModel pagina)
+        public IHttpActionResult nuevaPagina(nuevaPaginaModel paginas)
         {
             
             if (!ModelState.IsValid)
@@ -89,20 +89,26 @@ namespace Netmefy.Api.Controllers.api
             /*ClienteService clienteService= new ClienteService()*/;
 
             //var client_found = clienteService.findUserById(pagina.cliente_sk, pagina.usuario_sk);
-            var client_found = db.usuarios.Where(x => x.cliente_sk == pagina.cliente_sk && x.usuario_sk == pagina.usuario_sk).FirstOrDefault();
+            var client_found = db.usuarios.Where(x => x.cliente_sk == paginas.cliente_sk && x.usuario_sk == paginas.usuario_sk).FirstOrDefault();
             //db.paginas.Add(pagina);
             //db.SaveChanges();
-            pagina p = new pagina
+
+            foreach (string pagina in paginas.paginas)
             {
-                entidad_desc = pagina.pagina
-            };
-            client_found.paginas.Add(p);
+                pagina p = new pagina
+                {
+                    entidad_desc = pagina
+                };
+                client_found.paginas.Add(p);
+            }
+
+            
             //db.paginas.Add(pagina);
 
             db.SaveChanges();
             
 
-            return CreatedAtRoute("DefaultApi", new { id = pagina.id }, pagina);
+            return CreatedAtRoute("DefaultApi", new { id = paginas.id }, paginas);
         }
 
         // DELETE: api/paginas/5
