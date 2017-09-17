@@ -8,5 +8,6 @@ namespace Netmefy.Data
     public partial class pagina
     {
         
+        
     }
 }

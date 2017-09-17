@@ -79,6 +79,7 @@ namespace Netmefy.Api.Controllers.api
         {
 
             _clientService.saveUser(usuario);
+
             /*if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

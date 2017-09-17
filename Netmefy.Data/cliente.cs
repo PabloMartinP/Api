@@ -19,6 +19,7 @@ namespace Netmefy.Data
         {
             this.bt_solicitudes = new HashSet<bt_solicitudes>();
             this.bt_tests = new HashSet<bt_tests>();
+            this.lk_cliente_router = new HashSet<router>();
         }
     
         public int cliente_sk { get; set; }
@@ -37,5 +38,7 @@ namespace Netmefy.Data
         public virtual ICollection<bt_tests> bt_tests { get; set; }
         public virtual lk_empresa lk_empresa { get; set; }
         public virtual lk_localidad lk_localidad { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<router> lk_cliente_router { get; set; }
     }
 }

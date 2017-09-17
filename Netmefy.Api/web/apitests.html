@@ -16,6 +16,8 @@
         <button ng-click="get_tecnico()">get api/tecnicos?username=201</button>
         <button ng-click="get_tipoUsuarioApp()">get api/tipoUsuarioApp?username=201</button>        
         <button ng-click="post_usuario()">post api/usuarios</button>
+
+        <button ng-click="agregar_pagina_de_fb()">POST api/paginas</button>
         <hr />
         <h3>POST Token</h3>
         <div>
@@ -55,7 +57,8 @@
         var URL_TIPOUSUARIOAPP = url_root + "/api/tipoUsuarioApp";
         var URL_LOGS = url_root + "/api/logs";
         var URL_TOKEN = url_root + "/api/tokens";
-
+        var URL_PAGINAFB  = url_root + "/api/paginas";
+        
 
         var app = angular.module('myApp', []);
         var authorizationData;
@@ -124,10 +127,27 @@
                     });
             }
 
+            
+
+            $scope.agregar_pagina_de_fb = function () {
+                //EL DOS ES EL ID DOS DEL CLIENTE 101!!!
+                var data = { cliente_sk: 1, usuario_sk: 1, pagina: 'unaFanPage();' };
+                var url = URL_PAGINAFB;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("ERR" + url + " catch");
+                        
+                    });
+            }
 
             $scope.post_usuario = function () {
                 //EL DOS ES EL ID DOS DEL CLIENTE 101!!!
-                var data = { cliente_sk: 2, usuario_edad: 123, usuario_email: 'mail', usuario_nombre: 'nomm', usuario_sexo: 'F' };
+                var data = { cliente_sk: 2, usuario_edad: 123, usuario_email: 'mail2', usuario_nombre: 'nomm', usuario_sexo: 'F' };
                 var url = URL_USUARIOS;
                 $http.post(url, data)
                     .then(function (response) {

@@ -21,11 +21,12 @@
           <Key>
             <PropertyRef Name="ot_id" />
           </Key>
-          <Property Name="ot_id" Type="int" Nullable="false" />
+          <Property Name="ot_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tecnico_sk" Type="int" />
           <Property Name="fh_creacion" Type="date" Nullable="false" />
           <Property Name="fh_cierre" Type="date" />
           <Property Name="calificacion" Type="int" />
+          <Property Name="cliente_sk" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="bt_os_status">
           <Key>
@@ -53,7 +54,7 @@
           <Key>
             <PropertyRef Name="os_id" />
           </Key>
-          <Property Name="os_id" Type="int" Nullable="false" />
+          <Property Name="os_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cliente_sk" Type="int" Nullable="false" />
           <Property Name="fh_creacion" Type="date" Nullable="false" />
           <Property Name="fh_cierre" Type="date" />
@@ -62,7 +63,7 @@
           <Key>
             <PropertyRef Name="test_id" />
           </Key>
-          <Property Name="test_id" Type="int" Nullable="false" />
+          <Property Name="test_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cliente_sk" Type="int" Nullable="false" />
           <Property Name="tiempo_sk" Type="date" Nullable="false" />
           <Property Name="ot_id" Type="int" />
@@ -87,7 +88,7 @@
           <Key>
             <PropertyRef Name="cliente_sk" />
           </Key>
-          <Property Name="cliente_sk" Type="int" Nullable="false" />
+          <Property Name="cliente_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cliente_id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="cliente_psw" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="cliente_desc" Type="varchar" MaxLength="100" />
@@ -103,7 +104,7 @@
             <PropertyRef Name="router_sk" />
           </Key>
           <Property Name="cliente_sk" Type="int" Nullable="false" />
-          <Property Name="router_sk" Type="int" Nullable="false" />
+          <Property Name="router_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="router_modelo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="router_activo" Type="int" Nullable="false" />
           <Property Name="router_ssid" Type="varchar" MaxLength="50" Nullable="false" />
@@ -117,7 +118,7 @@
           </Key>
           <Property Name="cliente_sk" Type="int" Nullable="false" />
           <Property Name="router_sk" Type="int" Nullable="false" />
-          <Property Name="dispositivo_sk" Type="int" Nullable="false" />
+          <Property Name="dispositivo_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="dispositivo_mac" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="dispositivo_ip" Type="varchar" MaxLength="15" />
           <Property Name="dispositivo_foto" Type="image" />
@@ -129,28 +130,28 @@
           <Key>
             <PropertyRef Name="empresa_sk" />
           </Key>
-          <Property Name="empresa_sk" Type="int" Nullable="false" />
+          <Property Name="empresa_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="empresa_desc" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="lk_entidad">
           <Key>
             <PropertyRef Name="entidad_sk" />
           </Key>
-          <Property Name="entidad_sk" Type="int" Nullable="false" />
+          <Property Name="entidad_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="entidad_desc" Type="varchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="lk_estado">
           <Key>
             <PropertyRef Name="estado_sk" />
           </Key>
-          <Property Name="estado_sk" Type="int" Nullable="false" />
+          <Property Name="estado_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="estado_desc" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="lk_localidad">
           <Key>
             <PropertyRef Name="localidad_sk" />
           </Key>
-          <Property Name="localidad_sk" Type="int" Nullable="false" />
+          <Property Name="localidad_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="localidad_cp" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="localidad_desc" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="localidad_provincia" Type="varchar" MaxLength="50" Nullable="false" />
@@ -160,7 +161,7 @@
           <Key>
             <PropertyRef Name="notificacion_sk" />
           </Key>
-          <Property Name="notificacion_sk" Type="int" Nullable="false" />
+          <Property Name="notificacion_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="notificacion_desc" Type="varchar" MaxLength="100" />
           <Property Name="notificacion_texto" Type="varchar" MaxLength="2000" />
         </EntityType>
@@ -168,7 +169,7 @@
           <Key>
             <PropertyRef Name="tecnico_sk" />
           </Key>
-          <Property Name="tecnico_sk" Type="int" Nullable="false" />
+          <Property Name="tecnico_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tecnico_id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="tecnico_psw" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="tecnico_desc" Type="varchar" MaxLength="100" Nullable="false" />
@@ -188,7 +189,7 @@
             <PropertyRef Name="usuario_sk" />
             <PropertyRef Name="cliente_sk" />
           </Key>
-          <Property Name="usuario_sk" Type="int" Nullable="false" />
+          <Property Name="usuario_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="cliente_sk" Type="int" Nullable="false" />
           <Property Name="usuario_nombre" Type="varchar" MaxLength="50" />
           <Property Name="usuario_sexo" Type="varchar" MaxLength="50" />
@@ -200,7 +201,7 @@
           <Key>
             <PropertyRef Name="web_sk" />
           </Key>
-          <Property Name="web_sk" Type="int" Nullable="false" />
+          <Property Name="web_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="web_ip" Type="varchar" MaxLength="15" />
           <Property Name="web_url" Type="varchar" MaxLength="200" />
         </EntityType>
@@ -237,6 +238,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="SK" Type="int" Nullable="false" />
           <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PSW" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="OT_install" Type="int" />
         </EntityType>
         <Association Name="fk_bt_notificaciones_lk_notificacion">
           <End Role="lk_notificacion" Type="Self.lk_notificacion" Multiplicity="1" />
@@ -506,6 +508,18 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_lk_cliente_router_lk_cliente">
+          <End Role="lk_cliente" Type="Self.lk_cliente" Multiplicity="1" />
+          <End Role="lk_cliente_router" Type="Self.lk_cliente_router" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lk_cliente">
+              <PropertyRef Name="cliente_sk" />
+            </Principal>
+            <Dependent Role="lk_cliente_router">
+              <PropertyRef Name="cliente_sk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_lk_dispositivo_lk_cliente_router">
           <End Role="lk_cliente_router" Type="Self.lk_cliente_router" Multiplicity="1" />
           <End Role="lk_dispositivo" Type="Self.lk_dispositivo" Multiplicity="*" />
@@ -573,7 +587,8 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
     [VW_Usuarios_App].[tipo] AS [tipo], 
     [VW_Usuarios_App].[SK] AS [SK], 
     [VW_Usuarios_App].[ID] AS [ID], 
-    [VW_Usuarios_App].[PSW] AS [PSW]
+    [VW_Usuarios_App].[PSW] AS [PSW], 
+    [VW_Usuarios_App].[OT_install] AS [OT_install]
     FROM [dbo].[VW_Usuarios_App] AS [VW_Usuarios_App]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="fk_bt_notificaciones_lk_notificacion" Association="Self.fk_bt_notificaciones_lk_notificacion">
@@ -663,6 +678,10 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <AssociationSet Name="fk_lk_cliente_lk_localidad" Association="Self.fk_lk_cliente_lk_localidad">
             <End Role="lk_localidad" EntitySet="lk_localidad" />
             <End Role="lk_cliente" EntitySet="lk_cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_lk_cliente_router_lk_cliente" Association="Self.FK_lk_cliente_router_lk_cliente">
+            <End Role="lk_cliente" EntitySet="lk_cliente" />
+            <End Role="lk_cliente_router" EntitySet="lk_cliente_router" />
           </AssociationSet>
           <AssociationSet Name="fk_lk_dispositivo_lk_cliente_router" Association="Self.fk_lk_dispositivo_lk_cliente_router">
             <End Role="lk_cliente_router" EntitySet="lk_cliente_router" />
@@ -794,6 +813,10 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <End Role="lk_entidad" EntitySet="paginas" />
             <End Role="usuario" EntitySet="usuarios" />
           </AssociationSet>
+          <AssociationSet Name="FK_lk_cliente_router_lk_cliente" Association="NETMEFYModel.FK_lk_cliente_router_lk_cliente">
+            <End Role="cliente" EntitySet="clientes" />
+            <End Role="router" EntitySet="routers" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="bt_notificaciones">
           <Key>
@@ -824,6 +847,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <NavigationProperty Name="lk_tiempo1" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo1" FromRole="bt_ord_trabajo" ToRole="lk_tiempo" />
           <NavigationProperty Name="bt_ot_status" Relationship="NETMEFYModel.fk_bt_ot_status_bt_ord_trabajo" FromRole="bt_ord_trabajo" ToRole="bt_ot_status" />
           <NavigationProperty Name="bt_tests" Relationship="NETMEFYModel.fk_bt_tests_bt_ord_trabajo" FromRole="bt_ord_trabajo" ToRole="bt_tests" />
+          <Property Name="cliente_sk" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="bt_os_status">
           <Key>
@@ -901,6 +925,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <NavigationProperty Name="bt_tests" Relationship="NETMEFYModel.fk_bt_tests_lk_cliente" FromRole="lk_cliente" ToRole="bt_tests" />
           <NavigationProperty Name="lk_empresa" Relationship="NETMEFYModel.fk_lk_cliente_lk_empresa" FromRole="lk_cliente" ToRole="lk_empresa" />
           <NavigationProperty Name="lk_localidad" Relationship="NETMEFYModel.fk_lk_cliente_lk_localidad" FromRole="lk_cliente" ToRole="lk_localidad" />
+          <NavigationProperty Name="lk_cliente_router" Relationship="NETMEFYModel.FK_lk_cliente_router_lk_cliente" FromRole="cliente" ToRole="router" />
         </EntityType>
         <EntityType Name="router">
           <Key>
@@ -915,6 +940,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="router_psw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="lk_dispositivo" Relationship="NETMEFYModel.fk_lk_dispositivo_lk_cliente_router" FromRole="lk_cliente_router" ToRole="lk_dispositivo" />
           <NavigationProperty Name="lk_web" Relationship="NETMEFYModel.bt_webs_bloq" FromRole="lk_cliente_router" ToRole="lk_web" />
+          <NavigationProperty Name="lk_cliente" Relationship="NETMEFYModel.FK_lk_cliente_router_lk_cliente" FromRole="router" ToRole="cliente" />
         </EntityType>
         <EntityType Name="dispositivo">
           <Key>
@@ -1011,7 +1037,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="usuario_foto" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="usuario_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="bt_notificaciones" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_usuario" FromRole="lk_usuario" ToRole="bt_notificaciones" />
-          <NavigationProperty Name="lk_entidad" Relationship="NETMEFYModel.rel_user_ent" FromRole="usuario" ToRole="lk_entidad" />
+          <NavigationProperty Name="paginas" Relationship="NETMEFYModel.rel_user_ent" FromRole="usuario" ToRole="lk_entidad" />
         </EntityType>
         <EntityType Name="lk_web">
           <Key>
@@ -1043,6 +1069,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="SK" Type="Int32" Nullable="false" />
           <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="PSW" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OT_install" Type="Int32" />
         </EntityType>
         <Association Name="fk_bt_notificaciones_lk_notificacion">
           <End Type="NETMEFYModel.lk_notificacion" Role="lk_notificacion" Multiplicity="1" />
@@ -1316,6 +1343,18 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <End Type="NETMEFYModel.pagina" Role="lk_entidad" Multiplicity="*" />
           <End Type="NETMEFYModel.usuario" Role="usuario" Multiplicity="*" />
         </Association>
+        <Association Name="FK_lk_cliente_router_lk_cliente">
+          <End Type="NETMEFYModel.cliente" Role="cliente" Multiplicity="1" />
+          <End Type="NETMEFYModel.router" Role="router" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cliente">
+              <PropertyRef Name="cliente_sk" />
+            </Principal>
+            <Dependent Role="router">
+              <PropertyRef Name="cliente_sk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1335,6 +1374,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySetMapping Name="bt_ord_trabajo">
             <EntityTypeMapping TypeName="NETMEFYModel.bt_ord_trabajo">
               <MappingFragment StoreEntitySet="bt_ord_trabajo">
+                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
                 <ScalarProperty Name="calificacion" ColumnName="calificacion" />
                 <ScalarProperty Name="fh_cierre" ColumnName="fh_cierre" />
                 <ScalarProperty Name="fh_creacion" ColumnName="fh_creacion" />
@@ -1524,6 +1564,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySetMapping Name="VW_Usuarios_App">
             <EntityTypeMapping TypeName="NETMEFYModel.VW_Usuarios_App">
               <MappingFragment StoreEntitySet="VW_Usuarios_App">
+                <ScalarProperty Name="OT_install" ColumnName="OT_install" />
                 <ScalarProperty Name="PSW" ColumnName="PSW" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="SK" ColumnName="SK" />

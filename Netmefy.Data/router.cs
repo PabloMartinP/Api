@@ -32,5 +32,6 @@ namespace Netmefy.Data
         public virtual ICollection<dispositivo> lk_dispositivo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<lk_web> lk_web { get; set; }
+        public virtual cliente lk_cliente { get; set; }
     }
 }

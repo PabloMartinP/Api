@@ -18,5 +18,6 @@ namespace Netmefy.Data
         public int SK { get; set; }
         public string ID { get; set; }
         public string PSW { get; set; }
+        public Nullable<int> OT_install { get; set; }
     }
 }

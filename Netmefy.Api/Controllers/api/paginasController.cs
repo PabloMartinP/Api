@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Netmefy.Data;
+using Netmefy.Service;
+using Netmefy.Api.Models;
 
 namespace Netmefy.Api.Controllers.api
 {
@@ -74,33 +76,33 @@ namespace Netmefy.Api.Controllers.api
         }
 
         // POST: api/paginas
-        [ResponseType(typeof(pagina))]
-        public IHttpActionResult Postpagina(pagina pagina)
+        [ResponseType(typeof(nuevaPaginaModel))]
+        [HttpPost]
+        public IHttpActionResult nuevaPagina(nuevaPaginaModel pagina)
         {
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.paginas.Add(pagina);
+            /*ClienteService clienteService= new ClienteService()*/;
 
-            try
+            //var client_found = clienteService.findUserById(pagina.cliente_sk, pagina.usuario_sk);
+            var client_found = db.usuarios.Where(x => x.cliente_sk == pagina.cliente_sk && x.usuario_sk == pagina.usuario_sk).FirstOrDefault();
+            //db.paginas.Add(pagina);
+            //db.SaveChanges();
+            pagina p = new pagina
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (paginaExists(pagina.entidad_sk))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+                entidad_desc = pagina.pagina
+            };
+            client_found.paginas.Add(p);
+            //db.paginas.Add(pagina);
 
-            return CreatedAtRoute("DefaultApi", new { id = pagina.entidad_sk }, pagina);
+            db.SaveChanges();
+            
+
+            return CreatedAtRoute("DefaultApi", new { id = pagina.id }, pagina);
         }
 
         // DELETE: api/paginas/5

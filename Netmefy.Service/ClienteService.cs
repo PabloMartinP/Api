@@ -22,6 +22,11 @@ namespace Netmefy.Service
             return client_found;
         }
 
+        public Data.cliente buscarById(int id)
+        {
+            return db.clientes.Find(id);
+        }
+
         public Data.router getRouterFromClient(int client_sk)
         {
             var router_found = db.routers.Where(x => x.cliente_sk == client_sk && x.router_activo == 1).FirstOrDefault();
@@ -50,6 +55,12 @@ namespace Netmefy.Service
 
                 db.usuarios.Add(usuario);
                 db.SaveChanges();
+
+                //pagina p = new pagina();
+                //p.entidad_desc = "facebook.com";
+                //usuario.paginas.Add(p);
+                //db.SaveChanges();
+
                 return true;
             }
             else
@@ -67,6 +78,11 @@ namespace Netmefy.Service
         {
             var user_found = db.usuarios.Where(x => x.usuario_email.ToLower().Equals(email.ToLower())).FirstOrDefault();
             return user_found;
+        }
+
+        public Data.usuario findUserById(int client_sk, int usuario_sk)
+        {
+            return db.usuarios.Where(x => x.cliente_sk == client_sk && x.usuario_sk == usuario_sk).FirstOrDefault();
         }
     }
 }

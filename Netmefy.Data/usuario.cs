@@ -18,7 +18,7 @@ namespace Netmefy.Data
         public usuario()
         {
             this.bt_notificaciones = new HashSet<bt_notificaciones>();
-            this.lk_entidad = new HashSet<pagina>();
+            this.paginas = new HashSet<pagina>();
         }
     
         public int usuario_sk { get; set; }
@@ -32,6 +32,6 @@ namespace Netmefy.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bt_notificaciones> bt_notificaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<pagina> lk_entidad { get; set; }
+        public virtual ICollection<pagina> paginas { get; set; }
     }
 }

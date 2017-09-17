@@ -48,6 +48,7 @@
         <AssociationConnector Association="NETMEFYModel.bt_webs_bloq" />
         <EntityTypeShape EntityType="NETMEFYModel.pagina" Width="1.5" PointX="1.5" PointY="23.75" />
         <AssociationConnector Association="NETMEFYModel.rel_user_ent" />
+        <AssociationConnector Association="NETMEFYModel.FK_lk_cliente_router_lk_cliente" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
