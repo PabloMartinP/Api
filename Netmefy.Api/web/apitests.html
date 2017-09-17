@@ -131,7 +131,8 @@
 
             $scope.agregar_pagina_de_fb = function () {
                 //EL DOS ES EL ID DOS DEL CLIENTE 101!!!
-                var data = { cliente_sk: 1, usuario_sk: 1, paginas: ['unaFanPage();', 'OtraFanPage();;'] };
+                //['Calabaza besame y bailare', 'Los Simpson y la oposición']
+                var data = { cliente_sk: 1, usuario_sk: 1, paginas: "['Calabaza besame y bailare', 'Los Simpson y la oposición']" };
                 var url = URL_PAGINAFB;
                 $http.post(url, data)
                     .then(function (response) {

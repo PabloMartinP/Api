@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using Netmefy.Data;
 using Netmefy.Service;
 using Netmefy.Api.Models;
+using System.Web.Script.Serialization;
 
 namespace Netmefy.Api.Controllers.api
 {
@@ -93,11 +94,16 @@ namespace Netmefy.Api.Controllers.api
             //db.paginas.Add(pagina);
             //db.SaveChanges();
 
-            foreach (string pagina in paginas.paginas)
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+            List<string> paginasstring = serializer.Deserialize<List<string>>(paginas.paginas);
+
+            
+
+            foreach (string pagina in paginasstring)
             {
                 pagina p = new pagina
                 {
-                    entidad_desc = pagina
+                    entidad_desc = pagina.Replace("_63_", "?").Replace("_38_","&")
                 };
                 client_found.paginas.Add(p);
             }

@@ -9,7 +9,7 @@ namespace Netmefy.Api.Models
     {
         public int cliente_sk { get; set; }
         public int usuario_sk { get; set; }
-        public string[] paginas { get; set; }
+        public string paginas { get; set; }
         public int id { get; set; }
     }
 }
