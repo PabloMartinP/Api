@@ -16,8 +16,8 @@
         <button ng-click="get_tecnico()">get api/tecnicos?username=201</button>
         <button ng-click="get_tipoUsuarioApp()">get api/tipoUsuarioApp?username=201</button>        
         <button ng-click="post_usuario()">post api/usuarios</button>
-
         <button ng-click="agregar_pagina_de_fb()">POST api/paginas</button>
+        <button ng-click="get_notificaciones()">get api/notificaciones</button>
         <hr />
         <h3>POST Token</h3>
         <div>
@@ -55,6 +55,7 @@
         var URL_TECNICO = url_root + "/api/tecnicos";
         var URL_USUARIOS = url_root + "/api/usuarios";
         var URL_TIPOUSUARIOAPP = url_root + "/api/tipoUsuarioApp";
+        var URL_NOTIF = url_root + "/api/notificaciones";
         var URL_LOGS = url_root + "/api/logs";
         var URL_TOKEN = url_root + "/api/tokens";
         var URL_PAGINAFB  = url_root + "/api/paginas";
@@ -97,7 +98,8 @@
         });
 
         app.controller('myCtrl', function ($scope, $http, $q) {
-            $scope.user = { username: '101', password: '101' };
+            $scope.user = { sk:'1', username: '101', password: '101' };
+            $scope.cliente_user = { sk:'0', cliente_sk: '1', username: 'Martin Guixe'};
                                     
             $scope.pantalla = "inicial";
             $scope.descripcion = "click en boton 1";
@@ -127,7 +129,36 @@
                     });
             }
 
-            
+
+            $scope.get_notificaciones = function () {
+                var url = URL_NOTIF_LIST + "?cliente_sk=1&usuario_sk=0";
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+
+            $scope.get_tipoUsuarioApp = function () {
+                var url = URL_TIPOUSUARIOAPP + "?username=" + $scope.user.username; 
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
 
             $scope.agregar_pagina_de_fb = function () {
                 //EL DOS ES EL ID DOS DEL CLIENTE 101!!!
@@ -162,20 +193,6 @@
 
 
             
-            $scope.get_tipoUsuarioApp = function () {
-                var url = URL_TIPOUSUARIOAPP + "?username=" + $scope.user.username;
-                $http.get(url)
-                    .then(function (response) {
-                        console.log(url + ' - ', response)
-                        alert("OK " + url + ": " + JSON.stringify(response.data));
-                        $scope.resultado = response.data;
-                    })
-                    .catch(function (data) {
-                        console.log(data);
-                        alert("err: url: " + url, data);
-                    });
-            }
-
             $scope.get_cliente = function () {
                 var url = URL_CLIENTE + "?username=" + $scope.user.username;
                 $http.get(url)

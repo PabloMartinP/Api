@@ -117,6 +117,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NotificacionesService.cs" />
     <Compile Include="ClienteService.cs" />
     <Compile Include="FirebaseService.cs" />
     <Compile Include="LoginService.cs" />

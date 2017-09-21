@@ -234,6 +234,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\api\clientesController.cs" />
     <Compile Include="Controllers\api\ispController.cs" />
+    <Compile Include="Controllers\api\notificacionesController.cs" />
     <Compile Include="Controllers\api\paginasController.cs" />
     <Compile Include="Controllers\api\tecnicosController.cs" />
     <Compile Include="Controllers\api\tipoUsuarioAppController.cs" />

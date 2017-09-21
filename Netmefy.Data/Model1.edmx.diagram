@@ -20,10 +20,10 @@
         <EntityTypeShape EntityType="NETMEFYModel.lk_notificacion" Width="1.5" PointX="3.75" PointY="16.625" />
         <EntityTypeShape EntityType="NETMEFYModel.tecnico" Width="1.5" PointX="0.75" PointY="4.875" />
         <EntityTypeShape EntityType="NETMEFYModel.lk_tiempo" Width="1.5" PointX="0.75" PointY="8" />
-        <EntityTypeShape EntityType="NETMEFYModel.usuario" Width="1.5" PointX="3.75" PointY="23.125" />
+        <EntityTypeShape EntityType="NETMEFYModel.usuario" Width="1.5" PointX="9.625" PointY="19" />
         <EntityTypeShape EntityType="NETMEFYModel.lk_web" Width="1.5" PointX="10" PointY="4.75" />
         <EntityTypeShape EntityType="NETMEFYModel.token" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="NETMEFYModel.VW_Usuarios_App" Width="1.5" PointX="10" PointY="7.25" />
+        <EntityTypeShape EntityType="NETMEFYModel.VW_Usuarios_App" Width="1.5" PointX="11" PointY="7" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_notificaciones_lk_notificacion" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_notificaciones_lk_tiempo" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_notificaciones_lk_usuario" />
@@ -46,7 +46,7 @@
         <AssociationConnector Association="NETMEFYModel.fk_lk_cliente_lk_localidad" />
         <AssociationConnector Association="NETMEFYModel.fk_lk_dispositivo_lk_cliente_router" />
         <AssociationConnector Association="NETMEFYModel.bt_webs_bloq" />
-        <EntityTypeShape EntityType="NETMEFYModel.pagina" Width="1.5" PointX="1.5" PointY="23.75" />
+        <EntityTypeShape EntityType="NETMEFYModel.pagina" Width="1.5" PointX="7.375" PointY="19.625" />
         <AssociationConnector Association="NETMEFYModel.rel_user_ent" />
         <AssociationConnector Association="NETMEFYModel.FK_lk_cliente_router_lk_cliente" />
       </Diagram>
