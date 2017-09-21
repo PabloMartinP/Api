@@ -244,6 +244,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\notificacionesModel.cs" />
     <Compile Include="Models\clientInfoModel.cs" />
     <Compile Include="Models\nuevaPaginaModel.cs" />
     <Compile Include="Models\tecnicoInfoModel.cs" />

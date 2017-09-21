@@ -23,15 +23,27 @@ namespace Netmefy.Api.Controllers.api
         }
 
         // GET: api/notificaciones/5
-        [ResponseType(typeof(bt_notificaciones))]
+        [ResponseType(typeof(Models.notificacionesModel))]
         public IHttpActionResult Getbt_notificaciones(int cliente_sk,int usuario_sk)
         {
             Service.NotificacionesService ns = new Service.NotificacionesService();
 
-            var notificaciones = ns.buscarNotificacionesXClienteUsuario(cliente_sk,usuario_sk);
+            List<bt_notificaciones> notificaciones = ns.buscarNotificacionesXClienteUsuario(cliente_sk,usuario_sk);
 
-            return Ok(notificaciones);
+            List<Models.notificacionesModel> not_model = Models.notificacionesModel.ConvertTo(notificaciones);
+
+            return Ok(not_model);
         }
+
+        //[ResponseType(typeof(bt_notificaciones))]
+        //public IHttpActionResult Getbt_notificaciones(int cliente_sk, int usuario_sk)
+        //{
+        //    Service.NotificacionesService ns = new Service.NotificacionesService();
+
+        //    var notificaciones = ns.buscarNotificacionesXClienteUsuario(cliente_sk, usuario_sk);
+
+        //    return Ok(notificaciones);
+        //}
 
         //[ResponseType(typeof(bt_notificaciones))]
         //public IHttpActionResult Getbt_notificaciones(int cliente_sk)
