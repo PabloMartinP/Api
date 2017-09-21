@@ -131,7 +131,7 @@
 
 
             $scope.get_notificaciones = function () {
-                var url = URL_NOTIF_LIST + "?cliente_sk=1&usuario_sk=0";
+                var url = URL_NOTIF + "?cliente_sk=1&usuario_sk=0";
                 $http.get(url)
                     .then(function (response) {
                         console.log(url + ' - ', response)
