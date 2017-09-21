@@ -11,10 +11,14 @@ namespace Netmefy.Api.Models
         public int cliente_sk;
         public int notificacion_sk;
         public System.DateTime tiempo_sk;
+        public string notificacion_desc;
+        public string notificacion_texto;
 
         public static List<notificacionesModel> ConvertTo(List<Data.bt_notificaciones> notificaciones)
         {
             List<notificacionesModel> list = new List<notificacionesModel>();
+            Service.NotificacionesService ns = new Service.NotificacionesService();
+
 
             foreach (Data.bt_notificaciones n in notificaciones)
             {
@@ -24,6 +28,8 @@ namespace Netmefy.Api.Models
                     cliente_sk = n.cliente_sk,
                     notificacion_sk = n.notificacion_sk,
                     tiempo_sk = n.tiempo_sk,
+                    notificacion_desc= ns.buscarNotificaciones(n.notificacion_sk).notificacion_desc,
+                    notificacion_texto = ns.buscarNotificaciones(n.notificacion_sk).notificacion_texto,
 
                 });
             }

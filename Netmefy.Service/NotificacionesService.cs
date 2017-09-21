@@ -22,6 +22,12 @@ namespace Netmefy.Service
             return j;
         }
 
+        public Data.lk_notificacion buscarNotificaciones(int notificacion_sk)
+        {
+            var j = db.lk_notificacion.Where(x => x.notificacion_sk == notificacion_sk).FirstOrDefault();
+            return j;
+        }
+
 
 
 
