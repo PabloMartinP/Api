@@ -41,35 +41,35 @@ namespace Netmefy.Api.Models
         }
 
 
-        // POST: api/dispositivos
-        [ResponseType(typeof(dispositivo))]
-        public IHttpActionResult Postdispositivo(dispositivo dispositivo)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST: api/dispositivos
+        //[ResponseType(typeof(dispositivo))]
+        //public IHttpActionResult Postdispositivo(dispositivo dispositivo)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            db.dispositivos.Add(dispositivo);
+        //    db.dispositivos.Add(dispositivo);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (dispositivoExists(dispositivo.cliente_sk))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        if (dispositivoExists(dispositivo.cliente_sk))
+        //        {
+        //            return Conflict();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return CreatedAtRoute("DefaultApi", new { id = dispositivo.cliente_sk }, dispositivo);
-        }
+        //    return CreatedAtRoute("DefaultApi", new { id = dispositivo.cliente_sk }, dispositivo);
+        //}
 
         // PUT: api/dispositivos/5
         [ResponseType(typeof(void))]
@@ -106,41 +106,42 @@ namespace Netmefy.Api.Models
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        public IHttpActionResult PutPushdispositivo
-            (int cliente_sk, int router_sk, int dispositivo_sk, string dispositivo_mac, string dispositivo_ip, 
-             int dispositivo_bloq, string dispositivo_tipo, string dispositivo_apodo)
+
+        [ResponseType(typeof(dispositivo))]
+        [HttpPost]
+        public IHttpActionResult PutPushDispositivo (dispositivo dispositivo)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (dispositivo_sk == 0)
+            if (dispositivo.dispositivo_sk == 0)
             {
-                dispositivo new_disp = new dispositivo
-                {
-                    cliente_sk = cliente_sk,
-                    router_sk = router_sk,
-                    dispositivo_mac = dispositivo_mac,
-                    dispositivo_ip = dispositivo_ip,
-                    dispositivo_bloq = dispositivo_bloq,
-                    dispositivo_tipo = dispositivo_tipo,
-                    dispositivo_apodo = dispositivo_apodo
-                };
+                db.dispositivos.Add(dispositivo);
 
-                db.dispositivos.Add(new_disp);
+                db.SaveChanges();
+
+                return CreatedAtRoute("DefaultApi", new { id = dispositivo.cliente_sk }, dispositivo);
 
             } else
             {
-                dispositivo dispositivo = db.dispositivos.Find(dispositivo_sk);
+                dispositivo disp = db.dispositivos.Where(x => x.dispositivo_sk == dispositivo.dispositivo_sk).FirstOrDefault();
 
-                dispositivo.dispositivo_mac = dispositivo_mac;
-                dispositivo.dispositivo_ip = dispositivo_ip;
-                dispositivo.dispositivo_bloq = dispositivo_bloq;
-                dispositivo.dispositivo_tipo = dispositivo_tipo;
-                dispositivo.dispositivo_apodo = dispositivo_apodo;
+                disp.dispositivo_bloq = dispositivo.dispositivo_bloq;
+                disp.dispositivo_apodo = dispositivo.dispositivo_apodo;
+                disp.dispositivo_foto = dispositivo.dispositivo_foto;
+                disp.dispositivo_ip = dispositivo.dispositivo_ip;
+                disp.dispositivo_mac = dispositivo.dispositivo_mac;
+                disp.dispositivo_tipo = dispositivo.dispositivo_tipo;
+
+                db.SaveChanges();
+
+                return StatusCode(HttpStatusCode.NoContent);
             }
-            db.SaveChanges();
+            
+
+            
         }
 
         //// DELETE: api/dispositivos/5
