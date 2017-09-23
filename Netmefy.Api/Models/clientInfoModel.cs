@@ -14,18 +14,24 @@ namespace Netmefy.Api.Models
         public string nombre;
         public routerInfoModel router { get; set; }
     }
+    public class webModel
+    {
+        public string ip;
+        public string url;
+    }
 
     public class routerInfoModel
     {
-        public int id;
+        public int router_sk;
         public string modelo;
         public string ssid;
         public string password;
         public List<dispositivoInfoModel> devices;
+        public List<webModel> webs_bloqueadas { get; set; }
     }
     public class dispositivoInfoModel
     {
-        public int id;
+        public int dispositivo_sk;
         public string mac;
         public string ip;
         public string tipo;
@@ -40,7 +46,7 @@ namespace Netmefy.Api.Models
             foreach (Data.dispositivo d in dispositivos)
             {
                 list.Add(new dispositivoInfoModel {
-                    id = d.dispositivo_sk,
+                    dispositivo_sk = d.dispositivo_sk,
                     mac = d.dispositivo_mac,
                     ip = d.dispositivo_ip, 
                     tipo = d.dispositivo_tipo, 

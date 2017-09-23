@@ -41,6 +41,7 @@ namespace Netmefy.Service
             return devices;
         }
 
+
         public bool saveUser(Data.usuario usuario)
         {
             if (!existUser(usuario.usuario_email))

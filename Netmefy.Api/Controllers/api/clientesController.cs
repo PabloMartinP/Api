@@ -32,8 +32,18 @@ namespace Netmefy.Api.Controllers.api
 
             router router = _clientService.getRouterFromClient(cliente.cliente_sk);
             List<dispositivo> devices = _clientService.getDevices(cliente.cliente_sk, router.router_sk);
+            List<lk_web> webs = router.lk_web.ToList();
+            List<webModel> websModel = new List<webModel>();
+            foreach (var w in webs)     
+            {
+                websModel.Add(new webModel
+                {
+                    ip = w.web_ip, url = w.web_url
+                });
+            }
 
             List<dispositivoInfoModel> devicesModel = dispositivoInfoModel.ConvertTo(devices);
+
 
             clientInfoModel info = new clientInfoModel
             {
@@ -44,12 +54,13 @@ namespace Netmefy.Api.Controllers.api
                 nombre = cliente.cliente_desc,
                 router = new routerInfoModel
                 {
+                    router_sk = router.router_sk, 
                     modelo = router.router_modelo,
                     ssid = router.router_ssid,
                     password = router.router_psw,
-                    devices = devicesModel
+                    devices = devicesModel, 
+                    webs_bloqueadas = websModel
                 }
-
             };
 
 
