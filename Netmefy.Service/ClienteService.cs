@@ -46,12 +46,12 @@ namespace Netmefy.Service
             if (!existUser(usuario.usuario_email))
             {
 
-                int? newUsuario_sk = db.usuarios.Where(x => x.cliente_sk == usuario.cliente_sk).Max(d => d.usuario_sk);
+                //int? newUsuario_sk = db.usuarios.Where(x => x.cliente_sk == usuario.cliente_sk).Max(d => d.usuario_sk);
 
-                if (newUsuario_sk == null)
-                    usuario.usuario_sk = 1;
-                else
-                    usuario.usuario_sk = ((int)newUsuario_sk)+1;
+                //if (newUsuario_sk == null)
+                //    usuario.usuario_sk = 1;
+                //else
+                //    usuario.usuario_sk = ((int)newUsuario_sk)+1;
 
                 db.usuarios.Add(usuario);
                 db.SaveChanges();
