@@ -15,21 +15,22 @@ namespace Netmefy.Api.Controllers.api
 {
     public class usuariosController : ApiController
     {
-        //private NETMEFYEntities db = new NETMEFYEntities();
+        private NETMEFYEntities db = new NETMEFYEntities();
         private ClienteService _clientService = new ClienteService();
 
-        /*
-        // GET: api/usuarios
-        public IQueryable<usuario> Getusuarios()
-        {
-            return db.usuarios;
-        }
+
+        //// GET: api/usuarios
+        //public IQueryable<usuario> Getusuarios()
+        //{
+        //    return db.usuarios;
+        //}
+        
 
         // GET: api/usuarios/5
-        [ResponseType(typeof(usuario))]
-        public IHttpActionResult Getusuario(int id)
+        [ResponseType(typeof(Data.usuario))]
+        public IHttpActionResult Getusuario(string email)
         {
-            usuario usuario = db.usuarios.Find(id);
+            Data.usuario usuario = _clientService.findUserByEmail(email);
             if (usuario == null)
             {
                 return NotFound();
@@ -38,40 +39,40 @@ namespace Netmefy.Api.Controllers.api
             return Ok(usuario);
         }
 
-        // PUT: api/usuarios/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Putusuario(int id, usuario usuario)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/usuarios/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult Putusuario(int id, usuario usuario)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != usuario.usuario_sk)
-            {
-                return BadRequest();
-            }
+        //    if (id != usuario.usuario_sk)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(usuario).State = EntityState.Modified;
+        //    db.Entry(usuario).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!usuarioExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!usuarioExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }*/
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // POST: api/usuarios
         [ResponseType(typeof(usuario))]
