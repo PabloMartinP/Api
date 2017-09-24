@@ -291,7 +291,7 @@
             }
 
             $scope.updatear_dispositivo = function () {
-                var data = { cliente_sk: 1, router_sk: 1, dispositivo_sk: 1, dispositivo_mac: 'DD:EE:FF', dispositivo_ip: '192.168.0.2', dispositivo_apodo: '.Net Master', dispositivo_tipo: 'Notebook', dispositivo_bloq: 0 };
+                var data = { cliente_sk: 1, router_sk: 1, dispositivo_sk: 82, dispositivo_mac: 'DD:EE:FF', dispositivo_ip: '192.168.0.2', dispositivo_apodo: '.Net Master', dispositivo_tipo: 'Notebook', dispositivo_bloq: 0 };
                 var url = URL_DISPOSITIVOS;
                 $http.post(url, data)
                     .then(function (response) {
