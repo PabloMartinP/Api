@@ -25,12 +25,14 @@ namespace Netmefy.Api.Controllers.api
         //    return db.usuarios;
         //}
         
+        
 
         // GET: api/usuarios/5
-        [ResponseType(typeof(Data.usuario))]
+        [ResponseType(typeof(Models.usuarioModel))]
         public IHttpActionResult Getusuario(string email)
         {
-            Data.usuario usuario = _clientService.findUserByEmail(email);
+            Data.usuario data_usr = _clientService.findUserByEmail(email);
+            Models.usuarioModel usuario = Models.usuarioModel.ConvertTo(data_usr);
             if (usuario == null)
             {
                 return NotFound();
