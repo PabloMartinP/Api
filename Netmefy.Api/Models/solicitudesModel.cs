@@ -20,7 +20,12 @@ namespace Netmefy.Api.Models
             foreach (Data.bt_solicitudes n in solicitudes)
             {
                 DateTime fh_creacion_d = (DateTime)n.fh_creacion;
-                DateTime fh_cierre_d = (DateTime)n.fh_cierre;
+
+                DateTime fh_cierre_d;
+                if (n.fh_cierre != null)
+                    fh_cierre_d = (DateTime)n.fh_cierre;
+                else
+                    fh_cierre_d = DateTime.MinValue;
 
                 list.Add(new solicitudesModel
                 {
