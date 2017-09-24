@@ -51,6 +51,7 @@ namespace Netmefy.Api.Models
                     ip = d.dispositivo_ip, 
                     tipo = d.dispositivo_tipo, 
                     bloqueado = d.dispositivo_bloq == 0, 
+                    apodo = d.dispositivo_apodo
 
                 });
             }
