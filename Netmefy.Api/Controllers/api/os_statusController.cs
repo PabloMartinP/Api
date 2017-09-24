@@ -16,11 +16,11 @@ namespace Netmefy.Api.Controllers.api
     {
         private NETMEFYEntities db = new NETMEFYEntities();
 
-        // GET: api/os_status
-        public IQueryable<bt_os_status> Getbt_os_status()
-        {
-            return db.bt_os_status;
-        }
+        //// GET: api/os_status
+        //public IQueryable<bt_os_status> Getbt_os_status()
+        //{
+        //    return db.bt_os_status;
+        //}
 
         // GET: api/os_status/5
         [ResponseType(typeof(bt_os_status))]

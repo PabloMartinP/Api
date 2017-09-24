@@ -17,8 +17,8 @@ namespace Netmefy.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public bt_ord_trabajo()
         {
-            this.bt_ot_status = new HashSet<bt_ot_status>();
             this.bt_tests = new HashSet<bt_tests>();
+            this.bt_ot_status = new HashSet<bt_ot_status>();
         }
     
         public int ot_id { get; set; }
@@ -32,8 +32,8 @@ namespace Netmefy.Data
         public virtual lk_tiempo lk_tiempo { get; set; }
         public virtual lk_tiempo lk_tiempo1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<bt_ot_status> bt_ot_status { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bt_tests> bt_tests { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<bt_ot_status> bt_ot_status { get; set; }
     }
 }

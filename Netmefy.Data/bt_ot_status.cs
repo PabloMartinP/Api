@@ -16,9 +16,9 @@ namespace Netmefy.Data
     {
         public int ot_id { get; set; }
         public System.DateTime tiempo_sk { get; set; }
+        public string hh_mm_ss { get; set; }
         public int estado_sk { get; set; }
         public string comentarios { get; set; }
-        public int hh_mm_ss { get; set; }
     
         public virtual bt_ord_trabajo bt_ord_trabajo { get; set; }
         public virtual lk_estado lk_estado { get; set; }

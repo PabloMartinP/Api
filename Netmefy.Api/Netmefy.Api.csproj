@@ -248,6 +248,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Controllers\api\dispositivosController.cs" />
+    <Compile Include="Models\os_statusModel.cs" />
     <Compile Include="Models\solicitudesModel.cs" />
     <Compile Include="Models\notificacionesModel.cs" />
     <Compile Include="Models\clientInfoModel.cs" />
