@@ -108,7 +108,7 @@ namespace Netmefy.Api.Models
 
                 db.SaveChanges();
 
-                return CreatedAtRoute("DefaultApi", new { id = dispositivo.cliente_sk }, dispositivo);
+                return CreatedAtRoute("DefaultApi", new { id = disp.cliente_sk }, disp);
             }
             
 

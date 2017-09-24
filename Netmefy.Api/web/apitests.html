@@ -379,9 +379,9 @@
             }
 
             $scope.updatear_solicitud = function () {
-                var data = { os_id: 1, cliente_sk: 1, fh_creacion: '22-02-1989', fh_cierre: '31-12-2017'};
+                var data = { os_id: 1, cliente_sk: 1, fh_creacion: '22-02-2017', fh_cierre: '31-12-2017'};
                 //var data = { os_id: 1, cliente_sk: 1, fh_creacion: 1506267389138, fh_cierre: 1506267389138 };
-                var url = URL_DISPOSITIVOS;
+                var url = URL_SOLICITUDES;
                 $http.post(url, data)
                     .then(function (response) {
                         console.log(url + 'ok ' + url, response)

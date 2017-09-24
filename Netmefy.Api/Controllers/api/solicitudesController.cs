@@ -40,7 +40,7 @@ namespace Netmefy.Api.Controllers
         }
 
         // POST: api/solicitudes
-        [ResponseType(typeof(Models.solicitudesModel))]
+        [ResponseType(typeof(bt_solicitudes))]
         public IHttpActionResult Postbt_solicitudes(Models.solicitudesModel solicitud)
         {
             if (!ModelState.IsValid)
@@ -52,8 +52,6 @@ namespace Netmefy.Api.Controllers
 
             if (bt_solicitudes.os_id == 0)
             {
-                bt_solicitudes.fh_creacion = DateTime.Today;
-
                 db.bt_solicitudes.Add(bt_solicitudes);
 
                 db.SaveChanges();
@@ -70,7 +68,7 @@ namespace Netmefy.Api.Controllers
 
                 db.SaveChanges();
 
-                return StatusCode(HttpStatusCode.NoContent);
+                return CreatedAtRoute("DefaultApi", new { id = solpe.os_id }, solpe);
             }
 
         }

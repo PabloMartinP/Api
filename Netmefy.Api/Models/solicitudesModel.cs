@@ -19,19 +19,19 @@ namespace Netmefy.Api.Models
 
             foreach (Data.bt_solicitudes n in solicitudes)
             {
-                DateTime fh_creacion_d = (DateTime)n.fh_creacion;
-
+              
                 DateTime fh_cierre_d;
+
                 if (n.fh_cierre != null)
                     fh_cierre_d = (DateTime)n.fh_cierre;
                 else
-                    fh_cierre_d = DateTime.MinValue;
+                    fh_cierre_d = DateTime.MaxValue;
 
                 list.Add(new solicitudesModel
                 {
                     os_id = n.os_id,
                     cliente_sk = n.cliente_sk,
-                    fh_creacion = fh_creacion_d.ToString("dd-MM-yyyy"),
+                    fh_creacion = n.fh_creacion.ToString("dd-MM-yyyy"),
                     fh_cierre = fh_cierre_d.ToString("dd-MM-yyyy"),
                 });
             }
@@ -43,12 +43,17 @@ namespace Netmefy.Api.Models
         {
             solicitudesModel solpe = new solicitudesModel();
             
-            DateTime fh_creacion_d = (DateTime)solicitudes.fh_creacion;
-            DateTime fh_cierre_d = (DateTime)solicitudes.fh_cierre;
+            DateTime fh_cierre_d;
+
+            if (solicitudes.fh_cierre != null)
+                fh_cierre_d = (DateTime)solicitudes.fh_cierre;
+            else
+                fh_cierre_d = DateTime.MaxValue;
+
 
             solpe.os_id = solicitudes.os_id;
             solpe.cliente_sk = solicitudes.cliente_sk;
-            solpe.fh_creacion = fh_creacion_d.ToString("dd-MM-yyyy");
+            solpe.fh_creacion = solicitudes.fh_creacion.ToString("dd-MM-yyyy");
             solpe.fh_cierre = fh_cierre_d.ToString("dd-MM-yyyy");
 
             return solpe;
@@ -60,8 +65,18 @@ namespace Netmefy.Api.Models
             
             solpe.os_id = solicitudes.os_id;
             solpe.cliente_sk = solicitudes.cliente_sk;
-            solpe.fh_creacion = DateTime.ParseExact(solicitudes.fh_creacion,"dd-MM-yyyy",null);
-            solpe.fh_cierre = DateTime.ParseExact(solicitudes.fh_cierre, "dd-MM-yyyy", null); ;
+
+            if (solicitudes.fh_creacion != null)
+                solpe.fh_creacion = DateTime.ParseExact(solicitudes.fh_creacion, "dd-MM-yyyy", null);
+            else
+                solpe.fh_creacion = DateTime.Today;
+            
+
+            if (solicitudes.fh_cierre != null)
+                solpe.fh_cierre = DateTime.ParseExact(solicitudes.fh_cierre, "dd-MM-yyyy", null);
+            else
+                solpe.fh_cierre = DateTime.ParseExact("31-12-2999", "dd-MM-yyyy", null); ;
+       
 
             return solpe;
         }
