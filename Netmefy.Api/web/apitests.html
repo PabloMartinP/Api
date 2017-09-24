@@ -16,10 +16,11 @@
         <button ng-click="get_tecnico()">get api/tecnicos?username=201</button>
         <button ng-click="get_tipoUsuarioApp()">get api/tipoUsuarioApp?username=201</button>        
         <button ng-click="post_usuario()">post api/usuarios</button>
+        <button ng-click="get_usuario()">get api/usuarios</button>
         <button ng-click="agregar_pagina_de_fb()">POST api/paginas</button>
         <button ng-click="get_notificaciones()">get api/notificaciones</button>
         <button ng-click="agregar_dispositivo()">agregar_dispositivo</button>
-        <button ng-click="updatear_dispositivo()">updatear_dispositivo</button>
+        <button ng-click="updatear_dispositivo()">updatear_dispositivo</button>        
         <hr />
         <h3>POST Token</h3>
         <div>
@@ -101,7 +102,7 @@
         });
 
         app.controller('myCtrl', function ($scope, $http, $q) {
-            $scope.user = { sk:'1', username: '101', password: '101' };
+            $scope.user = { sk:'1', username: '101', password: '101', email: 'martin@hotmail.com'};
             $scope.cliente_user = { sk:'0', cliente_sk: '1', username: 'Martin Guixe'};
                                     
             $scope.pantalla = "inicial";
@@ -193,6 +194,22 @@
                         alert("ERR" + url + " catch");
                     });
             }
+            
+
+            $scope.get_usuario = function () {
+                var url = URL_USUARIOS + "?email=" + $scope.user.email;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
 
             $scope.agregar_dispositivo = function () {
                 var data = { cliente_sk: 3, router_sk:3, dispositivo_mac: 'AA:BB:CC', dispositivo_ip: '192.168.0.1', dispositivo_apodo: 'El Marto', dispositivo_tipo: 'Celular', dispositivo_bloq: 0  };

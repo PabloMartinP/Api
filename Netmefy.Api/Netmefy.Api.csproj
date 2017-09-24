@@ -223,6 +223,7 @@
     <Content Include="web\apitests.html" />
     <None Include="Properties\PublishProfiles\iislocal.pubxml" />
     <None Include="Properties\PublishProfiles\loca.pubxml" />
+    <None Include="Properties\PublishProfiles\netmefy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -241,13 +242,15 @@
     <Compile Include="Controllers\api\tokensController.cs" />
     <Compile Include="Controllers\api\usuariosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\api\solicitudesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\dispositivosController.cs" />
+    <Compile Include="Controllers\api\dispositivosController.cs" />
     <Compile Include="Models\notificacionesModel.cs" />
     <Compile Include="Models\clientInfoModel.cs" />
     <Compile Include="Models\nuevaPaginaModel.cs" />
+    <Compile Include="Models\usuarioModel.cs" />
     <Compile Include="Models\tecnicoInfoModel.cs" />
     <Compile Include="Models\tipoClienteModel.cs" />
     <Compile Include="Models\token.cs" />
