@@ -16,11 +16,11 @@ namespace Netmefy.Api.Controllers
     {
         private NETMEFYEntities db = new NETMEFYEntities();
 
-        // GET: api/solicitudes
-        public IQueryable<bt_solicitudes> Getbt_solicitudes()
-        {
-            return db.bt_solicitudes;
-        }
+        //// GET: api/solicitudes
+        //public IQueryable<bt_solicitudes> Getbt_solicitudes()
+        //{
+        //    return db.bt_solicitudes;
+        //}
 
         // GET: api/solicitudes/5
         [ResponseType(typeof(bt_solicitudes))]
@@ -35,86 +35,98 @@ namespace Netmefy.Api.Controllers
             return Ok(bt_solicitudes);
         }
 
-        // PUT: api/solicitudes/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Putbt_solicitudes(int id, bt_solicitudes bt_solicitudes)
+        [ResponseType(typeof(Models.notificacionesModel))]
+        public IHttpActionResult Getbt_notificaciones(int cliente_sk, int usuario_sk)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            Service.NotificacionesService ns = new Service.NotificacionesService();
 
-            if (id != bt_solicitudes.os_id)
-            {
-                return BadRequest();
-            }
+            List<bt_notificaciones> notificaciones = ns.buscarNotificacionesXClienteUsuario(cliente_sk, usuario_sk);
 
-            db.Entry(bt_solicitudes).State = EntityState.Modified;
+            List<Models.notificacionesModel> not_model = Models.notificacionesModel.ConvertTo(notificaciones);
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!bt_solicitudesExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            return Ok(not_model);
         }
 
-        // POST: api/solicitudes
-        [ResponseType(typeof(bt_solicitudes))]
-        public IHttpActionResult Postbt_solicitudes(bt_solicitudes bt_solicitudes)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/solicitudes/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult Putbt_solicitudes(int id, bt_solicitudes bt_solicitudes)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            db.bt_solicitudes.Add(bt_solicitudes);
+        //    if (id != bt_solicitudes.os_id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (bt_solicitudesExists(bt_solicitudes.os_id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    db.Entry(bt_solicitudes).State = EntityState.Modified;
 
-            return CreatedAtRoute("DefaultApi", new { id = bt_solicitudes.os_id }, bt_solicitudes);
-        }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!bt_solicitudesExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-        // DELETE: api/solicitudes/5
-        [ResponseType(typeof(bt_solicitudes))]
-        public IHttpActionResult Deletebt_solicitudes(int id)
-        {
-            bt_solicitudes bt_solicitudes = db.bt_solicitudes.Find(id);
-            if (bt_solicitudes == null)
-            {
-                return NotFound();
-            }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
-            db.bt_solicitudes.Remove(bt_solicitudes);
-            db.SaveChanges();
+        //// POST: api/solicitudes
+        //[ResponseType(typeof(bt_solicitudes))]
+        //public IHttpActionResult Postbt_solicitudes(bt_solicitudes bt_solicitudes)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            return Ok(bt_solicitudes);
-        }
+        //    db.bt_solicitudes.Add(bt_solicitudes);
+
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateException)
+        //    {
+        //        if (bt_solicitudesExists(bt_solicitudes.os_id))
+        //        {
+        //            return Conflict();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+
+        //    return CreatedAtRoute("DefaultApi", new { id = bt_solicitudes.os_id }, bt_solicitudes);
+        //}
+
+        //// DELETE: api/solicitudes/5
+        //[ResponseType(typeof(bt_solicitudes))]
+        //public IHttpActionResult Deletebt_solicitudes(int id)
+        //{
+        //    bt_solicitudes bt_solicitudes = db.bt_solicitudes.Find(id);
+        //    if (bt_solicitudes == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    db.bt_solicitudes.Remove(bt_solicitudes);
+        //    db.SaveChanges();
+
+        //    return Ok(bt_solicitudes);
+        //}
 
         protected override void Dispose(bool disposing)
         {
