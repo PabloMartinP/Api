@@ -18,6 +18,7 @@ namespace Netmefy.Data
         public System.DateTime tiempo_sk { get; set; }
         public int estado_sk { get; set; }
         public string comentarios { get; set; }
+        public int hh_mm_ss { get; set; }
     
         public virtual bt_solicitudes bt_solicitudes { get; set; }
         public virtual lk_estado lk_estado { get; set; }

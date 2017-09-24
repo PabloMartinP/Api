@@ -35,6 +35,8 @@ namespace Netmefy.Api.Controllers.api
             return Ok(not_model);
         }
 
+        
+
         //[ResponseType(typeof(bt_notificaciones))]
         //public IHttpActionResult Getbt_notificaciones(int cliente_sk, int usuario_sk)
         //{

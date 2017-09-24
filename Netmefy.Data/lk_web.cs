@@ -23,6 +23,7 @@ namespace Netmefy.Data
         public int web_sk { get; set; }
         public string web_ip { get; set; }
         public string web_url { get; set; }
+        public string web_nombre { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<router> lk_cliente_router { get; set; }

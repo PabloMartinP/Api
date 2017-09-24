@@ -40,36 +40,7 @@ namespace Netmefy.Api.Models
             return db.dispositivos.Count(e => e.cliente_sk == id) > 0;
         }
 
-
-        //// POST: api/dispositivos
-        //[ResponseType(typeof(dispositivo))]
-        //public IHttpActionResult Postdispositivo(dispositivo dispositivo)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    db.dispositivos.Add(dispositivo);
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (dispositivoExists(dispositivo.cliente_sk))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return CreatedAtRoute("DefaultApi", new { id = dispositivo.cliente_sk }, dispositivo);
-        //}
+        
 
         // PUT: api/dispositivos/5
         [ResponseType(typeof(void))]
@@ -107,9 +78,9 @@ namespace Netmefy.Api.Models
         }
 
 
+        // POST: api/solicitudes
         [ResponseType(typeof(dispositivo))]
-        [HttpPost]
-        public IHttpActionResult PutPushDispositivo (dispositivo dispositivo)
+        public IHttpActionResult Postdispositivo (dispositivo dispositivo)
         {
             if (!ModelState.IsValid)
             {

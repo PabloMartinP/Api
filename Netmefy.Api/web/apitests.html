@@ -21,6 +21,9 @@
         <button ng-click="get_notificaciones()">get api/notificaciones</button>
         <button ng-click="agregar_dispositivo()">agregar_dispositivo</button>
         <button ng-click="updatear_dispositivo()">updatear_dispositivo</button>        
+        <button ng-click="get_solicitudes()">get_solicitudes</button>        
+        <button ng-click="agregar_solicitud()">agregar_solicitud</button>
+        <button ng-click="updatear_solicitud()">updatear_solicitud</button>        
         <hr />
         <h3>POST Token</h3>
         <div>
@@ -51,6 +54,10 @@
 
     <script>
 
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////// GENERAL /////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
         //200.69.217.157:20100
         //var url_root = "http://200.82.0.24";
         var url_root = "";
@@ -63,6 +70,7 @@
         var URL_TOKEN = url_root + "/api/tokens";
         var URL_PAGINAFB = url_root + "/api/paginas";
         var URL_DISPOSITIVOS = url_root + "/api/dispositivos";
+        var URL_SOLICITUDES = url_root + "/api/solicitudes";
         
 
         var app = angular.module('myApp', []);
@@ -134,138 +142,6 @@
             }
 
 
-            $scope.get_notificaciones = function () {
-                var url = URL_NOTIF + "?cliente_sk=1&usuario_sk=0";
-                $http.get(url)
-                    .then(function (response) {
-                        console.log(url + ' - ', response)
-                        alert("OK " + url + ": " + JSON.stringify(response.data));
-                        $scope.resultado = response.data;
-                    })
-                    .catch(function (data) {
-                        console.log(data);
-                        alert("err: url: " + url, data);
-                    });
-            }
-
-
-            $scope.get_tipoUsuarioApp = function () {
-                var url = URL_TIPOUSUARIOAPP + "?username=" + $scope.user.username; 
-                $http.get(url)
-                    .then(function (response) {
-                        console.log(url + ' - ', response)
-                        alert("OK " + url + ": " + JSON.stringify(response.data));
-                        $scope.resultado = response.data;
-                    })
-                    .catch(function (data) {
-                        console.log(data);
-                        alert("err: url: " + url, data);
-                    });
-            }
-
-
-            $scope.agregar_pagina_de_fb = function () {
-                //EL DOS ES EL ID DOS DEL CLIENTE 101!!!
-                //['Calabaza besame y bailare', 'Los Simpson y la oposición']
-                var data = { cliente_sk: 1, usuario_sk: 1, paginas: "['Calabaza besame y bailare', 'Los Simpson y la oposición']" };
-                var url = URL_PAGINAFB;
-                $http.post(url, data)
-                    .then(function (response) {
-                        console.log(url + 'ok ' + url, response)
-                        alert("OK " + url + "response:" + JSON.stringify(response.data));
-                    })
-                    .catch(function (data) {
-                        console.log(data);
-                        alert("ERR" + url + " catch");
-                        
-                    });
-            }
-
-            $scope.post_usuario = function () {
-                //EL DOS ES EL ID DOS DEL CLIENTE 101!!!
-                var data = { cliente_sk: 2, usuario_edad: 123, usuario_email: 'mail2', usuario_nombre: 'nomm', usuario_sexo: 'F' };
-                var url = URL_USUARIOS;
-                $http.post(url, data)
-                    .then(function (response) {
-                        console.log(url + 'ok ' + url, response)
-                        alert("OK " + url + "response:" + JSON.stringify(response.data));
-                    })
-                    .catch(function (data) {
-                        alert("ERR" + url + " catch");
-                    });
-            }
-            
-
-            $scope.get_usuario = function () {
-                var url = URL_USUARIOS + "?email=" + $scope.user.email;
-                $http.get(url)
-                    .then(function (response) {
-                        console.log(url + ' - ', response)
-                        alert("OK " + url + ": " + JSON.stringify(response.data));
-                        $scope.resultado = response.data;
-                    })
-                    .catch(function (data) {
-                        console.log(data);
-                        alert("err: url: " + url, data);
-                    });
-            }
-
-
-            $scope.agregar_dispositivo = function () {
-                var data = { cliente_sk: 3, router_sk:3, dispositivo_mac: 'AA:BB:CC', dispositivo_ip: '192.168.0.1', dispositivo_apodo: 'El Marto', dispositivo_tipo: 'Celular', dispositivo_bloq: 0  };
-                var url = URL_DISPOSITIVOS;
-                $http.post(url, data)
-                    .then(function (response) {
-                        console.log(url + 'ok ' + url, response)
-                        alert("OK " + url + "response:" + JSON.stringify(response.data));
-                    })
-                    .catch(function (data) {
-                        alert("ERR" + url + " catch");
-                    });
-            }
-
-            $scope.updatear_dispositivo = function () {
-                var data = { cliente_sk: 1, router_sk: 1, dispositivo_sk: 1, dispositivo_mac: 'DD:EE:FF', dispositivo_ip: '192.168.0.2', dispositivo_apodo: '.Net Master', dispositivo_tipo: 'Notebook', dispositivo_bloq: 0 };
-                var url = URL_DISPOSITIVOS;
-                $http.post(url, data)
-                    .then(function (response) {
-                        console.log(url + 'ok ' + url, response)
-                        alert("OK " + url + "response:" + JSON.stringify(response.data));
-                    })
-                    .catch(function (data) {
-                        alert("ERR" + url + " catch");
-                    });
-            }
-
-            
-            $scope.get_cliente = function () {
-                var url = URL_CLIENTE + "?username=" + $scope.user.username;
-                $http.get(url)
-                    .then(function (response) {
-                        console.log(url + ' - ', response)
-                        alert("OK " + url + ": " + JSON.stringify(response.data));
-                        $scope.resultado = response.data;
-                    })
-                    .catch(function (data) {
-                        console.log(data);
-                        alert("err: url: " + url, data);
-                    });
-            }
-
-            $scope.get_tecnico = function () {
-                var url = URL_TECNICO + "?username=" + $scope.user.username;
-                $http.get(url)
-                    .then(function (response) {
-                        console.log(url + ' - ', response)
-                        alert("OK " + url + ": " + JSON.stringify(response.data));
-                        $scope.resultado = response.data;
-                    })
-                    .catch(function (data) {
-                        console.log(data);
-                        alert("err: url: " + url, data);
-                    });
-            }
-
 
             $scope.click_get_token = function () {
                 /*EL CLIENT_ID ES UN PARAMETRO FIJO PARA TODA LA APLICACION*/
@@ -297,15 +173,228 @@
             }
 
 
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////// NOTIFICACIONES /////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            $scope.get_notificaciones = function () {
+                var url = URL_NOTIF + "?cliente_sk=1&usuario_sk=0";
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////// TIPO USUARIO ///////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            $scope.get_tipoUsuarioApp = function () {
+                var url = URL_TIPOUSUARIOAPP + "?username=" + $scope.user.username; 
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////// PAGINAS /////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            $scope.agregar_pagina_de_fb = function () {
+                //['Calabaza besame y bailare', 'Los Simpson y la oposición']
+                var data = { cliente_sk: 1, usuario_sk: 1, paginas: "['Calabaza besame y bailare', 'Los Simpson y la oposición']" };
+                var url = URL_PAGINAFB;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("ERR" + url + " catch");
+                        
+                    });
+            }
+
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////// USUARIOS /////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            $scope.post_usuario = function () {
+                var data = { cliente_sk: 2, usuario_edad: 123, usuario_email: 'mail2', usuario_nombre: 'nomm', usuario_sexo: 'F' };
+                var url = URL_USUARIOS;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+            
+
+            $scope.get_usuario = function () {
+                var url = URL_USUARIOS + "?email=" + $scope.user.email;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////////// DISPOSITIVOS ///////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            $scope.agregar_dispositivo = function () {
+                var data = { cliente_sk: 3, router_sk:3, dispositivo_mac: 'AA:BB:CC', dispositivo_ip: '192.168.0.1', dispositivo_apodo: 'El Marto', dispositivo_tipo: 'Celular', dispositivo_bloq: 0  };
+                var url = URL_DISPOSITIVOS;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
+            $scope.updatear_dispositivo = function () {
+                var data = { cliente_sk: 1, router_sk: 1, dispositivo_sk: 1, dispositivo_mac: 'DD:EE:FF', dispositivo_ip: '192.168.0.2', dispositivo_apodo: '.Net Master', dispositivo_tipo: 'Notebook', dispositivo_bloq: 0 };
+                var url = URL_DISPOSITIVOS;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response) 
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////// CLIENTE /////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            
+            $scope.get_cliente = function () {
+                var url = URL_CLIENTE + "?username=" + $scope.user.username;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////// TECNICO /////////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+            $scope.get_tecnico = function () {
+                var url = URL_TECNICO + "?username=" + $scope.user.username;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////// SOLICITUDES ///////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            $scope.get_solicitudes = function () {
+                var url = URL_SOLICITUDES + "?cliente_sk=1";
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.agregar_solicitud = function () {
+                var data = { cliente_sk: 2};
+                var url = URL_SOLICITUDES;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
+            $scope.updatear_solicitud = function () {
+                var data = { os_id: 1, cliente_sk: 1, fh_creacion: '22-02-1989', fh_cierre: '31-12-2017'};
+                //var data = { os_id: 1, cliente_sk: 1, fh_creacion: 1506267389138, fh_cierre: 1506267389138 };
+                var url = URL_DISPOSITIVOS;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
+
 
         });
-
-
-
-
-
-    </script>
-
-
+</script>
 </body>
 </html>

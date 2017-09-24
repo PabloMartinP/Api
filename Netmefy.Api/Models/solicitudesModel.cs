@@ -10,30 +10,57 @@ namespace Netmefy.Api.Models
 
         public int os_id;
         public int cliente_sk;
-        public System.DateTime fh_creacion;
-        public Nullable<System.DateTime> fh_cierre;
+        public string fh_creacion;
+        public string fh_cierre;
 
-        public static List<notificacionesModel> ConvertTo(List<Data.bt_notificaciones> notificaciones)
+        public static List<solicitudesModel> ListConvertTo(List<Data.bt_solicitudes> solicitudes)
         {
-            List<notificacionesModel> list = new List<notificacionesModel>();
-            Service.NotificacionesService ns = new Service.NotificacionesService();
+            List<solicitudesModel> list = new List<solicitudesModel>();
 
-
-            foreach (Data.bt_notificaciones n in notificaciones)
+            foreach (Data.bt_solicitudes n in solicitudes)
             {
-                list.Add(new notificacionesModel
-                {
-                    usuario_sk = n.usuario_sk,
-                    cliente_sk = n.cliente_sk,
-                    notificacion_sk = n.notificacion_sk,
-                    tiempo_sk = n.tiempo_sk,
-                    notificacion_desc= ns.buscarNotificaciones(n.notificacion_sk).notificacion_desc,
-                    notificacion_texto = ns.buscarNotificaciones(n.notificacion_sk).notificacion_texto,
+                DateTime fh_creacion_d = (DateTime)n.fh_creacion;
+                DateTime fh_cierre_d = (DateTime)n.fh_cierre;
 
+                list.Add(new solicitudesModel
+                {
+                    os_id = n.os_id,
+                    cliente_sk = n.cliente_sk,
+                    fh_creacion = fh_creacion_d.ToString("dd-MM-yyyy"),
+                    fh_cierre = fh_cierre_d.ToString("dd-MM-yyyy"),
                 });
             }
 
             return list;
         }
+
+        public static solicitudesModel ConvertTo(Data.bt_solicitudes solicitudes)
+        {
+            solicitudesModel solpe = new solicitudesModel();
+            
+            DateTime fh_creacion_d = (DateTime)solicitudes.fh_creacion;
+            DateTime fh_cierre_d = (DateTime)solicitudes.fh_cierre;
+
+            solpe.os_id = solicitudes.os_id;
+            solpe.cliente_sk = solicitudes.cliente_sk;
+            solpe.fh_creacion = fh_creacion_d.ToString("dd-MM-yyyy");
+            solpe.fh_cierre = fh_cierre_d.ToString("dd-MM-yyyy");
+
+            return solpe;
+        }
+
+        public static Data.bt_solicitudes ConvertToBD(solicitudesModel solicitudes)
+        {
+            Data.bt_solicitudes solpe = new Data.bt_solicitudes();
+            
+            solpe.os_id = solicitudes.os_id;
+            solpe.cliente_sk = solicitudes.cliente_sk;
+            solpe.fh_creacion = DateTime.ParseExact(solicitudes.fh_creacion,"dd-MM-yyyy",null);
+            solpe.fh_cierre = DateTime.ParseExact(solicitudes.fh_cierre, "dd-MM-yyyy", null); ;
+
+            return solpe;
+        }
+
+
     }
 }

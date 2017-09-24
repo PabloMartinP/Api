@@ -32,10 +32,12 @@
           <Key>
             <PropertyRef Name="os_id" />
             <PropertyRef Name="tiempo_sk" />
+            <PropertyRef Name="hh_mm_ss" />
             <PropertyRef Name="estado_sk" />
           </Key>
           <Property Name="os_id" Type="int" Nullable="false" />
           <Property Name="tiempo_sk" Type="date" Nullable="false" />
+          <Property Name="hh_mm_ss" Type="int" Nullable="false" />
           <Property Name="estado_sk" Type="int" Nullable="false" />
           <Property Name="comentarios" Type="varchar" MaxLength="200" />
         </EntityType>
@@ -43,10 +45,12 @@
           <Key>
             <PropertyRef Name="ot_id" />
             <PropertyRef Name="tiempo_sk" />
+            <PropertyRef Name="hh_mm_ss" />
             <PropertyRef Name="estado_sk" />
           </Key>
           <Property Name="ot_id" Type="int" Nullable="false" />
           <Property Name="tiempo_sk" Type="date" Nullable="false" />
+          <Property Name="hh_mm_ss" Type="int" Nullable="false" />
           <Property Name="estado_sk" Type="int" Nullable="false" />
           <Property Name="comentarios" Type="varchar" MaxLength="200" />
         </EntityType>
@@ -204,6 +208,7 @@
           <Property Name="web_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="web_ip" Type="varchar" MaxLength="15" />
           <Property Name="web_url" Type="varchar" MaxLength="200" />
+          <Property Name="web_nombre" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="rel_user_ent">
           <Key>
@@ -854,6 +859,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <PropertyRef Name="os_id" />
             <PropertyRef Name="tiempo_sk" />
             <PropertyRef Name="estado_sk" />
+            <PropertyRef Name="hh_mm_ss" />
           </Key>
           <Property Name="os_id" Type="Int32" Nullable="false" />
           <Property Name="tiempo_sk" Type="DateTime" Nullable="false" Precision="0" />
@@ -862,12 +868,14 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <NavigationProperty Name="bt_solicitudes" Relationship="NETMEFYModel.fk_bt_os_status_bt_solicitudes" FromRole="bt_os_status" ToRole="bt_solicitudes" />
           <NavigationProperty Name="lk_estado" Relationship="NETMEFYModel.fk_bt_os_status_lk_estado" FromRole="bt_os_status" ToRole="lk_estado" />
           <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_os_status_lk_tiempo" FromRole="bt_os_status" ToRole="lk_tiempo" />
+          <Property Name="hh_mm_ss" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="bt_ot_status">
           <Key>
             <PropertyRef Name="ot_id" />
             <PropertyRef Name="tiempo_sk" />
             <PropertyRef Name="estado_sk" />
+            <PropertyRef Name="hh_mm_ss" />
           </Key>
           <Property Name="ot_id" Type="Int32" Nullable="false" />
           <Property Name="tiempo_sk" Type="DateTime" Nullable="false" Precision="0" />
@@ -876,6 +884,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <NavigationProperty Name="bt_ord_trabajo" Relationship="NETMEFYModel.fk_bt_ot_status_bt_ord_trabajo" FromRole="bt_ot_status" ToRole="bt_ord_trabajo" />
           <NavigationProperty Name="lk_estado" Relationship="NETMEFYModel.fk_bt_ot_status_lk_estado" FromRole="bt_ot_status" ToRole="lk_estado" />
           <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_ot_status_lk_tiempo" FromRole="bt_ot_status" ToRole="lk_tiempo" />
+          <Property Name="hh_mm_ss" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="bt_solicitudes">
           <Key>
@@ -1047,6 +1056,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="web_ip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="web_url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="lk_cliente_router" Relationship="NETMEFYModel.bt_webs_bloq" FromRole="lk_web" ToRole="lk_cliente_router" />
+          <Property Name="web_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="token">
           <Key>
@@ -1386,6 +1396,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySetMapping Name="bt_os_status">
             <EntityTypeMapping TypeName="NETMEFYModel.bt_os_status">
               <MappingFragment StoreEntitySet="bt_os_status">
+                <ScalarProperty Name="hh_mm_ss" ColumnName="hh_mm_ss" />
                 <ScalarProperty Name="comentarios" ColumnName="comentarios" />
                 <ScalarProperty Name="estado_sk" ColumnName="estado_sk" />
                 <ScalarProperty Name="tiempo_sk" ColumnName="tiempo_sk" />
@@ -1396,6 +1407,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySetMapping Name="bt_ot_status">
             <EntityTypeMapping TypeName="NETMEFYModel.bt_ot_status">
               <MappingFragment StoreEntitySet="bt_ot_status">
+                <ScalarProperty Name="hh_mm_ss" ColumnName="hh_mm_ss" />
                 <ScalarProperty Name="comentarios" ColumnName="comentarios" />
                 <ScalarProperty Name="estado_sk" ColumnName="estado_sk" />
                 <ScalarProperty Name="tiempo_sk" ColumnName="tiempo_sk" />
@@ -1544,6 +1556,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySetMapping Name="lk_web">
             <EntityTypeMapping TypeName="NETMEFYModel.lk_web">
               <MappingFragment StoreEntitySet="lk_web">
+                <ScalarProperty Name="web_nombre" ColumnName="web_nombre" />
                 <ScalarProperty Name="web_url" ColumnName="web_url" />
                 <ScalarProperty Name="web_ip" ColumnName="web_ip" />
                 <ScalarProperty Name="web_sk" ColumnName="web_sk" />
