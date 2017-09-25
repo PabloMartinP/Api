@@ -50,7 +50,7 @@ namespace Netmefy.Api.Models
                     mac = d.dispositivo_mac,
                     ip = d.dispositivo_ip, 
                     tipo = d.dispositivo_tipo, 
-                    bloqueado = d.dispositivo_bloq == 0, 
+                    bloqueado = d.dispositivo_bloq != 0, 
                     apodo = d.dispositivo_apodo
 
                 });
