@@ -236,8 +236,10 @@
     <Compile Include="Controllers\api\clientesController.cs" />
     <Compile Include="Controllers\api\ispController.cs" />
     <Compile Include="Controllers\api\notificacionesController.cs" />
+    <Compile Include="Controllers\api\ot_statusController.cs" />
     <Compile Include="Controllers\api\os_statusController.cs" />
     <Compile Include="Controllers\api\paginasController.cs" />
+    <Compile Include="Controllers\api\otController.cs" />
     <Compile Include="Controllers\api\tecnicosController.cs" />
     <Compile Include="Controllers\api\tipoUsuarioAppController.cs" />
     <Compile Include="Controllers\api\tokensController.cs" />
@@ -248,7 +250,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Controllers\api\dispositivosController.cs" />
+    <Compile Include="Models\ot_statusModel.cs" />
     <Compile Include="Models\os_statusModel.cs" />
+    <Compile Include="Models\otModel.cs" />
     <Compile Include="Models\solicitudesModel.cs" />
     <Compile Include="Models\notificacionesModel.cs" />
     <Compile Include="Models\clientInfoModel.cs" />

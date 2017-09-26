@@ -24,6 +24,13 @@
         <button ng-click="get_solicitudes()">get_solicitudes</button>        
         <button ng-click="agregar_solicitud()">agregar_solicitud</button>
         <button ng-click="updatear_solicitud()">updatear_solicitud</button>        
+        <button ng-click="OS_ult_estado()">OS_ult_estado</button>     
+        <button ng-click="OS_agregar_estado()">OS_agregar_estado</button> 
+        <button ng-click="get_OT()">get_OT</button>
+        <button ng-click="agregar_OT()">agregar_OT</button>
+        <button ng-click="updatear_OT()">updatear_OT</button>
+        <button ng-click="OT_ult_estado()">OT_ult_estado</button>
+        <button ng-click="OT_agregar_estado()">OT_agregar_estado</button>     
         <hr />
         <h3>POST Token</h3>
         <div>
@@ -71,6 +78,9 @@
         var URL_PAGINAFB = url_root + "/api/paginas";
         var URL_DISPOSITIVOS = url_root + "/api/dispositivos";
         var URL_SOLICITUDES = url_root + "/api/solicitudes";
+        var URL_OS_STATUS = url_root + "/api/os_status";
+        var URL_OT = url_root + "/api/ot";
+        var URL_OT_STATUS = url_root + "/api/ot_status";
         
 
         var app = angular.module('myApp', []);
@@ -393,6 +403,108 @@
             }
 
 
+            $scope.OS_ult_estado = function () {
+                var url = URL_OS_STATUS + "?os_id=1";
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.OS_agregar_estado = function () {
+                var data = { os_id: 1, estado_sk: 2, comentarios: 'soy la puta bestia' };
+                var url = URL_OS_STATUS;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
+
+
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////// ORDENES DE TRABAJO ////////////////////////////////////////////////
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            $scope.get_OT = function () {
+                var url = URL_OT + "?cliente_sk=1";
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.agregar_OT = function () {
+                var data = { cliente_sk: 1 };
+                var url = URL_OT;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
+            $scope.updatear_solicitud = function () {
+                var data = { ot_id: 1, cliente_sk: 1, fh_creacion: '22-02-2017', fh_cierre: '31-12-2017', tecnico_sk: 1 };
+                var url = URL_OT;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
+
+            $scope.OT_ult_estado = function () {
+                var url = URL_OT_STATUS + "?os_id=1";
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.OT_agregar_estado = function () {
+                var data = { ot_id: 1, estado_sk: 2, comentarios: 'soy la puta bestia 2' };
+                var url = URL_OS_STATUS;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
 
         });
 </script>

@@ -15,107 +15,45 @@ namespace Netmefy.Api.Controllers.api
     public class os_statusController : ApiController
     {
         private NETMEFYEntities db = new NETMEFYEntities();
-
-        //// GET: api/os_status
-        //public IQueryable<bt_os_status> Getbt_os_status()
-        //{
-        //    return db.bt_os_status;
-        //}
-
+        
         // GET: api/os_status/5
-        [ResponseType(typeof(bt_os_status))]
-        public IHttpActionResult Getbt_os_status(int id)
+        [ResponseType(typeof(Models.os_statusModel))]
+        public IHttpActionResult Getbt_os_status(int os_id)
         {
-            bt_os_status bt_os_status = db.bt_os_status.Find(id);
-            if (bt_os_status == null)
+            List<bt_os_status> estados = db.bt_os_status.Where(x => x.os_id == os_id).ToList();
+            if (estados == null)
             {
                 return NotFound();
             }
 
-            return Ok(bt_os_status);
+            List<Models.os_statusModel> modelEstados = Models.os_statusModel.ListConvertTo(estados);
+            Models.os_statusModel ult_estado = modelEstados.OrderByDescending(x => x.timestamp).FirstOrDefault();
+
+            return Ok(ult_estado);
         }
 
-        // PUT: api/os_status/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Putbt_os_status(int id, bt_os_status bt_os_status)
+        
+        [ResponseType(typeof(Models.os_statusModel))]
+        public IHttpActionResult Postbt_os_status(Models.os_statusModel estado)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != bt_os_status.os_id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(bt_os_status).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!bt_os_statusExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/os_status
-        [ResponseType(typeof(bt_os_status))]
-        public IHttpActionResult Postbt_os_status(bt_os_status bt_os_status)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+            bt_os_status bt_os_status = Models.os_statusModel.ConvertToBD(estado);
             db.bt_os_status.Add(bt_os_status);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (bt_os_statusExists(bt_os_status.os_id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = bt_os_status.os_id }, bt_os_status);
-        }
-
-        // DELETE: api/os_status/5
-        [ResponseType(typeof(bt_os_status))]
-        public IHttpActionResult Deletebt_os_status(int id)
-        {
-            bt_os_status bt_os_status = db.bt_os_status.Find(id);
-            if (bt_os_status == null)
-            {
-                return NotFound();
-            }
-
-            db.bt_os_status.Remove(bt_os_status);
             db.SaveChanges();
 
-            return Ok(bt_os_status);
+            estado.tiempo_sk = bt_os_status.tiempo_sk.ToString("dd-MM-yyyy");
+            estado.hh_mm_ss = bt_os_status.hh_mm_ss;
+            estado.timestamp = string.Concat(bt_os_status.tiempo_sk.ToString("yyyy-dd-MM"), " ", bt_os_status.hh_mm_ss);
+                
+            return CreatedAtRoute("DefaultApi", new { id = estado.os_id }, estado);
+            
         }
 
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

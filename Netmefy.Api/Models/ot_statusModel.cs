@@ -5,21 +5,21 @@ using System.Web;
 
 namespace Netmefy.Api.Models
 {
-    public class os_statusModel
+    public class ot_statusModel
     {
 
-        public int os_id;
+        public int ot_id;
         public string tiempo_sk;
         public string hh_mm_ss;
         public int estado_sk;
         public string comentarios;
         public string timestamp;
 
-        public static List<os_statusModel> ListConvertTo(List<Data.bt_os_status> estados)
+        public static List<ot_statusModel> ListConvertTo(List<Data.bt_ot_status> estados)
         {
-            List<os_statusModel> list = new List<os_statusModel>();
+            List<ot_statusModel> list = new List<ot_statusModel>();
 
-            foreach (Data.bt_os_status n in estados)
+            foreach (Data.bt_ot_status n in estados)
             {
                 list.Add(ConvertTo(n));
             }
@@ -27,11 +27,11 @@ namespace Netmefy.Api.Models
             return list;
         }
 
-        public static os_statusModel ConvertTo(Data.bt_os_status estado)
+        public static ot_statusModel ConvertTo(Data.bt_ot_status estado)
         {
-            os_statusModel e = new os_statusModel();
+            ot_statusModel e = new ot_statusModel();
 
-            e.os_id = estado.os_id;
+            e.ot_id = estado.ot_id;
             e.tiempo_sk = estado.tiempo_sk.ToString("dd-MM-yyyy");
             e.hh_mm_ss = estado.hh_mm_ss;
             e.estado_sk = estado.estado_sk;
@@ -41,11 +41,11 @@ namespace Netmefy.Api.Models
             return e;
         }
 
-        public static Data.bt_os_status ConvertToBD(os_statusModel estado)
+        public static Data.bt_ot_status ConvertToBD(ot_statusModel estado)
         {
-            Data.bt_os_status e = new Data.bt_os_status();
+            Data.bt_ot_status e = new Data.bt_ot_status();
 
-            e.os_id = estado.os_id;
+            e.ot_id = estado.ot_id;
 
             if (estado.tiempo_sk != null)
                 e.tiempo_sk = DateTime.ParseExact(estado.tiempo_sk, "dd-MM-yyyy", null);
