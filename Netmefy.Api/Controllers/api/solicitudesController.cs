@@ -40,7 +40,8 @@ namespace Netmefy.Api.Controllers
         }
 
         // POST: api/solicitudes
-        [ResponseType(typeof(Models.solicitudesModel))]
+        [ResponseType(typeof(Models.solicitudesModel))]        
+        //public IHttpActionResult Postbt_solicitudes(Models.solicitudesModel solicitud)
         public IHttpActionResult Postbt_solicitudes(Models.solicitudesModel solicitud)
         {
             if (!ModelState.IsValid)
