@@ -40,7 +40,7 @@ namespace Netmefy.Api.Controllers
         }
 
         // POST: api/solicitudes
-        [ResponseType(typeof(bt_solicitudes))]
+        [ResponseType(typeof(Models.solicitudesModel))]
         public IHttpActionResult Postbt_solicitudes(Models.solicitudesModel solicitud)
         {
             if (!ModelState.IsValid)
@@ -55,8 +55,11 @@ namespace Netmefy.Api.Controllers
                 db.bt_solicitudes.Add(bt_solicitudes);
 
                 db.SaveChanges();
+                solicitud.fh_cierre = ((DateTime)(bt_solicitudes.fh_cierre)).ToString("yyyy-mm-dd"); ;
+                solicitud.fh_creacion = ((DateTime)(bt_solicitudes.fh_creacion)).ToString("yyyy-mm-dd"); ;
+                solicitud.os_id = bt_solicitudes.os_id;
 
-                return CreatedAtRoute("DefaultApi", new { id = bt_solicitudes.os_id }, bt_solicitudes);
+                return CreatedAtRoute("DefaultApi", new { id = bt_solicitudes.os_id }, solicitud);
 
             }
             else
@@ -67,8 +70,10 @@ namespace Netmefy.Api.Controllers
                 solpe.fh_cierre = bt_solicitudes.fh_cierre;
 
                 db.SaveChanges();
+                solicitud.fh_creacion = ((DateTime)(solpe.fh_creacion)).ToString("yyyy-mm-dd"); ;
+                solicitud.fh_cierre = ((DateTime)(solpe.fh_cierre)).ToString("yyyy-mm-dd"); ;
 
-                return CreatedAtRoute("DefaultApi", new { id = solpe.os_id }, solpe);
+                return CreatedAtRoute("DefaultApi", new { id = solpe.os_id }, solicitud);
             }
 
         }
