@@ -8,10 +8,10 @@ namespace Netmefy.Api.Models
     public class solicitudesModel
     {
 
-        public int os_id;
-        public int cliente_sk;
-        public string fh_creacion;
-        public string fh_cierre;
+        public int os_id { get; set; }
+        public int cliente_sk { get; set; }
+        public string fh_creacion { get; set; }
+        public string fh_cierre { get; set; }
 
         public static List<solicitudesModel> ListConvertTo(List<Data.bt_solicitudes> solicitudes)
         {
