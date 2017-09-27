@@ -8,12 +8,12 @@ namespace Netmefy.Api.Models
     public class otModel
     {
 
-        public int ot_id;
-        public int cliente_sk;
-        public int tecnico_sk;
-        public string fh_creacion;
-        public string fh_cierre;
-        public int calificacion;
+        public int ot_id { get; set; }
+        public int cliente_sk { get; set; }
+        public int tecnico_sk { get; set; }
+        public string fh_creacion { get; set; }
+        public string fh_cierre { get; set; }
+        public int calificacion { get; set; }
 
         public static List<otModel> ListConvertTo(List<Data.bt_ord_trabajo> ots)
         {
