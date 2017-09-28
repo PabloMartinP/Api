@@ -16,8 +16,17 @@ namespace Netmefy.Api.Models
     }
     public class webModel
     {
+        public int id { get; set; }
         public string ip { get; set; }
         public string url { get; set; }
+        public string nombre { get; set; }
+    }
+
+    public class webBloqModel
+    {
+        public int cliente_sk { get; set; }
+        public int router_sk { get; set; }
+        public int web_sk { get; set; }
     }
 
     public class routerInfoModel

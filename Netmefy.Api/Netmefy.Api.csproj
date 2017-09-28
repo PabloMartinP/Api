@@ -244,6 +244,7 @@
     <Compile Include="Controllers\api\tipoUsuarioAppController.cs" />
     <Compile Include="Controllers\api\tokensController.cs" />
     <Compile Include="Controllers\api\usuariosController.cs" />
+    <Compile Include="Controllers\api\webController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\api\solicitudesController.cs" />
     <Compile Include="Global.asax.cs">

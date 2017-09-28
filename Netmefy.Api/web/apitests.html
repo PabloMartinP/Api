@@ -30,7 +30,10 @@
         <button ng-click="agregar_OT()">agregar_OT</button>
         <button ng-click="updatear_OT()">updatear_OT</button>
         <button ng-click="OT_ult_estado()">OT_ult_estado</button>
-        <button ng-click="OT_agregar_estado()">OT_agregar_estado</button>     
+        <button ng-click="OT_agregar_estado()">OT_agregar_estado</button> 
+        <button ng-click="get_lk_webs()">get_lk_webs</button>
+        <button ng-click="post_lk_web()">post_lk_web</button>     
+        <button ng-click="update_lk_web()">update_lk_web</button>     
         <hr />
         <h3>POST Token</h3>
         <div>
@@ -81,6 +84,7 @@
         var URL_OS_STATUS = url_root + "/api/os_status";
         var URL_OT = url_root + "/api/ot";
         var URL_OT_STATUS = url_root + "/api/ot_status";
+        var URL_LK_WEB = url_root + "/api/web";
         
 
         var app = angular.module('myApp', []);
@@ -505,6 +509,56 @@
                         alert("ERR" + url + " catch");
                     });
             }
+
+
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////// LK WEB ////////////////////////////////////////////////
+            /////////////////////////////////////////////////////// ////////////////////////////////////////////////
+
+
+            $scope.get_lk_webs = function () {
+                var url = URL_LK_WEB ;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.post_lk_web = function () {
+                var data = { ip: '192.168.0.1', nombre: 'localhost', url: 'www.xxx.yyy' };
+                var url = URL_LK_WEB;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
+            $scope.update_lk_web = function () {
+                var data = { id: 16, ip: '192.168.20.11', nombre: 'lala', url: 'zzz.xxx.yyy' };
+                var url = URL_LK_WEB;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
+
 
         });
 </script>

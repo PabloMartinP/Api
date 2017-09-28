@@ -38,7 +38,7 @@ namespace Netmefy.Api.Controllers.api
             {
                 websModel.Add(new webModel
                 {
-                    ip = w.web_ip, url = w.web_url
+                    ip = w.web_ip, url = w.web_url, id = w.web_sk, nombre = w.web_nombre
                 });
             }
 
