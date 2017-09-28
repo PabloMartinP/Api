@@ -7,8 +7,8 @@ namespace Netmefy.Api.Models
 {
     public class tecnicoInfoModel
     {
-        public int id;
-        public string nombre;
+        public int id { get; set; }
+        public string nombre { get; set; }
 
     }
 }

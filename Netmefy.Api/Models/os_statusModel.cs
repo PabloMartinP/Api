@@ -8,12 +8,12 @@ namespace Netmefy.Api.Models
     public class os_statusModel
     {
 
-        public int os_id;
-        public string tiempo_sk;
-        public string hh_mm_ss;
-        public int estado_sk;
-        public string comentarios;
-        public string timestamp;
+        public int os_id { get; set; }
+        public string tiempo_sk { get; set; }
+        public string hh_mm_ss { get; set; }
+        public int estado_sk { get; set; }
+        public string comentarios { get; set; }
+        public string timestamp { get; set; }
 
         public static List<os_statusModel> ListConvertTo(List<Data.bt_os_status> estados)
         {

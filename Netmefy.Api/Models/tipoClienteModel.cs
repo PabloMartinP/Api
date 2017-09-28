@@ -7,8 +7,8 @@ namespace Netmefy.Api.Models
 {
     public class tipoClienteModel
     {
-        public string tipo;
-        public int id;
-        public string username;
+        public string tipo { get; set; }
+        public int id { get; set; }
+        public string username { get; set; }
     }
 }

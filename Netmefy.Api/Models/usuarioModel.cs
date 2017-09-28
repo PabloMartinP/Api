@@ -7,13 +7,13 @@ namespace Netmefy.Api.Models
 {
     public class usuarioModel
     {
-        public int usuario_sk;
-        public int cliente_sk;
-        public string usuario_nombre;
-        public string usuario_sexo;
-        public Nullable<int> usuario_edad;
-        public byte[] usuario_foto;
-        public string usuario_email;
+        public int usuario_sk { get; set; }
+        public int cliente_sk { get; set; }
+        public string usuario_nombre { get; set; }
+        public string usuario_sexo { get; set; }
+        public Nullable<int> usuario_edad { get; set; }
+        public byte[] usuario_foto { get; set; }
+        public string usuario_email { get; set; }
 
 
         public static usuarioModel ConvertTo(Data.usuario usuario)

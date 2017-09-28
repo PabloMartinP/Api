@@ -7,37 +7,37 @@ namespace Netmefy.Api.Models
 {
     public class clientInfoModel
     {
-        public int id;
-        public string username;
-        public int mb_contratado;
-        public int mb_umbral;
-        public string nombre;
+        public int id { get; set; }
+        public string username { get; set; }
+        public int mb_contratado { get; set; }
+        public int mb_umbral { get; set; }
+        public string nombre { get; set; }
         public routerInfoModel router { get; set; }
     }
     public class webModel
     {
-        public string ip;
-        public string url;
+        public string ip { get; set; }
+        public string url { get; set; }
     }
 
     public class routerInfoModel
     {
-        public int router_sk;
-        public string modelo;
-        public string ssid;
-        public string password;
-        public List<dispositivoInfoModel> devices;
+        public int router_sk { get; set; }
+        public string modelo { get; set; }
+        public string ssid { get; set; }
+        public string password { get; set; }
+        public List<dispositivoInfoModel> devices { get; set; }
         public List<webModel> webs_bloqueadas { get; set; }
     }
     public class dispositivoInfoModel
     {
-        public int dispositivo_sk;
-        public string mac;
-        public string ip;
-        public string tipo;
-        public bool bloqueado;
-        public string foto;
-        public string apodo;
+        public int dispositivo_sk { get; set; }
+        public string mac { get; set; }
+        public string ip { get; set; }
+        public string tipo { get; set; }
+        public bool bloqueado { get; set; }
+        public string foto { get; set; }
+        public string apodo { get; set; }
 
         public static List<dispositivoInfoModel> ConvertTo(List<Data.dispositivo> dispositivos)
         {

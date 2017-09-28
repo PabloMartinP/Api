@@ -7,12 +7,12 @@ namespace Netmefy.Api.Models
 {
     public class notificacionesModel
     {
-        public int usuario_sk;
-        public int cliente_sk;
-        public int notificacion_sk;
-        public System.DateTime tiempo_sk;
-        public string notificacion_desc;
-        public string notificacion_texto;
+        public int usuario_sk { get; set; }
+        public int cliente_sk { get; set; }
+        public int notificacion_sk { get; set; }
+        public System.DateTime tiempo_sk { get; set; }
+        public string notificacion_desc { get; set; }
+        public string notificacion_texto { get; set; }
 
         public static List<notificacionesModel> ConvertTo(List<Data.bt_notificaciones> notificaciones)
         {
