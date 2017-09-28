@@ -19,7 +19,7 @@ namespace Netmefy.Api.Controllers.api
     {
 
         private NETMEFYEntities db = new NETMEFYEntities();
-
+        /*
         // GET: api/paginas
         public IQueryable<pagina> Getpaginas()
         {
@@ -40,7 +40,7 @@ namespace Netmefy.Api.Controllers.api
 
             return Ok(pagina);
         }
-
+        
         // PUT: api/paginas/5
         [ResponseType(typeof(void))]
         public IHttpActionResult Putpagina(int id, pagina pagina)
@@ -74,20 +74,21 @@ namespace Netmefy.Api.Controllers.api
             }
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
+        }*/
 
         // POST: api/paginas
         [ResponseType(typeof(nuevaPaginaModel))]
         [HttpPost]
         public IHttpActionResult nuevaPagina(nuevaPaginaModel paginas)
         {
-            
+            paginas.id = 5678;
+            return CreatedAtRoute("DefaultApi", new { id = 1234 }, paginas);
+            /*
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            /*ClienteService clienteService= new ClienteService()*/;
+            
 
             //var client_found = clienteService.findUserById(pagina.cliente_sk, pagina.usuario_sk);
             var client_found = db.usuarios.Where(x => x.cliente_sk == paginas.cliente_sk && x.usuario_sk == paginas.usuario_sk).FirstOrDefault();
@@ -114,9 +115,9 @@ namespace Netmefy.Api.Controllers.api
             db.SaveChanges();
             
 
-            return CreatedAtRoute("DefaultApi", new { id = paginas.id }, paginas);
+            return CreatedAtRoute("DefaultApi", new { id = paginas.id }, paginas);*/
         }
-
+        /*
         // DELETE: api/paginas/5
         [ResponseType(typeof(pagina))]
         public IHttpActionResult Deletepagina(int id)
@@ -132,7 +133,7 @@ namespace Netmefy.Api.Controllers.api
 
             return Ok(pagina);
         }
-
+        */
         protected override void Dispose(bool disposing)
         {
             if (disposing)
