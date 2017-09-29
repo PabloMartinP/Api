@@ -240,6 +240,7 @@
     <Compile Include="Controllers\api\os_statusController.cs" />
     <Compile Include="Controllers\api\paginasController.cs" />
     <Compile Include="Controllers\api\otController.cs" />
+    <Compile Include="Controllers\api\routersController.cs" />
     <Compile Include="Controllers\api\tecnicosController.cs" />
     <Compile Include="Controllers\api\tipoUsuarioAppController.cs" />
     <Compile Include="Controllers\api\tokensController.cs" />

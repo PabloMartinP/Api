@@ -34,6 +34,8 @@
         <button ng-click="get_lk_webs()">get_lk_webs</button>
         <button ng-click="post_lk_web()">post_lk_web</button>     
         <button ng-click="update_lk_web()">update_lk_web</button>     
+        <button ng-click="get_router()">get_router</button>  
+        <button ng-click="bloquear_web()">bloquear_web</button>  
         <hr />
         <h3>POST Token</h3>
         <div>
@@ -85,6 +87,7 @@
         var URL_OT = url_root + "/api/ot";
         var URL_OT_STATUS = url_root + "/api/ot_status";
         var URL_LK_WEB = url_root + "/api/web";
+        var URL_ROUTER = url_root + "/api/routers";
         
 
         var app = angular.module('myApp', []);
@@ -558,6 +561,39 @@
                     });
             }
 
+
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////// ROUTERS ///////////////////////////////////////////////
+            /////////////////////////////////////////////////////// ///////////////////////////////////////////////
+
+
+            $scope.get_router = function () {
+                var url = URL_ROUTER + "?router_sk=2";
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.bloquear_web = function () {
+                var data = { cliente_sk:2, router_sk:2, web_sk:9 };
+                var url = URL_ROUTER;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
 
 
         });
