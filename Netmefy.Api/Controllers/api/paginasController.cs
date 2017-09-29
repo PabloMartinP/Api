@@ -81,41 +81,47 @@ namespace Netmefy.Api.Controllers.api
         [HttpPost]
         public IHttpActionResult nuevaPagina(nuevaPaginaModel paginas)
         {
-            paginas.id = 5678;
-            return CreatedAtRoute("DefaultApi", new { id = 1234 }, paginas);
-            /*
-            if (!ModelState.IsValid)
+            //paginas.id = 5678;
+            //return CreatedAtRoute("DefaultApi", new { id = 1234 }, paginas);
+            int i = 0;
+
+            try
             {
-                return BadRequest(ModelState);
-            }
-            
+                //var client_found = clienteService.findUserById(pagina.cliente_sk, pagina.usuario_sk);
+                var usuario = db.usuarios.Where(x => x.cliente_sk == paginas.cliente_sk && x.usuario_sk == paginas.usuario_sk).FirstOrDefault();
+                //db.paginas.Add(pagina);
+                //db.SaveChanges();
 
-            //var client_found = clienteService.findUserById(pagina.cliente_sk, pagina.usuario_sk);
-            var client_found = db.usuarios.Where(x => x.cliente_sk == paginas.cliente_sk && x.usuario_sk == paginas.usuario_sk).FirstOrDefault();
-            //db.paginas.Add(pagina);
-            //db.SaveChanges();
-
-            JavaScriptSerializer serializer = new JavaScriptSerializer();
-            List<string> paginasstring = serializer.Deserialize<List<string>>(paginas.paginas);
-
-            
-
-            foreach (string pagina in paginasstring)
-            {
-                pagina p = new pagina
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                List<string> paginasstring = serializer.Deserialize<List<string>>(paginas.paginas);
+                pagina p; 
+                foreach (string pagina in paginasstring)
                 {
-                    entidad_desc = pagina.Replace("_63_", "?").Replace("_38_","&")
+                    p = new pagina
+                    {
+                        //entidad_desc = pagina.Replace("_63_", "?").Replace("_38_", "&").Replace("'", "_39_");
+                        entidad_desc = pagina.Replace("'", "_39_")
                 };
-                client_found.paginas.Add(p);
+                    usuario.paginas.Add(p);
+
+
+                    i++;
+                }
+                db.SaveChanges();
+                //db.paginas.Add(pagina);
+
+
+                paginas.paginas = "ok";
+                paginas.id = i;
+                return CreatedAtRoute("DefaultApi", new { cant = i }, paginas);
             }
-
+            catch (Exception ex)
+            {
+                paginas.id = i;
+                paginas.paginas = "error:"+ex.ToString();
+                return CreatedAtRoute("DefaultApi", new { cant = -1 }, paginas);
+            }
             
-            //db.paginas.Add(pagina);
-
-            db.SaveChanges();
-            
-
-            return CreatedAtRoute("DefaultApi", new { id = paginas.id }, paginas);*/
         }
         /*
         // DELETE: api/paginas/5
