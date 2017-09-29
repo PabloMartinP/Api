@@ -36,11 +36,6 @@ namespace Netmefy.Api.Controllers.api
         [ResponseType(typeof(Models.ot_statusModel))]
         public IHttpActionResult Postbt_ot_status(Models.ot_statusModel estado)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             bt_ot_status bt_ot_status = Models.ot_statusModel.ConvertToBD(estado);
             db.bt_ot_status.Add(bt_ot_status);
             db.SaveChanges();

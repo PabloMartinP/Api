@@ -38,11 +38,6 @@ namespace Netmefy.Api.Controllers
         [ResponseType(typeof(Models.otModel))]        
         public IHttpActionResult Postbt_ord_trabajo(Models.otModel orden)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
             bt_ord_trabajo bt_ord_trabajo = Models.otModel.ConvertToBD(orden);
 
             if (bt_ord_trabajo.ot_id == 0)

@@ -15,12 +15,7 @@ namespace Netmefy.Api.Controllers.api
     public class notificacionesController : ApiController
     {
         private NETMEFYEntities db = new NETMEFYEntities();
-
-        //// GET: api/notificaciones
-        //public IQueryable<bt_notificaciones> Getbt_notificaciones()
-        //{
-        //    return db.bt_notificaciones;
-        //}
+        
 
         // GET: api/notificaciones/5
         [ResponseType(typeof(Models.notificacionesModel))]

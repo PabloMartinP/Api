@@ -46,15 +46,7 @@ namespace Netmefy.Api.Models
         [ResponseType(typeof(void))]
         public IHttpActionResult Putdispositivo(int id, dispositivo dispositivo)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != dispositivo.cliente_sk)
-            {
-                return BadRequest();
-            }
+            
 
             db.Entry(dispositivo).State = EntityState.Modified;
 
@@ -82,11 +74,7 @@ namespace Netmefy.Api.Models
         [ResponseType(typeof(dispositivo))]
         public IHttpActionResult Postdispositivo (dispositivo dispositivo)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+            
             if (dispositivo.dispositivo_sk == 0)
             {
                 db.dispositivos.Add(dispositivo);
@@ -115,31 +103,5 @@ namespace Netmefy.Api.Models
             
         }
 
-        //// DELETE: api/dispositivos/5
-        //[ResponseType(typeof(dispositivo))]
-        //public IHttpActionResult Deletedispositivo(int id)
-        //{
-        //    dispositivo dispositivo = db.dispositivos.Find(id);
-        //    if (dispositivo == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    db.dispositivos.Remove(dispositivo);
-        //    db.SaveChanges();
-
-        //    return Ok(dispositivo);
-        //}
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
-
-
     }
-    }
+}

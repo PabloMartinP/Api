@@ -48,10 +48,7 @@ namespace Netmefy.Api.Controllers.api
         [ResponseType(typeof(Models.webModel))]
         public IHttpActionResult Postlk_web(Models.webModel modelWeb )
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+           
             
             Data.lk_web web = new Data.lk_web
             {

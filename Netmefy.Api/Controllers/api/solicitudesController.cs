@@ -44,11 +44,7 @@ namespace Netmefy.Api.Controllers
         //public IHttpActionResult Postbt_solicitudes(Models.solicitudesModel solicitud)
         public IHttpActionResult Postbt_solicitudes(Models.solicitudesModel solicitud)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
+            
             bt_solicitudes bt_solicitudes = Models.solicitudesModel.ConvertToBD(solicitud);
 
             if (bt_solicitudes.os_id == 0)
