@@ -14,6 +14,7 @@ namespace Netmefy.Api.Models
         public Nullable<int> usuario_edad { get; set; }
         public byte[] usuario_foto { get; set; }
         public string usuario_email { get; set; }
+        public List<string> paginas { get; set; }
 
 
         public static usuarioModel ConvertTo(Data.usuario usuario)

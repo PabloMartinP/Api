@@ -101,7 +101,9 @@ namespace Netmefy.Api.Controllers.api
                     {
                         //entidad_desc = pagina.Replace("_63_", "?").Replace("_38_", "&").Replace("'", "_39_");
                         entidad_desc = pagina.Replace("'", "_39_")
-                };
+
+                    };
+
                     usuario.paginas.Add(p);
 
 

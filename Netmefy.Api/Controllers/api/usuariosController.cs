@@ -32,12 +32,15 @@ namespace Netmefy.Api.Controllers.api
         public IHttpActionResult Getusuario(string email)
         {
             Data.usuario data_usr = _clientService.findUserByEmail(email);
+            List<pagina> paginas = data_usr.paginas.ToList();
+
             Models.usuarioModel usuario = Models.usuarioModel.ConvertTo(data_usr);
+            
             if (usuario == null)
             {
                 return NotFound();
             }
-
+            usuario.paginas = paginas.Select(x => x.entidad_desc).ToList();
             return Ok(usuario);
         }
 
@@ -80,33 +83,23 @@ namespace Netmefy.Api.Controllers.api
         [ResponseType(typeof(usuario))]
         public IHttpActionResult Postusuario(usuario usuario)
         {
-
-            _clientService.saveUser(usuario);
-
-            /*if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.usuarios.Add(usuario);
-
             try
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (usuarioExists(usuario.usuario_sk))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }*/
+                _clientService.saveUser(usuario);
+                Data.usuario user = _clientService.findUserByEmail(usuario.usuario_email);
 
-            return CreatedAtRoute("DefaultApi", new { id = usuario.usuario_sk }, usuario);
+                usuario.usuario_sk = user.usuario_sk;
+
+                //return CreatedAtRoute("DefaultApi", new { id = usuario.usuario_sk }, usuario);
+                return CreatedAtRoute("DefaultApi", new { id = usuario.usuario_sk }, new { status="ok"});
+
+            }
+            catch (Exception ex)
+            {
+                usuario.usuario_email = "error:" + ex.ToString();
+                return CreatedAtRoute("DefaultApi", new { id = -1 }, new { status = ex.ToString() });
+            }
+            
         }
 
         /*

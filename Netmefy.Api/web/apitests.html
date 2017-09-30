@@ -127,7 +127,7 @@
         });
 
         app.controller('myCtrl', function ($scope, $http, $q) {
-            $scope.user = { sk:'1', username: '101', password: '101', email: 'martin@hotmail.com'};
+            $scope.user = { sk:'1', username: '101', password: '101', email: 'pablo.penialoza@hotmail.com'};
             $scope.cliente_user = { sk:'0', cliente_sk: '1', username: 'Martin Guixe'};
                                     
             $scope.pantalla = "inicial";
@@ -273,6 +273,7 @@
             
 
             $scope.get_usuario = function () {
+                alert($scope.user.email);
                 var url = URL_USUARIOS + "?email=" + $scope.user.email;
                 $http.get(url)
                     .then(function (response) {
