@@ -20,13 +20,21 @@ namespace Netmefy.Api.Models
         public string ip { get; set; }
         public string url { get; set; }
         public string nombre { get; set; }
+        public int resId { get; set; }
     }
 
     public class webBloqModel
     {
         public int cliente_sk { get; set; }
         public int router_sk { get; set; }
+        //public int web_sk { get; set; }
+        //public List<webABloquearModel> webs { get; set; }
+        public string webs { get; set; }
+    }
+    public class webABloquearModel
+    {
         public int web_sk { get; set; }
+        public bool web_bloqueado { get; set; }
     }
 
     public class routerInfoModel

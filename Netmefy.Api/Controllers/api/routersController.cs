@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Netmefy.Data;
+using System.Web.Script.Serialization;
+using Netmefy.Api.Models;
 
 namespace Netmefy.Api.Controllers.api
 {
@@ -43,7 +45,7 @@ namespace Netmefy.Api.Controllers.api
             
         //}
 
-        public Models.routerInfoModel getRouterInfo(int router_sk)
+        private Models.routerInfoModel getRouterInfo(int router_sk)
         {
             router router = db.routers.Where(x => x.router_sk == router_sk).FirstOrDefault();
             List<dispositivo> devices = db.dispositivos.Where(x => x.router_sk == router.router_sk).ToList();
@@ -81,9 +83,12 @@ namespace Netmefy.Api.Controllers.api
 
         // GET: api/routers/5
         [ResponseType(typeof(Models.routerInfoModel))]
-        public IHttpActionResult Getrouter(Models.routerInfoModel r)
+        [HttpGet]
+        
+        //public IHttpActionResult Getrouter(Models.routerInfoModel r)
+        public IHttpActionResult Getrouter(int router_sk)
         {
-            Models.routerInfoModel router = getRouterInfo(r.router_sk);
+            Models.routerInfoModel router = getRouterInfo(router_sk);
 
             if (router == null)
             {
@@ -103,21 +108,45 @@ namespace Netmefy.Api.Controllers.api
         [ResponseType(typeof(Models.webModel))]
         public IHttpActionResult Postrouter(Models.webBloqModel webBloq)
         {
-            Models.routerInfoModel routerModel = getRouterInfo(webBloq.router_sk);
+            //return CreatedAtRoute("DefaultApi", new { cant = 123 }, new { status= "ok", webBloqok = webBloq });
 
-            Data.lk_web web = db.lk_web.Where(x => x.web_sk == webBloq.web_sk).FirstOrDefault();
-            Models.webModel webBloqFinal = new Models.webModel();
-            webBloqFinal.id = web.web_sk;
-            webBloqFinal.ip = web.web_ip;
-            webBloqFinal.nombre = web.web_nombre;
-            webBloqFinal.url = web.web_url;
+            //Models.routerInfoModel routerModel = getRouterInfo(webBloq.router_sk);
+            try
+            {
+                router routerModel = db.routers.Where(z => z.router_sk == webBloq.router_sk).FirstOrDefault();
+                int cant_bloq = 0;
+                int cant_no_bloq = 0;
 
-            routerModel.webs_bloqueadas.Add(webBloqFinal);
-            
-            db.SaveChanges();
-            
-            return CreatedAtRoute("DefaultApi", new { id = webBloqFinal.id }, webBloqFinal);
-            
+                JavaScriptSerializer serializer = new JavaScriptSerializer();
+                List<webABloquearModel> webABloquearModelString = serializer.Deserialize<List<webABloquearModel>>(webBloq.webs);
+
+                foreach (Models.webABloquearModel webok in webABloquearModelString)
+                {
+                    Data.lk_web web;
+                    web = db.lk_web.Where(x => x.web_sk == webok.web_sk).FirstOrDefault();
+                    if (webok.web_bloqueado)
+                    {
+                        routerModel.lk_web.Add(web);
+                        cant_bloq++;
+                    }
+                    else
+                    {
+                        routerModel.lk_web.Remove(web);
+                        cant_no_bloq++;
+                    }
+
+                }
+
+                db.SaveChanges();
+
+                return CreatedAtRoute("DefaultApi", new { cant = cant_no_bloq + cant_bloq }, new {status="ok", cant_bloq = cant_bloq, cant_no_bloq = cant_no_bloq });
+
+            }
+            catch (Exception ex)
+            {
+                return CreatedAtRoute("DefaultApi", new { id = 123 }, new { status="error:"+ ex.ToString(), data= webBloq});
+            }
+
 
         }
     }

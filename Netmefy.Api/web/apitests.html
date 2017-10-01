@@ -584,7 +584,8 @@
             }
 
             $scope.bloquear_web = function () {
-                var data = { cliente_sk:2, router_sk:2, web_sk:9 };
+                //var data = { cliente_sk:2, router_sk:2, web_sk:9 };
+                var data = { cliente_sk: 2, router_sk: 2, webs: "[{ web_sk: 9, web_bloquedo: false }, { web_sk: 12, web_bloquedo: true }]" };
                 var url = URL_ROUTER;
                 $http.post(url, data)
                     .then(function (response) {

@@ -39,11 +39,11 @@ namespace Netmefy.Data
         public virtual DbSet<tecnico> tecnicos { get; set; }
         public virtual DbSet<lk_tiempo> lk_tiempo { get; set; }
         public virtual DbSet<usuario> usuarios { get; set; }
-        public virtual DbSet<lk_web> lk_web { get; set; }
         public virtual DbSet<token> tokens { get; set; }
         public virtual DbSet<VW_Usuarios_App> VW_Usuarios_App { get; set; }
         public virtual DbSet<pagina> paginas { get; set; }
         public virtual DbSet<bt_os_status> bt_os_status { get; set; }
         public virtual DbSet<bt_ot_status> bt_ot_status { get; set; }
+        public virtual DbSet<lk_web> lk_web { get; set; }
     }
 }

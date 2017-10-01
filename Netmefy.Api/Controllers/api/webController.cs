@@ -31,14 +31,15 @@ namespace Netmefy.Api.Controllers.api
                     ip = w.web_ip,
                     url = w.web_url,
                     id = w.web_sk,
-                    nombre = w.web_nombre
+                    nombre = w.web_nombre, 
+                    resId = w.web_imagen
                 });
             }
-            
+            /*
             if (websModel == null)
             {
                 return NotFound();
-            }
+            }*/
 
             return Ok(websModel);
         }

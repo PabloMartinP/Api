@@ -209,6 +209,7 @@
           <Property Name="web_ip" Type="varchar" MaxLength="15" />
           <Property Name="web_url" Type="varchar" MaxLength="200" />
           <Property Name="web_nombre" Type="nvarchar" MaxLength="50" />
+          <Property Name="web_imagen" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="rel_user_ent">
           <Key>
@@ -720,7 +721,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySet Name="tecnicos" EntityType="NETMEFYModel.tecnico" />
           <EntitySet Name="lk_tiempo" EntityType="NETMEFYModel.lk_tiempo" />
           <EntitySet Name="usuarios" EntityType="NETMEFYModel.usuario" />
-          <EntitySet Name="lk_web" EntityType="NETMEFYModel.lk_web" />
           <EntitySet Name="tokens" EntityType="NETMEFYModel.token" />
           <EntitySet Name="VW_Usuarios_App" EntityType="NETMEFYModel.VW_Usuarios_App" />
           <AssociationSet Name="fk_bt_notificaciones_lk_notificacion" Association="NETMEFYModel.fk_bt_notificaciones_lk_notificacion">
@@ -783,10 +783,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <End Role="lk_cliente_router" EntitySet="routers" />
             <End Role="lk_dispositivo" EntitySet="dispositivos" />
           </AssociationSet>
-          <AssociationSet Name="bt_webs_bloq" Association="NETMEFYModel.bt_webs_bloq">
-            <End Role="lk_cliente_router" EntitySet="routers" />
-            <End Role="lk_web" EntitySet="lk_web" />
-          </AssociationSet>
           <EntitySet Name="paginas" EntityType="NETMEFYModel.pagina" />
           <AssociationSet Name="rel_user_ent" Association="NETMEFYModel.rel_user_ent">
             <End Role="lk_entidad" EntitySet="paginas" />
@@ -821,6 +817,11 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <AssociationSet Name="fk_bt_ot_status_lk_tiempo" Association="NETMEFYModel.fk_bt_ot_status_lk_tiempo">
             <End Role="lk_tiempo" EntitySet="lk_tiempo" />
             <End Role="bt_ot_status" EntitySet="bt_ot_status" />
+          </AssociationSet>
+          <EntitySet Name="lk_web" EntityType="NETMEFYModel.lk_web" />
+          <AssociationSet Name="bt_webs_bloq" Association="NETMEFYModel.bt_webs_bloq">
+            <End Role="router" EntitySet="routers" />
+            <End Role="lk_web" EntitySet="lk_web" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="bt_notificaciones">
@@ -916,8 +917,8 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="router_ssid" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="router_psw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="lk_dispositivo" Relationship="NETMEFYModel.fk_lk_dispositivo_lk_cliente_router" FromRole="lk_cliente_router" ToRole="lk_dispositivo" />
-          <NavigationProperty Name="lk_web" Relationship="NETMEFYModel.bt_webs_bloq" FromRole="lk_cliente_router" ToRole="lk_web" />
           <NavigationProperty Name="lk_cliente" Relationship="NETMEFYModel.FK_lk_cliente_router_lk_cliente" FromRole="router" ToRole="cliente" />
+          <NavigationProperty Name="lk_web" Relationship="NETMEFYModel.bt_webs_bloq" FromRole="router" ToRole="lk_web" />
         </EntityType>
         <EntityType Name="dispositivo">
           <Key>
@@ -1015,16 +1016,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="usuario_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="bt_notificaciones" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_usuario" FromRole="lk_usuario" ToRole="bt_notificaciones" />
           <NavigationProperty Name="paginas" Relationship="NETMEFYModel.rel_user_ent" FromRole="usuario" ToRole="lk_entidad" />
-        </EntityType>
-        <EntityType Name="lk_web">
-          <Key>
-            <PropertyRef Name="web_sk" />
-          </Key>
-          <Property Name="web_sk" Type="Int32" Nullable="false" />
-          <Property Name="web_ip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="web_url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="lk_cliente_router" Relationship="NETMEFYModel.bt_webs_bloq" FromRole="lk_web" ToRole="lk_cliente_router" />
-          <Property Name="web_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="token">
           <Key>
@@ -1233,10 +1224,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="bt_webs_bloq">
-          <End Type="NETMEFYModel.router" Role="lk_cliente_router" Multiplicity="*" />
-          <End Type="NETMEFYModel.lk_web" Role="lk_web" Multiplicity="*" />
-        </Association>
         <EntityType Name="pagina">
           <Key>
             <PropertyRef Name="entidad_sk" />
@@ -1364,6 +1351,21 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
               <PropertyRef Name="tiempo_sk" />
             </Dependent>
           </ReferentialConstraint>
+        </Association>
+        <EntityType Name="lk_web">
+          <Key>
+            <PropertyRef Name="web_sk" />
+          </Key>
+          <Property Name="web_sk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="web_ip" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="web_url" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="web_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="web_imagen" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="lk_cliente_router" Relationship="NETMEFYModel.bt_webs_bloq" FromRole="lk_web" ToRole="router" />
+        </EntityType>
+        <Association Name="bt_webs_bloq">
+          <End Type="NETMEFYModel.router" Role="router" Multiplicity="*" />
+          <End Type="NETMEFYModel.lk_web" Role="lk_web" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -1531,16 +1533,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="lk_web">
-            <EntityTypeMapping TypeName="NETMEFYModel.lk_web">
-              <MappingFragment StoreEntitySet="lk_web">
-                <ScalarProperty Name="web_nombre" ColumnName="web_nombre" />
-                <ScalarProperty Name="web_url" ColumnName="web_url" />
-                <ScalarProperty Name="web_ip" ColumnName="web_ip" />
-                <ScalarProperty Name="web_sk" ColumnName="web_sk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="tokens">
             <EntityTypeMapping TypeName="NETMEFYModel.token">
               <MappingFragment StoreEntitySet="token">
@@ -1563,15 +1555,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="bt_webs_bloq" TypeName="NETMEFYModel.bt_webs_bloq" StoreEntitySet="bt_webs_bloq">
-            <EndProperty Name="lk_web">
-              <ScalarProperty Name="web_sk" ColumnName="web_sk" />
-            </EndProperty>
-            <EndProperty Name="lk_cliente_router">
-              <ScalarProperty Name="router_sk" ColumnName="router_sk" />
-              <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
-            </EndProperty>
-          </AssociationSetMapping>
           <EntitySetMapping Name="paginas">
             <EntityTypeMapping TypeName="NETMEFYModel.pagina">
               <MappingFragment StoreEntitySet="lk_entidad">
@@ -1611,6 +1594,26 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="lk_web">
+            <EntityTypeMapping TypeName="NETMEFYModel.lk_web">
+              <MappingFragment StoreEntitySet="lk_web">
+                <ScalarProperty Name="web_imagen" ColumnName="web_imagen" />
+                <ScalarProperty Name="web_nombre" ColumnName="web_nombre" />
+                <ScalarProperty Name="web_url" ColumnName="web_url" />
+                <ScalarProperty Name="web_ip" ColumnName="web_ip" />
+                <ScalarProperty Name="web_sk" ColumnName="web_sk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="bt_webs_bloq" TypeName="NETMEFYModel.bt_webs_bloq" StoreEntitySet="bt_webs_bloq">
+            <EndProperty Name="lk_web">
+              <ScalarProperty Name="web_sk" ColumnName="web_sk" />
+            </EndProperty>
+            <EndProperty Name="router">
+              <ScalarProperty Name="router_sk" ColumnName="router_sk" />
+              <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
