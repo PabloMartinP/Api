@@ -1025,7 +1025,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="id_entidad" Type="Int32" Nullable="false" />
           <Property Name="es_cliente" Type="Boolean" Nullable="false" />
           <Property Name="es_tecnico" Type="Boolean" Nullable="false" />
-          <Property Name="token1" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="tokenid" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VW_Usuarios_App">
           <Key>
@@ -1536,7 +1536,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySetMapping Name="tokens">
             <EntityTypeMapping TypeName="NETMEFYModel.token">
               <MappingFragment StoreEntitySet="token">
-                <ScalarProperty Name="token1" ColumnName="token" />
+                <ScalarProperty Name="tokenid" ColumnName="token" />
                 <ScalarProperty Name="es_tecnico" ColumnName="es_tecnico" />
                 <ScalarProperty Name="es_cliente" ColumnName="es_cliente" />
                 <ScalarProperty Name="id_entidad" ColumnName="id_entidad" />

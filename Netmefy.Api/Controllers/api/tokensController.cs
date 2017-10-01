@@ -73,7 +73,7 @@ namespace Netmefy.Api.Controllers.api
         }*/
 
         // POST: api/tokens
-        /*[ResponseType(typeof(token))]
+        [ResponseType(typeof(token))]
         public IHttpActionResult Posttoken(token token)
         {
             FirebaseService fb = new FirebaseService();
@@ -86,7 +86,7 @@ namespace Netmefy.Api.Controllers.api
             //db.tokens.Add(token);
             //db.SaveChanges();
             return CreatedAtRoute("DefaultApi", new { id = token.id }, token);
-        }*/
+        }
         /*
         // DELETE: api/tokens/5
         [ResponseType(typeof(token))]
