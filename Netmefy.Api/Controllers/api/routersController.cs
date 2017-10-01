@@ -138,8 +138,9 @@ namespace Netmefy.Api.Controllers.api
                 }
 
                 db.SaveChanges();
+                Models.routerInfoModel routerModelfinal = getRouterInfo(webBloq.router_sk);
 
-                return CreatedAtRoute("DefaultApi", new { cant = cant_no_bloq + cant_bloq }, new {status="ok", cant_bloq = cant_bloq, cant_no_bloq = cant_no_bloq });
+                return CreatedAtRoute("DefaultApi", new { cant = cant_no_bloq + cant_bloq }, new {status="ok", cant_bloq = cant_bloq, cant_no_bloq = cant_no_bloq, router= routerModelfinal });
 
             }
             catch (Exception ex)
