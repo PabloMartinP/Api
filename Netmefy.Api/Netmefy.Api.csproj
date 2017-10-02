@@ -242,6 +242,7 @@
     <Compile Include="Controllers\api\otController.cs" />
     <Compile Include="Controllers\api\routersController.cs" />
     <Compile Include="Controllers\api\tecnicosController.cs" />
+    <Compile Include="Controllers\api\testsController.cs" />
     <Compile Include="Controllers\api\tipoUsuarioAppController.cs" />
     <Compile Include="Controllers\api\tokensController.cs" />
     <Compile Include="Controllers\api\usuariosController.cs" />
@@ -252,6 +253,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Controllers\api\dispositivosController.cs" />
+    <Compile Include="Models\testsModel.cs" />
     <Compile Include="Models\ot_statusModel.cs" />
     <Compile Include="Models\os_statusModel.cs" />
     <Compile Include="Models\otModel.cs" />

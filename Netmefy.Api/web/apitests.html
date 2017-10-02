@@ -35,7 +35,10 @@
         <button ng-click="post_lk_web()">post_lk_web</button>     
         <button ng-click="update_lk_web()">update_lk_web</button>     
         <button ng-click="get_router()">get_router</button>  
-        <button ng-click="bloquear_web()">bloquear_web</button>  
+        <button ng-click="bloquear_web()">bloquear_web</button> 
+        <button ng-click="get_tests()">get_tests</button>
+        <button ng-click="post_test()">post_test</button>  
+        <button ng-click="post_test_sin_ot()">post_test_sin_ot</button>  
         <hr />
         <h3>POST Token</h3>
         <div>
@@ -88,6 +91,7 @@
         var URL_OT_STATUS = url_root + "/api/ot_status";
         var URL_LK_WEB = url_root + "/api/web";
         var URL_ROUTER = url_root + "/api/routers";
+        var URL_TESTS = url_root + "/api/tests";
         
 
         var app = angular.module('myApp', []);
@@ -587,6 +591,53 @@
                 //var data = { cliente_sk:2, router_sk:2, web_sk:9 };
                 var data = { cliente_sk: 2, router_sk: 2, webs: "[{ web_sk: 9, web_bloquedo: false }, { web_sk: 12, web_bloquedo: true }]" };
                 var url = URL_ROUTER;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////// TESTS ///////////////////////////////////////////////
+            /////////////////////////////////////////////////////// ///////////////////////////////////////////////
+
+
+            $scope.get_tests = function () {
+                var url = URL_TESTS + "?id=1";;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.post_test = function () {
+                var data = { cliente_sk: 1, ot_id: 1, flag_instalacion: 1, comentario:'Test de OT', vel_mb_medidos: 25, potencia_recep: 100, flag_cableado:1, flag_modem_ok:1  };
+                var url = URL_TESTS;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
+
+            $scope.post_test_sin_ot = function () {
+                var data = { cliente_sk: 1, comentario: 'Test sin OT', flag_instalacion:0, vel_mb_medidos: 25, potencia_recep: 100, flag_cableado: 1, flag_modem_ok: 1 };
+                var url = URL_TESTS;
                 $http.post(url, data)
                     .then(function (response) {
                         console.log(url + 'ok ' + url, response)
