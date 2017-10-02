@@ -226,10 +226,10 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_entidad" Type="int" Nullable="false" />
+          <Property Name="sk_entidad" Type="int" Nullable="false" />
           <Property Name="es_cliente" Type="bit" Nullable="false" />
           <Property Name="es_tecnico" Type="bit" Nullable="false" />
-          <Property Name="token" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="tokenid" Type="nvarchar" MaxLength="255" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -721,7 +721,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySet Name="tecnicos" EntityType="NETMEFYModel.tecnico" />
           <EntitySet Name="lk_tiempo" EntityType="NETMEFYModel.lk_tiempo" />
           <EntitySet Name="usuarios" EntityType="NETMEFYModel.usuario" />
-          <EntitySet Name="tokens" EntityType="NETMEFYModel.token" />
           <EntitySet Name="VW_Usuarios_App" EntityType="NETMEFYModel.VW_Usuarios_App" />
           <AssociationSet Name="fk_bt_notificaciones_lk_notificacion" Association="NETMEFYModel.fk_bt_notificaciones_lk_notificacion">
             <End Role="lk_notificacion" EntitySet="lk_notificacion" />
@@ -823,6 +822,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <End Role="router" EntitySet="routers" />
             <End Role="lk_web" EntitySet="lk_web" />
           </AssociationSet>
+          <EntitySet Name="tokens" EntityType="NETMEFYModel.token" />
         </EntityContainer>
         <EntityType Name="bt_notificaciones">
           <Key>
@@ -1016,16 +1016,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="usuario_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="bt_notificaciones" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_usuario" FromRole="lk_usuario" ToRole="bt_notificaciones" />
           <NavigationProperty Name="paginas" Relationship="NETMEFYModel.rel_user_ent" FromRole="usuario" ToRole="lk_entidad" />
-        </EntityType>
-        <EntityType Name="token">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_entidad" Type="Int32" Nullable="false" />
-          <Property Name="es_cliente" Type="Boolean" Nullable="false" />
-          <Property Name="es_tecnico" Type="Boolean" Nullable="false" />
-          <Property Name="tokenid" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="VW_Usuarios_App">
           <Key>
@@ -1367,6 +1357,16 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <End Type="NETMEFYModel.router" Role="router" Multiplicity="*" />
           <End Type="NETMEFYModel.lk_web" Role="lk_web" Multiplicity="*" />
         </Association>
+        <EntityType Name="token">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sk_entidad" Type="Int32" Nullable="false" />
+          <Property Name="es_cliente" Type="Boolean" Nullable="false" />
+          <Property Name="es_tecnico" Type="Boolean" Nullable="false" />
+          <Property Name="tokenid" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1533,17 +1533,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tokens">
-            <EntityTypeMapping TypeName="NETMEFYModel.token">
-              <MappingFragment StoreEntitySet="token">
-                <ScalarProperty Name="tokenid" ColumnName="token" />
-                <ScalarProperty Name="es_tecnico" ColumnName="es_tecnico" />
-                <ScalarProperty Name="es_cliente" ColumnName="es_cliente" />
-                <ScalarProperty Name="id_entidad" ColumnName="id_entidad" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="VW_Usuarios_App">
             <EntityTypeMapping TypeName="NETMEFYModel.VW_Usuarios_App">
               <MappingFragment StoreEntitySet="VW_Usuarios_App">
@@ -1614,6 +1603,17 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
               <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="tokens">
+            <EntityTypeMapping TypeName="NETMEFYModel.token">
+              <MappingFragment StoreEntitySet="token">
+                <ScalarProperty Name="tokenid" ColumnName="tokenid" />
+                <ScalarProperty Name="es_tecnico" ColumnName="es_tecnico" />
+                <ScalarProperty Name="es_cliente" ColumnName="es_cliente" />
+                <ScalarProperty Name="sk_entidad" ColumnName="sk_entidad" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

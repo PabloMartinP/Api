@@ -146,7 +146,7 @@
             }
 
             $scope.save_token = function () {
-                var data = { id_entidad: '1234', es_cliente: "false", es_tecnico: "true", tokenid: "asdfñlkjqwerpoi" };
+                var data = { sk_entidad: '2', es_cliente: "true", es_tecnico: "false", tokenid: "dOQ3ZvJnhEs:APA91bEub-Y3nklmcqwpk-gXX3rfQKiZe80WWs-2GSTX73vVkohjrO2cqYWn425NriJhFCJmCo3O-g2oxhanuOz16RsOngY3wH17BqnW3gwtaprVg4le2Ky0h4yCKLHf-Loc-u3gzxze" };
                 var url = URL_TOKEN;
                 $http.post(url, data)
                     .then(function (response) {

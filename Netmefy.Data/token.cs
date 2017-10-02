@@ -15,7 +15,7 @@ namespace Netmefy.Data
     public partial class token
     {
         public int id { get; set; }
-        public int id_entidad { get; set; }
+        public int sk_entidad { get; set; }
         public bool es_cliente { get; set; }
         public bool es_tecnico { get; set; }
         public string tokenid { get; set; }

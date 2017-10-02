@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using Netmefy.Data;
 using Netmefy.Service;
+using static Netmefy.Service.FirebaseService;
 
 namespace Netmefy.Api.Controllers.api
 {
@@ -77,14 +78,18 @@ namespace Netmefy.Api.Controllers.api
         public IHttpActionResult Posttoken(token token)
         {
             FirebaseService fb = new FirebaseService();
-            fb.registerToken(token);
+            bool primeraVez = fb.registerTokenIfNotExists(token);
+            if (primeraVez) {
+                notificacion_mensaje m = new notificacion_mensaje();
+                m.cliente_sk = token.sk_entidad;
+                //ClienteService cs = new ClienteService();
+                //var clientFound = cs.buscarById(m.cliente_sk);
+                m.descripcion = "Gracias por instalar Netmefy!";
+                m.titulo = "Bienvenido";
+                fb.EnviarAFCM(m);
+            }
             
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-            //db.tokens.Add(token);
-            //db.SaveChanges();
+
             return CreatedAtRoute("DefaultApi", new { id = token.id }, token);
         }
         /*
