@@ -49,6 +49,7 @@
         <EntityTypeShape EntityType="NETMEFYModel.lk_web" Width="1.5" PointX="10" PointY="14.75" />
         <AssociationConnector Association="NETMEFYModel.bt_webs_bloq" />
         <EntityTypeShape EntityType="NETMEFYModel.token" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NETMEFYModel.log" Width="1.5" PointX="10.375" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

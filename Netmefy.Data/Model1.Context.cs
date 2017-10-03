@@ -45,5 +45,6 @@ namespace Netmefy.Data
         public virtual DbSet<bt_ot_status> bt_ot_status { get; set; }
         public virtual DbSet<lk_web> lk_web { get; set; }
         public virtual DbSet<token> tokens { get; set; }
+        public virtual DbSet<log> logs { get; set; }
     }
 }

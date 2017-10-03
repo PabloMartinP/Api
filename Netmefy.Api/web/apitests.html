@@ -138,7 +138,7 @@
             $scope.descripcion = "click en boton 1";
 
             $scope.click_post_log = function () {
-                var data = { tipo: 200, doc_tipo: $scope.doc_tipo, doc_numero: $scope.doc_nro, pantalla: $scope.pantalla, descripcion: $scope.descripcion };
+                var data = { cliente_sk: -1, log_tipo: 500, log_desc: "un test" };
                 $http.post(URL_LOGS, data)
                     .then(function (response) {
                         console.log(URL_LOGS + 'ok ' + URL_LOGS, response)

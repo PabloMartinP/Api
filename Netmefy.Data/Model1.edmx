@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="NETMEFYModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bt_log">
+          <Key>
+            <PropertyRef Name="log_sk" />
+          </Key>
+          <Property Name="log_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cliente_sk" Type="int" Nullable="false" />
+          <Property Name="log_tipo" Type="int" Nullable="false" />
+          <Property Name="log_desc" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="fechahora" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="bt_notificaciones">
           <Key>
             <PropertyRef Name="usuario_sk" />
@@ -567,6 +577,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="NETMEFYModelStoreContainer">
+          <EntitySet Name="bt_log" EntityType="Self.bt_log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bt_notificaciones" EntityType="Self.bt_notificaciones" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bt_ord_trabajo" EntityType="Self.bt_ord_trabajo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="bt_os_status" EntityType="Self.bt_os_status" Schema="dbo" store:Type="Tables" />
@@ -823,6 +834,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <End Role="lk_web" EntitySet="lk_web" />
           </AssociationSet>
           <EntitySet Name="tokens" EntityType="NETMEFYModel.token" />
+          <EntitySet Name="logs" EntityType="NETMEFYModel.log" />
         </EntityContainer>
         <EntityType Name="bt_notificaciones">
           <Key>
@@ -1367,6 +1379,16 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="es_tecnico" Type="Boolean" Nullable="false" />
           <Property Name="tokenid" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="log">
+          <Key>
+            <PropertyRef Name="log_sk" />
+          </Key>
+          <Property Name="log_sk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cliente_sk" Type="Int32" Nullable="false" />
+          <Property Name="log_tipo" Type="Int32" Nullable="false" />
+          <Property Name="log_desc" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="fechahora" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1611,6 +1633,17 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
                 <ScalarProperty Name="es_cliente" ColumnName="es_cliente" />
                 <ScalarProperty Name="sk_entidad" ColumnName="sk_entidad" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="logs">
+            <EntityTypeMapping TypeName="NETMEFYModel.log">
+              <MappingFragment StoreEntitySet="bt_log">
+                <ScalarProperty Name="fechahora" ColumnName="fechahora" />
+                <ScalarProperty Name="log_desc" ColumnName="log_desc" />
+                <ScalarProperty Name="log_tipo" ColumnName="log_tipo" />
+                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
+                <ScalarProperty Name="log_sk" ColumnName="log_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
