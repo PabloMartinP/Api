@@ -14,6 +14,7 @@ namespace Netmefy.Api.Models
         public string fh_creacion { get; set; }
         public string fh_cierre { get; set; }
         public int calificacion { get; set; }
+        public string descripcion { get; set; }
 
         public static List<otModel> ListConvertTo(List<Data.bt_ord_trabajo> ots)
         {
@@ -44,6 +45,7 @@ namespace Netmefy.Api.Models
             ot.fh_creacion = n.fh_creacion.ToString("dd-MM-yyyy");
             ot.fh_cierre = fh_cierre_d.ToString("dd-MM-yyyy");
             ot.calificacion = (int)n.calificacion;
+            ot.descripcion = n.descripcion;
 
             return ot;
         }
@@ -56,6 +58,7 @@ namespace Netmefy.Api.Models
             ot.cliente_sk = orden.cliente_sk;
             ot.tecnico_sk = orden.tecnico_sk;
             ot.calificacion = orden.calificacion;
+            ot.descripcion = orden.descripcion;
 
             if (orden.fh_creacion != null)
                 ot.fh_creacion = DateTime.ParseExact(orden.fh_creacion, "dd-MM-yyyy", null);
