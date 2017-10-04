@@ -37,6 +37,7 @@
           <Property Name="fh_cierre" Type="date" />
           <Property Name="calificacion" Type="int" />
           <Property Name="cliente_sk" Type="int" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="bt_os_status">
           <Key>
@@ -72,6 +73,7 @@
           <Property Name="cliente_sk" Type="int" Nullable="false" />
           <Property Name="fh_creacion" Type="date" Nullable="false" />
           <Property Name="fh_cierre" Type="date" />
+          <Property Name="descripcion" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="bt_tests">
           <Key>
@@ -438,7 +440,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_bt_tests_bt_ord_trabajo">
+        <Association Name="fk_bt_tests_bt_ord_trabajo2">
           <End Role="bt_ord_trabajo" Type="Self.bt_ord_trabajo" Multiplicity="0..1" />
           <End Role="bt_tests" Type="Self.bt_tests" Multiplicity="*" />
           <ReferentialConstraint>
@@ -668,7 +670,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <End Role="lk_tiempo" EntitySet="lk_tiempo" />
             <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
           </AssociationSet>
-          <AssociationSet Name="fk_bt_tests_bt_ord_trabajo" Association="Self.fk_bt_tests_bt_ord_trabajo">
+          <AssociationSet Name="fk_bt_tests_bt_ord_trabajo2" Association="Self.fk_bt_tests_bt_ord_trabajo2">
             <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
             <End Role="bt_tests" EntitySet="bt_tests" />
           </AssociationSet>
@@ -866,6 +868,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <NavigationProperty Name="bt_tests" Relationship="NETMEFYModel.fk_bt_tests_bt_ord_trabajo" FromRole="bt_ord_trabajo" ToRole="bt_tests" />
           <Property Name="cliente_sk" Type="Int32" Nullable="false" />
           <NavigationProperty Name="bt_ot_status" Relationship="NETMEFYModel.fk_bt_ot_status_bt_ord_trabajo" FromRole="bt_ord_trabajo" ToRole="bt_ot_status" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="bt_solicitudes">
           <Key>
@@ -879,6 +882,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_solicitudes_lk_tiempo" FromRole="bt_solicitudes" ToRole="lk_tiempo" />
           <NavigationProperty Name="lk_tiempo1" Relationship="NETMEFYModel.fk_bt_solicitudes_lk_tiempo1" FromRole="bt_solicitudes" ToRole="lk_tiempo" />
           <NavigationProperty Name="bt_os_status" Relationship="NETMEFYModel.fk_bt_os_status_bt_solicitudes" FromRole="bt_solicitudes" ToRole="bt_os_status" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="bt_tests">
           <Key>
@@ -1408,6 +1412,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySetMapping Name="bt_ord_trabajo">
             <EntityTypeMapping TypeName="NETMEFYModel.bt_ord_trabajo">
               <MappingFragment StoreEntitySet="bt_ord_trabajo">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
                 <ScalarProperty Name="calificacion" ColumnName="calificacion" />
                 <ScalarProperty Name="fh_cierre" ColumnName="fh_cierre" />
@@ -1420,6 +1425,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySetMapping Name="bt_solicitudes">
             <EntityTypeMapping TypeName="NETMEFYModel.bt_solicitudes">
               <MappingFragment StoreEntitySet="bt_solicitudes">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="fh_cierre" ColumnName="fh_cierre" />
                 <ScalarProperty Name="fh_creacion" ColumnName="fh_creacion" />
                 <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
