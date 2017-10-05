@@ -175,6 +175,12 @@
     <Compile Include="lk_tiempo.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="lk_tipo_os.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="lk_tipo_ot.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="lk_web.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

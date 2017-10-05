@@ -200,6 +200,20 @@
           <Property Name="trimestre" Type="varchar" MaxLength="5" Nullable="false" />
           <Property Name="anio" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="lk_tipo_os">
+          <Key>
+            <PropertyRef Name="tipo_os_sk" />
+          </Key>
+          <Property Name="tipo_os_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_os_desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="lk_tipo_ot">
+          <Key>
+            <PropertyRef Name="tipo_ot_sk" />
+          </Key>
+          <Property Name="tipo_ot_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo_ot_desc" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="lk_usuario">
           <Key>
             <PropertyRef Name="usuario_sk" />
@@ -597,6 +611,8 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySet Name="lk_notificacion" EntityType="Self.lk_notificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lk_tecnico" EntityType="Self.lk_tecnico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lk_tiempo" EntityType="Self.lk_tiempo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lk_tipo_os" EntityType="Self.lk_tipo_os" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="lk_tipo_ot" EntityType="Self.lk_tipo_ot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lk_usuario" EntityType="Self.lk_usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="lk_web" EntityType="Self.lk_web" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rel_user_ent" EntityType="Self.rel_user_ent" Schema="dbo" store:Type="Tables" />
@@ -837,6 +853,8 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           </AssociationSet>
           <EntitySet Name="tokens" EntityType="NETMEFYModel.token" />
           <EntitySet Name="logs" EntityType="NETMEFYModel.log" />
+          <EntitySet Name="lk_tipo_os" EntityType="NETMEFYModel.lk_tipo_os" />
+          <EntitySet Name="lk_tipo_ot" EntityType="NETMEFYModel.lk_tipo_ot" />
         </EntityContainer>
         <EntityType Name="bt_notificaciones">
           <Key>
@@ -1393,6 +1411,20 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="log_desc" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
           <Property Name="fechahora" Type="DateTime" Nullable="false" Precision="3" />
         </EntityType>
+        <EntityType Name="lk_tipo_os">
+          <Key>
+            <PropertyRef Name="tipo_os_sk" />
+          </Key>
+          <Property Name="tipo_os_sk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_os_desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="lk_tipo_ot">
+          <Key>
+            <PropertyRef Name="tipo_ot_sk" />
+          </Key>
+          <Property Name="tipo_ot_sk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo_ot_desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1650,6 +1682,22 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
                 <ScalarProperty Name="log_tipo" ColumnName="log_tipo" />
                 <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
                 <ScalarProperty Name="log_sk" ColumnName="log_sk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lk_tipo_os">
+            <EntityTypeMapping TypeName="NETMEFYModel.lk_tipo_os">
+              <MappingFragment StoreEntitySet="lk_tipo_os">
+                <ScalarProperty Name="tipo_os_desc" ColumnName="tipo_os_desc" />
+                <ScalarProperty Name="tipo_os_sk" ColumnName="tipo_os_sk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lk_tipo_ot">
+            <EntityTypeMapping TypeName="NETMEFYModel.lk_tipo_ot">
+              <MappingFragment StoreEntitySet="lk_tipo_ot">
+                <ScalarProperty Name="tipo_ot_desc" ColumnName="tipo_ot_desc" />
+                <ScalarProperty Name="tipo_ot_sk" ColumnName="tipo_ot_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

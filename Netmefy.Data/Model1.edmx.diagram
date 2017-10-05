@@ -50,6 +50,8 @@
         <AssociationConnector Association="NETMEFYModel.bt_webs_bloq" />
         <EntityTypeShape EntityType="NETMEFYModel.token" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="NETMEFYModel.log" Width="1.5" PointX="10.375" PointY="9.75" />
+        <EntityTypeShape EntityType="NETMEFYModel.lk_tipo_os" Width="1.5" PointX="5.375" PointY="11.75" />
+        <EntityTypeShape EntityType="NETMEFYModel.lk_tipo_ot" Width="1.5" PointX="12.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

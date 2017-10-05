@@ -245,11 +245,13 @@
     <Compile Include="Controllers\api\tecnicosController.cs" />
     <Compile Include="Controllers\api\testsController.cs" />
     <Compile Include="Controllers\api\tipoUsuarioAppController.cs" />
+    <Compile Include="Controllers\api\tipo_otController.cs" />
     <Compile Include="Controllers\api\tokensController.cs" />
     <Compile Include="Controllers\api\usuariosController.cs" />
     <Compile Include="Controllers\api\webController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\api\solicitudesController.cs" />
+    <Compile Include="Controllers\tipo_osController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

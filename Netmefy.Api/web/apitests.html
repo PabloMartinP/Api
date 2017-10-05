@@ -39,6 +39,8 @@
         <button ng-click="get_tests()">get_tests</button>
         <button ng-click="post_test()">post_test</button>  
         <button ng-click="post_test_sin_ot()">post_test_sin_ot</button>  
+        <button ng-click="tipo_os()">tipo_os</button>  
+        <button ng-click="tipo_ot()">tipo_ot</button>  
         <hr />
         <h3>POST Token</h3>
         <div>
@@ -92,6 +94,8 @@
         var URL_LK_WEB = url_root + "/api/web";
         var URL_ROUTER = url_root + "/api/routers";
         var URL_TESTS = url_root + "/api/tests";
+        var URL_TIPO_OS = url_root + "/api/tipo_os";
+        var URL_TIPO_OT = url_root + "/api/tipo_ot";
         
 
         var app = angular.module('myApp', []);
@@ -645,6 +649,41 @@
                     })
                     .catch(function (data) {
                         alert("ERR" + url + " catch");
+                    });
+            }
+
+
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////
+            /////////////////////////////////////////////// TIPO OS Y OT //////////////////////////////////////////
+            /////////////////////////////////////////////////////// ///////////////////////////////////////////////
+
+
+            $scope.tipo_os = function () {
+                var url = URL_TIPO_OS ;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.tipo_ot = function () {
+                var url = URL_TIPO_OT;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
                     });
             }
 
