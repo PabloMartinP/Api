@@ -558,7 +558,7 @@
 
 
             $scope.OT_ult_estado = function () {
-                var url = URL_OT_STATUS + "?os_id=1";
+                var url = URL_OT_STATUS + "?ot_id=1";
                 $http.get(url)
                     .then(function (response) {
                         console.log(url + ' - ', response)
@@ -573,7 +573,7 @@
 
             $scope.OT_agregar_estado = function () {
                 var data = { ot_id: 1, estado_sk: 2, comentarios: 'soy la puta bestia 2' };
-                var url = URL_OS_STATUS;
+                var url = URL_OT_STATUS;
                 $http.post(url, data)
                     .then(function (response) {
                         console.log(url + 'ok ' + url, response)
