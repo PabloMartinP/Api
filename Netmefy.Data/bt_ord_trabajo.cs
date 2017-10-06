@@ -28,6 +28,7 @@ namespace Netmefy.Data
         public Nullable<int> calificacion { get; set; }
         public int cliente_sk { get; set; }
         public string descripcion { get; set; }
+        public string tipo { get; set; }
     
         public virtual tecnico lk_tecnico { get; set; }
         public virtual lk_tiempo lk_tiempo { get; set; }

@@ -30,123 +30,30 @@ namespace Netmefy.Api.Controllers.api
             return Ok(not_model);
         }
 
-        
 
-        //[ResponseType(typeof(bt_notificaciones))]
-        //public IHttpActionResult Getbt_notificaciones(int cliente_sk, int usuario_sk)
-        //{
-        //    Service.NotificacionesService ns = new Service.NotificacionesService();
 
-        //    var notificaciones = ns.buscarNotificacionesXClienteUsuario(cliente_sk, usuario_sk);
+        // POST: api/notificaciones
+        [ResponseType(typeof(Models.notificacionesModel))]
+        public IHttpActionResult Postbt_notificaciones(Models.notificacionesModel n)
+        {
+            if(n.notificacion_sk == 0)
+            {
+                Data.lk_notificacion not = new Data.lk_notificacion();
+                not.notificacion_desc = n.notificacion_desc;
+                not.notificacion_texto = n.notificacion_texto;
+                db.lk_notificacion.Add(not);
+                db.SaveChanges();
+                n.notificacion_sk = not.notificacion_sk;
+            } else
+            {
+                Data.bt_notificaciones not = new Data.bt_notificaciones();
+                not = Models.notificacionesModel.ConvertToBD(n);
+                db.bt_notificaciones.Add(not);
+                db.SaveChanges();
+                n.tiempo_sk = not.tiempo_sk.ToString("dd-MM-yyyy");
+            }
 
-        //    return Ok(notificaciones);
-        //}
-
-        //[ResponseType(typeof(bt_notificaciones))]
-        //public IHttpActionResult Getbt_notificaciones(int cliente_sk)
-        //{
-        //    bt_notificaciones bt_notificaciones = db.bt_notificaciones.Find(id);
-        //    if (bt_notificaciones == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(bt_notificaciones);
-        //}
-
-        //// PUT: api/notificaciones/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult Putbt_notificaciones(int id, bt_notificaciones bt_notificaciones)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    if (id != bt_notificaciones.usuario_sk)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    db.Entry(bt_notificaciones).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!bt_notificacionesExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
-
-        //// POST: api/notificaciones
-        //[ResponseType(typeof(bt_notificaciones))]
-        //public IHttpActionResult Postbt_notificaciones(bt_notificaciones bt_notificaciones)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    db.bt_notificaciones.Add(bt_notificaciones);
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateException)
-        //    {
-        //        if (bt_notificacionesExists(bt_notificaciones.usuario_sk))
-        //        {
-        //            return Conflict();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return CreatedAtRoute("DefaultApi", new { id = bt_notificaciones.usuario_sk }, bt_notificaciones);
-        //}
-
-        //// DELETE: api/notificaciones/5
-        //[ResponseType(typeof(bt_notificaciones))]
-        //public IHttpActionResult Deletebt_notificaciones(int id)
-        //{
-        //    bt_notificaciones bt_notificaciones = db.bt_notificaciones.Find(id);
-        //    if (bt_notificaciones == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    db.bt_notificaciones.Remove(bt_notificaciones);
-        //    db.SaveChanges();
-
-        //    return Ok(bt_notificaciones);
-        //}
-
-        //protected override void Dispose(bool disposing)
-        //{
-        //    if (disposing)
-        //    {
-        //        db.Dispose();
-        //    }
-        //    base.Dispose(disposing);
-        //}
-
-        //private bool bt_notificacionesExists(int id)
-        //{
-        //    return db.bt_notificaciones.Count(e => e.usuario_sk == id) > 0;
-        //}
+            return CreatedAtRoute("DefaultApi", new { id = n.usuario_sk }, n);
+        }
     }
 }

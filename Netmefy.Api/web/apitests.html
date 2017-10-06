@@ -6,51 +6,65 @@
     <div ng-app="myApp" ng-controller="myCtrl">
         <div>
             username: <input type="text"  name="" ng-model="user.username" /> | password: <input type="text"  name="" ng-model="user.password" />
-        </div>
-        <br/>
-        <div>
             <button ng-click="click_get_token()">get token </button>
+            <button ng-click="save_token()">post api/tokens</button>
         </div>
         <hr />
-        <button ng-click="get_cliente()">get api/clientes?username=101</button>
-        <button ng-click="get_tecnico()">get api/tecnicos?username=201</button>
-        <button ng-click="get_tipoUsuarioApp()">get api/tipoUsuarioApp?username=201</button>        
-        <button ng-click="post_usuario()">post api/usuarios</button>
-        <button ng-click="get_usuario()">get api/usuarios</button>
-        <button ng-click="agregar_pagina_de_fb()">POST api/paginas</button>
-        <button ng-click="get_notificaciones()">get api/notificaciones</button>
+        <h3>Clientes y Usuarios</h3>
+        <button ng-click="get_cliente()">get cliente 101</button>
+        <button ng-click="get_tecnico()">get tecnico 201</button>
+        <button ng-click="get_tipoUsuarioApp()">get tipoUsuarioApp 201</button>        
+        <button ng-click="post_usuario()">post usuarios</button>
+        <button ng-click="get_usuario()">get usuarios</button>
+        <button ng-click="agregar_pagina_de_fb()">POST paginas</button>
         <button ng-click="agregar_dispositivo()">agregar_dispositivo</button>
         <button ng-click="updatear_dispositivo()">updatear_dispositivo</button>        
+        <hr />
+        <h3>Solicitudes</h3>
         <button ng-click="get_solicitudes()">get_solicitudes</button>        
         <button ng-click="agregar_solicitud()">agregar_solicitud</button>
         <button ng-click="updatear_solicitud()">updatear_solicitud</button>        
         <button ng-click="OS_ult_estado()">OS_ult_estado</button>     
         <button ng-click="OS_agregar_estado()">OS_agregar_estado</button> 
+        <button ng-click="tipo_os()">tipo_os</button>
+        <hr />
+        <h3>Ordenes de Trabajo</h3>
         <button ng-click="get_OT()">get_OT</button>
         <button ng-click="agregar_OT()">agregar_OT</button>
         <button ng-click="updatear_OT()">updatear_OT</button>
         <button ng-click="OT_ult_estado()">OT_ult_estado</button>
         <button ng-click="OT_agregar_estado()">OT_agregar_estado</button> 
-        <button ng-click="get_lk_webs()">get_lk_webs</button>
-        <button ng-click="post_lk_web()">post_lk_web</button>     
-        <button ng-click="update_lk_web()">update_lk_web</button>     
+        <button ng-click="tipo_ot()">tipo_ot</button>
+        <hr />
+        <h3>Router</h3>
         <button ng-click="get_router()">get_router</button>  
         <button ng-click="bloquear_web()">bloquear_web</button> 
+        <hr />
+        <h3>Webs</h3>
+        <button ng-click="get_lk_webs()">get_lk_webs</button>
+        <button ng-click="post_lk_web()">post_lk_web</button>
+        <button ng-click="update_lk_web()">update_lk_web</button>
+        <hr />
+        <h3>Tests</h3>
         <button ng-click="get_tests()">get_tests</button>
         <button ng-click="post_test()">post_test</button>  
         <button ng-click="post_test_sin_ot()">post_test_sin_ot</button>  
-        <button ng-click="tipo_os()">tipo_os</button>  
-        <button ng-click="tipo_ot()">tipo_ot</button>  
         <hr />
-        <h3>POST Token</h3>
+        <h3>Notificaciones</h3>
+        <button ng-click="get_notificaciones()">get_notificaciones</button>
+        <button ng-click="agregar_dim_notif()">agregar_dim_notif</button>
+        <button ng-click="agregar_bt_notif_sin_ot()">agregar_bt_notif_sin_ot</button>
+        <button ng-click="agregar_bt_notif_con_ot()">agregar_bt_notif_sin_ot</button>
+        <hr />
+        <!---<h3>POST Token</h3>
         <div>
             <!--<input type="text" name="" placeholder="idEntidad" ng-model="saveToken.id_entidad" />
             <input type="text" name="" ng-model="saveToken.es_cliente" />
             <input type="text" name="" ng-model="saveToken.es_tecnico" />
-            <input type="text" name="" ng-model="saveToken.token" />-->
+            <input type="text" name="" ng-model="saveToken.token" />
             <button ng-click="save_token()">post api/tokens</button>
         </div>
-        <hr />
+        <hr /> -->
         <h3>logs</h3>
         <div>
             pantalla: <input type="text" name="" ng-model="pantalla" />
@@ -217,6 +231,54 @@
                     });
             }
 
+            $scope.agregar_dim_notif = function () {
+
+                var data = { notificacion_desc: 'descripcion not', notificacion_texto:'textlalala'};
+                var url = URL_NOTIF;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("ERR" + url + " catch");
+
+                    });
+            }
+
+            $scope.agregar_bt_notif_sin_ot = function () {
+
+                var data = { usuario_sk: 1, cliente_sk: 1, notificacion_sk: 1  };
+                var url = URL_NOTIF;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("ERR" + url + " catch");
+
+                    });
+            }
+
+            $scope.agregar_bt_notif_con_ot = function () {
+
+                var data = { usuario_sk: 1, cliente_sk: 1, notificacion_sk: 2, ot_id: 1 };
+                var url = URL_NOTIF;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("ERR" + url + " catch");
+
+                    });
+            }
+
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /////////////////////////////////////////////////// TIPO USUARIO ///////////////////////////////////////////////////
@@ -317,7 +379,7 @@
             }
 
             $scope.updatear_dispositivo = function () {
-                var data = { cliente_sk: 1, router_sk: 1, dispositivo_sk: 82, dispositivo_mac: 'DD:EE:FF', dispositivo_ip: '192.168.0.2', dispositivo_apodo: '.Net Master', dispositivo_tipo: 'Notebook', dispositivo_bloq: 0 };
+                var data = { cliente_sk: 1, router_sk: 1, dispositivo_sk: 148, dispositivo_mac: 'DD:EE:FF', dispositivo_ip: '192.168.0.2', dispositivo_apodo: '.Net Master', dispositivo_tipo: 'Notebook', dispositivo_bloq: 0 };
                 var url = URL_DISPOSITIVOS;
                 $http.post(url, data)
                     .then(function (response) {
@@ -378,7 +440,7 @@
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             $scope.get_solicitudes = function () {
-                var url = URL_SOLICITUDES + "?cliente_sk=1";
+                var url = URL_SOLICITUDES + "?cliente_sk=2";
                 $http.get(url)
                     .then(function (response) {
                         console.log(url + ' - ', response)
@@ -392,7 +454,7 @@
             }
 
             $scope.agregar_solicitud = function () {
-                var data = { cliente_sk: 2};
+                var data = { cliente_sk: 2, tipo: 'Upgrade', descripcion: '50 MB'};
                 var url = URL_SOLICITUDES;
                 $http.post(url, data)
                     .then(function (response) {
@@ -405,7 +467,7 @@
             }
 
             $scope.updatear_solicitud = function () {
-                var data = { os_id: 1, cliente_sk: 1, fh_creacion: '22-02-2017', fh_cierre: '31-12-2017'};
+                var data = { os_id: 2, cliente_sk: 2, fh_creacion: '22-02-2017', fh_cierre: '31-12-2017', tipo: 'Upgrade', descripcion: '50 MB' };
                 //var data = { os_id: 1, cliente_sk: 1, fh_creacion: 1506267389138, fh_cierre: 1506267389138 };
                 var url = URL_SOLICITUDES;
                 $http.post(url, data)
@@ -420,7 +482,7 @@
 
 
             $scope.OS_ult_estado = function () {
-                var url = URL_OS_STATUS + "?os_id=1";
+                var url = URL_OS_STATUS + "?os_id=2";
                 $http.get(url)
                     .then(function (response) {
                         console.log(url + ' - ', response)
@@ -434,7 +496,7 @@
             }
 
             $scope.OS_agregar_estado = function () {
-                var data = { os_id: 1, estado_sk: 2, comentarios: 'soy la puta bestia' };
+                var data = { os_id: 2, estado_sk: 2, comentarios: 'soy la puta bestia' };
                 var url = URL_OS_STATUS;
                 $http.post(url, data)
                     .then(function (response) {
@@ -469,7 +531,7 @@
             }
 
             $scope.agregar_OT = function () {
-                var data = { cliente_sk: 1 };
+                var data = { cliente_sk: 1, tipo: 'Falla Modem', descripcion: 'destruido' };
                 var url = URL_OT;
                 $http.post(url, data)
                     .then(function (response) {
@@ -481,8 +543,8 @@
                     });
             }
 
-            $scope.updatear_solicitud = function () {
-                var data = { ot_id: 1, cliente_sk: 1, fh_creacion: '22-02-2017', fh_cierre: '31-12-2017', tecnico_sk: 1 };
+            $scope.updatear_OT = function () {
+                var data = { ot_id: 1, cliente_sk: 1, fh_creacion: '22-02-2017', fh_cierre: '31-12-2017', tecnico_sk: 1, tipo: 'Falla Modem', descripcion: 'destruido' };
                 var url = URL_OT;
                 $http.post(url, data)
                     .then(function (response) {

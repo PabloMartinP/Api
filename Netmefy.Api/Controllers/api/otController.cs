@@ -60,6 +60,8 @@ namespace Netmefy.Api.Controllers
                 ord_trabajo.fh_cierre = bt_ord_trabajo.fh_cierre;
                 ord_trabajo.calificacion = bt_ord_trabajo.calificacion;
                 ord_trabajo.tecnico_sk = bt_ord_trabajo.tecnico_sk;
+                ord_trabajo.tipo = bt_ord_trabajo.tipo;
+                ord_trabajo.descripcion = bt_ord_trabajo.descripcion;
 
                 db.SaveChanges();
                 orden.fh_creacion = ((DateTime)(ord_trabajo.fh_creacion)).ToString("yyyy-mm-dd"); ;

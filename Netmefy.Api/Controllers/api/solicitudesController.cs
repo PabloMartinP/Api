@@ -61,10 +61,12 @@ namespace Netmefy.Api.Controllers
             }
             else
             {
-                bt_solicitudes solpe = db.bt_solicitudes.Where(x => x.os_id == bt_solicitudes.os_id && x.cliente_sk == bt_solicitudes.cliente_sk).FirstOrDefault();
+                bt_solicitudes solpe = db.bt_solicitudes.Where(x => x.os_id == bt_solicitudes.os_id).FirstOrDefault();
 
                 solpe.fh_creacion = bt_solicitudes.fh_creacion;
                 solpe.fh_cierre = bt_solicitudes.fh_cierre;
+                solpe.tipo = bt_solicitudes.tipo;
+                solpe.descripcion = bt_solicitudes.descripcion;
 
                 db.SaveChanges();
                 solicitud.fh_creacion = ((DateTime)(solpe.fh_creacion)).ToString("yyyy-mm-dd"); ;
@@ -75,59 +77,7 @@ namespace Netmefy.Api.Controllers
 
         }
 
-        //// DELETE: api/solicitudes/5
-        //[ResponseType(typeof(bt_solicitudes))]
-        //public IHttpActionResult Deletebt_solicitudes(int id)
-        //{
-        //    bt_solicitudes bt_solicitudes = db.bt_solicitudes.Find(id);
-        //    if  (bt_solicitudes == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    db.bt_solicitudes.Remove(bt_solicitudes);
-        //    db.SaveChanges();
-
-        //    return Ok(bt_solicitudes);
-        //}
-
-
-        //// PUT: api/solicitudes/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult Putbt_solicitudes(int id, bt_solicitudes bt_solicitudes)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    if (id != bt_solicitudes.os_id)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    db.Entry(bt_solicitudes).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!bt_solicitudesExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
-
-
+        
         protected override void Dispose(bool disposing)
         {
             if (disposing)

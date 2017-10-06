@@ -25,6 +25,7 @@ namespace Netmefy.Data
         public System.DateTime fh_creacion { get; set; }
         public Nullable<System.DateTime> fh_cierre { get; set; }
         public string descripcion { get; set; }
+        public string tipo { get; set; }
     
         public virtual cliente lk_cliente { get; set; }
         public virtual lk_tiempo lk_tiempo { get; set; }
