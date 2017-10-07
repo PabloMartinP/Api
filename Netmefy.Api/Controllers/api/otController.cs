@@ -71,7 +71,28 @@ namespace Netmefy.Api.Controllers
             }
 
         }
-        
+        // PUT: api/paginas/5
+        //[ResponseType(typeof(string))]
+        [HttpPut]
+        public IHttpActionResult updatearCalificacion(int id, int calificacion)
+        {
+
+            try
+            {
+                bt_ord_trabajo orden = db.bt_ord_trabajo.Where(x => x.ot_id == id).FirstOrDefault();
+                orden.calificacion = calificacion;
+
+                db.SaveChanges();
+
+                Models.otModel bt_ord_trabajo = Models.otModel.ConvertTo(orden);
+                //return StatusCode(HttpStatusCode.NoContent);
+                return CreatedAtRoute("DefaultApi", new { status = "ok" }, new { ot = bt_ord_trabajo });
+            }
+            catch (Exception ex)
+            {
+                return CreatedAtRoute("DefaultApi", new { status = "error" }, new { mensaje=  ex.ToString() });
+            }
+        }
 
 
         protected override void Dispose(bool disposing)
