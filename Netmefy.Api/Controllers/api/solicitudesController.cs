@@ -16,11 +16,11 @@ namespace Netmefy.Api.Controllers
     {
         private NETMEFYEntities db = new NETMEFYEntities();
 
-        //// GET: api/solicitudes
-        //public IQueryable<bt_solicitudes> Getbt_solicitudes()
-        //{
-        //    return db.bt_solicitudes;
-        //}
+        public Data.lk_tipo_os[] buscarTipoSolicitudes()
+        {
+            var j = db.lk_tipo_os.OrderBy(x=>x.tipo_os_sk).ToArray();
+            return j;
+        }
 
         public List<Data.bt_solicitudes> buscarSolicitudesXCliente(int cliente_sk)
         {
@@ -33,8 +33,9 @@ namespace Netmefy.Api.Controllers
         public IHttpActionResult Getbt_solicitudes(int cliente_sk)
         {
             List<bt_solicitudes> solicitudes = buscarSolicitudesXCliente(cliente_sk);
+            Data.lk_tipo_os[] tipos = buscarTipoSolicitudes();
 
-            List<Models.solicitudesModel> solpe = Models.solicitudesModel.ListConvertTo(solicitudes);
+            List<Models.solicitudesModel> solpe = Models.solicitudesModel.ListConvertTo(solicitudes,tipos);
 
             return Ok(solpe);
         }

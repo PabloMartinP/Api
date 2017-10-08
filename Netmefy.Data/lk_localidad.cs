@@ -25,6 +25,8 @@ namespace Netmefy.Data
         public string localidad_desc { get; set; }
         public string localidad_provincia { get; set; }
         public string localidad_pais { get; set; }
+        public Nullable<double> localidad_lat { get; set; }
+        public Nullable<double> localidad_long { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cliente> lk_cliente { get; set; }

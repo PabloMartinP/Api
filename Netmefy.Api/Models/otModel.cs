@@ -14,22 +14,23 @@ namespace Netmefy.Api.Models
         public string fh_creacion { get; set; }
         public string fh_cierre { get; set; }
         public int calificacion { get; set; }
+        public int tipo_id { get; set; }
         public string tipo { get; set; }
         public string descripcion { get; set; }
 
-        public static List<otModel> ListConvertTo(List<Data.bt_ord_trabajo> ots)
+        public static List<otModel> ListConvertTo(List<Data.bt_ord_trabajo> ots,Data.lk_tipo_ot[] tipos)
         {
             List<otModel> list = new List<otModel>();
 
-            foreach (Data.bt_ord_trabajo n in ots)
+            foreach (Data.bt_ord_trabajo ot in ots)
             {
-                list.Add(ConvertTo(n));
+                list.Add(ConvertTo(ot,tipos));
             }
 
             return list;
         }
 
-        public static otModel ConvertTo(Data.bt_ord_trabajo n)
+        public static otModel ConvertTo(Data.bt_ord_trabajo n,Data.lk_tipo_ot[] tipos)
         {
             otModel ot = new otModel();
 
@@ -47,7 +48,8 @@ namespace Netmefy.Api.Models
             ot.fh_cierre = fh_cierre_d.ToString("dd-MM-yyyy");
             ot.calificacion = (int)n.calificacion;
             ot.descripcion = n.descripcion;
-            ot.tipo = n.tipo;
+            ot.tipo_id = n.tipo;
+            ot.tipo = tipos[n.tipo-1].tipo_ot_desc;
 
             return ot;
         }
@@ -61,7 +63,7 @@ namespace Netmefy.Api.Models
             ot.tecnico_sk = orden.tecnico_sk;
             ot.calificacion = orden.calificacion;
             ot.descripcion = orden.descripcion;
-            ot.tipo = orden.tipo;
+            ot.tipo = orden.tipo_id;
 
             if (orden.fh_creacion != null)
                 ot.fh_creacion = DateTime.ParseExact(orden.fh_creacion, "dd-MM-yyyy", null);

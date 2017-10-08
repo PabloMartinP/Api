@@ -20,8 +20,8 @@ namespace Netmefy.Data
         public int estado_sk { get; set; }
         public string comentarios { get; set; }
     
-        public virtual bt_ord_trabajo bt_ord_trabajo { get; set; }
         public virtual lk_estado lk_estado { get; set; }
         public virtual lk_tiempo lk_tiempo { get; set; }
+        public virtual bt_ord_trabajo bt_ord_trabajo { get; set; }
     }
 }

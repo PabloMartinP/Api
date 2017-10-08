@@ -7,46 +7,31 @@ namespace Netmefy.Api.Models
 {
     public class solicitudesModel
     {
-
+        
         public int os_id { get; set; }
         public int cliente_sk { get; set; }
         public string fh_creacion { get; set; }
         public string fh_cierre { get; set; }
         public string descripcion { get; set; }
+        public int tipo_id { get; set; }
         public string tipo { get; set; }
 
-        public static List<solicitudesModel> ListConvertTo(List<Data.bt_solicitudes> solicitudes)
+        public static List<solicitudesModel> ListConvertTo(List<Data.bt_solicitudes> solicitudes, Data.lk_tipo_os[] tipos)
         {
             List<solicitudesModel> list = new List<solicitudesModel>();
 
-            foreach (Data.bt_solicitudes n in solicitudes)
+            foreach (Data.bt_solicitudes s in solicitudes)
             {
-              
-                DateTime fh_cierre_d;
-
-                if (n.fh_cierre != null)
-                    fh_cierre_d = (DateTime)n.fh_cierre;
-                else
-                    fh_cierre_d = DateTime.MaxValue;
-
-                list.Add(new solicitudesModel
-                {
-                    os_id = n.os_id,
-                    cliente_sk = n.cliente_sk,
-                    fh_creacion = n.fh_creacion.ToString("dd-MM-yyyy"),
-                    fh_cierre = fh_cierre_d.ToString("dd-MM-yyyy"),
-                    descripcion = n.descripcion,
-                    tipo = n.tipo,
-                });
+                Models.solicitudesModel sol = ConvertTo(s,tipos);
+                list.Add(sol);
             }
-
             return list;
         }
 
-        public static solicitudesModel ConvertTo(Data.bt_solicitudes solicitudes)
+        public static solicitudesModel ConvertTo(Data.bt_solicitudes solicitudes,Data.lk_tipo_os[] tipos)
         {
             solicitudesModel solpe = new solicitudesModel();
-            
+
             DateTime fh_cierre_d;
 
             if (solicitudes.fh_cierre != null)
@@ -54,13 +39,13 @@ namespace Netmefy.Api.Models
             else
                 fh_cierre_d = DateTime.MaxValue;
 
-
             solpe.os_id = solicitudes.os_id;
             solpe.cliente_sk = solicitudes.cliente_sk;
             solpe.fh_creacion = solicitudes.fh_creacion.ToString("dd-MM-yyyy");
             solpe.fh_cierre = fh_cierre_d.ToString("dd-MM-yyyy");
             solpe.descripcion = solicitudes.descripcion;
-            solpe.tipo = solicitudes.tipo;
+            solpe.tipo_id = solicitudes.tipo;
+            solpe.tipo = tipos[solicitudes.tipo-1].tipo_os_desc;
 
             return solpe;
         }
@@ -72,7 +57,7 @@ namespace Netmefy.Api.Models
             solpe.os_id = solicitudes.os_id;
             solpe.cliente_sk = solicitudes.cliente_sk;
             solpe.descripcion = solicitudes.descripcion;
-            solpe.tipo = solicitudes.tipo;
+            solpe.tipo = solicitudes.tipo_id;
 
             if (solicitudes.fh_creacion != null)
                 solpe.fh_creacion = DateTime.ParseExact(solicitudes.fh_creacion, "dd-MM-yyyy", null);

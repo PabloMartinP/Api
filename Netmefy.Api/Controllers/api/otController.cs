@@ -16,6 +16,11 @@ namespace Netmefy.Api.Controllers
     {
         private NETMEFYEntities db = new NETMEFYEntities();
 
+        public Data.lk_tipo_ot[] buscarTipoSolicitudes()
+        {
+            var j = db.lk_tipo_ot.OrderBy(x => x.tipo_ot_sk).ToArray();
+            return j;
+        }
 
         public List<Data.bt_ord_trabajo> buscarOtXCliente(int cliente_sk)
         {
@@ -28,8 +33,9 @@ namespace Netmefy.Api.Controllers
         public IHttpActionResult Getbt_ord_trabajo(int cliente_sk)
         {
             List<bt_ord_trabajo> ots = buscarOtXCliente(cliente_sk);
+            Data.lk_tipo_ot[] tipos = buscarTipoSolicitudes();
 
-            List<Models.otModel> ordenes = Models.otModel.ListConvertTo(ots);
+            List<Models.otModel> ordenes = Models.otModel.ListConvertTo(ots,tipos);
 
             return Ok(ordenes);
         }
@@ -84,7 +90,9 @@ namespace Netmefy.Api.Controllers
 
                 db.SaveChanges();
 
-                Models.otModel bt_ord_trabajo = Models.otModel.ConvertTo(orden);
+                Data.lk_tipo_ot[] tipos = buscarTipoSolicitudes();
+
+                Models.otModel bt_ord_trabajo = Models.otModel.ConvertTo(orden, tipos);
                 //return StatusCode(HttpStatusCode.NoContent);
                 return CreatedAtRoute("DefaultApi", new { status = "ok" }, new { ot = bt_ord_trabajo });
             }
