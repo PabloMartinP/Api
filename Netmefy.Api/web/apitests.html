@@ -35,6 +35,7 @@
         <button ng-click="calificar_OT()">calificar_OT</button>
         <button ng-click="OT_ult_estado()">OT_ult_estado</button>
         <button ng-click="OT_agregar_estado()">OT_agregar_estado</button> 
+        <button ng-click="finalizar_OT()">finalizar_orden</button> 
         <button ng-click="tipo_ot()">tipo_ot</button>
         <hr />
         <h3>Router</h3>
@@ -53,7 +54,7 @@
         <hr />
         <h3>Notificaciones</h3>
         <button ng-click="get_notificaciones()">get_notificaciones</button>
-        <button ng-click="agregar_dim_notif()">agregar_dim_notif</button>
+        <button ng-click="agregar_bt_notif_nueva()">agregar_bt_notif_nueva</button>
         <button ng-click="agregar_bt_notif_sin_ot()">agregar_bt_notif_sin_ot</button>
         <button ng-click="agregar_bt_notif_con_ot()">agregar_bt_notif_sin_ot</button>
         <hr />
@@ -232,9 +233,9 @@
                     });
             }
 
-            $scope.agregar_dim_notif = function () {
+            $scope.agregar_bt_notif_nueva = function () {
 
-                var data = { notificacion_desc: 'descripcion not', notificacion_texto:'textlalala'};
+                var data = { usuario_sk: 1, cliente_sk: 1, ot_id: 1 ,notificacion_desc: 'descripcion not', notificacion_texto:'textlalala'};
                 var url = URL_NOTIF;
                 $http.post(url, data)
                     .then(function (response) {
@@ -532,7 +533,7 @@
             }
 
             $scope.agregar_OT = function () {
-                var data = { cliente_sk: 1, tipo: 'Falla Modem', descripcion: 'destruido' };
+                var data = { cliente_sk: 1, tipo_id: 1, descripcion: 'destroyed' };
                 var url = URL_OT;
                 $http.post(url, data)
                     .then(function (response) {
@@ -545,7 +546,7 @@
             }
 
             $scope.updatear_OT = function () {
-                var data = { ot_id: 1, cliente_sk: 1, fh_creacion: '22-02-2017', fh_cierre: '31-12-2017', tecnico_sk: 1, tipo: 'Falla Modem', descripcion: 'destruido' };
+                var data = { ot_id: 1, cliente_sk: 1, fh_creacion: '22-02-2017', fh_cierre: '31-12-2017', tecnico_sk: 1, tipo_id: 2, tipo: 'lal', descripcion: 'destruido' };
                 var url = URL_OT;
                 $http.post(url, data)
                     .then(function (response) {
@@ -588,6 +589,19 @@
 
             $scope.OT_agregar_estado = function () {
                 var data = { ot_id: 1, estado_sk: 2, comentarios: 'soy la puta bestia 2' };
+                var url = URL_OT_STATUS;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
+            $scope.finalizar_OT = function () {
+                var data = { ot_id: 1, estado_sk: 3 };
                 var url = URL_OT_STATUS;
                 $http.post(url, data)
                     .then(function (response) {

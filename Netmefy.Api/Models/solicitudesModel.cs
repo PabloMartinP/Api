@@ -15,6 +15,8 @@ namespace Netmefy.Api.Models
         public string descripcion { get; set; }
         public int tipo_id { get; set; }
         public string tipo { get; set; }
+        public int estado_id { get; set; }
+        public string estado_desc { get; set; }
 
         public static List<solicitudesModel> ListConvertTo(List<Data.bt_solicitudes> solicitudes, Data.lk_tipo_os[] tipos)
         {

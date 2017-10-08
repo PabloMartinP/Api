@@ -85,5 +85,10 @@ namespace Netmefy.Service
         {
             return db.usuarios.Where(x => x.cliente_sk == client_sk && x.usuario_sk == usuario_sk).FirstOrDefault();
         }
+
+        public List<Data.usuario> findUsersByClient(int client_sk)
+        {
+            return db.usuarios.Where(x => x.cliente_sk == client_sk).ToList();
+        }
     }
 }

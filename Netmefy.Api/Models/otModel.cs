@@ -17,6 +17,8 @@ namespace Netmefy.Api.Models
         public int tipo_id { get; set; }
         public string tipo { get; set; }
         public string descripcion { get; set; }
+        public int estado_id { get; set; }
+        public string estado_desc { get; set; }
 
         public static List<otModel> ListConvertTo(List<Data.bt_ord_trabajo> ots,Data.lk_tipo_ot[] tipos)
         {

@@ -15,21 +15,27 @@ namespace Netmefy.Api.Controllers.api
     public class os_statusController : ApiController
     {
         private NETMEFYEntities db = new NETMEFYEntities();
-        
+        private Service.OSService _osService = new Service.OSService();
+
         // GET: api/os_status/5
         [ResponseType(typeof(Models.os_statusModel))]
         public IHttpActionResult Getbt_os_status(int os_id)
         {
-            List<bt_os_status> estados = db.bt_os_status.Where(x => x.os_id == os_id).ToList();
-            if (estados == null)
-            {
-                return NotFound();
-            }
+            //List<bt_os_status> estados = db.bt_os_status.Where(x => x.os_id == os_id).ToList();
+            //if (estados == null)
+            //{
+            //    return NotFound();
+            //}
 
-            List<Models.os_statusModel> modelEstados = Models.os_statusModel.ListConvertTo(estados);
-            Models.os_statusModel ult_estado = modelEstados.OrderByDescending(x => x.timestamp).FirstOrDefault();
+            //List<Models.os_statusModel> modelEstados = Models.os_statusModel.ListConvertTo(estados);
+            //Models.os_statusModel ult_estado = modelEstados.OrderByDescending(x => x.timestamp).FirstOrDefault();
 
-            return Ok(ult_estado);
+            //return Ok(ult_estado);
+
+            Data.bt_os_status ult_estado = _osService.buscarUltEstado(os_id);
+            Models.os_statusModel modelEstado = Models.os_statusModel.ConvertTo(ult_estado);
+
+            return Ok(modelEstado);
         }
 
         

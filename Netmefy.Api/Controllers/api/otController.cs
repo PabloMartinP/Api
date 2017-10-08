@@ -16,26 +16,23 @@ namespace Netmefy.Api.Controllers
     {
         private NETMEFYEntities db = new NETMEFYEntities();
 
-        public Data.lk_tipo_ot[] buscarTipoSolicitudes()
-        {
-            var j = db.lk_tipo_ot.OrderBy(x => x.tipo_ot_sk).ToArray();
-            return j;
-        }
-
-        public List<Data.bt_ord_trabajo> buscarOtXCliente(int cliente_sk)
-        {
-            var j = db.bt_ord_trabajo.Where(x => x.cliente_sk == cliente_sk).ToList();
-            return j;
-        }
+        private Service.OTService _otService = new Service.OTService();
 
         // GET: api/ordenes/5
         [ResponseType(typeof(Models.otModel))]
         public IHttpActionResult Getbt_ord_trabajo(int cliente_sk)
         {
-            List<bt_ord_trabajo> ots = buscarOtXCliente(cliente_sk);
-            Data.lk_tipo_ot[] tipos = buscarTipoSolicitudes();
+            List<bt_ord_trabajo> ots = _otService.buscarOtXCliente(cliente_sk);
+            Data.lk_tipo_ot[] tipos = _otService.buscarTipoSolicitudes();
 
             List<Models.otModel> ordenes = Models.otModel.ListConvertTo(ots,tipos);
+
+            foreach (Models.otModel ot in ordenes)
+            {
+                Data.bt_ot_status ot_st = _otService.buscarUltEstado(ot.ot_id);
+                ot.estado_id = ot_st.estado_sk;
+                ot.estado_desc = _otService.buscarEstado(ot_st.estado_sk).estado_desc;
+            }
 
             return Ok(ordenes);
         }
@@ -48,12 +45,26 @@ namespace Netmefy.Api.Controllers
 
             if (bt_ord_trabajo.ot_id == 0)
             {
+                // Creo la la orden
                 db.bt_ord_trabajo.Add(bt_ord_trabajo);
 
                 db.SaveChanges();
                 orden.fh_cierre = ((DateTime)(bt_ord_trabajo.fh_cierre)).ToString("yyyy-mm-dd"); ;
                 orden.fh_creacion = ((DateTime)(bt_ord_trabajo.fh_creacion)).ToString("yyyy-mm-dd"); ;
                 orden.ot_id = bt_ord_trabajo.ot_id;
+                orden.estado_id = 1;
+                orden.estado_desc = _otService.buscarEstado(1).estado_desc;
+
+                // Creo la el estado 1 para la orden
+                Models.ot_statusModel st = new Models.ot_statusModel();
+                st.estado_sk = 1;
+                st.ot_id = bt_ord_trabajo.ot_id;
+                st.comentarios = "Nueva Orden";
+                bt_ot_status bt_ot_status = Models.ot_statusModel.ConvertToBD(st);
+
+
+                db.bt_ot_status.Add(bt_ot_status);
+                db.SaveChanges();
 
                 return CreatedAtRoute("DefaultApi", new { id = bt_ord_trabajo.ot_id }, orden);
 
@@ -72,6 +83,8 @@ namespace Netmefy.Api.Controllers
                 db.SaveChanges();
                 orden.fh_creacion = ((DateTime)(ord_trabajo.fh_creacion)).ToString("yyyy-mm-dd"); ;
                 orden.fh_cierre = ((DateTime)(ord_trabajo.fh_cierre)).ToString("yyyy-mm-dd"); ;
+                orden.estado_id = _otService.buscarUltEstado(orden.ot_id).estado_sk;
+                orden.estado_desc = _otService.buscarEstado(orden.estado_id).estado_desc;
 
                 return CreatedAtRoute("DefaultApi", new { id = ord_trabajo.ot_id }, orden);
             }
@@ -90,7 +103,7 @@ namespace Netmefy.Api.Controllers
 
                 db.SaveChanges();
 
-                Data.lk_tipo_ot[] tipos = buscarTipoSolicitudes();
+                Data.lk_tipo_ot[] tipos = _otService.buscarTipoSolicitudes();
 
                 Models.otModel bt_ord_trabajo = Models.otModel.ConvertTo(orden, tipos);
                 //return StatusCode(HttpStatusCode.NoContent);

@@ -38,20 +38,21 @@ namespace Netmefy.Api.Controllers.api
         {
             if(n.notificacion_sk == 0)
             {
-                Data.lk_notificacion not = new Data.lk_notificacion();
-                not.notificacion_desc = n.notificacion_desc;
-                not.notificacion_texto = n.notificacion_texto;
-                db.lk_notificacion.Add(not);
+                // Creo en el maestro la notificacion
+                Data.lk_notificacion noti = new Data.lk_notificacion();
+                noti.notificacion_desc = n.notificacion_desc;
+                noti.notificacion_texto = n.notificacion_texto;
+                db.lk_notificacion.Add(noti);
                 db.SaveChanges();
-                n.notificacion_sk = not.notificacion_sk;
-            } else
-            {
-                Data.bt_notificaciones not = new Data.bt_notificaciones();
-                not = Models.notificacionesModel.ConvertToBD(n);
-                db.bt_notificaciones.Add(not);
-                db.SaveChanges();
-                n.tiempo_sk = not.tiempo_sk.ToString("dd-MM-yyyy");
+                n.notificacion_sk = noti.notificacion_sk;
             }
+
+            // La agrego en la BT_Notificaciones
+            Data.bt_notificaciones not = new Data.bt_notificaciones();
+            not = Models.notificacionesModel.ConvertToBD(n);
+            db.bt_notificaciones.Add(not);
+            db.SaveChanges();
+            
 
             return CreatedAtRoute("DefaultApi", new { id = n.usuario_sk }, n);
         }
