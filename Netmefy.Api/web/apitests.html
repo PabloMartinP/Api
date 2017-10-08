@@ -456,7 +456,7 @@
             }
 
             $scope.agregar_solicitud = function () {
-                var data = { cliente_sk: 2, tipo: 'Upgrade', descripcion: '50 MB'};
+                var data = { cliente_sk: 2, tipo_id: '1', descripcion: '50 MB'};
                 var url = URL_SOLICITUDES;
                 $http.post(url, data)
                     .then(function (response) {
@@ -469,7 +469,7 @@
             }
 
             $scope.updatear_solicitud = function () {
-                var data = { os_id: 2, cliente_sk: 2, fh_creacion: '22-02-2017', fh_cierre: '31-12-2017', tipo: 'Upgrade', descripcion: '50 MB' };
+                var data = { os_id: 2, cliente_sk: 2, fh_creacion: '22-02-2017', fh_cierre: '31-12-2017', tipo_id: '1', descripcion: '50 MB' };
                 //var data = { os_id: 1, cliente_sk: 1, fh_creacion: 1506267389138, fh_cierre: 1506267389138 };
                 var url = URL_SOLICITUDES;
                 $http.post(url, data)
