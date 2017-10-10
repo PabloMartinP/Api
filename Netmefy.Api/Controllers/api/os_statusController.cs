@@ -46,9 +46,9 @@ namespace Netmefy.Api.Controllers.api
             db.bt_os_status.Add(bt_os_status);
             db.SaveChanges();
 
-            estado.tiempo_sk = bt_os_status.tiempo_sk.ToString("dd-MM-yyyy");
+            estado.tiempo_sk = bt_os_status.tiempo_sk.ToString("yyyy-MM-dd");
             estado.hh_mm_ss = bt_os_status.hh_mm_ss;
-            estado.timestamp = string.Concat(bt_os_status.tiempo_sk.ToString("yyyy-dd-MM"), " ", bt_os_status.hh_mm_ss);
+            estado.timestamp = string.Concat(bt_os_status.tiempo_sk.ToString("yyyy-MM-dd"), " ", bt_os_status.hh_mm_ss);
                 
             return CreatedAtRoute("DefaultApi", new { id = estado.os_id }, estado);
             

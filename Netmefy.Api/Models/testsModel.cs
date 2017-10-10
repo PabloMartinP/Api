@@ -58,7 +58,7 @@ namespace Netmefy.Api.Models
             t.cliente_sk = test.cliente_sk;
             //t.ot_id = test.ot_id;
             if (test.tiempo_sk != null)
-                t.tiempo_sk = DateTime.ParseExact(test.tiempo_sk, "dd-MM-yyyy", null);
+                t.tiempo_sk = DateTime.ParseExact(test.tiempo_sk, "yyyy-MM-dd", null);
             else
                 t.tiempo_sk = DateTime.Today;
             t.flag_instalacion = test.flag_instalacion;

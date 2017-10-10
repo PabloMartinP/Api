@@ -51,7 +51,9 @@
         <AssociationConnector Association="NETMEFYModel.fk_bt_solicitudes_lk_cliente" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_solicitudes_lk_tiempo" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_solicitudes_lk_tiempo1" />
-      </Diagram>
+        <EntityTypeShape EntityType="NETMEFYModel.vw_calificacion_tecnico" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NETMEFYModel.vw_ot_abiertas" Width="1.5" PointX="12.375" PointY="3.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

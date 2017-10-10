@@ -51,8 +51,8 @@ namespace Netmefy.Api.Controllers
                 db.bt_solicitudes.Add(bt_solicitudes);
 
                 db.SaveChanges();
-                solicitud.fh_cierre = ((DateTime)(bt_solicitudes.fh_cierre)).ToString("yyyy-mm-dd"); ;
-                solicitud.fh_creacion = ((DateTime)(bt_solicitudes.fh_creacion)).ToString("yyyy-mm-dd"); ;
+                solicitud.fh_cierre = ((DateTime)(bt_solicitudes.fh_cierre)).ToString("yyyy-MM-dd"); ;
+                solicitud.fh_creacion = ((DateTime)(bt_solicitudes.fh_creacion)).ToString("yyyy-MM-dd"); ;
                 solicitud.os_id = bt_solicitudes.os_id;
                 solicitud.estado_id = 1;
                 solicitud.estado_desc = _osService.buscarEstado(1).estado_desc;
@@ -82,8 +82,8 @@ namespace Netmefy.Api.Controllers
                 solpe.descripcion = bt_solicitudes.descripcion;
 
                 db.SaveChanges();
-                solicitud.fh_creacion = ((DateTime)(solpe.fh_creacion)).ToString("yyyy-mm-dd"); ;
-                solicitud.fh_cierre = ((DateTime)(solpe.fh_cierre)).ToString("yyyy-mm-dd");
+                solicitud.fh_creacion = ((DateTime)(solpe.fh_creacion)).ToString("yyyy-MM-dd"); ;
+                solicitud.fh_cierre = ((DateTime)(solpe.fh_cierre)).ToString("yyyy-MM-dd");
                 solicitud.estado_id = _osService.buscarUltEstado(solicitud.os_id).estado_sk;
                 solicitud.estado_desc = _osService.buscarEstado(solicitud.estado_id).estado_desc;
 

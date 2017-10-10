@@ -16,71 +16,54 @@ namespace Netmefy.Api.Controllers.api
 {
     public class tecnicosController : ApiController
     {
-        TecnicoService _tecnicoService = new TecnicoService();
-        /*
         private NETMEFYEntities db = new NETMEFYEntities();
 
-        // GET: api/tecnicos
-        public IQueryable<tecnico> Gettecnicos()
+        public Models.tecnicoModel buscarTecnico(string id)
         {
-            return db.tecnicos;
-        }*/
+            Models.tecnicoModel tecnico = new Models.tecnicoModel();
+
+            vw_calificacion_tecnico ct = db.vw_calificacion_tecnico.Where(x => x.id == id).FirstOrDefault();
+            List<vw_ot_abiertas> ots = db.vw_ot_abiertas.Where(x => x.tecnico_sk == ct.sk).ToList();
+
+            tecnico.id = ct.id;
+            tecnico.psw = ct.psw;
+            tecnico.nombre = ct.nombre;
+            tecnico.sk = ct.sk;
+            tecnico.email = ct.email;
+            tecnico.calificacion = ct.calificacion;
+            
+            List<Models.tecnicoOtModel> otsTecnico = new List<Models.tecnicoOtModel>();
+
+            foreach (vw_ot_abiertas o in ots)
+            {
+                otsTecnico.Add(new tecnicoOtModel
+                {
+                    ot_id = o.ot_id,
+                    estado = o.estado,
+                    estado_desc = o.estado_desc,
+                    fecha = o.fecha
+                });
+            }
+
+            tecnico.ots = otsTecnico;
+            
+            return tecnico;
+        }
 
         // GET: api/tecnicos/5
-        [ResponseType(typeof(tecnicoInfoModel))]
-        public IHttpActionResult Gettecnico(string username)
+        [ResponseType(typeof(tecnicoModel))]
+        public IHttpActionResult Gettecnico(string id)
         {
-            tecnico tecnico = _tecnicoService.buscar(username);
+            Models.tecnicoModel tecnico = buscarTecnico(id);
             if (tecnico == null)
             {
                 return NotFound();
             }
 
-            tecnicoInfoModel tm = new tecnicoInfoModel
-            {
-                id = tecnico.tecnico_sk,
-                nombre = tecnico.tecnico_desc
-            };
-
-
-            return Ok(tm);
+            return Ok(tecnico);
         }
         /*
-        // PUT: api/tecnicos/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult Puttecnico(int id, tecnico tecnico)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != tecnico.tecnico_sk)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(tecnico).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!tecnicoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
+        
         // POST: api/tecnicos
         [ResponseType(typeof(tecnico))]
         public IHttpActionResult Posttecnico(tecnico tecnico)
@@ -110,35 +93,6 @@ namespace Netmefy.Api.Controllers.api
 
             return CreatedAtRoute("DefaultApi", new { id = tecnico.tecnico_sk }, tecnico);
         }
-
-        // DELETE: api/tecnicos/5
-        [ResponseType(typeof(tecnico))]
-        public IHttpActionResult Deletetecnico(int id)
-        {
-            tecnico tecnico = db.tecnicos.Find(id);
-            if (tecnico == null)
-            {
-                return NotFound();
-            }
-
-            db.tecnicos.Remove(tecnico);
-            db.SaveChanges();
-
-            return Ok(tecnico);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool tecnicoExists(int id)
-        {
-            return db.tecnicos.Count(e => e.tecnico_sk == id) > 0;
-        }*/
+*/
     }
 }

@@ -45,9 +45,9 @@ namespace Netmefy.Api.Controllers.api
             db.bt_ot_status.Add(bt_ot_status);
             db.SaveChanges();
 
-            estado.tiempo_sk = bt_ot_status.tiempo_sk.ToString("dd-MM-yyyy");
+            estado.tiempo_sk = bt_ot_status.tiempo_sk.ToString("yyyy-MM-dd");
             estado.hh_mm_ss = bt_ot_status.hh_mm_ss;
-            estado.timestamp = string.Concat(bt_ot_status.tiempo_sk.ToString("yyyy-dd-MM"), " ", bt_ot_status.hh_mm_ss);
+            estado.timestamp = string.Concat(bt_ot_status.tiempo_sk.ToString("yyyy-MM-dd"), " ", bt_ot_status.hh_mm_ss);
 
             // Agrego notificacion en caso de que la orden se cierre
             if(estado.estado_sk == 3)

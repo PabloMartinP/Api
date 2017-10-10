@@ -194,6 +194,7 @@
           <Property Name="tecnico_id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="tecnico_psw" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="tecnico_desc" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="tecnico_email" Type="varchar" MaxLength="200" Nullable="false" />
         </EntityType>
         <EntityType Name="lk_tiempo">
           <Key>
@@ -261,6 +262,38 @@
           <Property Name="es_cliente" Type="bit" Nullable="false" />
           <Property Name="es_tecnico" Type="bit" Nullable="false" />
           <Property Name="tokenid" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NETMEFY.dbo.vw_calificacion_tecnico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_calificacion_tecnico">
+          <Key>
+            <PropertyRef Name="sk" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="psw" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="email" />
+          </Key>
+          <Property Name="sk" Type="int" Nullable="false" />
+          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="psw" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="calificacion" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NETMEFY.dbo.vw_ot_abiertas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_ot_abiertas">
+          <Key>
+            <PropertyRef Name="ot_id" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="estado_desc" />
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Name="ot_id" Type="int" Nullable="false" />
+          <Property Name="tecnico_sk" Type="int" />
+          <Property Name="estado" Type="int" Nullable="false" />
+          <Property Name="estado_desc" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="fecha" Type="varchar" MaxLength="40" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -598,6 +631,25 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySet Name="lk_web" EntityType="Self.lk_web" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rel_user_ent" EntityType="Self.rel_user_ent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="token" EntityType="Self.token" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_calificacion_tecnico" EntityType="Self.vw_calificacion_tecnico" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_calificacion_tecnico].[sk] AS [sk], 
+    [vw_calificacion_tecnico].[id] AS [id], 
+    [vw_calificacion_tecnico].[psw] AS [psw], 
+    [vw_calificacion_tecnico].[nombre] AS [nombre], 
+    [vw_calificacion_tecnico].[email] AS [email], 
+    [vw_calificacion_tecnico].[calificacion] AS [calificacion]
+    FROM [dbo].[vw_calificacion_tecnico] AS [vw_calificacion_tecnico]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_ot_abiertas" EntityType="Self.vw_ot_abiertas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_ot_abiertas].[ot_id] AS [ot_id], 
+    [vw_ot_abiertas].[tecnico_sk] AS [tecnico_sk], 
+    [vw_ot_abiertas].[estado] AS [estado], 
+    [vw_ot_abiertas].[estado_desc] AS [estado_desc], 
+    [vw_ot_abiertas].[fecha] AS [fecha]
+    FROM [dbo].[vw_ot_abiertas] AS [vw_ot_abiertas]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VW_Usuarios_App" EntityType="Self.VW_Usuarios_App" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VW_Usuarios_App].[tipo] AS [tipo], 
@@ -824,7 +876,9 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <End Role="lk_tiempo" EntitySet="lk_tiempo" />
             <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="vw_calificacion_tecnico" EntityType="NETMEFYModel.vw_calificacion_tecnico" />
+          <EntitySet Name="vw_ot_abiertas" EntityType="NETMEFYModel.vw_ot_abiertas" />
+          </EntityContainer>
         <EntityType Name="bt_notificaciones">
           <Key>
             <PropertyRef Name="usuario_sk" />
@@ -958,6 +1012,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="tecnico_psw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="tecnico_desc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="bt_ord_trabajo" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tecnico" FromRole="tecnico" ToRole="bt_ord_trabajo" />
+          <Property Name="tecnico_email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="lk_tiempo">
           <Key>
@@ -1385,7 +1440,35 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="vw_calificacion_tecnico">
+          <Key>
+            <PropertyRef Name="sk" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="psw" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="email" />
+          </Key>
+          <Property Name="sk" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="psw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="calificacion" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vw_ot_abiertas">
+          <Key>
+            <PropertyRef Name="ot_id" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="estado_desc" />
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Name="ot_id" Type="Int32" Nullable="false" />
+          <Property Name="tecnico_sk" Type="Int32" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <Property Name="estado_desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1501,6 +1584,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySetMapping Name="tecnicos">
             <EntityTypeMapping TypeName="NETMEFYModel.tecnico">
               <MappingFragment StoreEntitySet="lk_tecnico">
+                <ScalarProperty Name="tecnico_email" ColumnName="tecnico_email" />
                 <ScalarProperty Name="tecnico_desc" ColumnName="tecnico_desc" />
                 <ScalarProperty Name="tecnico_psw" ColumnName="tecnico_psw" />
                 <ScalarProperty Name="tecnico_id" ColumnName="tecnico_id" />
@@ -1666,7 +1750,30 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="vw_calificacion_tecnico">
+            <EntityTypeMapping TypeName="NETMEFYModel.vw_calificacion_tecnico">
+              <MappingFragment StoreEntitySet="vw_calificacion_tecnico">
+                <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="psw" ColumnName="psw" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sk" ColumnName="sk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_ot_abiertas">
+            <EntityTypeMapping TypeName="NETMEFYModel.vw_ot_abiertas">
+              <MappingFragment StoreEntitySet="vw_ot_abiertas">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="estado_desc" ColumnName="estado_desc" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="tecnico_sk" ColumnName="tecnico_sk" />
+                <ScalarProperty Name="ot_id" ColumnName="ot_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

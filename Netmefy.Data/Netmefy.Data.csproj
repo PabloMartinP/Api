@@ -219,6 +219,12 @@
     <Compile Include="usuario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="vw_calificacion_tecnico.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_ot_abiertas.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="VW_Usuarios_App.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

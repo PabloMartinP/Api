@@ -12,7 +12,7 @@
         <hr />
         <h3>Clientes y Usuarios</h3>
         <button ng-click="get_cliente()">get cliente 101</button>
-        <button ng-click="get_tecnico()">get tecnico 201</button>
+        <button ng-click="get_tecnico()">get tecnico</button>
         <button ng-click="get_tipoUsuarioApp()">get tipoUsuarioApp 201</button>        
         <button ng-click="post_usuario()">post usuarios</button>
         <button ng-click="get_usuario()">get usuarios</button>
@@ -422,7 +422,7 @@
 
 
             $scope.get_tecnico = function () {
-                var url = URL_TECNICO + "?username=" + $scope.user.username;
+                var url = URL_TECNICO + "?id=200";
                 $http.get(url)
                     .then(function (response) {
                         console.log(url + ' - ', response)

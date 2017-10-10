@@ -32,11 +32,11 @@ namespace Netmefy.Api.Models
             ot_statusModel e = new ot_statusModel();
 
             e.ot_id = estado.ot_id;
-            e.tiempo_sk = estado.tiempo_sk.ToString("dd-MM-yyyy");
+            e.tiempo_sk = estado.tiempo_sk.ToString("yyyy-MM-dd");
             e.hh_mm_ss = estado.hh_mm_ss;
             e.estado_sk = estado.estado_sk;
             e.comentarios = estado.comentarios;
-            e.timestamp = string.Concat(estado.tiempo_sk.ToString("yyyy-dd-MM")," ", estado.hh_mm_ss);
+            e.timestamp = string.Concat(estado.tiempo_sk.ToString("yyyy-MM-dd")," ", estado.hh_mm_ss);
 
             return e;
         }
@@ -48,7 +48,7 @@ namespace Netmefy.Api.Models
             e.ot_id = estado.ot_id;
 
             if (estado.tiempo_sk != null)
-                e.tiempo_sk = DateTime.ParseExact(estado.tiempo_sk, "dd-MM-yyyy", null);
+                e.tiempo_sk = DateTime.ParseExact(estado.tiempo_sk, "yyyy-MM-dd", null);
             else
                 e.tiempo_sk = DateTime.Today;
 

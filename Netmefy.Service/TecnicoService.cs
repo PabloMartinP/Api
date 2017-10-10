@@ -10,17 +10,17 @@ namespace Netmefy.Service
     {
         private NETMEFYEntities db = new NETMEFYEntities();
 
-        public Data.tecnico buscar(string username)
-        {
-            //Data.cliente client_found = null;
-            LoginService ls = new LoginService();
-            var dataLogin = ls.findByUsername(username);
+        //public Data.tecnico buscar(string username)
+        //{
+        //    //Data.cliente client_found = null;
+        //    LoginService ls = new LoginService();
+        //    var dataLogin = ls.findByUsername(username);
 
 
-            var tech_found = db.tecnicos.Find(dataLogin.SK);
+        //    var tech_found = db.tecnicos.Find(dataLogin.SK);
 
-            return tech_found;
-        }
+        //    return tech_found;
+        //}
 
     }
 }

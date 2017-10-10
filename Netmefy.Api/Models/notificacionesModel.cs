@@ -30,7 +30,7 @@ namespace Netmefy.Api.Models
                     usuario_sk = n.usuario_sk,
                     cliente_sk = n.cliente_sk,
                     notificacion_sk = n.notificacion_sk,
-                    tiempo_sk = n.tiempo_sk.ToString("dd-MM-yyyy"),
+                    tiempo_sk = n.tiempo_sk.ToString("yyyy-MM-dd"),
                     ot_id = n.ot_id,
                     notificacion_desc= ns.buscarNotificaciones(n.notificacion_sk).notificacion_desc,
                     notificacion_texto = ns.buscarNotificaciones(n.notificacion_sk).notificacion_texto,

@@ -48,5 +48,7 @@ namespace Netmefy.Data
         public virtual DbSet<lk_tipo_ot> lk_tipo_ot { get; set; }
         public virtual DbSet<bt_ord_trabajo> bt_ord_trabajo { get; set; }
         public virtual DbSet<bt_solicitudes> bt_solicitudes { get; set; }
+        public virtual DbSet<vw_calificacion_tecnico> vw_calificacion_tecnico { get; set; }
+        public virtual DbSet<vw_ot_abiertas> vw_ot_abiertas { get; set; }
     }
 }
