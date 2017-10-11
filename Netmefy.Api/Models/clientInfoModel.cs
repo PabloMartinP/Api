@@ -46,6 +46,17 @@ namespace Netmefy.Api.Models
         public List<dispositivoInfoModel> devices { get; set; }
         public List<webModel> webs_bloqueadas { get; set; }
     }
+
+
+    public class router2Model
+    {
+        public int cliente_sk { get; set; }
+        public int router_sk { get; set; }
+        public string router_modelo { get; set; }
+        public string router_ssid { get; set; }
+        public string router_psw { get; set; }
+    }
+
     public class dispositivoInfoModel
     {
         public int dispositivo_sk { get; set; }

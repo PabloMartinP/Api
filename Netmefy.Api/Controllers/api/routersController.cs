@@ -66,7 +66,32 @@ namespace Netmefy.Api.Controllers.api
 
         }
 
-        
+
+        // PUT: api/routers/5
+        [ResponseType(typeof(Models.router2Model))]
+        [HttpPut]
+        public IHttpActionResult updatearRouter(Models.router2Model router)
+        {
+
+            try
+            {
+                router r = db.routers.Where(x => x.router_sk == router.router_sk).FirstOrDefault();
+
+                r.router_modelo = router.router_modelo;
+                r.router_psw = router.router_psw;
+                r.router_ssid = router.router_ssid;
+
+                db.SaveChanges();
+
+                return CreatedAtRoute("DefaultApi", new { status = "ok" }, new { ot = router });
+            }
+            catch (Exception ex)
+            {
+                return CreatedAtRoute("DefaultApi", new { status = "error" }, new { mensaje = ex.ToString() });
+            }
+        }
+
+
         // POST: api/routers
         [ResponseType(typeof(Models.webModel))]
         public IHttpActionResult Postrouter(Models.webBloqModel webBloq)

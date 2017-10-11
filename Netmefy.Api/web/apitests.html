@@ -41,6 +41,7 @@
         <h3>Router</h3>
         <button ng-click="get_router()">get_router</button>  
         <button ng-click="bloquear_web()">bloquear_web</button> 
+        <button ng-click="actualizar_router()">actualizar_router</button> 
         <hr />
         <h3>Webs</h3>
         <button ng-click="get_lk_webs()">get_lk_webs</button>
@@ -687,6 +688,21 @@
                 var data = { cliente_sk: 2, router_sk: 2, webs: "[{ web_sk: 9, web_bloquedo: false }, { web_sk: 12, web_bloquedo: true }]" };
                 var url = URL_ROUTER;
                 $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
+            $scope.actualizar_router = function () {
+                //var ot_id = 1;
+                //var url = URL_ROUTER + "/" + "router_sk=1?router_modelo='lala'?";
+                var data = { router_sk: 2, router_modelo: 'lala', router_ssid: 'nuevoSSID', router_psw: 'psw' }
+                var url = URL_ROUTER;
+                $http.put(url, data)
                     .then(function (response) {
                         console.log(url + 'ok ' + url, response)
                         alert("OK " + url + "response:" + JSON.stringify(response.data));
