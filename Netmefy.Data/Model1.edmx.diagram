@@ -6,7 +6,6 @@
     <edmx:Diagrams>
       <Diagram DiagramId="a2695aee58be4bdbab574449aa603e4b" Name="Diagram1" ZoomLevel="79">
         <EntityTypeShape EntityType="NETMEFYModel.bt_notificaciones" Width="1.5" PointX="3" PointY="8.25" />
-        <EntityTypeShape EntityType="NETMEFYModel.bt_tests" Width="1.5" PointX="8.25" PointY="7.75" />
         <EntityTypeShape EntityType="NETMEFYModel.cliente" Width="1.5" PointX="0.75" PointY="2.625" />
         <EntityTypeShape EntityType="NETMEFYModel.router" Width="1.5" PointX="3" PointY="28.5" />
         <EntityTypeShape EntityType="NETMEFYModel.dispositivo" Width="1.5" PointX="5.25" PointY="27" />
@@ -21,8 +20,6 @@
         <AssociationConnector Association="NETMEFYModel.fk_bt_notificaciones_lk_notificacion" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_notificaciones_lk_tiempo" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_notificaciones_lk_usuario" />
-        <AssociationConnector Association="NETMEFYModel.fk_bt_tests_lk_cliente" />
-        <AssociationConnector Association="NETMEFYModel.fk_bt_tests_lk_tiempo" />
         <AssociationConnector Association="NETMEFYModel.fk_lk_cliente_lk_empresa" />
         <AssociationConnector Association="NETMEFYModel.fk_lk_cliente_lk_localidad" />
         <AssociationConnector Association="NETMEFYModel.fk_lk_dispositivo_lk_cliente_router" />
@@ -47,12 +44,15 @@
         <AssociationConnector Association="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo1" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_ot_status_bt_ord_trabajo" />
-        <AssociationConnector Association="NETMEFYModel.fk_bt_tests_bt_ord_trabajo2" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_solicitudes_lk_cliente" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_solicitudes_lk_tiempo" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_solicitudes_lk_tiempo1" />
         <EntityTypeShape EntityType="NETMEFYModel.vw_calificacion_tecnico" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="NETMEFYModel.vw_ot_abiertas" Width="1.5" PointX="12.375" PointY="3.75" />
+        <EntityTypeShape EntityType="NETMEFYModel.bt_tests" Width="1.5" PointX="8.25" PointY="8.125" />
+        <AssociationConnector Association="NETMEFYModel.fk_bt_tests_bt_ord_trabajo2" />
+        <AssociationConnector Association="NETMEFYModel.fk_bt_tests_lk_cliente" />
+        <AssociationConnector Association="NETMEFYModel.fk_bt_tests_lk_tiempo" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -26,7 +26,6 @@ namespace Netmefy.Data
         }
     
         public virtual DbSet<bt_notificaciones> bt_notificaciones { get; set; }
-        public virtual DbSet<bt_tests> bt_tests { get; set; }
         public virtual DbSet<cliente> clientes { get; set; }
         public virtual DbSet<router> routers { get; set; }
         public virtual DbSet<dispositivo> dispositivos { get; set; }
@@ -50,5 +49,6 @@ namespace Netmefy.Data
         public virtual DbSet<bt_solicitudes> bt_solicitudes { get; set; }
         public virtual DbSet<vw_calificacion_tecnico> vw_calificacion_tecnico { get; set; }
         public virtual DbSet<vw_ot_abiertas> vw_ot_abiertas { get; set; }
+        public virtual DbSet<bt_tests> bt_tests { get; set; }
     }
 }

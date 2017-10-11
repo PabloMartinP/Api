@@ -17,33 +17,7 @@ namespace Netmefy.Api.Controllers.api
     public class routersController : ApiController
     {
         private NETMEFYEntities db = new NETMEFYEntities();
-
-        //public Models.routerInfoModel getRouterInfo(int cliente_sk, int router_sk)
-        //{
-        //    router router = db.routers.Where(x => x.cliente_sk == cliente_sk && x.router_sk == router_sk).FirstOrDefault();
-        //    List<dispositivo> devices = db.dispositivos.Where(x => x.cliente_sk == cliente_sk && x.router_sk == router.router_sk).ToList();
-        //    List<Models.dispositivoInfoModel> devicesModel = Models.dispositivoInfoModel.ConvertTo(devices);
-        //    List<lk_web> webs = router.lk_web.ToList();
-        //    List<Models.webModel> websModel = new List<Models.webModel>();
-        //    foreach (var w in webs)
-        //    {
-        //        websModel.Add(new Models.webModel
-        //        {
-        //            ip = w.web_ip, url = w.web_url, id = w.web_sk, nombre = w.web_nombre
-        //        });
-        //    }
-
-        //    Models.routerInfoModel routerFinal = new Models.routerInfoModel();
-        //    routerFinal.router_sk = router.router_sk;
-        //    routerFinal.modelo = router.router_modelo;
-        //    routerFinal.ssid = router.router_ssid;
-        //    routerFinal.password = router.router_psw;
-        //    routerFinal.devices = devicesModel;
-        //    routerFinal.webs_bloqueadas = websModel;
-
-        //    return routerFinal;
-            
-        //}
+        
 
         private Models.routerInfoModel getRouterInfo(int router_sk)
         {
@@ -75,12 +49,6 @@ namespace Netmefy.Api.Controllers.api
 
         }
 
-        //// GET: api/routers/5
-        //[ResponseType(typeof(Models.routerInfoModel))]
-        //public IHttpActionResult Getrouter(int cliente_sk, int router_sk)
-        //{
-        //    Models.routerInfoModel router = getRouterInfo(cliente_sk, router_sk);
-
         // GET: api/routers/5
         [ResponseType(typeof(Models.routerInfoModel))]
         [HttpGet]
@@ -98,19 +66,11 @@ namespace Netmefy.Api.Controllers.api
 
         }
 
-        //// POST: api/routers
-        //[ResponseType(typeof(Models.routerInfoModel))]
-        //public IHttpActionResult Postrouter(int cliente_sk, int router_sk, int web_sk)
-        //{
-        //    Models.routerInfoModel router = getRouterInfo(cliente_sk, router_sk);
-
+        
         // POST: api/routers
         [ResponseType(typeof(Models.webModel))]
         public IHttpActionResult Postrouter(Models.webBloqModel webBloq)
         {
-            //return CreatedAtRoute("DefaultApi", new { cant = 123 }, new { status= "ok", webBloqok = webBloq });
-
-            //Models.routerInfoModel routerModel = getRouterInfo(webBloq.router_sk);
             try
             {
                 router routerModel = db.routers.Where(z => z.router_sk == webBloq.router_sk).FirstOrDefault();

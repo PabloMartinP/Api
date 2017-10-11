@@ -12,7 +12,6 @@ namespace Netmefy.Api.Models
         public int cliente_sk { get; set; }
         public int? ot_id { get; set; }
         public string tiempo_sk { get; set; }
-        public int flag_instalacion { get; set; }
         public string comentario { get; set; }
         public int? vel_mb_medidos { get; set; }
         public int? potencia_recep { get; set; }
@@ -39,7 +38,6 @@ namespace Netmefy.Api.Models
             t.cliente_sk = test.cliente_sk;
             t.ot_id = test.ot_id;
             t.tiempo_sk = test.tiempo_sk.ToString("dd-MM-yyyy");
-            t.flag_instalacion = test.flag_instalacion;
             t.comentario = test.comentario;
 
             t.vel_mb_medidos = test.vel_mb_medidos;
@@ -61,7 +59,6 @@ namespace Netmefy.Api.Models
                 t.tiempo_sk = DateTime.ParseExact(test.tiempo_sk, "yyyy-MM-dd", null);
             else
                 t.tiempo_sk = DateTime.Today;
-            t.flag_instalacion = test.flag_instalacion;
             t.comentario = test.comentario;
             t.vel_mb_medidos = test.vel_mb_medidos;
             t.potencia_recep = test.potencia_recep;
