@@ -42,8 +42,6 @@
         <AssociationConnector Association="NETMEFYModel.fk_bt_solicitudes_lk_cliente" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_solicitudes_lk_tiempo" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_solicitudes_lk_tiempo1" />
-        <EntityTypeShape EntityType="NETMEFYModel.vw_calificacion_tecnico" Width="1.5" PointX="12.375" PointY="0.75" />
-        <EntityTypeShape EntityType="NETMEFYModel.vw_ot_abiertas" Width="1.5" PointX="12.375" PointY="3.75" />
         <EntityTypeShape EntityType="NETMEFYModel.bt_tests" Width="1.5" PointX="8.25" PointY="8.125" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_tests_lk_cliente" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_tests_lk_tiempo" />
@@ -53,6 +51,8 @@
         <AssociationConnector Association="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo1" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_ot_status_bt_ord_trabajo" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_tests_bt_ord_trabajo2" />
+        <EntityTypeShape EntityType="NETMEFYModel.vw_calificacion_tecnico" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NETMEFYModel.vw_ot_abiertas" Width="1.5" PointX="12.375" PointY="3.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -115,6 +115,7 @@
           <Property Name="localidad_sk" Type="int" Nullable="false" />
           <Property Name="cliente_vel_mb_contr" Type="int" Nullable="false" />
           <Property Name="cliente_vel_mb_umbral" Type="int" Nullable="false" />
+          <Property Name="cliente_tipo_casa" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="lk_cliente_router">
           <Key>
@@ -277,19 +278,26 @@ warning 6002: The table/view 'NETMEFY.dbo.vw_calificacion_tecnico' does not have
           <Property Name="psw" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="calificacion" Type="int" />
+          <Property Name="calificacion" Type="decimal" Precision="38" Scale="6" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'NETMEFY.dbo.vw_ot_abiertas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_ot_abiertas">
           <Key>
             <PropertyRef Name="ot_id" />
+            <PropertyRef Name="tipo_ot" />
+            <PropertyRef Name="cliente_sk" />
             <PropertyRef Name="estado" />
             <PropertyRef Name="estado_desc" />
             <PropertyRef Name="fecha" />
           </Key>
           <Property Name="ot_id" Type="int" Nullable="false" />
+          <Property Name="tipo_ot" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="tecnico_sk" Type="int" />
+          <Property Name="cliente_sk" Type="int" Nullable="false" />
+          <Property Name="cliente_desc" Type="varchar" MaxLength="100" />
+          <Property Name="cliente_direccion" Type="varchar" MaxLength="200" />
+          <Property Name="cliente_tipo_casa" Type="varchar" MaxLength="50" />
           <Property Name="estado" Type="int" Nullable="false" />
           <Property Name="estado_desc" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="fecha" Type="varchar" MaxLength="40" Nullable="false" />
@@ -643,7 +651,12 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySet Name="vw_ot_abiertas" EntityType="Self.vw_ot_abiertas" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_ot_abiertas].[ot_id] AS [ot_id], 
+    [vw_ot_abiertas].[tipo_ot] AS [tipo_ot], 
     [vw_ot_abiertas].[tecnico_sk] AS [tecnico_sk], 
+    [vw_ot_abiertas].[cliente_sk] AS [cliente_sk], 
+    [vw_ot_abiertas].[cliente_desc] AS [cliente_desc], 
+    [vw_ot_abiertas].[cliente_direccion] AS [cliente_direccion], 
+    [vw_ot_abiertas].[cliente_tipo_casa] AS [cliente_tipo_casa], 
     [vw_ot_abiertas].[estado] AS [estado], 
     [vw_ot_abiertas].[estado_desc] AS [estado_desc], 
     [vw_ot_abiertas].[fecha] AS [fecha]
@@ -845,8 +858,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <End Role="lk_tiempo" EntitySet="lk_tiempo" />
             <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
           </AssociationSet>
-          <EntitySet Name="vw_calificacion_tecnico" EntityType="NETMEFYModel.vw_calificacion_tecnico" />
-          <EntitySet Name="vw_ot_abiertas" EntityType="NETMEFYModel.vw_ot_abiertas" />
           <EntitySet Name="bt_tests" EntityType="NETMEFYModel.bt_tests" />
           <AssociationSet Name="fk_bt_tests_lk_cliente" Association="NETMEFYModel.fk_bt_tests_lk_cliente">
             <End Role="cliente" EntitySet="clientes" />
@@ -877,6 +888,8 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
             <End Role="bt_tests" EntitySet="bt_tests" />
           </AssociationSet>
+          <EntitySet Name="vw_calificacion_tecnico" EntityType="NETMEFYModel.vw_calificacion_tecnico" />
+          <EntitySet Name="vw_ot_abiertas" EntityType="NETMEFYModel.vw_ot_abiertas" />
           </EntityContainer>
         <EntityType Name="bt_notificaciones">
           <Key>
@@ -912,6 +925,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <NavigationProperty Name="lk_cliente_router" Relationship="NETMEFYModel.FK_lk_cliente_router_lk_cliente" FromRole="cliente" ToRole="router" />
           <NavigationProperty Name="bt_solicitudes" Relationship="NETMEFYModel.fk_bt_solicitudes_lk_cliente" FromRole="cliente" ToRole="bt_solicitudes" />
           <NavigationProperty Name="bt_tests" Relationship="NETMEFYModel.fk_bt_tests_lk_cliente" FromRole="cliente" ToRole="bt_tests" />
+          <Property Name="cliente_tipo_casa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="router">
           <Key>
@@ -1319,34 +1333,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vw_calificacion_tecnico">
-          <Key>
-            <PropertyRef Name="sk" />
-            <PropertyRef Name="id" />
-            <PropertyRef Name="psw" />
-            <PropertyRef Name="nombre" />
-            <PropertyRef Name="email" />
-          </Key>
-          <Property Name="sk" Type="Int32" Nullable="false" />
-          <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="psw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="calificacion" Type="Int32" />
-        </EntityType>
-        <EntityType Name="vw_ot_abiertas">
-          <Key>
-            <PropertyRef Name="ot_id" />
-            <PropertyRef Name="estado" />
-            <PropertyRef Name="estado_desc" />
-            <PropertyRef Name="fecha" />
-          </Key>
-          <Property Name="ot_id" Type="Int32" Nullable="false" />
-          <Property Name="tecnico_sk" Type="Int32" />
-          <Property Name="estado" Type="Int32" Nullable="false" />
-          <Property Name="estado_desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fecha" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="bt_tests">
           <Key>
             <PropertyRef Name="test_id" />
@@ -1466,6 +1452,41 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="vw_calificacion_tecnico">
+          <Key>
+            <PropertyRef Name="sk" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="psw" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="email" />
+          </Key>
+          <Property Name="sk" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="psw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="calificacion" Type="Decimal" Precision="38" Scale="6" />
+        </EntityType>
+        <EntityType Name="vw_ot_abiertas">
+          <Key>
+            <PropertyRef Name="ot_id" />
+            <PropertyRef Name="tipo_ot" />
+            <PropertyRef Name="cliente_sk" />
+            <PropertyRef Name="estado" />
+            <PropertyRef Name="estado_desc" />
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Name="ot_id" Type="Int32" Nullable="false" />
+          <Property Name="tipo_ot" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="tecnico_sk" Type="Int32" />
+          <Property Name="cliente_sk" Type="Int32" Nullable="false" />
+          <Property Name="cliente_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="cliente_tipo_casa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+          <Property Name="estado_desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1486,6 +1507,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySetMapping Name="clientes">
             <EntityTypeMapping TypeName="NETMEFYModel.cliente">
               <MappingFragment StoreEntitySet="lk_cliente">
+                <ScalarProperty Name="cliente_tipo_casa" ColumnName="cliente_tipo_casa" />
                 <ScalarProperty Name="cliente_vel_mb_umbral" ColumnName="cliente_vel_mb_umbral" />
                 <ScalarProperty Name="cliente_vel_mb_contr" ColumnName="cliente_vel_mb_contr" />
                 <ScalarProperty Name="localidad_sk" ColumnName="localidad_sk" />
@@ -1718,29 +1740,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vw_calificacion_tecnico">
-            <EntityTypeMapping TypeName="NETMEFYModel.vw_calificacion_tecnico">
-              <MappingFragment StoreEntitySet="vw_calificacion_tecnico">
-                <ScalarProperty Name="calificacion" ColumnName="calificacion" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="psw" ColumnName="psw" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="sk" ColumnName="sk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vw_ot_abiertas">
-            <EntityTypeMapping TypeName="NETMEFYModel.vw_ot_abiertas">
-              <MappingFragment StoreEntitySet="vw_ot_abiertas">
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="estado_desc" ColumnName="estado_desc" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="tecnico_sk" ColumnName="tecnico_sk" />
-                <ScalarProperty Name="ot_id" ColumnName="ot_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="bt_tests">
             <EntityTypeMapping TypeName="NETMEFYModel.bt_tests">
               <MappingFragment StoreEntitySet="bt_tests">
@@ -1766,6 +1765,34 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
                 <ScalarProperty Name="fh_cierre" ColumnName="fh_cierre" />
                 <ScalarProperty Name="fh_creacion" ColumnName="fh_creacion" />
                 <ScalarProperty Name="tecnico_sk" ColumnName="tecnico_sk" />
+                <ScalarProperty Name="ot_id" ColumnName="ot_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_calificacion_tecnico">
+            <EntityTypeMapping TypeName="NETMEFYModel.vw_calificacion_tecnico">
+              <MappingFragment StoreEntitySet="vw_calificacion_tecnico">
+                <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="psw" ColumnName="psw" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="sk" ColumnName="sk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_ot_abiertas">
+            <EntityTypeMapping TypeName="NETMEFYModel.vw_ot_abiertas">
+              <MappingFragment StoreEntitySet="vw_ot_abiertas">
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="estado_desc" ColumnName="estado_desc" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="cliente_tipo_casa" ColumnName="cliente_tipo_casa" />
+                <ScalarProperty Name="cliente_direccion" ColumnName="cliente_direccion" />
+                <ScalarProperty Name="cliente_desc" ColumnName="cliente_desc" />
+                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
+                <ScalarProperty Name="tecnico_sk" ColumnName="tecnico_sk" />
+                <ScalarProperty Name="tipo_ot" ColumnName="tipo_ot" />
                 <ScalarProperty Name="ot_id" ColumnName="ot_id" />
               </MappingFragment>
             </EntityTypeMapping>

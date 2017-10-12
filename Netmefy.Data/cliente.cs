@@ -31,6 +31,7 @@ namespace Netmefy.Data
         public int localidad_sk { get; set; }
         public int cliente_vel_mb_contr { get; set; }
         public int cliente_vel_mb_umbral { get; set; }
+        public string cliente_tipo_casa { get; set; }
     
         public virtual lk_empresa lk_empresa { get; set; }
         public virtual lk_localidad lk_localidad { get; set; }

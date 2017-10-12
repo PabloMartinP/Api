@@ -13,7 +13,7 @@ namespace Netmefy.Api.Models
         public int? tecnico_sk { get; set; }
         public string fh_creacion { get; set; }
         public string fh_cierre { get; set; }
-        public decimal calificacion { get; set; }
+        public decimal? calificacion { get; set; }
         public int tipo_id { get; set; }
         public string tipo { get; set; }
         public string descripcion { get; set; }

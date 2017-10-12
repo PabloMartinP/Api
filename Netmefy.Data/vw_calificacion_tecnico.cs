@@ -19,6 +19,6 @@ namespace Netmefy.Data
         public string psw { get; set; }
         public string nombre { get; set; }
         public string email { get; set; }
-        public Nullable<int> calificacion { get; set; }
+        public Nullable<decimal> calificacion { get; set; }
     }
 }

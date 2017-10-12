@@ -26,7 +26,6 @@ namespace Netmefy.Api.Controllers.api
             List<vw_ot_abiertas> ots = db.vw_ot_abiertas.Where(x => x.tecnico_sk == ct.sk).ToList();
 
             tecnico.id = ct.id;
-            tecnico.psw = ct.psw;
             tecnico.nombre = ct.nombre;
             tecnico.sk = ct.sk;
             tecnico.email = ct.email;
@@ -39,6 +38,11 @@ namespace Netmefy.Api.Controllers.api
                 otsTecnico.Add(new tecnicoOtModel
                 {
                     ot_id = o.ot_id,
+                    tipo_ot = o.tipo_ot,
+                    cliente_sk = o.cliente_sk,
+                    cliente_desc = o.cliente_desc,
+                    cliente_direccion = o.cliente_direccion,
+                    cliente_tipo_casa = o.cliente_tipo_casa,
                     estado = o.estado,
                     estado_desc = o.estado_desc,
                     fecha = o.fecha
