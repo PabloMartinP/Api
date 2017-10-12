@@ -42,9 +42,9 @@ namespace Netmefy.Service
         }
 
 
-        public bool saveUser(Data.usuario usuario)
+        public int guardarSiEsQueNoExiste(Data.usuario usuario)
         {
-            if (!existUser(usuario.usuario_email))
+            if (!existUser(usuario))
             {
 
                 //int? newUsuario_sk = db.usuarios.Where(x => x.cliente_sk == usuario.cliente_sk).Max(d => d.usuario_sk);
@@ -62,12 +62,13 @@ namespace Netmefy.Service
                 //usuario.paginas.Add(p);
                 //db.SaveChanges();
 
-                return true;
+                return usuario.usuario_sk;
             }
             else
             {
-                return false;
-            }            
+                Data.usuario user_found = findUserByEmailAndClient(usuario.usuario_email, usuario.cliente_sk);
+                return user_found.usuario_sk;
+            }
         }
 
         public bool existUser(string email)
@@ -75,15 +76,28 @@ namespace Netmefy.Service
             return findUserByEmail(email) != null;
         }
 
+        public bool existUser(Data.usuario user)
+        {
+            return findUserByEmailAndClient(user.usuario_email, user.cliente_sk) != null;
+        }
+
+
+
+
         public Data.usuario findUserByEmail(string email)
         {
             var user_found = db.usuarios.Where(x => x.usuario_email.ToLower().Equals(email.ToLower())).FirstOrDefault();
             return user_found;
         }
-
-        public Data.usuario findUserById(int client_sk, int usuario_sk)
+        public Data.usuario findUserByEmailAndClient(string email, int cliente_sk)
         {
-            return db.usuarios.Where(x => x.cliente_sk == client_sk && x.usuario_sk == usuario_sk).FirstOrDefault();
+            var user_found = db.usuarios.Where(x => x.usuario_email.ToLower().Equals(email.ToLower()) && x.cliente_sk == cliente_sk).FirstOrDefault();
+            return user_found;
+        }
+
+        public Data.usuario findUserById(int usuario_sk)
+        {
+            return db.usuarios.Where(x => x.usuario_sk == usuario_sk).FirstOrDefault();
         }
 
         public List<Data.usuario> findUsersByClient(int client_sk)

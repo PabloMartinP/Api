@@ -14,6 +14,7 @@ namespace Netmefy.Api.Models
         public string notificacion_desc { get; set; }
         public string notificacion_texto { get; set; }
         public int? ot_id { get; set; }
+        public decimal ot_calificacion { get; set; }
 
         public static List<notificacionesModel> ConvertTo(List<Data.bt_notificaciones> notificaciones)
         {

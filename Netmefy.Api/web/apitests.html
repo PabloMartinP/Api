@@ -347,7 +347,8 @@
 
             $scope.get_usuario = function () {
                 alert($scope.user.email);
-                var url = URL_USUARIOS + "?email=" + $scope.user.email;
+                //var url = URL_USUARIOS + "?email=" + $scope.user.email;
+                var url = URL_USUARIOS + "/4";//usuario_sk=4;
                 $http.get(url)
                     .then(function (response) {
                         console.log(url + ' - ', response)

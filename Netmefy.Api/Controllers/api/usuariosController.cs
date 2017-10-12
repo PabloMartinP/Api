@@ -29,9 +29,9 @@ namespace Netmefy.Api.Controllers.api
 
         // GET: api/usuarios/5
         [ResponseType(typeof(Models.usuarioModel))]
-        public IHttpActionResult Getusuario(string email)
+        public IHttpActionResult Getusuario(int id)
         {
-            Data.usuario data_usr = _clientService.findUserByEmail(email);
+            Data.usuario data_usr = _clientService.findUserById(id);
             List<pagina> paginas = data_usr.paginas.ToList();
 
             Models.usuarioModel usuario = Models.usuarioModel.ConvertTo(data_usr);
@@ -85,19 +85,21 @@ namespace Netmefy.Api.Controllers.api
         {
             try
             {
-                _clientService.saveUser(usuario);
-                Data.usuario user = _clientService.findUserByEmail(usuario.usuario_email);
 
-                usuario.usuario_sk = user.usuario_sk;
+
+
+
+                usuario.usuario_sk = _clientService.guardarSiEsQueNoExiste(usuario);
 
                 //return CreatedAtRoute("DefaultApi", new { id = usuario.usuario_sk }, usuario);
-                return CreatedAtRoute("DefaultApi", new { id = usuario.usuario_sk }, new { status="ok"});
+                return CreatedAtRoute("DefaultApi", new { id = usuario.usuario_sk }, new { status="ok", usuario= usuario});
 
             }
             catch (Exception ex)
             {
+                usuario.usuario_sk = -1;
                 usuario.usuario_email = "error:" + ex.ToString();
-                return CreatedAtRoute("DefaultApi", new { id = -1 }, new { status = ex.ToString() });
+                return CreatedAtRoute("DefaultApi", new { id = -1 }, new { status = ex.ToString(), usuario = usuario });
             }
             
         }

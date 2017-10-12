@@ -27,6 +27,21 @@ namespace Netmefy.Api.Controllers.api
 
             List<Models.notificacionesModel> not_model = Models.notificacionesModel.ConvertTo(notificaciones);
 
+            foreach (var item in not_model)
+            {
+                Service.OTService ots = new Service.OTService();
+
+                if (item.ot_id != null && item.ot_id != 0) {
+                    decimal? calif = ots.buscarOtXOTID((int)item.ot_id).calificacion;
+                    if (calif == null)
+                        item.ot_calificacion = 0;
+                    else
+                        item.ot_calificacion = (decimal)calif;
+
+                }
+
+            }
+
             return Ok(not_model);
         }
 
