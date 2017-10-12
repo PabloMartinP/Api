@@ -562,7 +562,7 @@
             $scope.calificar_OT = function () {
                 var ot_id = 1;
                 //var data = { calificacion: 5 };
-                var url = URL_OT + "/" + ot_id + "?calificacion=5";
+                var url = URL_OT + "/" + ot_id + "?calificacion=4";
                 $http.put(url, null)
                     .then(function (response) {
                         console.log(url + 'ok ' + url, response)

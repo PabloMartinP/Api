@@ -36,7 +36,7 @@
           <Property Name="tecnico_sk" Type="int" />
           <Property Name="fh_creacion" Type="date" Nullable="false" />
           <Property Name="fh_cierre" Type="date" />
-          <Property Name="calificacion" Type="int" />
+          <Property Name="calificacion" Type="decimal" Precision="5" Scale="1" />
           <Property Name="cliente_sk" Type="int" Nullable="false" />
           <Property Name="tipo" Type="int" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="200" Nullable="false" />
@@ -832,8 +832,31 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySet Name="logs" EntityType="NETMEFYModel.log" />
           <EntitySet Name="lk_tipo_os" EntityType="NETMEFYModel.lk_tipo_os" />
           <EntitySet Name="lk_tipo_ot" EntityType="NETMEFYModel.lk_tipo_ot" />
-          <EntitySet Name="bt_ord_trabajo" EntityType="NETMEFYModel.bt_ord_trabajo" />
           <EntitySet Name="bt_solicitudes" EntityType="NETMEFYModel.bt_solicitudes" />
+          <AssociationSet Name="fk_bt_solicitudes_lk_cliente" Association="NETMEFYModel.fk_bt_solicitudes_lk_cliente">
+            <End Role="cliente" EntitySet="clientes" />
+            <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_solicitudes_lk_tiempo" Association="NETMEFYModel.fk_bt_solicitudes_lk_tiempo">
+            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
+            <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_solicitudes_lk_tiempo1" Association="NETMEFYModel.fk_bt_solicitudes_lk_tiempo1">
+            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
+            <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
+          </AssociationSet>
+          <EntitySet Name="vw_calificacion_tecnico" EntityType="NETMEFYModel.vw_calificacion_tecnico" />
+          <EntitySet Name="vw_ot_abiertas" EntityType="NETMEFYModel.vw_ot_abiertas" />
+          <EntitySet Name="bt_tests" EntityType="NETMEFYModel.bt_tests" />
+          <AssociationSet Name="fk_bt_tests_lk_cliente" Association="NETMEFYModel.fk_bt_tests_lk_cliente">
+            <End Role="cliente" EntitySet="clientes" />
+            <End Role="bt_tests" EntitySet="bt_tests" />
+          </AssociationSet>
+          <AssociationSet Name="fk_bt_tests_lk_tiempo" Association="NETMEFYModel.fk_bt_tests_lk_tiempo">
+            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
+            <End Role="bt_tests" EntitySet="bt_tests" />
+          </AssociationSet>
+          <EntitySet Name="bt_ord_trabajo" EntityType="NETMEFYModel.bt_ord_trabajo" />
           <AssociationSet Name="fk_bt_ord_trabajo_lk_tecnico" Association="NETMEFYModel.fk_bt_ord_trabajo_lk_tecnico">
             <End Role="tecnico" EntitySet="tecnicos" />
             <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
@@ -850,31 +873,8 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
             <End Role="bt_ot_status" EntitySet="bt_ot_status" />
           </AssociationSet>
-          <AssociationSet Name="fk_bt_solicitudes_lk_cliente" Association="NETMEFYModel.fk_bt_solicitudes_lk_cliente">
-            <End Role="cliente" EntitySet="clientes" />
-            <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_solicitudes_lk_tiempo" Association="NETMEFYModel.fk_bt_solicitudes_lk_tiempo">
-            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
-            <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_solicitudes_lk_tiempo1" Association="NETMEFYModel.fk_bt_solicitudes_lk_tiempo1">
-            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
-            <End Role="bt_solicitudes" EntitySet="bt_solicitudes" />
-          </AssociationSet>
-          <EntitySet Name="vw_calificacion_tecnico" EntityType="NETMEFYModel.vw_calificacion_tecnico" />
-          <EntitySet Name="vw_ot_abiertas" EntityType="NETMEFYModel.vw_ot_abiertas" />
-          <EntitySet Name="bt_tests" EntityType="NETMEFYModel.bt_tests" />
           <AssociationSet Name="fk_bt_tests_bt_ord_trabajo2" Association="NETMEFYModel.fk_bt_tests_bt_ord_trabajo2">
             <End Role="bt_ord_trabajo" EntitySet="bt_ord_trabajo" />
-            <End Role="bt_tests" EntitySet="bt_tests" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_tests_lk_cliente" Association="NETMEFYModel.fk_bt_tests_lk_cliente">
-            <End Role="cliente" EntitySet="clientes" />
-            <End Role="bt_tests" EntitySet="bt_tests" />
-          </AssociationSet>
-          <AssociationSet Name="fk_bt_tests_lk_tiempo" Association="NETMEFYModel.fk_bt_tests_lk_tiempo">
-            <End Role="lk_tiempo" EntitySet="lk_tiempo" />
             <End Role="bt_tests" EntitySet="bt_tests" />
           </AssociationSet>
           </EntityContainer>
@@ -992,8 +992,8 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="tecnico_id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="tecnico_psw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="tecnico_desc" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="bt_ord_trabajo" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tecnico" FromRole="tecnico" ToRole="bt_ord_trabajo" />
           <Property Name="tecnico_email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="bt_ord_trabajo" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tecnico" FromRole="tecnico" ToRole="bt_ord_trabajo" />
         </EntityType>
         <EntityType Name="lk_tiempo">
           <Key>
@@ -1007,11 +1007,11 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <NavigationProperty Name="bt_notificaciones" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_notificaciones" />
           <NavigationProperty Name="bt_os_status" Relationship="NETMEFYModel.fk_bt_os_status_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_os_status" />
           <NavigationProperty Name="bt_ot_status" Relationship="NETMEFYModel.fk_bt_ot_status_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_ot_status" />
-          <NavigationProperty Name="bt_ord_trabajo" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_ord_trabajo" />
-          <NavigationProperty Name="bt_ord_trabajo1" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo1" FromRole="lk_tiempo" ToRole="bt_ord_trabajo" />
           <NavigationProperty Name="bt_solicitudes" Relationship="NETMEFYModel.fk_bt_solicitudes_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_solicitudes" />
           <NavigationProperty Name="bt_solicitudes1" Relationship="NETMEFYModel.fk_bt_solicitudes_lk_tiempo1" FromRole="lk_tiempo" ToRole="bt_solicitudes" />
           <NavigationProperty Name="bt_tests" Relationship="NETMEFYModel.fk_bt_tests_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_tests" />
+          <NavigationProperty Name="bt_ord_trabajo" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo" FromRole="lk_tiempo" ToRole="bt_ord_trabajo" />
+          <NavigationProperty Name="bt_ord_trabajo1" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo1" FromRole="lk_tiempo" ToRole="bt_ord_trabajo" />
         </EntityType>
         <EntityType Name="usuario">
           <Key>
@@ -1269,24 +1269,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="tipo_ot_sk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tipo_ot_desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="bt_ord_trabajo">
-          <Key>
-            <PropertyRef Name="ot_id" />
-          </Key>
-          <Property Name="ot_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tecnico_sk" Type="Int32" />
-          <Property Name="fh_creacion" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="fh_cierre" Type="DateTime" Precision="0" />
-          <Property Name="calificacion" Type="Int32" />
-          <Property Name="cliente_sk" Type="Int32" Nullable="false" />
-          <Property Name="tipo" Type="Int32" Nullable="false" />
-          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="lk_tecnico" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tecnico" FromRole="bt_ord_trabajo" ToRole="tecnico" />
-          <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo" FromRole="bt_ord_trabajo" ToRole="lk_tiempo" />
-          <NavigationProperty Name="lk_tiempo1" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo1" FromRole="bt_ord_trabajo" ToRole="lk_tiempo" />
-          <NavigationProperty Name="bt_ot_status" Relationship="NETMEFYModel.fk_bt_ot_status_bt_ord_trabajo" FromRole="bt_ord_trabajo" ToRole="bt_ot_status" />
-          <NavigationProperty Name="bt_tests" Relationship="NETMEFYModel.fk_bt_tests_bt_ord_trabajo2" FromRole="bt_ord_trabajo" ToRole="bt_tests" />
-        </EntityType>
         <EntityType Name="bt_solicitudes">
           <Key>
             <PropertyRef Name="os_id" />
@@ -1301,54 +1283,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_solicitudes_lk_tiempo" FromRole="bt_solicitudes" ToRole="lk_tiempo" />
           <NavigationProperty Name="lk_tiempo1" Relationship="NETMEFYModel.fk_bt_solicitudes_lk_tiempo1" FromRole="bt_solicitudes" ToRole="lk_tiempo" />
         </EntityType>
-        <Association Name="fk_bt_ord_trabajo_lk_tecnico">
-          <End Type="NETMEFYModel.tecnico" Role="tecnico" Multiplicity="0..1" />
-          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="tecnico">
-              <PropertyRef Name="tecnico_sk" />
-            </Principal>
-            <Dependent Role="bt_ord_trabajo">
-              <PropertyRef Name="tecnico_sk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_bt_ord_trabajo_lk_tiempo">
-          <End Type="NETMEFYModel.lk_tiempo" Role="lk_tiempo" Multiplicity="0..1" />
-          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lk_tiempo">
-              <PropertyRef Name="tiempo_sk" />
-            </Principal>
-            <Dependent Role="bt_ord_trabajo">
-              <PropertyRef Name="fh_cierre" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_bt_ord_trabajo_lk_tiempo1">
-          <End Type="NETMEFYModel.lk_tiempo" Role="lk_tiempo" Multiplicity="0..1" />
-          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lk_tiempo">
-              <PropertyRef Name="tiempo_sk" />
-            </Principal>
-            <Dependent Role="bt_ord_trabajo">
-              <PropertyRef Name="fh_cierre" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_bt_ot_status_bt_ord_trabajo">
-          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="1" />
-          <End Type="NETMEFYModel.bt_ot_status" Role="bt_ot_status" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="bt_ord_trabajo">
-              <PropertyRef Name="ot_id" />
-            </Principal>
-            <Dependent Role="bt_ot_status">
-              <PropertyRef Name="ot_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_bt_solicitudes_lk_cliente">
           <End Type="NETMEFYModel.cliente" Role="cliente" Multiplicity="1" />
           <End Type="NETMEFYModel.bt_solicitudes" Role="bt_solicitudes" Multiplicity="*" />
@@ -1426,22 +1360,10 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="potencia_recep" Type="Int32" />
           <Property Name="flag_clabeado_nuevo" Type="Int32" />
           <Property Name="flag_modem_ok" Type="Int32" />
-          <NavigationProperty Name="bt_ord_trabajo" Relationship="NETMEFYModel.fk_bt_tests_bt_ord_trabajo2" FromRole="bt_tests" ToRole="bt_ord_trabajo" />
           <NavigationProperty Name="lk_cliente" Relationship="NETMEFYModel.fk_bt_tests_lk_cliente" FromRole="bt_tests" ToRole="cliente" />
           <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_tests_lk_tiempo" FromRole="bt_tests" ToRole="lk_tiempo" />
+          <NavigationProperty Name="bt_ord_trabajo" Relationship="NETMEFYModel.fk_bt_tests_bt_ord_trabajo2" FromRole="bt_tests" ToRole="bt_ord_trabajo" />
         </EntityType>
-        <Association Name="fk_bt_tests_bt_ord_trabajo2">
-          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="0..1" />
-          <End Type="NETMEFYModel.bt_tests" Role="bt_tests" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="bt_ord_trabajo">
-              <PropertyRef Name="ot_id" />
-            </Principal>
-            <Dependent Role="bt_tests">
-              <PropertyRef Name="ot_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_bt_tests_lk_cliente">
           <End Type="NETMEFYModel.cliente" Role="cliente" Multiplicity="1" />
           <End Type="NETMEFYModel.bt_tests" Role="bt_tests" Multiplicity="*" />
@@ -1463,6 +1385,84 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             </Principal>
             <Dependent Role="bt_tests">
               <PropertyRef Name="tiempo_sk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="bt_ord_trabajo">
+          <Key>
+            <PropertyRef Name="ot_id" />
+          </Key>
+          <Property Name="ot_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tecnico_sk" Type="Int32" />
+          <Property Name="fh_creacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="fh_cierre" Type="DateTime" Precision="0" />
+          <Property Name="calificacion" Type="Decimal" Precision="5" Scale="1" />
+          <Property Name="cliente_sk" Type="Int32" Nullable="false" />
+          <Property Name="tipo" Type="Int32" Nullable="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="lk_tecnico" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tecnico" FromRole="bt_ord_trabajo" ToRole="tecnico" />
+          <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo" FromRole="bt_ord_trabajo" ToRole="lk_tiempo" />
+          <NavigationProperty Name="lk_tiempo1" Relationship="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo1" FromRole="bt_ord_trabajo" ToRole="lk_tiempo" />
+          <NavigationProperty Name="bt_ot_status" Relationship="NETMEFYModel.fk_bt_ot_status_bt_ord_trabajo" FromRole="bt_ord_trabajo" ToRole="bt_ot_status" />
+          <NavigationProperty Name="bt_tests" Relationship="NETMEFYModel.fk_bt_tests_bt_ord_trabajo2" FromRole="bt_ord_trabajo" ToRole="bt_tests" />
+        </EntityType>
+        <Association Name="fk_bt_ord_trabajo_lk_tecnico">
+          <End Type="NETMEFYModel.tecnico" Role="tecnico" Multiplicity="0..1" />
+          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tecnico">
+              <PropertyRef Name="tecnico_sk" />
+            </Principal>
+            <Dependent Role="bt_ord_trabajo">
+              <PropertyRef Name="tecnico_sk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bt_ord_trabajo_lk_tiempo">
+          <End Type="NETMEFYModel.lk_tiempo" Role="lk_tiempo" Multiplicity="0..1" />
+          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lk_tiempo">
+              <PropertyRef Name="tiempo_sk" />
+            </Principal>
+            <Dependent Role="bt_ord_trabajo">
+              <PropertyRef Name="fh_cierre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bt_ord_trabajo_lk_tiempo1">
+          <End Type="NETMEFYModel.lk_tiempo" Role="lk_tiempo" Multiplicity="0..1" />
+          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lk_tiempo">
+              <PropertyRef Name="tiempo_sk" />
+            </Principal>
+            <Dependent Role="bt_ord_trabajo">
+              <PropertyRef Name="fh_cierre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bt_ot_status_bt_ord_trabajo">
+          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_ot_status" Role="bt_ot_status" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bt_ord_trabajo">
+              <PropertyRef Name="ot_id" />
+            </Principal>
+            <Dependent Role="bt_ot_status">
+              <PropertyRef Name="ot_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_bt_tests_bt_ord_trabajo2">
+          <End Type="NETMEFYModel.bt_ord_trabajo" Role="bt_ord_trabajo" Multiplicity="0..1" />
+          <End Type="NETMEFYModel.bt_tests" Role="bt_tests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bt_ord_trabajo">
+              <PropertyRef Name="ot_id" />
+            </Principal>
+            <Dependent Role="bt_tests">
+              <PropertyRef Name="ot_id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1706,20 +1706,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="bt_ord_trabajo">
-            <EntityTypeMapping TypeName="NETMEFYModel.bt_ord_trabajo">
-              <MappingFragment StoreEntitySet="bt_ord_trabajo">
-                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
-                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
-                <ScalarProperty Name="calificacion" ColumnName="calificacion" />
-                <ScalarProperty Name="fh_cierre" ColumnName="fh_cierre" />
-                <ScalarProperty Name="fh_creacion" ColumnName="fh_creacion" />
-                <ScalarProperty Name="tecnico_sk" ColumnName="tecnico_sk" />
-                <ScalarProperty Name="ot_id" ColumnName="ot_id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="bt_solicitudes">
             <EntityTypeMapping TypeName="NETMEFYModel.bt_solicitudes">
               <MappingFragment StoreEntitySet="bt_solicitudes">
@@ -1767,6 +1753,20 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
                 <ScalarProperty Name="tiempo_sk" ColumnName="tiempo_sk" />
                 <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
                 <ScalarProperty Name="test_id" ColumnName="test_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bt_ord_trabajo">
+            <EntityTypeMapping TypeName="NETMEFYModel.bt_ord_trabajo">
+              <MappingFragment StoreEntitySet="bt_ord_trabajo">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+                <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
+                <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+                <ScalarProperty Name="fh_cierre" ColumnName="fh_cierre" />
+                <ScalarProperty Name="fh_creacion" ColumnName="fh_creacion" />
+                <ScalarProperty Name="tecnico_sk" ColumnName="tecnico_sk" />
+                <ScalarProperty Name="ot_id" ColumnName="ot_id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

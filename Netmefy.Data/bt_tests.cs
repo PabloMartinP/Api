@@ -24,8 +24,8 @@ namespace Netmefy.Data
         public Nullable<int> flag_clabeado_nuevo { get; set; }
         public Nullable<int> flag_modem_ok { get; set; }
     
-        public virtual bt_ord_trabajo bt_ord_trabajo { get; set; }
         public virtual cliente lk_cliente { get; set; }
         public virtual lk_tiempo lk_tiempo { get; set; }
+        public virtual bt_ord_trabajo bt_ord_trabajo { get; set; }
     }
 }

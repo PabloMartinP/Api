@@ -13,7 +13,7 @@ namespace Netmefy.Api.Models
         public int? tecnico_sk { get; set; }
         public string fh_creacion { get; set; }
         public string fh_cierre { get; set; }
-        public int? calificacion { get; set; }
+        public decimal calificacion { get; set; }
         public int tipo_id { get; set; }
         public string tipo { get; set; }
         public string descripcion { get; set; }
@@ -48,7 +48,13 @@ namespace Netmefy.Api.Models
             ot.tecnico_sk = n.tecnico_sk;
             ot.fh_creacion = n.fh_creacion.ToString("dd-MM-yyyy");
             ot.fh_cierre = fh_cierre_d.ToString("dd-MM-yyyy");
-            ot.calificacion = n.calificacion;
+
+            if(n.calificacion == null)
+                ot.calificacion = 0;
+            else
+                ot.calificacion =(decimal) n.calificacion;
+
+
             ot.descripcion = n.descripcion;
             ot.tipo_id = n.tipo;
             ot.tipo = tipos[n.tipo-1].tipo_ot_desc;
