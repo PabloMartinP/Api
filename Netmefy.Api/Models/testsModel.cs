@@ -54,7 +54,7 @@ namespace Netmefy.Api.Models
 
             //t.test_id = test.test_id;
             t.cliente_sk = test.cliente_sk;
-            //t.ot_id = test.ot_id;
+            t.ot_id = test.ot_id;
             if (test.tiempo_sk != null)
                 t.tiempo_sk = DateTime.ParseExact(test.tiempo_sk, "yyyy-MM-dd", null);
             else
