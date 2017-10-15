@@ -25,6 +25,7 @@ namespace Netmefy.Api.Controllers.api
         {
 
             cliente cliente = _clientService.buscar(username);
+            
             if (cliente == null)
             {
                 return NotFound();
