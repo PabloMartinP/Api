@@ -18,18 +18,22 @@ namespace Netmefy.Api.Controllers.api
         {
             LoginService ls = new LoginService();
             var tipoUsuario = ls.findByUsername(username);
-            string tipo;
+            string tipo = "";
 
             if (tipoUsuario.tipo.ToLower().StartsWith("c"))
                 tipo = "c";
-            else
+            if (tipoUsuario.tipo.ToLower().StartsWith("t"))
                 tipo = "t";
+            if (tipoUsuario.tipo.ToLower().StartsWith("a"))
+                tipo = "a";
+
 
             tipoClienteModel m = new tipoClienteModel
             {
                 id = tipoUsuario.SK,
                 tipo = tipo, 
-                username = tipoUsuario.ID
+                username = tipoUsuario.ID, 
+                nombre = tipoUsuario.nombre
 
             };
             return Ok(m);

@@ -310,12 +310,14 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <PropertyRef Name="SK" />
             <PropertyRef Name="ID" />
             <PropertyRef Name="PSW" />
+            <PropertyRef Name="nombre" />
           </Key>
           <Property Name="tipo" Type="varchar" MaxLength="7" Nullable="false" />
           <Property Name="SK" Type="int" Nullable="false" />
           <Property Name="ID" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="PSW" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="OT_install" Type="int" />
+          <Property Name="nombre" Type="varchar" MaxLength="14" Nullable="false" />
         </EntityType>
         <Association Name="fk_bt_notificaciones_lk_notificacion">
           <End Role="lk_notificacion" Type="Self.lk_notificacion" Multiplicity="1" />
@@ -668,7 +670,8 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
     [VW_Usuarios_App].[SK] AS [SK], 
     [VW_Usuarios_App].[ID] AS [ID], 
     [VW_Usuarios_App].[PSW] AS [PSW], 
-    [VW_Usuarios_App].[OT_install] AS [OT_install]
+    [VW_Usuarios_App].[OT_install] AS [OT_install], 
+    [VW_Usuarios_App].[nombre] AS [nombre]
     FROM [dbo].[VW_Usuarios_App] AS [VW_Usuarios_App]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="fk_bt_notificaciones_lk_notificacion" Association="Self.fk_bt_notificaciones_lk_notificacion">
@@ -784,7 +787,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySet Name="tecnicos" EntityType="NETMEFYModel.tecnico" />
           <EntitySet Name="lk_tiempo" EntityType="NETMEFYModel.lk_tiempo" />
           <EntitySet Name="usuarios" EntityType="NETMEFYModel.usuario" />
-          <EntitySet Name="VW_Usuarios_App" EntityType="NETMEFYModel.VW_Usuarios_App" />
           <AssociationSet Name="fk_bt_notificaciones_lk_notificacion" Association="NETMEFYModel.fk_bt_notificaciones_lk_notificacion">
             <End Role="lk_notificacion" EntitySet="lk_notificacion" />
             <End Role="bt_notificaciones" EntitySet="bt_notificaciones" />
@@ -890,6 +892,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           </AssociationSet>
           <EntitySet Name="vw_calificacion_tecnico" EntityType="NETMEFYModel.vw_calificacion_tecnico" />
           <EntitySet Name="vw_ot_abiertas" EntityType="NETMEFYModel.vw_ot_abiertas" />
+          <EntitySet Name="VW_Usuarios_App" EntityType="NETMEFYModel.VW_Usuarios_App" />
           </EntityContainer>
         <EntityType Name="bt_notificaciones">
           <Key>
@@ -1041,19 +1044,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="usuario_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="bt_notificaciones" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_usuario" FromRole="lk_usuario" ToRole="bt_notificaciones" />
           <NavigationProperty Name="paginas" Relationship="NETMEFYModel.rel_user_ent" FromRole="usuario" ToRole="lk_entidad" />
-        </EntityType>
-        <EntityType Name="VW_Usuarios_App">
-          <Key>
-            <PropertyRef Name="tipo" />
-            <PropertyRef Name="SK" />
-            <PropertyRef Name="ID" />
-            <PropertyRef Name="PSW" />
-          </Key>
-          <Property Name="tipo" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
-          <Property Name="SK" Type="Int32" Nullable="false" />
-          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="PSW" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OT_install" Type="Int32" />
         </EntityType>
         <Association Name="fk_bt_notificaciones_lk_notificacion">
           <End Type="NETMEFYModel.lk_notificacion" Role="lk_notificacion" Multiplicity="1" />
@@ -1487,6 +1477,21 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="estado_desc" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="fecha" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="VW_Usuarios_App">
+          <Key>
+            <PropertyRef Name="tipo" />
+            <PropertyRef Name="SK" />
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="PSW" />
+            <PropertyRef Name="nombre" />
+          </Key>
+          <Property Name="tipo" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="SK" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PSW" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OT_install" Type="Int32" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1617,17 +1622,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
                 <ScalarProperty Name="usuario_nombre" ColumnName="usuario_nombre" />
                 <ScalarProperty Name="cliente_sk" ColumnName="cliente_sk" />
                 <ScalarProperty Name="usuario_sk" ColumnName="usuario_sk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VW_Usuarios_App">
-            <EntityTypeMapping TypeName="NETMEFYModel.VW_Usuarios_App">
-              <MappingFragment StoreEntitySet="VW_Usuarios_App">
-                <ScalarProperty Name="OT_install" ColumnName="OT_install" />
-                <ScalarProperty Name="PSW" ColumnName="PSW" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="SK" ColumnName="SK" />
-                <ScalarProperty Name="tipo" ColumnName="tipo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1794,6 +1788,18 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
                 <ScalarProperty Name="tecnico_sk" ColumnName="tecnico_sk" />
                 <ScalarProperty Name="tipo_ot" ColumnName="tipo_ot" />
                 <ScalarProperty Name="ot_id" ColumnName="ot_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VW_Usuarios_App">
+            <EntityTypeMapping TypeName="NETMEFYModel.VW_Usuarios_App">
+              <MappingFragment StoreEntitySet="VW_Usuarios_App">
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="OT_install" ColumnName="OT_install" />
+                <ScalarProperty Name="PSW" ColumnName="PSW" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SK" ColumnName="SK" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

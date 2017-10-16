@@ -16,7 +16,6 @@
         <EntityTypeShape EntityType="NETMEFYModel.tecnico" Width="1.5" PointX="3.75" PointY="12.5" />
         <EntityTypeShape EntityType="NETMEFYModel.lk_tiempo" Width="1.5" PointX="0.75" PointY="7.75" />
         <EntityTypeShape EntityType="NETMEFYModel.usuario" Width="1.5" PointX="0.75" PointY="20.375" />
-        <EntityTypeShape EntityType="NETMEFYModel.VW_Usuarios_App" Width="1.5" PointX="7.75" PointY="1.875" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_notificaciones_lk_notificacion" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_notificaciones_lk_tiempo" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_notificaciones_lk_usuario" />
@@ -53,6 +52,7 @@
         <AssociationConnector Association="NETMEFYModel.fk_bt_tests_bt_ord_trabajo2" />
         <EntityTypeShape EntityType="NETMEFYModel.vw_calificacion_tecnico" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="NETMEFYModel.vw_ot_abiertas" Width="1.5" PointX="12.375" PointY="3.75" />
+        <EntityTypeShape EntityType="NETMEFYModel.VW_Usuarios_App" Width="1.5" PointX="5.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

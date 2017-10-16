@@ -10,5 +10,6 @@ namespace Netmefy.Api.Models
         public string tipo { get; set; }
         public int id { get; set; }
         public string username { get; set; }
+        public string nombre { get; set; } 
     }
 }
