@@ -32,7 +32,7 @@ namespace Netmefy.Api.Controllers.api
                     url = w.web_url,
                     id = w.web_sk,
                     nombre = w.web_nombre, 
-                    resId = w.web_imagen
+                    resid_imagen = w.web_imagen
                 });
             }
             /*
@@ -49,14 +49,16 @@ namespace Netmefy.Api.Controllers.api
         [ResponseType(typeof(Models.webModel))]
         public IHttpActionResult Postlk_web(Models.webModel modelWeb )
         {
-           
-            
+
+
             Data.lk_web web = new Data.lk_web
             {
                 web_sk = modelWeb.id,
                 web_url = modelWeb.url,
                 web_ip = modelWeb.ip,
-                web_nombre = modelWeb.nombre
+                web_nombre = modelWeb.nombre,
+                web_imagen = modelWeb.resid_imagen
+
             };
 
             if (web.web_sk == 0)

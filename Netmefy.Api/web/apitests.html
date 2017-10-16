@@ -638,7 +638,7 @@
             }
 
             $scope.post_lk_web = function () {
-                var data = { ip: '192.168.0.1', nombre: 'localhost', url: 'www.xxx.yyy' };
+                var data = { ip: '192.168.0.1', nombre: 'localhost', url: 'www.xxx.yyy', resid_imagen: 2130837714 };
                 var url = URL_LK_WEB;
                 $http.post(url, data)
                     .then(function (response) {

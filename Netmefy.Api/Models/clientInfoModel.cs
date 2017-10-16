@@ -20,7 +20,7 @@ namespace Netmefy.Api.Models
         public string ip { get; set; }
         public string url { get; set; }
         public string nombre { get; set; }
-        public int resId { get; set; }
+        public int resid_imagen { get; set; }
     }
 
     public class webBloqModel
