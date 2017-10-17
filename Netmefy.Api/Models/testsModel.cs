@@ -13,8 +13,8 @@ namespace Netmefy.Api.Models
         public int? ot_id { get; set; }
         public string tiempo_sk { get; set; }
         public string comentario { get; set; }
-        public int? vel_mb_medidos { get; set; }
-        public int? potencia_recep { get; set; }
+        public decimal? vel_mb_medidos { get; set; }
+        public decimal? potencia_recep { get; set; }
         public int? flag_cableado_nuevo { get; set; }
         public int? flag_modem_ok { get; set; }
 

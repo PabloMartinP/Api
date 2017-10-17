@@ -22,9 +22,9 @@ namespace Netmefy.Data
             this.bt_ot_status = new HashSet<bt_ot_status>();
             this.bt_solicitudes = new HashSet<bt_solicitudes>();
             this.bt_solicitudes1 = new HashSet<bt_solicitudes>();
-            this.bt_tests = new HashSet<bt_tests>();
             this.bt_ord_trabajo = new HashSet<bt_ord_trabajo>();
             this.bt_ord_trabajo1 = new HashSet<bt_ord_trabajo>();
+            this.bt_tests = new HashSet<bt_tests>();
         }
     
         public System.DateTime tiempo_sk { get; set; }
@@ -44,10 +44,10 @@ namespace Netmefy.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bt_solicitudes> bt_solicitudes1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<bt_tests> bt_tests { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bt_ord_trabajo> bt_ord_trabajo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bt_ord_trabajo> bt_ord_trabajo1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<bt_tests> bt_tests { get; set; }
     }
 }

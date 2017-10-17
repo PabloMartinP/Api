@@ -104,5 +104,27 @@ namespace Netmefy.Service
         {
             return db.usuarios.Where(x => x.cliente_sk == client_sk).ToList();
         }
+
+        public Data.cliente findClientBySK(int cliente_sk)
+        {
+            return db.clientes.Where(x => x.cliente_sk == cliente_sk).FirstOrDefault();
+        }
+
+        public List<Data.cliente> findClientsByLocalidad(int localidad_sk)
+        {
+            return db.clientes.Where(x => x.localidad_sk == localidad_sk).ToList();
+        }
+
+        public List<Data.usuario> findUsersByClients(List<Data.cliente> clientes)
+        {
+            List<Data.usuario> usuarios = new List<Data.usuario>();
+            foreach (Data.cliente c in clientes)
+            {
+                usuarios.AddRange(findUsersByClient(c.cliente_sk));
+            }
+            return usuarios;
+        }
+
+
     }
 }

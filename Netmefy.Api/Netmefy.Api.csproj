@@ -235,6 +235,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\api\clientesController.cs" />
     <Compile Include="Controllers\api\ispController.cs" />
+    <Compile Include="Controllers\api\ISP_TecnicosController.cs" />
     <Compile Include="Controllers\api\logsController.cs" />
     <Compile Include="Controllers\api\notificacionesController.cs" />
     <Compile Include="Controllers\api\ot_statusController.cs" />
@@ -256,6 +257,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Controllers\api\dispositivosController.cs" />
+    <Compile Include="Models\ISP_Model.cs" />
     <Compile Include="Models\testsModel.cs" />
     <Compile Include="Models\ot_statusModel.cs" />
     <Compile Include="Models\os_statusModel.cs" />

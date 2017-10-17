@@ -52,14 +52,18 @@ namespace Netmefy.Api.Controllers.api
             // Agrego notificacion en caso de que la orden se cierre
             if(estado.estado_sk == 3)
             {
+                // actualizo el estado de cierre de la OT
+                Data.bt_ord_trabajo ot = db.bt_ord_trabajo.Where(x => x.ot_id == estado.ot_id).FirstOrDefault();
+                ot.fh_cierre = DateTime.Today;
+
                 // Doy de alta la notificacion en la LK
                 Data.lk_notificacion noti = new Data.lk_notificacion();
                 noti.notificacion_desc = string.Concat("Reclamo ",estado.ot_id.ToString()," finalizado");
                 noti.notificacion_texto = string.Concat("El reclamo ", estado.ot_id.ToString(), " ha sido resuelto, ante cualquier consulta no dude en informarnos");
                 db.lk_notificacion.Add(noti);
+                db.SaveChanges();
 
                 // Busco los usuarios del cliente de la OT
-                Data.bt_ord_trabajo ot = _otService.buscarOtXOTID(estado.ot_id);
                 List<usuario> usuarios = _clienteService.findUsersByClient(ot.cliente_sk);
 
                 // Armo una notificacion por cada Usuario

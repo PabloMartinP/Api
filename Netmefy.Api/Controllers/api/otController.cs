@@ -17,6 +17,7 @@ namespace Netmefy.Api.Controllers
         private NETMEFYEntities db = new NETMEFYEntities();
 
         private Service.OTService _otService = new Service.OTService();
+        private Service.ClienteService _clienteService = new Service.ClienteService();
 
         // GET: api/ordenes/5
         [ResponseType(typeof(Models.otModel))]
@@ -55,7 +56,7 @@ namespace Netmefy.Api.Controllers
                 orden.estado_id = 1;
                 orden.estado_desc = _otService.buscarEstado(1).estado_desc;
 
-                // Creo la el estado 1 para la orden
+                // Creo el estado 1 para la orden
                 Models.ot_statusModel st = new Models.ot_statusModel();
                 st.estado_sk = 1;
                 st.ot_id = bt_ord_trabajo.ot_id;
@@ -65,6 +66,56 @@ namespace Netmefy.Api.Controllers
 
                 db.bt_ot_status.Add(bt_ot_status);
                 db.SaveChanges();
+
+
+                // Chequeo si es un reclamo y la cantidad por zona, y dependiendo eso genero las notificaciones
+                if(orden.tipo_id == 1)
+                {
+                    Data.cliente cli = _clienteService.findClientBySK(orden.cliente_sk);
+                    Data.vw_ot_porc_quejas porc_quejas = db.vw_ot_porc_quejas.Where(x => x.localidad_sk == cli.localidad_sk).FirstOrDefault();
+                    
+                    if(porc_quejas.porc >= 20)
+                    {
+                        List<Data.cliente> clientes = _clienteService.findClientsByLocalidad(cli.localidad_sk);
+                        List<Data.usuario> usuarios = _clienteService.findUsersByClients(clientes);
+                        Data.lk_localidad loc = db.lk_localidad.Where(x => x.localidad_sk == cli.localidad_sk).FirstOrDefault();
+
+
+                        // Busco si esta la Noti y sino la doy de alta la notificacion en la LK
+
+                        Data.lk_notificacion noti = db.lk_notificacion.Where(x => x.notificacion_desc == String.Concat("Servicio con Inconvenientes - Localidad ", loc.localidad_desc)).FirstOrDefault();
+                        if (noti == null)
+                        {
+                            Data.lk_notificacion noti_aux = new Data.lk_notificacion();
+                            noti_aux.notificacion_desc = String.Concat("Servicio con Inconvenientes - Localidad ", loc.localidad_desc);
+                            noti_aux.notificacion_texto = "El servicio presenta momentaneamente inconvenientes, estamos solucionandolo para su tranquilidad. Sepa disculpar las molestias";
+                            db.lk_notificacion.Add(noti_aux);
+                            db.SaveChanges();
+                            noti = noti_aux;
+                        }
+
+                        // Armo una notificacion por cada Usuario
+                        foreach (usuario u in usuarios)
+                        {
+                            Data.bt_notificaciones bt_not = db.bt_notificaciones.Where(x => x.usuario_sk == u.usuario_sk && x.notificacion_sk == noti.notificacion_sk && x.tiempo_sk == DateTime.Today).FirstOrDefault();
+
+                            if(bt_not == null)
+                            {
+                                Data.bt_notificaciones bt_not_aux = new Data.bt_notificaciones();
+                                bt_not_aux.usuario_sk = u.usuario_sk;
+                                bt_not_aux.cliente_sk = u.cliente_sk;
+                                bt_not_aux.notificacion_sk = noti.notificacion_sk;
+                                bt_not_aux.tiempo_sk = DateTime.Today;
+
+                                db.bt_notificaciones.Add(bt_not_aux);
+                                db.SaveChanges();
+                                bt_not = bt_not_aux;
+                            }
+                        }
+                    }
+                }
+
+
 
                 return CreatedAtRoute("DefaultApi", new { id = bt_ord_trabajo.ot_id }, orden);
 

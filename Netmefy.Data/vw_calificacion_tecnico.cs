@@ -20,5 +20,7 @@ namespace Netmefy.Data
         public string nombre { get; set; }
         public string email { get; set; }
         public Nullable<decimal> calificacion { get; set; }
+        public int ot_asignadas { get; set; }
+        public int ot_cerradas { get; set; }
     }
 }

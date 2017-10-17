@@ -16,6 +16,7 @@ namespace Netmefy.Api.Controllers.api
     {
         private NETMEFYEntities db = new NETMEFYEntities();
         private Service.OSService _osService = new Service.OSService();
+        private Service.ClienteService _clienteService = new Service.ClienteService();
 
         // GET: api/os_status/5
         [ResponseType(typeof(Models.os_statusModel))]
@@ -49,7 +50,40 @@ namespace Netmefy.Api.Controllers.api
             estado.tiempo_sk = bt_os_status.tiempo_sk.ToString("yyyy-MM-dd");
             estado.hh_mm_ss = bt_os_status.hh_mm_ss;
             estado.timestamp = string.Concat(bt_os_status.tiempo_sk.ToString("yyyy-MM-dd"), " ", bt_os_status.hh_mm_ss);
-                
+
+            // Agrego notificacion en caso de que la orden se cierre
+            if (estado.estado_sk == 3)
+            {
+                // actualizo el estado de cierre de la OT
+                Data.bt_solicitudes os = db.bt_solicitudes.Where(x => x.os_id == estado.os_id).FirstOrDefault();
+                os.fh_cierre = DateTime.Today;
+
+                // Doy de alta la notificacion en la LK
+                Data.lk_notificacion noti = new Data.lk_notificacion();
+                noti.notificacion_desc = string.Concat("Solicitud ", estado.os_id.ToString(), " finalizada");
+                noti.notificacion_texto = string.Concat("La solicitud ", estado.os_id.ToString(), " ha sido resuelta, ante cualquier consulta no dude en informarnos");
+                db.lk_notificacion.Add(noti);
+
+                // Busco los usuarios del cliente de la OT
+                List<usuario> usuarios = _clienteService.findUsersByClient(os.cliente_sk);
+
+                // Armo una notificacion por cada Usuario
+                foreach (usuario u in usuarios)
+                {
+                    Data.bt_notificaciones bt_not = new Data.bt_notificaciones();
+                    bt_not.usuario_sk = u.usuario_sk;
+                    bt_not.cliente_sk = u.cliente_sk;
+                    bt_not.notificacion_sk = noti.notificacion_sk;
+                    bt_not.tiempo_sk = DateTime.Today;
+                    bt_not.ot_id = estado.os_id;
+
+                    db.bt_notificaciones.Add(bt_not);
+                    db.SaveChanges();
+                }
+
+            }
+
+
             return CreatedAtRoute("DefaultApi", new { id = estado.os_id }, estado);
             
         }

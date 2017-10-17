@@ -41,18 +41,19 @@
         <AssociationConnector Association="NETMEFYModel.fk_bt_solicitudes_lk_cliente" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_solicitudes_lk_tiempo" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_solicitudes_lk_tiempo1" />
-        <EntityTypeShape EntityType="NETMEFYModel.bt_tests" Width="1.5" PointX="8.25" PointY="8.125" />
-        <AssociationConnector Association="NETMEFYModel.fk_bt_tests_lk_cliente" />
-        <AssociationConnector Association="NETMEFYModel.fk_bt_tests_lk_tiempo" />
         <EntityTypeShape EntityType="NETMEFYModel.bt_ord_trabajo" Width="1.5" PointX="6" PointY="9.5" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_ord_trabajo_lk_tecnico" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_ord_trabajo_lk_tiempo1" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_ot_status_bt_ord_trabajo" />
-        <AssociationConnector Association="NETMEFYModel.fk_bt_tests_bt_ord_trabajo2" />
-        <EntityTypeShape EntityType="NETMEFYModel.vw_calificacion_tecnico" Width="1.5" PointX="12.375" PointY="0.75" />
         <EntityTypeShape EntityType="NETMEFYModel.vw_ot_abiertas" Width="1.5" PointX="12.375" PointY="3.75" />
         <EntityTypeShape EntityType="NETMEFYModel.VW_Usuarios_App" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NETMEFYModel.vw_calificacion_tecnico" Width="1.5" PointX="13.375" PointY="7.75" />
+        <EntityTypeShape EntityType="NETMEFYModel.vw_ot_porc_quejas" Width="1.5" PointX="12.375" PointY="0.75" />
+        <EntityTypeShape EntityType="NETMEFYModel.bt_tests" Width="1.5" PointX="8.625" PointY="8.125" />
+        <AssociationConnector Association="NETMEFYModel.fk_bt_tests_bt_ord_trabajo2" />
+        <AssociationConnector Association="NETMEFYModel.fk_bt_tests_lk_cliente" />
+        <AssociationConnector Association="NETMEFYModel.fk_bt_tests_lk_tiempo" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
