@@ -84,8 +84,9 @@ namespace Netmefy.Api.Controllers.api
                 m.cliente_sk = token.sk_entidad;
                 //ClienteService cs = new ClienteService();
                 //var clientFound = cs.buscarById(m.cliente_sk);
-                m.descripcion = "Mcri gt0!";
+                m.descripcion = "Netmefy";
                 m.titulo = "Bienvenido";
+                m.usuario_sk = 0;
                 fb.EnviarAFCM(m);
             }
             

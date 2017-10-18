@@ -18,6 +18,7 @@ namespace Netmefy.Api.Controllers
 
         private Service.OTService _otService = new Service.OTService();
         private Service.ClienteService _clienteService = new Service.ClienteService();
+        private Service.FirebaseService fb = new Service.FirebaseService();
 
         // GET: api/ordenes/5
         [ResponseType(typeof(Models.otModel))]
@@ -83,11 +84,11 @@ namespace Netmefy.Api.Controllers
 
                         // Busco si esta la Noti y sino la doy de alta la notificacion en la LK
 
-                        Data.lk_notificacion noti = db.lk_notificacion.Where(x => x.notificacion_desc == String.Concat("Servicio con Inconvenientes - Localidad ", loc.localidad_desc)).FirstOrDefault();
+                        Data.lk_notificacion noti = db.lk_notificacion.Where(x => x.notificacion_desc == String.Concat("Servicio con Inconvenientes - ", loc.localidad_desc)).FirstOrDefault();
                         if (noti == null)
                         {
                             Data.lk_notificacion noti_aux = new Data.lk_notificacion();
-                            noti_aux.notificacion_desc = String.Concat("Servicio con Inconvenientes - Localidad ", loc.localidad_desc);
+                            noti_aux.notificacion_desc = String.Concat("Servicio con Inconvenientes - ", loc.localidad_desc);
                             noti_aux.notificacion_texto = "El servicio presenta momentaneamente inconvenientes, estamos solucionandolo para su tranquilidad. Sepa disculpar las molestias";
                             db.lk_notificacion.Add(noti_aux);
                             db.SaveChanges();
@@ -110,7 +111,19 @@ namespace Netmefy.Api.Controllers
                                 db.bt_notificaciones.Add(bt_not_aux);
                                 db.SaveChanges();
                                 bt_not = bt_not_aux;
+
+                                // Mando Notificacion Push
+                                Service.FirebaseService.notificacion_mensaje m = new Service.FirebaseService.notificacion_mensaje();
+                                m.usuario_sk = u.usuario_sk;
+                                m.cliente_sk = 0;
+                                m.titulo = noti.notificacion_desc;
+                                m.descripcion = "Estamos trabajando para solucionarlo, disculpe las molestias";
+                                fb.EnviarAFCM(m);
+
                             }
+
+
+                            
                         }
                     }
                 }

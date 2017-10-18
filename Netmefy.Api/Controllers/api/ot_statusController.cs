@@ -17,6 +17,8 @@ namespace Netmefy.Api.Controllers.api
         private NETMEFYEntities db = new NETMEFYEntities();
         private Service.OTService _otService = new Service.OTService();
         private Service.ClienteService _clienteService = new Service.ClienteService();
+        private Service.FirebaseService fb = new Service.FirebaseService();
+
 
         // GET: api/ot_status/5
         [ResponseType(typeof(Models.ot_statusModel))]
@@ -48,17 +50,18 @@ namespace Netmefy.Api.Controllers.api
             estado.tiempo_sk = bt_ot_status.tiempo_sk.ToString("yyyy-MM-dd");
             estado.hh_mm_ss = bt_ot_status.hh_mm_ss;
             estado.timestamp = string.Concat(bt_ot_status.tiempo_sk.ToString("yyyy-MM-dd"), " ", bt_ot_status.hh_mm_ss);
-
-            // Agrego notificacion en caso de que la orden se cierre
+            
+            
             if(estado.estado_sk == 3)
             {
                 // actualizo el estado de cierre de la OT
                 Data.bt_ord_trabajo ot = db.bt_ord_trabajo.Where(x => x.ot_id == estado.ot_id).FirstOrDefault();
                 ot.fh_cierre = DateTime.Today;
+                db.SaveChanges();
 
                 // Doy de alta la notificacion en la LK
                 Data.lk_notificacion noti = new Data.lk_notificacion();
-                noti.notificacion_desc = string.Concat("Reclamo ",estado.ot_id.ToString()," finalizado");
+                noti.notificacion_desc = string.Concat("Reclamo ",estado.ot_id.ToString()," resuelto");
                 noti.notificacion_texto = string.Concat("El reclamo ", estado.ot_id.ToString(), " ha sido resuelto, ante cualquier consulta no dude en informarnos");
                 db.lk_notificacion.Add(noti);
                 db.SaveChanges();
@@ -79,7 +82,14 @@ namespace Netmefy.Api.Controllers.api
                     db.bt_notificaciones.Add(bt_not);
                     db.SaveChanges();
                 }
-                
+
+                // Mando Notificacion Push
+                Service.FirebaseService.notificacion_mensaje m = new Service.FirebaseService.notificacion_mensaje();
+                m.cliente_sk = ot.cliente_sk;
+                m.usuario_sk = 0;
+                m.titulo = noti.notificacion_desc;
+                fb.EnviarAFCM(m);
+
             }
 
             return CreatedAtRoute("DefaultApi", new { id = estado.ot_id }, estado);

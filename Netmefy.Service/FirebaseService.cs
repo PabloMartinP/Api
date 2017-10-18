@@ -35,6 +35,7 @@ namespace Netmefy.Service
             public string titulo { get; set; }
             public string descripcion { get; set; }
             public int cliente_sk { get; set; }
+            public int usuario_sk { get; set; }
         }
         public class FCMResponse
         {
@@ -111,42 +112,47 @@ namespace Netmefy.Service
             return registration_ids.ToArray();
         }
 
-
+        
         public bool EnviarAFCM (notificacion_mensaje mensaje)
         {
+            if (mensaje.cliente_sk != 0) { 
 
-            WebRequest tRequest = createWebRequestPush();
-            string jsonNotificationFormat = crearParamsNotificaciones(mensaje);
+                WebRequest tRequest = createWebRequestPush();
+                string jsonNotificationFormat = crearParamsNotificaciones(mensaje);
 
-            Byte[] byteArray = Encoding.UTF8.GetBytes(jsonNotificationFormat);
-            tRequest.ContentLength = byteArray.Length;
+                Byte[] byteArray = Encoding.UTF8.GetBytes(jsonNotificationFormat);
+                tRequest.ContentLength = byteArray.Length;
 
-            using (Stream dataStream = tRequest.GetRequestStream())
-            {
-                dataStream.Write(byteArray, 0, byteArray.Length);
-
-                using (WebResponse tResponse = tRequest.GetResponse())
+                using (Stream dataStream = tRequest.GetRequestStream())
                 {
-                    using (Stream dataStreamResponse = tResponse.GetResponseStream())
+                    dataStream.Write(byteArray, 0, byteArray.Length);
+
+                    using (WebResponse tResponse = tRequest.GetResponse())
                     {
-                        using (StreamReader tReader = new StreamReader(dataStreamResponse))
+                        using (Stream dataStreamResponse = tResponse.GetResponseStream())
                         {
-                            String responseFromFirebaseServer = tReader.ReadToEnd();
-                            //LogRepository.LOG_INFO((int)mensaje.doc_tipo, mensaje.doc_numero, responseFromFirebaseServer);                                
+                            using (StreamReader tReader = new StreamReader(dataStreamResponse))
+                            {
+                                String responseFromFirebaseServer = tReader.ReadToEnd();
+                                //LogRepository.LOG_INFO((int)mensaje.doc_tipo, mensaje.doc_numero, responseFromFirebaseServer);                                
 
 
-                            FCMResponse fcmResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<FCMResponse>(responseFromFirebaseServer);
-                            //como manda a muchos es dificil saber si ejecuto todos bien
-                            return true;                            
-                            //return fcmResponse.success !=0;
+                                FCMResponse fcmResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<FCMResponse>(responseFromFirebaseServer);
+                                //como manda a muchos es dificil saber si ejecuto todos bien
+                                return true;                            
+                                //return fcmResponse.success !=0;
                           
 
 
+                            }
                         }
                     }
                 }
+            } else
+            {
+                // CODIGO DE LA NOTI X USUARIO
+                return true;
             }
-
 
         }
 

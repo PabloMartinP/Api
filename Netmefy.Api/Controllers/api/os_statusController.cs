@@ -17,6 +17,7 @@ namespace Netmefy.Api.Controllers.api
         private NETMEFYEntities db = new NETMEFYEntities();
         private Service.OSService _osService = new Service.OSService();
         private Service.ClienteService _clienteService = new Service.ClienteService();
+        private Service.FirebaseService fb = new Service.FirebaseService();
 
         // GET: api/os_status/5
         [ResponseType(typeof(Models.os_statusModel))]
@@ -80,6 +81,13 @@ namespace Netmefy.Api.Controllers.api
                     db.bt_notificaciones.Add(bt_not);
                     db.SaveChanges();
                 }
+
+                // Mando Notificacion Push
+                Service.FirebaseService.notificacion_mensaje m = new Service.FirebaseService.notificacion_mensaje();
+                m.cliente_sk = os.cliente_sk;
+                m.usuario_sk = 0;
+                m.titulo = noti.notificacion_desc;
+                fb.EnviarAFCM(m);
 
             }
 

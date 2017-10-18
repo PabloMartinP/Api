@@ -15,7 +15,8 @@ namespace Netmefy.Api.Controllers.api
     public class notificacionesController : ApiController
     {
         private NETMEFYEntities db = new NETMEFYEntities();
-        
+        private Service.FirebaseService fb = new Service.FirebaseService();
+
 
         // GET: api/notificaciones/5
         [ResponseType(typeof(Models.notificacionesModel))]
@@ -67,7 +68,15 @@ namespace Netmefy.Api.Controllers.api
             not = Models.notificacionesModel.ConvertToBD(n);
             db.bt_notificaciones.Add(not);
             db.SaveChanges();
-            
+
+
+            // Envio notificacion Push
+            Service.FirebaseService.notificacion_mensaje m = new Service.FirebaseService.notificacion_mensaje();
+            m.cliente_sk = 0;
+            m.usuario_sk = n.usuario_sk;
+            m.descripcion = n.notificacion_texto;
+            m.titulo =n.notificacion_desc;
+            fb.EnviarAFCM(m);
 
             return CreatedAtRoute("DefaultApi", new { id = n.usuario_sk }, n);
         }
