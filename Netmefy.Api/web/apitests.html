@@ -13,6 +13,8 @@
         <h3>Web ISP</h3>
         <button ng-click="listado_tecnicos()">listado_tecnicos</button>
         <button ng-click="listado_ots()">listado_ots</button>
+        <button ng-click="listado_alertas()">listado_alertas</button>
+        <button ng-click="listado_promociones()">listado_promociones</button>
         <hr />
         <h3>Clientes y Usuarios</h3>
         <button ng-click="get_cliente()">get cliente 101</button>
@@ -119,6 +121,7 @@
         var URL_TIPO_OT = url_root + "/api/tipo_ot";
         var URL_ISP_TECNICOS = url_root + "/api/ISP_Tecnicos";
         var URL_ISP_OTS = url_root + "/api/ISP_Ots";
+        var URL_ISP_ALEPROM = url_root + "/api/ISP_AlertasProm";
         
 
         var app = angular.module('myApp', []);
@@ -160,7 +163,8 @@
         app.controller('myCtrl', function ($scope, $http, $q) {
             $scope.user = { sk:'1', username: '101', password: '101', email: 'pablo.penialoza@hotmail.com'};
             $scope.cliente_user = { sk:'0', cliente_sk: '1', username: 'Martin Guixe'};
-                                    
+            $scope.noti = {alerta:"Alerta", prom:"Promocion"}; 
+            
             $scope.pantalla = "inicial";
             $scope.descripcion = "click en boton 1";
 
@@ -726,7 +730,7 @@
 
 
             $scope.get_tests = function () {
-                var url = URL_TESTS + "?id=1";;
+                var url = URL_TESTS + "?id=1";
                 $http.get(url)
                     .then(function (response) {
                         console.log(url + ' - ', response)
@@ -822,6 +826,35 @@
 
             $scope.listado_ots = function () {
                 var url = URL_ISP_OTS;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.listado_promociones = function () {
+                var url = URL_ISP_ALEPROM + "?id=" + $scope.noti.prom;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.listado_alertas = function () {
+                var url = URL_ISP_ALEPROM + "?id=" + $scope.noti.alerta;
+       //         var url = URL_ISP_ALEPROM + "?id=1";
                 $http.get(url)
                     .then(function (response) {
                         console.log(url + ' - ', response)

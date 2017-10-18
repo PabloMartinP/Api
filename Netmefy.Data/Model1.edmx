@@ -305,6 +305,23 @@ warning 6002: The table/view 'NETMEFY.dbo.vw_isp_ots' does not have a primary ke
           <Property Name="estado" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'NETMEFY.dbo.vw_notificaciones' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_notificaciones">
+          <Key>
+            <PropertyRef Name="tipo" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="descripcion" />
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Name="tipo" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="2000" Nullable="false" />
+          <Property Name="fecha" Type="varchar" MaxLength="39" Nullable="false" />
+          <Property Name="cantidadDeUsuariosSuscriptos" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'NETMEFY.dbo.vw_ot_abiertas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_ot_abiertas">
           <Key>
@@ -700,6 +717,16 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
     [vw_isp_ots].[estado] AS [estado]
     FROM [dbo].[vw_isp_ots] AS [vw_isp_ots]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vw_notificaciones" EntityType="Self.vw_notificaciones" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_notificaciones].[tipo] AS [tipo], 
+    [vw_notificaciones].[id] AS [id], 
+    [vw_notificaciones].[nombre] AS [nombre], 
+    [vw_notificaciones].[descripcion] AS [descripcion], 
+    [vw_notificaciones].[fecha] AS [fecha], 
+    [vw_notificaciones].[cantidadDeUsuariosSuscriptos] AS [cantidadDeUsuariosSuscriptos]
+    FROM [dbo].[vw_notificaciones] AS [vw_notificaciones]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vw_ot_abiertas" EntityType="Self.vw_ot_abiertas" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_ot_abiertas].[ot_id] AS [ot_id], 
@@ -953,6 +980,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <End Role="bt_tests" EntitySet="bt_tests" />
           </AssociationSet>
           <EntitySet Name="vw_isp_ots" EntityType="NETMEFYModel.vw_isp_ots" />
+          <EntitySet Name="vw_notificaciones" EntityType="NETMEFYModel.vw_notificaciones" />
           </EntityContainer>
         <EntityType Name="bt_notificaciones">
           <Key>
@@ -1583,6 +1611,21 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="calificacionOT" Type="Decimal" Precision="5" Scale="1" />
           <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="vw_notificaciones">
+          <Key>
+            <PropertyRef Name="tipo" />
+            <PropertyRef Name="id" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="descripcion" />
+            <PropertyRef Name="fecha" />
+          </Key>
+          <Property Name="tipo" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="String" Nullable="false" MaxLength="39" FixedLength="false" Unicode="false" />
+          <Property Name="cantidadDeUsuariosSuscriptos" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1919,6 +1962,18 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
                 <ScalarProperty Name="nombreDeCliente" ColumnName="nombreDeCliente" />
                 <ScalarProperty Name="numeroDeCliente" ColumnName="numeroDeCliente" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_notificaciones">
+            <EntityTypeMapping TypeName="NETMEFYModel.vw_notificaciones">
+              <MappingFragment StoreEntitySet="vw_notificaciones">
+                <ScalarProperty Name="cantidadDeUsuariosSuscriptos" ColumnName="cantidadDeUsuariosSuscriptos" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

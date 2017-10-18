@@ -52,5 +52,6 @@ namespace Netmefy.Data
         public virtual DbSet<vw_ot_porc_quejas> vw_ot_porc_quejas { get; set; }
         public virtual DbSet<bt_tests> bt_tests { get; set; }
         public virtual DbSet<vw_isp_ots> vw_isp_ots { get; set; }
+        public virtual DbSet<vw_notificaciones> vw_notificaciones { get; set; }
     }
 }
