@@ -12,6 +12,7 @@
         <hr />
         <h3>Web ISP</h3>
         <button ng-click="listado_tecnicos()">listado_tecnicos</button>
+        <button ng-click="listado_ots()">listado_ots</button>
         <hr />
         <h3>Clientes y Usuarios</h3>
         <button ng-click="get_cliente()">get cliente 101</button>
@@ -117,6 +118,7 @@
         var URL_TIPO_OS = url_root + "/api/tipo_os";
         var URL_TIPO_OT = url_root + "/api/tipo_ot";
         var URL_ISP_TECNICOS = url_root + "/api/ISP_Tecnicos";
+        var URL_ISP_OTS = url_root + "/api/ISP_Ots";
         
 
         var app = angular.module('myApp', []);
@@ -806,6 +808,20 @@
 
             $scope.listado_tecnicos = function () {
                 var url = URL_ISP_TECNICOS;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.listado_ots = function () {
+                var url = URL_ISP_OTS;
                 $http.get(url)
                     .then(function (response) {
                         console.log(url + ' - ', response)

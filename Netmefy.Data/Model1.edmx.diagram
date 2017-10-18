@@ -54,6 +54,7 @@
         <AssociationConnector Association="NETMEFYModel.fk_bt_tests_bt_ord_trabajo2" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_tests_lk_cliente" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_tests_lk_tiempo" />
+        <EntityTypeShape EntityType="NETMEFYModel.vw_isp_ots" Width="1.5" PointX="13.375" PointY="11.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
