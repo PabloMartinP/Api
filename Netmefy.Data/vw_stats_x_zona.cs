@@ -19,6 +19,9 @@ namespace Netmefy.Data
         public Nullable<int> reclamos { get; set; }
         public Nullable<int> solicitudes { get; set; }
         public Nullable<decimal> velocidad { get; set; }
-        public Nullable<decimal> calificacion { get; set; }
+        public Nullable<decimal> promedio { get; set; }
+        public Nullable<int> cantidadClientes { get; set; }
+        public Nullable<decimal> edadPromedio { get; set; }
+        public Nullable<int> dispositivos { get; set; }
     }
 }

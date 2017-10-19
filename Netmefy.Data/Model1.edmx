@@ -376,7 +376,10 @@ warning 6002: The table/view 'NETMEFY.dbo.vw_stats_x_zona' does not have a prima
           <Property Name="reclamos" Type="int" />
           <Property Name="solicitudes" Type="int" />
           <Property Name="velocidad" Type="decimal" Precision="38" Scale="2" />
-          <Property Name="calificacion" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="promedio" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="cantidadClientes" Type="int" />
+          <Property Name="edadPromedio" Type="decimal" Precision="38" Scale="2" />
+          <Property Name="dispositivos" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -787,7 +790,10 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
     [vw_stats_x_zona].[reclamos] AS [reclamos], 
     [vw_stats_x_zona].[solicitudes] AS [solicitudes], 
     [vw_stats_x_zona].[velocidad] AS [velocidad], 
-    [vw_stats_x_zona].[calificacion] AS [calificacion]
+    [vw_stats_x_zona].[promedio] AS [promedio], 
+    [vw_stats_x_zona].[cantidadClientes] AS [cantidadClientes], 
+    [vw_stats_x_zona].[edadPromedio] AS [edadPromedio], 
+    [vw_stats_x_zona].[dispositivos] AS [dispositivos]
     FROM [dbo].[vw_stats_x_zona] AS [vw_stats_x_zona]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="VW_Usuarios_App" EntityType="Self.VW_Usuarios_App" store:Type="Views" store:Schema="dbo">
@@ -1687,7 +1693,10 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="reclamos" Type="Int32" />
           <Property Name="solicitudes" Type="Int32" />
           <Property Name="velocidad" Type="Decimal" Precision="38" Scale="2" />
-          <Property Name="calificacion" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="promedio" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="cantidadClientes" Type="Int32" />
+          <Property Name="edadPromedio" Type="Decimal" Precision="38" Scale="2" />
+          <Property Name="dispositivos" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2053,7 +2062,10 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySetMapping Name="vw_stats_x_zona">
             <EntityTypeMapping TypeName="NETMEFYModel.vw_stats_x_zona">
               <MappingFragment StoreEntitySet="vw_stats_x_zona">
-                <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+                <ScalarProperty Name="dispositivos" ColumnName="dispositivos" />
+                <ScalarProperty Name="edadPromedio" ColumnName="edadPromedio" />
+                <ScalarProperty Name="cantidadClientes" ColumnName="cantidadClientes" />
+                <ScalarProperty Name="promedio" ColumnName="promedio" />
                 <ScalarProperty Name="velocidad" ColumnName="velocidad" />
                 <ScalarProperty Name="solicitudes" ColumnName="solicitudes" />
                 <ScalarProperty Name="reclamos" ColumnName="reclamos" />

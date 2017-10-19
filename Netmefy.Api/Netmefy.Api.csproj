@@ -255,6 +255,7 @@
     <Compile Include="Controllers\api\webController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\api\solicitudesController.cs" />
+    <Compile Include="Controllers\ISP_StatsController.cs" />
     <Compile Include="Controllers\tipo_osController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
