@@ -18,7 +18,7 @@ namespace Netmefy.Service
 
         public bool registerTokenIfNotExists(token token)
         {
-            Data.token tokenFound = db.tokens.Where(x => x.sk_entidad == token.sk_entidad && x.es_cliente && x.tokenid.Equals(token.tokenid)).FirstOrDefault();
+            Data.token tokenFound = db.tokens.Where(x => x.sk_entidad == token.sk_entidad && x.usuario_sk == token.usuario_sk && x.es_cliente && x.tokenid.Equals(token.tokenid)).FirstOrDefault();
 
             if(tokenFound == null)
             {
@@ -90,10 +90,17 @@ namespace Netmefy.Service
 
         }
 
-        private List<token> ObtenerTokenPorUsernameCliente(int cliente_id )
+        private List<token> ObtenerTokenPorUsernameCliente(int cliente_id)
         {
             List<Data.token> result;
             result = db.tokens.Where(d => d.sk_entidad == cliente_id).ToList();
+
+            return result;
+        }
+        private List<token> ObtenerTokenPorUsernameUsuario(int usuario_sk)
+        {
+            List<Data.token> result;
+            result = db.tokens.Where(d => d.usuario_sk == usuario_sk).ToList();
 
             return result;
         }
@@ -101,8 +108,11 @@ namespace Netmefy.Service
         private string[] getRegistrationIds(notificacion_mensaje notificacion_mensaje)
         {
             List<token> nts;
-            nts = this.ObtenerTokenPorUsernameCliente(notificacion_mensaje.cliente_sk);
-            
+            if (notificacion_mensaje.usuario_sk == 0)
+                nts = this.ObtenerTokenPorUsernameCliente(notificacion_mensaje.cliente_sk);
+            else
+                nts = this.ObtenerTokenPorUsernameUsuario(notificacion_mensaje.usuario_sk);
+
 
             List<string> registration_ids = new List<string>();
             foreach (token nt in nts)

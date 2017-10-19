@@ -264,6 +264,7 @@
           <Property Name="es_cliente" Type="bit" Nullable="false" />
           <Property Name="es_tecnico" Type="bit" Nullable="false" />
           <Property Name="tokenid" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="usuario_sk" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'NETMEFY.dbo.vw_calificacion_tecnico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -1405,6 +1406,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="es_cliente" Type="Boolean" Nullable="false" />
           <Property Name="es_tecnico" Type="Boolean" Nullable="false" />
           <Property Name="tokenid" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="usuario_sk" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="log">
           <Key>
@@ -1922,6 +1924,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySetMapping Name="tokens">
             <EntityTypeMapping TypeName="NETMEFYModel.token">
               <MappingFragment StoreEntitySet="token">
+                <ScalarProperty Name="usuario_sk" ColumnName="usuario_sk" />
                 <ScalarProperty Name="tokenid" ColumnName="tokenid" />
                 <ScalarProperty Name="es_tecnico" ColumnName="es_tecnico" />
                 <ScalarProperty Name="es_cliente" ColumnName="es_cliente" />

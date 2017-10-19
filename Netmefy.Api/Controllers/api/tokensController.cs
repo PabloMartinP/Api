@@ -82,11 +82,12 @@ namespace Netmefy.Api.Controllers.api
             if (primeraVez) {
                 notificacion_mensaje m = new notificacion_mensaje();
                 m.cliente_sk = token.sk_entidad;
+                m.usuario_sk = token.usuario_sk;
                 //ClienteService cs = new ClienteService();
                 //var clientFound = cs.buscarById(m.cliente_sk);
                 m.descripcion = "Netmefy";
                 m.titulo = "Bienvenido";
-                m.usuario_sk = 0;
+                //m.usuario_sk = 0;
                 fb.EnviarAFCM(m);
             }
             

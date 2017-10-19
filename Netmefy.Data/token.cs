@@ -19,5 +19,6 @@ namespace Netmefy.Data
         public bool es_cliente { get; set; }
         public bool es_tecnico { get; set; }
         public string tokenid { get; set; }
+        public int usuario_sk { get; set; }
     }
 }
