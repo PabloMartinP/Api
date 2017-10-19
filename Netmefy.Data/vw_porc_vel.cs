@@ -15,7 +15,7 @@ namespace Netmefy.Data
     public partial class vw_porc_vel
     {
         public string zona { get; set; }
-        public int velocidad { get; set; }
+        public string velocidad { get; set; }
         public Nullable<decimal> porc { get; set; }
     }
 }

@@ -17,6 +17,7 @@
         <button ng-click="listado_promociones()">listado_promociones</button>
         <button ng-click="stats_AMBA()">stats_AMBA</button>
         <button ng-click="stats_ARG()">stats_ARG</button>
+        <button ng-click="velocidades_AMBA()">velocidades_AMBA</button>
         <hr />
         <h3>Clientes y Usuarios</h3>
         <button ng-click="get_cliente()">get cliente 101</button>
@@ -125,6 +126,7 @@
         var URL_ISP_OTS = url_root + "/api/ISP_Ots";
         var URL_ISP_ALEPROM = url_root + "/api/ISP_AlertasProm";
         var URL_ISP_STATS = url_root + "/api/ISP_Stats";
+        var URL_ISP_VEL = url_root + "/api/ISP_Velocidades_Contratadas";
         
 
         var app = angular.module('myApp', []);
@@ -888,6 +890,21 @@
 
             $scope.stats_ARGENTINA = function () {
                 var url = URL_ISP_STATS + "?id=" + $scope.stats.ARGENTINA;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+
+            $scope.velocidades_AMBA = function () {
+                var url = URL_ISP_VEL + "?id=" + $scope.stats.AMBA;
                 $http.get(url)
                     .then(function (response) {
                         console.log(url + ' - ', response)

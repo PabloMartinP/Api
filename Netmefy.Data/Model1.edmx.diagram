@@ -56,8 +56,8 @@
         <AssociationConnector Association="NETMEFYModel.fk_bt_tests_lk_tiempo" />
         <EntityTypeShape EntityType="NETMEFYModel.vw_isp_ots" Width="1.5" PointX="9.75" PointY="8.5" IsExpanded="false" />
         <EntityTypeShape EntityType="NETMEFYModel.vw_notificaciones" Width="1.5" PointX="9.75" PointY="10.5" IsExpanded="false" />
-        <EntityTypeShape EntityType="NETMEFYModel.vw_porc_vel" Width="1.5" PointX="10.75" PointY="1.5" IsExpanded="false" />
         <EntityTypeShape EntityType="NETMEFYModel.vw_stats_x_zona" Width="1.5" PointX="7.375" PointY="11.75" />
+        <EntityTypeShape EntityType="NETMEFYModel.vw_porc_vel" Width="1.5" PointX="11.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

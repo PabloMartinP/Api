@@ -15,5 +15,12 @@ namespace Netmefy.Api.Models
         public int otCerradas { get; set; }
     }
 
+    public class ISP_VelocidadesContratadas
+    {
+        public string zona { get; set; }
+        public string nombre { get; set; }
+        public Nullable<decimal> valor { get; set; }
+    }
+
 
 }

@@ -362,7 +362,7 @@ warning 6002: The table/view 'NETMEFY.dbo.vw_porc_vel' does not have a primary k
             <PropertyRef Name="velocidad" />
           </Key>
           <Property Name="zona" Type="varchar" MaxLength="100" />
-          <Property Name="velocidad" Type="int" Nullable="false" />
+          <Property Name="velocidad" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="porc" Type="decimal" Precision="30" Scale="2" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -1028,8 +1028,8 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           </AssociationSet>
           <EntitySet Name="vw_isp_ots" EntityType="NETMEFYModel.vw_isp_ots" />
           <EntitySet Name="vw_notificaciones" EntityType="NETMEFYModel.vw_notificaciones" />
-          <EntitySet Name="vw_porc_vel" EntityType="NETMEFYModel.vw_porc_vel" />
           <EntitySet Name="vw_stats_x_zona" EntityType="NETMEFYModel.vw_stats_x_zona" />
+          <EntitySet Name="vw_porc_vel" EntityType="NETMEFYModel.vw_porc_vel" />
           </EntityContainer>
         <EntityType Name="bt_notificaciones">
           <Key>
@@ -1676,14 +1676,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="fecha" Type="String" Nullable="false" MaxLength="39" FixedLength="false" Unicode="false" />
           <Property Name="cantidadDeUsuariosSuscriptos" Type="Int32" />
         </EntityType>
-        <EntityType Name="vw_porc_vel">
-          <Key>
-            <PropertyRef Name="velocidad" />
-          </Key>
-          <Property Name="zona" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="velocidad" Type="Int32" Nullable="false" />
-          <Property Name="porc" Type="Decimal" Precision="30" Scale="2" />
-        </EntityType>
         <EntityType Name="vw_stats_x_zona">
           <Key>
             <PropertyRef Name="id" />
@@ -1697,6 +1689,14 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="cantidadClientes" Type="Int32" />
           <Property Name="edadPromedio" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="dispositivos" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vw_porc_vel">
+          <Key>
+            <PropertyRef Name="velocidad" />
+          </Key>
+          <Property Name="zona" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="velocidad" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="porc" Type="Decimal" Precision="30" Scale="2" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2050,15 +2050,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vw_porc_vel">
-            <EntityTypeMapping TypeName="NETMEFYModel.vw_porc_vel">
-              <MappingFragment StoreEntitySet="vw_porc_vel">
-                <ScalarProperty Name="porc" ColumnName="porc" />
-                <ScalarProperty Name="velocidad" ColumnName="velocidad" />
-                <ScalarProperty Name="zona" ColumnName="zona" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vw_stats_x_zona">
             <EntityTypeMapping TypeName="NETMEFYModel.vw_stats_x_zona">
               <MappingFragment StoreEntitySet="vw_stats_x_zona">
@@ -2071,6 +2062,15 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
                 <ScalarProperty Name="reclamos" ColumnName="reclamos" />
                 <ScalarProperty Name="zona" ColumnName="zona" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_porc_vel">
+            <EntityTypeMapping TypeName="NETMEFYModel.vw_porc_vel">
+              <MappingFragment StoreEntitySet="vw_porc_vel">
+                <ScalarProperty Name="porc" ColumnName="porc" />
+                <ScalarProperty Name="velocidad" ColumnName="velocidad" />
+                <ScalarProperty Name="zona" ColumnName="zona" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
