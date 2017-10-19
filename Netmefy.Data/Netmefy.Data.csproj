@@ -234,6 +234,9 @@
     <Compile Include="vw_ot_porc_quejas.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="vw_ot_x_fh_creacion.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="vw_porc_vel.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -22,5 +22,12 @@ namespace Netmefy.Api.Models
         public Nullable<decimal> valor { get; set; }
     }
 
+    public class ISP_OTs_x_Dia
+    {
+        public string zona { get; set; }
+        public DateTime startDate { get; set; }
+        public List<int> otsPorDia { get; set; }
+    }
+
 
 }
