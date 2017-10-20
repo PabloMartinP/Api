@@ -19,6 +19,9 @@
         <button ng-click="stats_ARG()">stats_ARG</button>
         <button ng-click="velocidades_AMBA()">velocidades_AMBA</button>
         <button ng-click="ots_x_dia_AMBA()">ots_x_dia_AMBA</button>
+        <button ng-click="top_10_tecnicos()">top_10_tecnicos</button>
+        <button ng-click="top_100_paginas()">top_100_paginas</button>
+        <button ng-click="top_20_clientes()">top_20_clientes</button>
         <hr />
         <h3>Clientes y Usuarios</h3>
         <button ng-click="get_cliente()">get cliente 101</button>
@@ -129,6 +132,9 @@
         var URL_ISP_STATS = url_root + "/api/ISP_Stats";
         var URL_ISP_VEL = url_root + "/api/ISP_Velocidades_Contratadas";
         var URL_ISP_OTS_X_DIA = url_root + "/api/ISP_OTs_x_Dia";
+        var URL_ISP_TOP_TECNICOS = url_root + "/api/ISP_TopTecnicos";
+        var URL_ISP_TOP_PAGINAS = url_root + "/api/ISP_Top_Paginas";
+        var URL_ISP_TOP_CLIENTES = url_root + "/api/ISP_Top_Clientes";
         
 
         var app = angular.module('myApp', []);
@@ -933,6 +939,47 @@
                     });
             }
 
+            $scope.top_10_tecnicos = function () {
+                var url = URL_ISP_TOP_TECNICOS + "?id=" + $scope.stats.ARGENTINA;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.top_100_paginas = function () {
+                var url = URL_ISP_TOP_PAGINAS + "?id=" + $scope.stats.ARGENTINA;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.top_20_clientes = function () {
+                var url = URL_ISP_TOP_CLIENTES + "?id=" + $scope.stats.ARGENTINA;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
 
 
         });

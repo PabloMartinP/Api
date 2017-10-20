@@ -243,6 +243,15 @@
     <Compile Include="vw_stats_x_zona.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="vw_tecnico_x_zona.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_top_clientes_ot.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="vw_top_paginas_x_zona.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="VW_Usuarios_App.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

@@ -31,7 +31,7 @@ namespace Netmefy.Api.Controllers.api
             List<int> valores = new List<int>();
 
             ots_x_dia.zona = ots.FirstOrDefault().zona;
-            ots_x_dia.startDate = ots.OrderByDescending(x => x.fecha).FirstOrDefault().fecha;
+            ots_x_dia.startDate = ots.OrderBy(x => x.fecha).FirstOrDefault().fecha;
 
             foreach(vw_ot_x_fh_creacion cant in ots)
             {

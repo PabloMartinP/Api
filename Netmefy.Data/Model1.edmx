@@ -395,6 +395,56 @@ warning 6002: The table/view 'NETMEFY.dbo.vw_stats_x_zona' does not have a prima
           <Property Name="dispositivos" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'NETMEFY.dbo.vw_tecnico_x_zona' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_tecnico_x_zona">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="ot_asignadas_tot" />
+            <PropertyRef Name="ot_fin" />
+          </Key>
+          <Property Name="zona" Type="varchar" MaxLength="100" />
+          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="calificacion" Type="decimal" Precision="38" Scale="6" />
+          <Property Name="ot_asignadas_tot" Type="int" Nullable="false" />
+          <Property Name="ot_fin" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NETMEFY.dbo.vw_top_clientes_ot' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_top_clientes_ot">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="localidad" />
+            <PropertyRef Name="provincia" />
+            <PropertyRef Name="pais" />
+          </Key>
+          <Property Name="id" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" />
+          <Property Name="direccion" Type="varchar" MaxLength="200" />
+          <Property Name="tipo_casa" Type="varchar" MaxLength="50" />
+          <Property Name="localidad" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="zona" Type="varchar" MaxLength="100" />
+          <Property Name="provincia" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="pais" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="cant_reclamos" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'NETMEFY.dbo.vw_top_paginas_x_zona' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_top_paginas_x_zona">
+          <Key>
+            <PropertyRef Name="pagina" />
+          </Key>
+          <Property Name="pagina" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="zona" Type="varchar" MaxLength="100" />
+          <Property Name="cant_mujeres" Type="int" />
+          <Property Name="cant_hombres" Type="int" />
+          <Property Name="cant_total" Type="int" />
+          <Property Name="edad_prom" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="VW_Usuarios_App">
           <Key>
@@ -817,6 +867,40 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
     [vw_stats_x_zona].[dispositivos] AS [dispositivos]
     FROM [dbo].[vw_stats_x_zona] AS [vw_stats_x_zona]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="vw_tecnico_x_zona" EntityType="Self.vw_tecnico_x_zona" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_tecnico_x_zona].[zona] AS [zona], 
+    [vw_tecnico_x_zona].[id] AS [id], 
+    [vw_tecnico_x_zona].[nombre] AS [nombre], 
+    [vw_tecnico_x_zona].[email] AS [email], 
+    [vw_tecnico_x_zona].[calificacion] AS [calificacion], 
+    [vw_tecnico_x_zona].[ot_asignadas_tot] AS [ot_asignadas_tot], 
+    [vw_tecnico_x_zona].[ot_fin] AS [ot_fin]
+    FROM [dbo].[vw_tecnico_x_zona] AS [vw_tecnico_x_zona]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_top_clientes_ot" EntityType="Self.vw_top_clientes_ot" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_top_clientes_ot].[id] AS [id], 
+    [vw_top_clientes_ot].[nombre] AS [nombre], 
+    [vw_top_clientes_ot].[direccion] AS [direccion], 
+    [vw_top_clientes_ot].[tipo_casa] AS [tipo_casa], 
+    [vw_top_clientes_ot].[localidad] AS [localidad], 
+    [vw_top_clientes_ot].[zona] AS [zona], 
+    [vw_top_clientes_ot].[provincia] AS [provincia], 
+    [vw_top_clientes_ot].[pais] AS [pais], 
+    [vw_top_clientes_ot].[cant_reclamos] AS [cant_reclamos]
+    FROM [dbo].[vw_top_clientes_ot] AS [vw_top_clientes_ot]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vw_top_paginas_x_zona" EntityType="Self.vw_top_paginas_x_zona" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_top_paginas_x_zona].[pagina] AS [pagina], 
+    [vw_top_paginas_x_zona].[zona] AS [zona], 
+    [vw_top_paginas_x_zona].[cant_mujeres] AS [cant_mujeres], 
+    [vw_top_paginas_x_zona].[cant_hombres] AS [cant_hombres], 
+    [vw_top_paginas_x_zona].[cant_total] AS [cant_total], 
+    [vw_top_paginas_x_zona].[edad_prom] AS [edad_prom]
+    FROM [dbo].[vw_top_paginas_x_zona] AS [vw_top_paginas_x_zona]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="VW_Usuarios_App" EntityType="Self.VW_Usuarios_App" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [VW_Usuarios_App].[tipo] AS [tipo], 
@@ -1052,6 +1136,9 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySet Name="vw_stats_x_zona" EntityType="NETMEFYModel.vw_stats_x_zona" />
           <EntitySet Name="vw_ot_x_fh_creacion" EntityType="NETMEFYModel.vw_ot_x_fh_creacion" />
           <EntitySet Name="vw_porc_vel" EntityType="NETMEFYModel.vw_porc_vel" />
+          <EntitySet Name="vw_tecnico_x_zona" EntityType="NETMEFYModel.vw_tecnico_x_zona" />
+          <EntitySet Name="vw_top_paginas_x_zona" EntityType="NETMEFYModel.vw_top_paginas_x_zona" />
+          <EntitySet Name="vw_top_clientes_ot" EntityType="NETMEFYModel.vw_top_clientes_ot" />
           </EntityContainer>
         <EntityType Name="bt_notificaciones">
           <Key>
@@ -1731,6 +1818,50 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="porc" Type="Decimal" Precision="38" Scale="2" />
           <Property Name="cant_reclamos" Type="Int32" />
         </EntityType>
+        <EntityType Name="vw_tecnico_x_zona">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="email" />
+            <PropertyRef Name="ot_asignadas_tot" />
+            <PropertyRef Name="ot_fin" />
+          </Key>
+          <Property Name="zona" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="calificacion" Type="Decimal" Precision="38" Scale="6" />
+          <Property Name="ot_asignadas_tot" Type="Int32" Nullable="false" />
+          <Property Name="ot_fin" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vw_top_paginas_x_zona">
+          <Key>
+            <PropertyRef Name="pagina" />
+          </Key>
+          <Property Name="pagina" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="zona" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cant_mujeres" Type="Int32" />
+          <Property Name="cant_hombres" Type="Int32" />
+          <Property Name="cant_total" Type="Int32" />
+          <Property Name="edad_prom" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vw_top_clientes_ot">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="localidad" />
+            <PropertyRef Name="provincia" />
+            <PropertyRef Name="pais" />
+          </Key>
+          <Property Name="id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="tipo_casa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="localidad" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="zona" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="provincia" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="pais" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cant_reclamos" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2115,6 +2246,46 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
                 <ScalarProperty Name="porc" ColumnName="porc" />
                 <ScalarProperty Name="velocidad" ColumnName="velocidad" />
                 <ScalarProperty Name="zona" ColumnName="zona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_tecnico_x_zona">
+            <EntityTypeMapping TypeName="NETMEFYModel.vw_tecnico_x_zona">
+              <MappingFragment StoreEntitySet="vw_tecnico_x_zona">
+                <ScalarProperty Name="ot_fin" ColumnName="ot_fin" />
+                <ScalarProperty Name="ot_asignadas_tot" ColumnName="ot_asignadas_tot" />
+                <ScalarProperty Name="calificacion" ColumnName="calificacion" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="zona" ColumnName="zona" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_top_paginas_x_zona">
+            <EntityTypeMapping TypeName="NETMEFYModel.vw_top_paginas_x_zona">
+              <MappingFragment StoreEntitySet="vw_top_paginas_x_zona">
+                <ScalarProperty Name="edad_prom" ColumnName="edad_prom" />
+                <ScalarProperty Name="cant_total" ColumnName="cant_total" />
+                <ScalarProperty Name="cant_hombres" ColumnName="cant_hombres" />
+                <ScalarProperty Name="cant_mujeres" ColumnName="cant_mujeres" />
+                <ScalarProperty Name="zona" ColumnName="zona" />
+                <ScalarProperty Name="pagina" ColumnName="pagina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_top_clientes_ot">
+            <EntityTypeMapping TypeName="NETMEFYModel.vw_top_clientes_ot">
+              <MappingFragment StoreEntitySet="vw_top_clientes_ot">
+                <ScalarProperty Name="cant_reclamos" ColumnName="cant_reclamos" />
+                <ScalarProperty Name="pais" ColumnName="pais" />
+                <ScalarProperty Name="provincia" ColumnName="provincia" />
+                <ScalarProperty Name="zona" ColumnName="zona" />
+                <ScalarProperty Name="localidad" ColumnName="localidad" />
+                <ScalarProperty Name="tipo_casa" ColumnName="tipo_casa" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
