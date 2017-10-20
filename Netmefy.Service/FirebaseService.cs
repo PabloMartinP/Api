@@ -125,7 +125,6 @@ namespace Netmefy.Service
         
         public bool EnviarAFCM (notificacion_mensaje mensaje)
         {
-            if (mensaje.cliente_sk != 0) { 
 
                 WebRequest tRequest = createWebRequestPush();
                 string jsonNotificationFormat = crearParamsNotificaciones(mensaje);
@@ -158,11 +157,6 @@ namespace Netmefy.Service
                         }
                     }
                 }
-            } else
-            {
-                // CODIGO DE LA NOTI X USUARIO
-                return true;
-            }
 
         }
 

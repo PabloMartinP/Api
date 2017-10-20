@@ -67,6 +67,10 @@ namespace Netmefy.Service
             else
             {
                 Data.usuario user_found = findUserByEmailAndClient(usuario.usuario_email, usuario.cliente_sk);
+                user_found.usuario_edad = usuario.usuario_edad;
+                user_found.usuario_nombre = usuario.usuario_nombre;
+                user_found.usuario_sexo = usuario.usuario_sexo;
+                db.SaveChanges();
                 return user_found.usuario_sk;
             }
         }
