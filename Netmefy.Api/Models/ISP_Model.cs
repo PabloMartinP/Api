@@ -20,6 +20,7 @@ namespace Netmefy.Api.Models
         public string zona { get; set; }
         public string nombre { get; set; }
         public Nullable<decimal> valor { get; set; }
+        public Nullable<int> cant_reclamos { get; set; }
     }
 
     public class ISP_OTs_x_Dia

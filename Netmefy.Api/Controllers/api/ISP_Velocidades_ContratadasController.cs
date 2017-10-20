@@ -35,6 +35,7 @@ namespace Netmefy.Api.Controllers.api
                 vel_aux.zona = v.zona;
                 vel_aux.nombre = v.velocidad;
                 vel_aux.valor = v.porc;
+                vel_aux.cant_reclamos = v.cant_reclamos;
 
                 vel.Add(vel_aux);
             }

@@ -17,5 +17,6 @@ namespace Netmefy.Data
         public string zona { get; set; }
         public string velocidad { get; set; }
         public Nullable<decimal> porc { get; set; }
+        public Nullable<int> cant_reclamos { get; set; }
     }
 }
