@@ -22,6 +22,7 @@
         <button ng-click="top_10_tecnicos()">top_10_tecnicos</button>
         <button ng-click="top_100_paginas()">top_100_paginas</button>
         <button ng-click="top_20_clientes()">top_20_clientes</button>
+        <button ng-click="zonas_problemas()">zonas_problemas</button>
         <hr />
         <h3>Clientes y Usuarios</h3>
         <button ng-click="get_cliente()">get cliente 101</button>
@@ -135,6 +136,7 @@
         var URL_ISP_TOP_TECNICOS = url_root + "/api/ISP_TopTecnicos";
         var URL_ISP_TOP_PAGINAS = url_root + "/api/ISP_Top_Paginas";
         var URL_ISP_TOP_CLIENTES = url_root + "/api/ISP_Top_Clientes";
+        var URL_ISP_ALERTAS = url_root + "/api/ISP_Zonas_Problemas";
         
 
         var app = angular.module('myApp', []);
@@ -969,6 +971,20 @@
 
             $scope.top_20_clientes = function () {
                 var url = URL_ISP_TOP_CLIENTES + "?id=" + $scope.stats.ARGENTINA;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.zonas_problemas = function () {
+                var url = URL_ISP_ALERTAS;
                 $http.get(url)
                     .then(function (response) {
                         console.log(url + ' - ', response)

@@ -62,6 +62,7 @@
         <EntityTypeShape EntityType="NETMEFYModel.vw_tecnico_x_zona" Width="1.5" PointX="11.375" PointY="11.75" />
         <EntityTypeShape EntityType="NETMEFYModel.vw_top_paginas_x_zona" Width="1.5" PointX="12.375" PointY="3.75" />
         <EntityTypeShape EntityType="NETMEFYModel.vw_top_clientes_ot" Width="1.5" PointX="4.375" PointY="12.75" />
+        <EntityTypeShape EntityType="NETMEFYModel.vw_alertas" Width="1.5" PointX="12.375" PointY="6.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

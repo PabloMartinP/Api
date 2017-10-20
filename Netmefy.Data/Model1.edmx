@@ -267,6 +267,17 @@
           <Property Name="usuario_sk" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'NETMEFY.dbo.vw_alertas' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_alertas">
+          <Key>
+            <PropertyRef Name="nombreDeLocalidad" />
+          </Key>
+          <Property Name="latitud" Type="float" />
+          <Property Name="longitud" Type="float" />
+          <Property Name="nombreDeLocalidad" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="cantidadDeUsuariosAfectados" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'NETMEFY.dbo.vw_calificacion_tecnico' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vw_calificacion_tecnico">
           <Key>
@@ -782,6 +793,14 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySet Name="lk_web" EntityType="Self.lk_web" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rel_user_ent" EntityType="Self.rel_user_ent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="token" EntityType="Self.token" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_alertas" EntityType="Self.vw_alertas" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_alertas].[latitud] AS [latitud], 
+    [vw_alertas].[longitud] AS [longitud], 
+    [vw_alertas].[nombreDeLocalidad] AS [nombreDeLocalidad], 
+    [vw_alertas].[cantidadDeUsuariosAfectados] AS [cantidadDeUsuariosAfectados]
+    FROM [dbo].[vw_alertas] AS [vw_alertas]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="vw_calificacion_tecnico" EntityType="Self.vw_calificacion_tecnico" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [vw_calificacion_tecnico].[sk] AS [sk], 
@@ -1139,6 +1158,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySet Name="vw_tecnico_x_zona" EntityType="NETMEFYModel.vw_tecnico_x_zona" />
           <EntitySet Name="vw_top_paginas_x_zona" EntityType="NETMEFYModel.vw_top_paginas_x_zona" />
           <EntitySet Name="vw_top_clientes_ot" EntityType="NETMEFYModel.vw_top_clientes_ot" />
+          <EntitySet Name="vw_alertas" EntityType="NETMEFYModel.vw_alertas" />
           </EntityContainer>
         <EntityType Name="bt_notificaciones">
           <Key>
@@ -1862,6 +1882,15 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="pais" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cant_reclamos" Type="Int32" />
         </EntityType>
+        <EntityType Name="vw_alertas">
+          <Key>
+            <PropertyRef Name="nombreDeLocalidad" />
+          </Key>
+          <Property Name="latitud" Type="Double" />
+          <Property Name="longitud" Type="Double" />
+          <Property Name="nombreDeLocalidad" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="cantidadDeUsuariosAfectados" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2286,6 +2315,16 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
                 <ScalarProperty Name="direccion" ColumnName="direccion" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_alertas">
+            <EntityTypeMapping TypeName="NETMEFYModel.vw_alertas">
+              <MappingFragment StoreEntitySet="vw_alertas">
+                <ScalarProperty Name="cantidadDeUsuariosAfectados" ColumnName="cantidadDeUsuariosAfectados" />
+                <ScalarProperty Name="nombreDeLocalidad" ColumnName="nombreDeLocalidad" />
+                <ScalarProperty Name="longitud" ColumnName="longitud" />
+                <ScalarProperty Name="latitud" ColumnName="latitud" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -219,6 +219,9 @@
     <Compile Include="usuario.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="vw_alertas.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="vw_calificacion_tecnico.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

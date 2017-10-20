@@ -244,6 +244,7 @@
     <Compile Include="Controllers\api\ISP_Top_ClientesController.cs" />
     <Compile Include="Controllers\api\ISP_Top_PaginasController.cs" />
     <Compile Include="Controllers\api\ISP_Velocidades_ContratadasController.cs" />
+    <Compile Include="Controllers\api\ISP_Zonas_ProblemasController.cs" />
     <Compile Include="Controllers\api\logsController.cs" />
     <Compile Include="Controllers\api\notificacionesController.cs" />
     <Compile Include="Controllers\api\ot_statusController.cs" />

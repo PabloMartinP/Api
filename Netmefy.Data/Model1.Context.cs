@@ -59,5 +59,6 @@ namespace Netmefy.Data
         public virtual DbSet<vw_tecnico_x_zona> vw_tecnico_x_zona { get; set; }
         public virtual DbSet<vw_top_paginas_x_zona> vw_top_paginas_x_zona { get; set; }
         public virtual DbSet<vw_top_clientes_ot> vw_top_clientes_ot { get; set; }
+        public virtual DbSet<vw_alertas> vw_alertas { get; set; }
     }
 }
