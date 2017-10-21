@@ -262,7 +262,7 @@
 
             $scope.agregar_bt_notif_nueva = function () {
 
-                var data = { usuario_sk: 1, cliente_sk: 1, ot_id: 1 ,notificacion_desc: 'descripcion not', notificacion_texto:'textlalala'};
+                var data = { usuario_sk: 111, cliente_sk: 13, ot_id: 1 ,notificacion_desc: 'descripcion not', notificacion_texto:'textlalala'};
                 var url = URL_NOTIF;
                 $http.post(url, data)
                     .then(function (response) {
@@ -278,7 +278,7 @@
 
             $scope.agregar_bt_notif_sin_ot = function () {
 
-                var data = { usuario_sk: 1, cliente_sk: 1, notificacion_sk: 1  };
+                var data = { usuario_sk: 43, cliente_sk: 13, notificacion_sk: 1, notificacion_desc: 'Promo Freddo', notificacion_texto: '2x1 en 1Kg de Freddo!' };
                 var url = URL_NOTIF;
                 $http.post(url, data)
                     .then(function (response) {
