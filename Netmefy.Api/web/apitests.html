@@ -72,6 +72,7 @@
         <button ng-click="agregar_bt_notif_nueva()">agregar_bt_notif_nueva</button>
         <button ng-click="agregar_bt_notif_sin_ot()">agregar_bt_notif_sin_ot</button>
         <button ng-click="agregar_bt_notif_con_ot()">agregar_bt_notif_sin_ot</button>
+        <button ng-click="marcar_bt_notif_como_leido()">marcar_bt_notif_como_leido</button>
         <hr />
         <!---<h3>POST Token</h3>
         <div>
@@ -292,8 +293,26 @@
                     });
             }
 
-            $scope.agregar_bt_notif_con_ot = function () {
 
+            //marcar_bt_notif_como_leido
+            $scope.marcar_bt_notif_como_leido = function () {
+                var data = {cliente_sk: 13, usuario_sk: 44 };
+                //var data = null;
+                //user: 44	cli: 13	notif: 22
+                var url = URL_NOTIF + "/22?cliente_sk=13&usuario_sk=44";
+                $http.put(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("ERR " + url + " catch");
+
+                    });
+            }
+
+            $scope.agregar_bt_notif_con_ot = function () {
                 var data = { usuario_sk: 1, cliente_sk: 1, notificacion_sk: 2, ot_id: 1 };
                 var url = URL_NOTIF;
                 $http.post(url, data)
@@ -760,7 +779,7 @@
             }
 
             $scope.post_test = function () {
-                var data = { cliente_sk: 1, ot_id: 1, flag_instalacion: 1, comentario:'Test de OT', vel_mb_medidos: 25, potencia_recep: 100, flag_cableado:1, flag_modem_ok:1  };
+                var data = { cliente_sk: 1, ot_id: 1, flag_instalacion: 1, comentario:'Test de OT', vel_mb_medidos: 25.21, potencia_recep: -100.4, flag_cableado:1, flag_modem_ok:1, ping: 12.32  };
                 var url = URL_TESTS;
                 $http.post(url, data)
                     .then(function (response) {

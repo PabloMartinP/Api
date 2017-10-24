@@ -27,6 +27,7 @@
           <Property Name="notificacion_sk" Type="int" Nullable="false" />
           <Property Name="tiempo_sk" Type="date" Nullable="false" />
           <Property Name="ot_id" Type="int" />
+          <Property Name="leido" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="bt_ord_trabajo">
           <Key>
@@ -1175,6 +1176,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_tiempo" FromRole="bt_notificaciones" ToRole="lk_tiempo" />
           <NavigationProperty Name="lk_usuario" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_usuario" FromRole="bt_notificaciones" ToRole="lk_usuario" />
           <Property Name="ot_id" Type="Int32" />
+          <Property Name="leido" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="cliente">
           <Key>
@@ -1900,6 +1902,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySetMapping Name="bt_notificaciones">
             <EntityTypeMapping TypeName="NETMEFYModel.bt_notificaciones">
               <MappingFragment StoreEntitySet="bt_notificaciones">
+                <ScalarProperty Name="leido" ColumnName="leido" />
                 <ScalarProperty Name="ot_id" ColumnName="ot_id" />
                 <ScalarProperty Name="tiempo_sk" ColumnName="tiempo_sk" />
                 <ScalarProperty Name="notificacion_sk" ColumnName="notificacion_sk" />

@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Netmefy.Data;
+using Netmefy.Api.Models;
 
 namespace Netmefy.Api.Controllers.api
 {
@@ -44,6 +45,41 @@ namespace Netmefy.Api.Controllers.api
             }
 
             return Ok(not_model);
+        }
+
+        [HttpPut]
+        public IHttpActionResult marcarComoLeido(int id, int cliente_sk, int usuario_sk)
+        {
+            bt_notificaciones n = null;
+            Models.notificacionesModel nm = new notificacionesModel();
+            nm.notificacion_sk = id;
+            nm.cliente_sk = cliente_sk;
+            nm.usuario_sk = usuario_sk;
+            try
+            {
+                n = db.bt_notificaciones.Where(x => x.notificacion_sk == id && x.cliente_sk == cliente_sk && x.usuario_sk == usuario_sk).FirstOrDefault();
+                n.leido = true;
+                db.SaveChanges();
+                nm = new notificacionesModel
+                {
+                    usuario_sk = n.usuario_sk,
+                    cliente_sk = n.cliente_sk,
+                    notificacion_sk = n.notificacion_sk,
+                    tiempo_sk = n.tiempo_sk.ToString("yyyy-MM-dd"),
+                    ot_id = n.ot_id,
+                    notificacion_desc = "", 
+                    notificacion_texto = ""
+                };
+
+                //return StatusCode(HttpStatusCode.NoContent);
+                return CreatedAtRoute("DefaultApi", new { status = "ok" }, new {status="ok", noti = nm });
+            }
+            catch (Exception ex)
+            {
+
+                return CreatedAtRoute("DefaultApi", new { status = "error" }, new { status = "error:"+ex.ToString(), noti = nm, msg = ex.ToString() });
+            }
+
         }
 
 

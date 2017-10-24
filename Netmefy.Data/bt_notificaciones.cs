@@ -19,6 +19,7 @@ namespace Netmefy.Data
         public int notificacion_sk { get; set; }
         public System.DateTime tiempo_sk { get; set; }
         public Nullable<int> ot_id { get; set; }
+        public bool leido { get; set; }
     
         public virtual lk_notificacion lk_notificacion { get; set; }
         public virtual lk_tiempo lk_tiempo { get; set; }

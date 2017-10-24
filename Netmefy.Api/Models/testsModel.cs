@@ -17,6 +17,7 @@ namespace Netmefy.Api.Models
         public decimal? potencia_recep { get; set; }
         public int? flag_cableado_nuevo { get; set; }
         public int? flag_modem_ok { get; set; }
+        public decimal? ping { get; set; }
 
         public static List<testsModel> ListConvertTo(List<Data.bt_tests> tests)
         {
@@ -44,6 +45,7 @@ namespace Netmefy.Api.Models
             t.potencia_recep = test.potencia_recep;
             t.flag_cableado_nuevo = test.flag_clabeado_nuevo;
             t.flag_modem_ok = test.flag_modem_ok;
+            t.ping = test.ping;
 
             return t;
         }
@@ -68,6 +70,7 @@ namespace Netmefy.Api.Models
             t.potencia_recep = test.potencia_recep;
             t.flag_clabeado_nuevo = test.flag_cableado_nuevo;
             t.flag_modem_ok = test.flag_modem_ok;
+            t.ping = test.ping;
             
             return t;
         }
