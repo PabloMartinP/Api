@@ -66,10 +66,13 @@ namespace Netmefy.Service
             bool enviar_sin_enviar = false;//true para desarrollar. simula el envio
             //string priority = "normal";
             string priority = "high";
-            //si es mensaje para un topic            
-                string[] registration_ids;
+            //si es mensaje para un topic 
+            string[] registration_ids;
 
-                registration_ids =  getRegistrationIds(mensaje);
+            registration_ids =  getRegistrationIds(mensaje);
+            if (!registration_ids.Any())
+                return "";
+            else {
                 /////////////////////////////////////////////////
                 var objNotification = new
                 {
@@ -84,10 +87,10 @@ namespace Netmefy.Service
                         icon = "myicon",
                         sound = "default"
                     }
-    };
+                };
 
-            return Newtonsoft.Json.JsonConvert.SerializeObject(objNotification);
-
+                return Newtonsoft.Json.JsonConvert.SerializeObject(objNotification);
+            }
         }
 
         private List<token> ObtenerTokenPorUsernameCliente(int cliente_id)
@@ -125,10 +128,12 @@ namespace Netmefy.Service
         
         public bool EnviarAFCM (notificacion_mensaje mensaje)
         {
-
-                WebRequest tRequest = createWebRequestPush();
-                string jsonNotificationFormat = crearParamsNotificaciones(mensaje);
-
+            WebRequest tRequest = createWebRequestPush();
+            string jsonNotificationFormat = crearParamsNotificaciones(mensaje);
+            if (jsonNotificationFormat == "")
+                return false;
+            else
+            {
                 Byte[] byteArray = Encoding.UTF8.GetBytes(jsonNotificationFormat);
                 tRequest.ContentLength = byteArray.Length;
 
@@ -148,15 +153,17 @@ namespace Netmefy.Service
 
                                 FCMResponse fcmResponse = Newtonsoft.Json.JsonConvert.DeserializeObject<FCMResponse>(responseFromFirebaseServer);
                                 //como manda a muchos es dificil saber si ejecuto todos bien
-                                return true;                            
+                                return true;
                                 //return fcmResponse.success !=0;
-                          
+
 
 
                             }
                         }
                     }
                 }
+            }
+                
 
         }
 
