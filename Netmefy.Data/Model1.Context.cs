@@ -32,7 +32,6 @@ namespace Netmefy.Data
         public virtual DbSet<lk_empresa> lk_empresa { get; set; }
         public virtual DbSet<lk_estado> lk_estado { get; set; }
         public virtual DbSet<lk_localidad> lk_localidad { get; set; }
-        public virtual DbSet<lk_notificacion> lk_notificacion { get; set; }
         public virtual DbSet<tecnico> tecnicos { get; set; }
         public virtual DbSet<lk_tiempo> lk_tiempo { get; set; }
         public virtual DbSet<usuario> usuarios { get; set; }
@@ -60,5 +59,6 @@ namespace Netmefy.Data
         public virtual DbSet<vw_top_paginas_x_zona> vw_top_paginas_x_zona { get; set; }
         public virtual DbSet<vw_top_clientes_ot> vw_top_clientes_ot { get; set; }
         public virtual DbSet<vw_alertas> vw_alertas { get; set; }
+        public virtual DbSet<lk_notificacion> lk_notificacion { get; set; }
     }
 }

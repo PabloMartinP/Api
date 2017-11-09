@@ -90,6 +90,7 @@ namespace Netmefy.Api.Controllers
                             Data.lk_notificacion noti_aux = new Data.lk_notificacion();
                             noti_aux.notificacion_desc = String.Concat("Servicio con Inconvenientes - ", loc.localidad_desc);
                             noti_aux.notificacion_texto = "El servicio presenta momentaneamente inconvenientes, estamos solucionandolo para su tranquilidad. Sepa disculpar las molestias";
+                            noti_aux.notificacion_tipo = "Alerta";
                             db.lk_notificacion.Add(noti_aux);
                             db.SaveChanges();
                             noti = noti_aux;

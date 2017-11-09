@@ -23,6 +23,7 @@ namespace Netmefy.Data
         public int notificacion_sk { get; set; }
         public string notificacion_desc { get; set; }
         public string notificacion_texto { get; set; }
+        public string notificacion_tipo { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bt_notificaciones> bt_notificaciones { get; set; }

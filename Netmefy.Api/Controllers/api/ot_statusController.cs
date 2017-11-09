@@ -63,6 +63,7 @@ namespace Netmefy.Api.Controllers.api
                 Data.lk_notificacion noti = new Data.lk_notificacion();
                 noti.notificacion_desc = string.Concat("Reclamo ",estado.ot_id.ToString()," resuelto");
                 noti.notificacion_texto = string.Concat("El reclamo ", estado.ot_id.ToString(), " ha sido resuelto, ante cualquier consulta no dude en informarnos");
+                noti.notificacion_tipo = "OT y OS";
                 db.lk_notificacion.Add(noti);
                 db.SaveChanges();
 

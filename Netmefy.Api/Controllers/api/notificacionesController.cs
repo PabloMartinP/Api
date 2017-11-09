@@ -94,6 +94,7 @@ namespace Netmefy.Api.Controllers.api
                 Data.lk_notificacion noti = new Data.lk_notificacion();
                 noti.notificacion_desc = n.notificacion_desc;
                 noti.notificacion_texto = n.notificacion_texto;
+                noti.notificacion_tipo = n.notificacion_tipo;
                 db.lk_notificacion.Add(noti);
                 db.SaveChanges();
                 n.notificacion_sk = noti.notificacion_sk;

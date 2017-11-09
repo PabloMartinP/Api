@@ -188,6 +188,7 @@
           <Property Name="notificacion_sk" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="notificacion_desc" Type="varchar" MaxLength="100" />
           <Property Name="notificacion_texto" Type="varchar" MaxLength="2000" />
+          <Property Name="notificacion_tipo" Type="varchar" MaxLength="30" Nullable="false" />
         </EntityType>
         <EntityType Name="lk_tecnico">
           <Key>
@@ -328,7 +329,7 @@ warning 6002: The table/view 'NETMEFY.dbo.vw_notificaciones' does not have a pri
             <PropertyRef Name="descripcion" />
             <PropertyRef Name="fecha" />
           </Key>
-          <Property Name="tipo" Type="varchar" MaxLength="9" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="descripcion" Type="varchar" MaxLength="2000" Nullable="false" />
@@ -1040,14 +1041,9 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySet Name="lk_empresa" EntityType="NETMEFYModel.lk_empresa" />
           <EntitySet Name="lk_estado" EntityType="NETMEFYModel.lk_estado" />
           <EntitySet Name="lk_localidad" EntityType="NETMEFYModel.lk_localidad" />
-          <EntitySet Name="lk_notificacion" EntityType="NETMEFYModel.lk_notificacion" />
           <EntitySet Name="tecnicos" EntityType="NETMEFYModel.tecnico" />
           <EntitySet Name="lk_tiempo" EntityType="NETMEFYModel.lk_tiempo" />
           <EntitySet Name="usuarios" EntityType="NETMEFYModel.usuario" />
-          <AssociationSet Name="fk_bt_notificaciones_lk_notificacion" Association="NETMEFYModel.fk_bt_notificaciones_lk_notificacion">
-            <End Role="lk_notificacion" EntitySet="lk_notificacion" />
-            <End Role="bt_notificaciones" EntitySet="bt_notificaciones" />
-          </AssociationSet>
           <AssociationSet Name="fk_bt_notificaciones_lk_tiempo" Association="NETMEFYModel.fk_bt_notificaciones_lk_tiempo">
             <End Role="lk_tiempo" EntitySet="lk_tiempo" />
             <End Role="bt_notificaciones" EntitySet="bt_notificaciones" />
@@ -1160,6 +1156,11 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <EntitySet Name="vw_top_paginas_x_zona" EntityType="NETMEFYModel.vw_top_paginas_x_zona" />
           <EntitySet Name="vw_top_clientes_ot" EntityType="NETMEFYModel.vw_top_clientes_ot" />
           <EntitySet Name="vw_alertas" EntityType="NETMEFYModel.vw_alertas" />
+          <EntitySet Name="lk_notificacion" EntityType="NETMEFYModel.lk_notificacion" />
+          <AssociationSet Name="fk_bt_notificaciones_lk_notificacion" Association="NETMEFYModel.fk_bt_notificaciones_lk_notificacion">
+            <End Role="lk_notificacion" EntitySet="lk_notificacion" />
+            <End Role="bt_notificaciones" EntitySet="bt_notificaciones" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="bt_notificaciones">
           <Key>
@@ -1172,11 +1173,11 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="cliente_sk" Type="Int32" Nullable="false" />
           <Property Name="notificacion_sk" Type="Int32" Nullable="false" />
           <Property Name="tiempo_sk" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="lk_notificacion" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_notificacion" FromRole="bt_notificaciones" ToRole="lk_notificacion" />
           <NavigationProperty Name="lk_tiempo" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_tiempo" FromRole="bt_notificaciones" ToRole="lk_tiempo" />
           <NavigationProperty Name="lk_usuario" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_usuario" FromRole="bt_notificaciones" ToRole="lk_usuario" />
           <Property Name="ot_id" Type="Int32" />
           <Property Name="leido" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="lk_notificacion" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_notificacion" FromRole="bt_notificaciones" ToRole="lk_notificacion" />
         </EntityType>
         <EntityType Name="cliente">
           <Key>
@@ -1261,15 +1262,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="localidad_long" Type="Double" />
           <Property Name="localidad_zona" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="lk_notificacion">
-          <Key>
-            <PropertyRef Name="notificacion_sk" />
-          </Key>
-          <Property Name="notificacion_sk" Type="Int32" Nullable="false" />
-          <Property Name="notificacion_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="notificacion_texto" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="bt_notificaciones" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_notificacion" FromRole="lk_notificacion" ToRole="bt_notificaciones" />
-        </EntityType>
         <EntityType Name="tecnico">
           <Key>
             <PropertyRef Name="tecnico_sk" />
@@ -1314,18 +1306,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <NavigationProperty Name="bt_notificaciones" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_usuario" FromRole="lk_usuario" ToRole="bt_notificaciones" />
           <NavigationProperty Name="paginas" Relationship="NETMEFYModel.rel_user_ent" FromRole="usuario" ToRole="lk_entidad" />
         </EntityType>
-        <Association Name="fk_bt_notificaciones_lk_notificacion">
-          <End Type="NETMEFYModel.lk_notificacion" Role="lk_notificacion" Multiplicity="1" />
-          <End Type="NETMEFYModel.bt_notificaciones" Role="bt_notificaciones" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="lk_notificacion">
-              <PropertyRef Name="notificacion_sk" />
-            </Principal>
-            <Dependent Role="bt_notificaciones">
-              <PropertyRef Name="notificacion_sk" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="fk_bt_notificaciones_lk_tiempo">
           <End Type="NETMEFYModel.lk_tiempo" Role="lk_tiempo" Multiplicity="1" />
           <End Type="NETMEFYModel.bt_notificaciones" Role="bt_notificaciones" Multiplicity="*" />
@@ -1801,7 +1781,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <PropertyRef Name="descripcion" />
             <PropertyRef Name="fecha" />
           </Key>
-          <Property Name="tipo" Type="String" Nullable="false" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="tipo" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="descripcion" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="false" />
@@ -1893,6 +1873,28 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="nombreDeLocalidad" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="cantidadDeUsuariosAfectados" Type="Int32" />
         </EntityType>
+        <EntityType Name="lk_notificacion">
+          <Key>
+            <PropertyRef Name="notificacion_sk" />
+          </Key>
+          <Property Name="notificacion_sk" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="notificacion_desc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="notificacion_texto" Type="String" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Name="notificacion_tipo" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="bt_notificaciones" Relationship="NETMEFYModel.fk_bt_notificaciones_lk_notificacion" FromRole="lk_notificacion" ToRole="bt_notificaciones" />
+        </EntityType>
+        <Association Name="fk_bt_notificaciones_lk_notificacion">
+          <End Type="NETMEFYModel.lk_notificacion" Role="lk_notificacion" Multiplicity="1" />
+          <End Type="NETMEFYModel.bt_notificaciones" Role="bt_notificaciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="lk_notificacion">
+              <PropertyRef Name="notificacion_sk" />
+            </Principal>
+            <Dependent Role="bt_notificaciones">
+              <PropertyRef Name="notificacion_sk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1981,15 +1983,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
                 <ScalarProperty Name="localidad_desc" ColumnName="localidad_desc" />
                 <ScalarProperty Name="localidad_cp" ColumnName="localidad_cp" />
                 <ScalarProperty Name="localidad_sk" ColumnName="localidad_sk" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="lk_notificacion">
-            <EntityTypeMapping TypeName="NETMEFYModel.lk_notificacion">
-              <MappingFragment StoreEntitySet="lk_notificacion">
-                <ScalarProperty Name="notificacion_texto" ColumnName="notificacion_texto" />
-                <ScalarProperty Name="notificacion_desc" ColumnName="notificacion_desc" />
-                <ScalarProperty Name="notificacion_sk" ColumnName="notificacion_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2328,6 +2321,16 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
                 <ScalarProperty Name="nombreDeLocalidad" ColumnName="nombreDeLocalidad" />
                 <ScalarProperty Name="longitud" ColumnName="longitud" />
                 <ScalarProperty Name="latitud" ColumnName="latitud" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="lk_notificacion">
+            <EntityTypeMapping TypeName="NETMEFYModel.lk_notificacion">
+              <MappingFragment StoreEntitySet="lk_notificacion">
+                <ScalarProperty Name="notificacion_tipo" ColumnName="notificacion_tipo" />
+                <ScalarProperty Name="notificacion_texto" ColumnName="notificacion_texto" />
+                <ScalarProperty Name="notificacion_desc" ColumnName="notificacion_desc" />
+                <ScalarProperty Name="notificacion_sk" ColumnName="notificacion_sk" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

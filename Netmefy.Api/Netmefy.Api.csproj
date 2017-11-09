@@ -245,6 +245,7 @@
     <Compile Include="Controllers\api\ISP_Top_PaginasController.cs" />
     <Compile Include="Controllers\api\ISP_Velocidades_ContratadasController.cs" />
     <Compile Include="Controllers\api\ISP_Zonas_ProblemasController.cs" />
+    <Compile Include="Controllers\api\localidadController.cs" />
     <Compile Include="Controllers\api\logsController.cs" />
     <Compile Include="Controllers\api\notificacionesController.cs" />
     <Compile Include="Controllers\api\ot_statusController.cs" />
@@ -267,6 +268,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Controllers\api\dispositivosController.cs" />
+    <Compile Include="Models\localidadModel.cs" />
     <Compile Include="Models\ISP_Model.cs" />
     <Compile Include="Models\testsModel.cs" />
     <Compile Include="Models\ot_statusModel.cs" />

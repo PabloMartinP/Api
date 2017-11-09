@@ -12,11 +12,9 @@
         <EntityTypeShape EntityType="NETMEFYModel.lk_empresa" Width="1.5" PointX="1.5" PointY="7.625" IsExpanded="false" />
         <EntityTypeShape EntityType="NETMEFYModel.lk_estado" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="false" />
         <EntityTypeShape EntityType="NETMEFYModel.lk_localidad" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="false" />
-        <EntityTypeShape EntityType="NETMEFYModel.lk_notificacion" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="false" />
         <EntityTypeShape EntityType="NETMEFYModel.tecnico" Width="1.5" PointX="3.75" PointY="8.125" IsExpanded="false" />
         <EntityTypeShape EntityType="NETMEFYModel.lk_tiempo" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="false" />
         <EntityTypeShape EntityType="NETMEFYModel.usuario" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="false" />
-        <AssociationConnector Association="NETMEFYModel.fk_bt_notificaciones_lk_notificacion" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_notificaciones_lk_tiempo" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_notificaciones_lk_usuario" />
         <AssociationConnector Association="NETMEFYModel.fk_lk_cliente_lk_empresa" />
@@ -63,6 +61,8 @@
         <EntityTypeShape EntityType="NETMEFYModel.vw_top_paginas_x_zona" Width="1.5" PointX="12.375" PointY="3.75" />
         <EntityTypeShape EntityType="NETMEFYModel.vw_top_clientes_ot" Width="1.5" PointX="4.375" PointY="12.75" />
         <EntityTypeShape EntityType="NETMEFYModel.vw_alertas" Width="1.5" PointX="12.375" PointY="6.75" />
+        <EntityTypeShape EntityType="NETMEFYModel.lk_notificacion" Width="1.5" PointX="13.375" PointY="9.875" />
+        <AssociationConnector Association="NETMEFYModel.fk_bt_notificaciones_lk_notificacion" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

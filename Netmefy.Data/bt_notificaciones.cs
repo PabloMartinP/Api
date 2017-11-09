@@ -21,8 +21,8 @@ namespace Netmefy.Data
         public Nullable<int> ot_id { get; set; }
         public bool leido { get; set; }
     
-        public virtual lk_notificacion lk_notificacion { get; set; }
         public virtual lk_tiempo lk_tiempo { get; set; }
         public virtual usuario lk_usuario { get; set; }
+        public virtual lk_notificacion lk_notificacion { get; set; }
     }
 }

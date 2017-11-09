@@ -63,6 +63,7 @@ namespace Netmefy.Api.Controllers.api
                 Data.lk_notificacion noti = new Data.lk_notificacion();
                 noti.notificacion_desc = string.Concat("Solicitud ", estado.os_id.ToString(), " finalizada");
                 noti.notificacion_texto = string.Concat("La solicitud ", estado.os_id.ToString(), " ha sido resuelta, ante cualquier consulta no dude en informarnos");
+                noti.notificacion_tipo = "OT y OS";
                 db.lk_notificacion.Add(noti);
 
                 // Busco los usuarios del cliente de la OT
