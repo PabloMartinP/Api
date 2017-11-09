@@ -74,6 +74,8 @@
         <button ng-click="agregar_bt_notif_sin_ot()">agregar_bt_notif_sin_ot</button>
         <button ng-click="agregar_bt_notif_con_ot()">agregar_bt_notif_sin_ot</button>
         <button ng-click="marcar_bt_notif_como_leido()">marcar_bt_notif_como_leido</button>
+        <button ng-click="enviar_alerta_masiva()">enviar_alerta_masiva</button>
+        <button ng-click="enviar_notificacion_masiva()">enviar_notificacion_masiva</button>
         <hr />
         <!---<h3>POST Token</h3>
         <div>
@@ -140,6 +142,7 @@
         var URL_ISP_TOP_CLIENTES = url_root + "/api/ISP_Top_Clientes";
         var URL_ISP_ALERTAS = url_root + "/api/ISP_Zonas_Problemas";
         var URL_LOCALIDADES = url_root + "/api/localidad";
+        var URL_NOTI_ZONA = url_root + "/api/notificaciones_zona";
         
 
         var app = angular.module('myApp', []);
@@ -317,6 +320,36 @@
             $scope.agregar_bt_notif_con_ot = function () {
                 var data = { usuario_sk: 1, cliente_sk: 1, notificacion_sk: 2, ot_id: 1 };
                 var url = URL_NOTIF;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("ERR" + url + " catch");
+
+                    });
+            }
+
+            $scope.agregar_alerta_masiva = function () {
+                var data = { notificacion_desc: 'Problema General', notificacion_texto: 'Caida de tension' , notificacion_tipo: 'Alerta', localidad_sk: 35};
+                var url = URL_NOTI_ZONA;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("ERR" + url + " catch");
+
+                    });
+            }
+
+            $scope.agregar_notificacion_masiva = function () {
+                var data = { notificacion_desc: 'Vinos 50', notificacion_texto: 'Hasta el 31 de Diciembre en COTO', notificacion_tipo: 'Promocion', localidad_sk: 2 };
+                var url = URL_NOTI_ZONA;
                 $http.post(url, data)
                     .then(function (response) {
                         console.log(url + 'ok ' + url, response)
@@ -596,7 +629,7 @@
             }
 
             $scope.agregar_OT = function () {
-                var data = { cliente_sk: 1, tipo_id: 1, descripcion: 'destroyed' };
+                var data = { cliente_sk: 1, tipo_id: 1, descripcion: 'destroyed', tecnico_sk:1 };
                 var url = URL_OT;
                 $http.post(url, data)
                     .then(function (response) {

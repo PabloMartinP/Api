@@ -74,57 +74,60 @@ namespace Netmefy.Api.Controllers
                 {
                     Data.cliente cli = _clienteService.findClientBySK(orden.cliente_sk);
                     Data.vw_ot_porc_quejas porc_quejas = db.vw_ot_porc_quejas.Where(x => x.localidad_sk == cli.localidad_sk).FirstOrDefault();
-                    
-                    if(porc_quejas.porc >= 20)
+
+                    if (porc_quejas != null)
                     {
-                        List<Data.cliente> clientes = _clienteService.findClientsByLocalidad(cli.localidad_sk);
-                        List<Data.usuario> usuarios = _clienteService.findUsersByClients(clientes);
-                        Data.lk_localidad loc = db.lk_localidad.Where(x => x.localidad_sk == cli.localidad_sk).FirstOrDefault();
-
-
-                        // Busco si esta la Noti y sino la doy de alta la notificacion en la LK
-
-                        Data.lk_notificacion noti = db.lk_notificacion.Where(x => x.notificacion_desc == String.Concat("Servicio con Inconvenientes - ", loc.localidad_desc)).FirstOrDefault();
-                        if (noti == null)
+                        if (porc_quejas.porc >= 20)
                         {
-                            Data.lk_notificacion noti_aux = new Data.lk_notificacion();
-                            noti_aux.notificacion_desc = String.Concat("Servicio con Inconvenientes - ", loc.localidad_desc);
-                            noti_aux.notificacion_texto = "El servicio presenta momentaneamente inconvenientes, estamos solucionandolo para su tranquilidad. Sepa disculpar las molestias";
-                            noti_aux.notificacion_tipo = "Alerta";
-                            db.lk_notificacion.Add(noti_aux);
-                            db.SaveChanges();
-                            noti = noti_aux;
-                        }
+                            List<Data.cliente> clientes = _clienteService.findClientsByLocalidad(cli.localidad_sk);
+                            List<Data.usuario> usuarios = _clienteService.findUsersByClients(clientes);
+                            Data.lk_localidad loc = db.lk_localidad.Where(x => x.localidad_sk == cli.localidad_sk).FirstOrDefault();
 
-                        // Armo una notificacion por cada Usuario
-                        foreach (usuario u in usuarios)
-                        {
-                            Data.bt_notificaciones bt_not = db.bt_notificaciones.Where(x => x.usuario_sk == u.usuario_sk && x.notificacion_sk == noti.notificacion_sk && x.tiempo_sk == DateTime.Today).FirstOrDefault();
 
-                            if(bt_not == null)
+                            // Busco si esta la Noti y sino la doy de alta la notificacion en la LK
+
+                            Data.lk_notificacion noti = db.lk_notificacion.Where(x => x.notificacion_desc == String.Concat("Servicio con Inconvenientes - ", loc.localidad_desc)).FirstOrDefault();
+                            if (noti == null)
                             {
-                                Data.bt_notificaciones bt_not_aux = new Data.bt_notificaciones();
-                                bt_not_aux.usuario_sk = u.usuario_sk;
-                                bt_not_aux.cliente_sk = u.cliente_sk;
-                                bt_not_aux.notificacion_sk = noti.notificacion_sk;
-                                bt_not_aux.tiempo_sk = DateTime.Today;
-
-                                db.bt_notificaciones.Add(bt_not_aux);
+                                Data.lk_notificacion noti_aux = new Data.lk_notificacion();
+                                noti_aux.notificacion_desc = String.Concat("Servicio con Inconvenientes - ", loc.localidad_desc);
+                                noti_aux.notificacion_texto = "El servicio presenta momentaneamente inconvenientes, estamos solucionandolo para su tranquilidad. Sepa disculpar las molestias";
+                                noti_aux.notificacion_tipo = "Alerta";
+                                db.lk_notificacion.Add(noti_aux);
                                 db.SaveChanges();
-                                bt_not = bt_not_aux;
-
-                                // Mando Notificacion Push
-                                Service.FirebaseService.notificacion_mensaje m = new Service.FirebaseService.notificacion_mensaje();
-                                m.usuario_sk = u.usuario_sk;
-                                m.cliente_sk = 0;
-                                m.titulo = noti.notificacion_desc;
-                                m.descripcion = "Estamos trabajando para solucionarlo, disculpe las molestias";
-                                fb.EnviarAFCM(m);
-
+                                noti = noti_aux;
                             }
 
+                            // Armo una notificacion por cada Usuario
+                            foreach (usuario u in usuarios)
+                            {
+                                Data.bt_notificaciones bt_not = db.bt_notificaciones.Where(x => x.usuario_sk == u.usuario_sk && x.notificacion_sk == noti.notificacion_sk && x.tiempo_sk == DateTime.Today).FirstOrDefault();
 
-                            
+                                if (bt_not == null)
+                                {
+                                    Data.bt_notificaciones bt_not_aux = new Data.bt_notificaciones();
+                                    bt_not_aux.usuario_sk = u.usuario_sk;
+                                    bt_not_aux.cliente_sk = u.cliente_sk;
+                                    bt_not_aux.notificacion_sk = noti.notificacion_sk;
+                                    bt_not_aux.tiempo_sk = DateTime.Today;
+
+                                    db.bt_notificaciones.Add(bt_not_aux);
+                                    db.SaveChanges();
+                                    bt_not = bt_not_aux;
+
+                                    // Mando Notificacion Push
+                                    Service.FirebaseService.notificacion_mensaje m = new Service.FirebaseService.notificacion_mensaje();
+                                    m.usuario_sk = u.usuario_sk;
+                                    m.cliente_sk = 0;
+                                    m.titulo = noti.notificacion_desc;
+                                    m.descripcion = "Estamos trabajando para solucionarlo, disculpe las molestias";
+                                    fb.EnviarAFCM(m);
+
+                                }
+
+
+
+                            }
                         }
                     }
                 }

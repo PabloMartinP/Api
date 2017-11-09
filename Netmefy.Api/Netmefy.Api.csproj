@@ -248,6 +248,7 @@
     <Compile Include="Controllers\api\localidadController.cs" />
     <Compile Include="Controllers\api\logsController.cs" />
     <Compile Include="Controllers\api\notificacionesController.cs" />
+    <Compile Include="Controllers\api\notificaciones_zonaController.cs" />
     <Compile Include="Controllers\api\ot_statusController.cs" />
     <Compile Include="Controllers\api\os_statusController.cs" />
     <Compile Include="Controllers\api\paginasController.cs" />
@@ -270,6 +271,7 @@
     <Compile Include="Controllers\api\dispositivosController.cs" />
     <Compile Include="Models\localidadModel.cs" />
     <Compile Include="Models\ISP_Model.cs" />
+    <Compile Include="Models\notificacionesZonaModel.cs" />
     <Compile Include="Models\testsModel.cs" />
     <Compile Include="Models\ot_statusModel.cs" />
     <Compile Include="Models\os_statusModel.cs" />
