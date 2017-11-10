@@ -13,7 +13,9 @@
         <h3>Web ISP</h3>
         <button ng-click="listado_tecnicos()">listado_tecnicos</button>
         <button ng-click="listado_ots()">listado_ots</button>
+        <button ng-click="Unica_ot()">Unica_ot</button>
         <button ng-click="listado_oss()">listado_oss</button>
+        <button ng-click="Unica_os()">Unica_os</button>
         <button ng-click="listado_alertas()">listado_alertas</button>
         <button ng-click="listado_promociones()">listado_promociones</button>
         <button ng-click="stats_AMBA()">stats_AMBA</button>
@@ -134,7 +136,9 @@
         var URL_TIPO_OT = url_root + "/api/tipo_ot";
         var URL_ISP_TECNICOS = url_root + "/api/ISP_Tecnicos";
         var URL_ISP_OTS = url_root + "/api/ISP_Ots";
+        var URL_ISP_OTS_UNIT = url_root + "/api/ISP_OtsUnit";
         var URL_ISP_OSS = url_root + "/api/ISP_Oss";
+        var URL_ISP_OSS_UNIT = url_root + "/api/ISP_OssUnit";
         var URL_ISP_ALEPROM = url_root + "/api/ISP_AlertasProm";
         var URL_ISP_STATS = url_root + "/api/ISP_Stats";
         var URL_ISP_VEL = url_root + "/api/ISP_Velocidades_Contratadas";
@@ -924,8 +928,36 @@
                     });
             }
 
+            $scope.Unica_ot = function () {
+                var url = URL_ISP_OTS_UNIT + "?id=1";
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
             $scope.listado_oss = function () {
                 var url = URL_ISP_OSS;
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
+                    });
+            }
+
+            $scope.Unica_os = function () {
+                var url = URL_ISP_OSS_UNIT + "?id=2";
                 $http.get(url)
                     .then(function (response) {
                         console.log(url + ' - ', response)

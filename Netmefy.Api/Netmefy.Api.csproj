@@ -237,7 +237,9 @@
     <Compile Include="Controllers\api\clientesController.cs" />
     <Compile Include="Controllers\api\ispController.cs" />
     <Compile Include="Controllers\api\ISP_AlertasPromController.cs" />
+    <Compile Include="Controllers\api\ISP_OssUnitController.cs" />
     <Compile Include="Controllers\api\ISP_OssController.cs" />
+    <Compile Include="Controllers\api\ISP_OtsUnitController.cs" />
     <Compile Include="Controllers\api\ISP_OtsController.cs" />
     <Compile Include="Controllers\api\ISP_OTs_x_DiaController.cs" />
     <Compile Include="Controllers\api\ISP_TecnicosController.cs" />
