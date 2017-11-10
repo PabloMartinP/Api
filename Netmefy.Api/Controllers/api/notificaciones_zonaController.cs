@@ -19,6 +19,25 @@ namespace Netmefy.Api.Controllers.api
         private Service.ClienteService _clienteService = new Service.ClienteService();
 
 
+        // GET: api/notificaciones_zona/5
+        [ResponseType(typeof(Models.notificacionesZonaModel))]
+        public IHttpActionResult Getbt_notificaciones(int id)
+        {
+            Models.notificacionesZonaModel noti = new Models.notificacionesZonaModel();
+
+            lk_notificacion n = db.lk_notificacion.Where(x=>x.notificacion_sk==id).FirstOrDefault();
+
+            noti.notificacion_desc = n.notificacion_desc;
+            noti.notificacion_texto = n.notificacion_texto;
+            noti.notificacion_tipo = n.notificacion_tipo;
+
+            bt_notificaciones bt = db.bt_notificaciones.Where(x => x.notificacion_sk == id).FirstOrDefault();
+            noti.localidad_sk = bt.notificacion_sk;
+            
+
+            return Ok(noti);
+        }
+
         // POST: api/notificaciones_zona
         [ResponseType(typeof(Models.notificacionesZonaModel))]
         public IHttpActionResult Postbt_notificaciones(Models.notificacionesZonaModel n)

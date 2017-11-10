@@ -18,6 +18,7 @@
         <button ng-click="Unica_os()">Unica_os</button>
         <button ng-click="listado_alertas()">listado_alertas</button>
         <button ng-click="listado_promociones()">listado_promociones</button>
+        <button ng-click="Get_Noti()">Get_Noti</button>
         <button ng-click="stats_AMBA()">stats_AMBA</button>
         <button ng-click="stats_ARG()">stats_ARG</button>
         <button ng-click="velocidades_AMBA()">velocidades_AMBA</button>
@@ -365,6 +366,20 @@
                         console.log(data);
                         alert("ERR" + url + " catch");
 
+                    });
+            }
+
+            $scope.Get_Noti = function () {
+                var url = URL_NOTI_ZONA + "?id=1";
+                $http.get(url)
+                    .then(function (response) {
+                        console.log(url + ' - ', response)
+                        alert("OK " + url + ": " + JSON.stringify(response.data));
+                        $scope.resultado = response.data;
+                    })
+                    .catch(function (data) {
+                        console.log(data);
+                        alert("err: url: " + url, data);
                     });
             }
 
