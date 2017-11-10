@@ -225,6 +225,9 @@
     <Compile Include="vw_calificacion_tecnico.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="vw_isp_oss.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="vw_isp_ots.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

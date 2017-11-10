@@ -63,6 +63,7 @@
         <EntityTypeShape EntityType="NETMEFYModel.vw_alertas" Width="1.5" PointX="12.375" PointY="6.75" />
         <EntityTypeShape EntityType="NETMEFYModel.lk_notificacion" Width="1.5" PointX="13.375" PointY="9.875" />
         <AssociationConnector Association="NETMEFYModel.fk_bt_notificaciones_lk_notificacion" />
+        <EntityTypeShape EntityType="NETMEFYModel.vw_isp_oss" Width="1.5" PointX="13.375" PointY="12.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
