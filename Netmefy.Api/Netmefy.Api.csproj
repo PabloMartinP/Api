@@ -234,7 +234,8 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\api\clientesController.cs" />
+    <Compile Include="Controllers\api\clientesController - Copy.cs" />
+    <Compile Include="Controllers\api\ISP_clientesController.cs" />
     <Compile Include="Controllers\api\ispController.cs" />
     <Compile Include="Controllers\api\ISP_AlertasPromController.cs" />
     <Compile Include="Controllers\api\ISP_OssUnitController.cs" />

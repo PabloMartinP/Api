@@ -14,6 +14,14 @@ namespace Netmefy.Api.Models
         public string nombre { get; set; }
         public routerInfoModel router { get; set; }
     }
+
+    public class clientIDModel
+    {
+        public int sk { get; set; }
+        public string id { get; set; }
+        public string username { get; set; }
+    }
+
     public class webModel
     {
         public int id { get; set; }
