@@ -67,6 +67,7 @@
         <button ng-click="get_lk_webs()">get_lk_webs</button>
         <button ng-click="post_lk_web()">post_lk_web</button>
         <button ng-click="update_lk_web()">update_lk_web</button>
+        <button ng-click="delete_lk_web()">remove_lk_web</button>
         <hr />
         <h3>Tests</h3>
         <button ng-click="get_tests()">get_tests</button>
@@ -771,6 +772,20 @@
                 var data = { id: 16, ip: '192.168.20.11', nombre: 'lala', url: 'zzz.xxx.yyy' };
                 var url = URL_LK_WEB;
                 $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
+
+            $scope.delete_lk_web = function () {
+                //var data = { id: 41 };
+                var url = URL_LK_WEB;
+                //$http.delete(url, data)
+                $http.delete(url + "/10")
                     .then(function (response) {
                         console.log(url + 'ok ' + url, response)
                         alert("OK " + url + "response:" + JSON.stringify(response.data));

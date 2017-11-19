@@ -43,6 +43,38 @@ namespace Netmefy.Api.Controllers.api
 
             return Ok(websModel);
         }
+        // DELETE: api/usuarios/5
+        [HttpDelete]
+        [ResponseType(typeof(lk_web))]
+        public IHttpActionResult Deleteweb(int id)
+        {
+            //DEVUELVE -1 SI NO EXISTE, -1 SI HAY UN ERROR(YA ESTA USADA)
+            try
+            {
+                
+                lk_web web = db.lk_web.Find(id);
+                if (web == null)
+                {
+
+                    
+                    lk_web web2 = new lk_web();
+                    web2.web_sk = -2;
+                    return Ok(web2);
+                }
+
+                db.lk_web.Remove(web);
+                db.SaveChanges();
+
+                return Ok(web);
+            }
+            catch (Exception ex)
+            {
+                lk_web web = new lk_web();
+                web.web_sk = -1;
+                return Ok(web);
+            }
+        }
+
 
 
         // POST: api/web
