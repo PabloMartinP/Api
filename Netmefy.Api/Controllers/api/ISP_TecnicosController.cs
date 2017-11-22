@@ -26,6 +26,7 @@ namespace Netmefy.Api.Controllers.api
             foreach(vw_calificacion_tecnico t in vw_tecnicos){
                 Models.ISP_TecnicosModel tecnico = new Models.ISP_TecnicosModel();
 
+                tecnico.sk = t.sk;
                 tecnico.id = t.id;
                 tecnico.nombre = t.nombre;
                 tecnico.mail = t.email;

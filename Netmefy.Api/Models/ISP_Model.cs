@@ -7,6 +7,7 @@ namespace Netmefy.Api.Models
 {
     public class ISP_TecnicosModel
     {
+        public int sk { get; set; }
         public string id { get; set; }
         public string nombre { get; set; }
         public string mail { get; set; }
