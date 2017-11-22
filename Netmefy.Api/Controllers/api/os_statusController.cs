@@ -44,6 +44,7 @@ namespace Netmefy.Api.Controllers.api
         [ResponseType(typeof(Models.os_statusModel))]
         public IHttpActionResult Postbt_os_status(Models.os_statusModel estado)
         {
+            string notificacion_desc, notificacion_texto;
             bt_os_status bt_os_status = Models.os_statusModel.ConvertToBD(estado);
             db.bt_os_status.Add(bt_os_status);
             db.SaveChanges();
@@ -53,18 +54,35 @@ namespace Netmefy.Api.Controllers.api
             estado.timestamp = string.Concat(bt_os_status.tiempo_sk.ToString("yyyy-MM-dd"), " ", bt_os_status.hh_mm_ss);
 
             // Agrego notificacion en caso de que la orden se cierre
-            if (estado.estado_sk == 3)
+            if (estado.estado_sk == 3 || estado.estado_sk == 2)
             {
                 // actualizo el estado de cierre de la OT
                 Data.bt_solicitudes os = db.bt_solicitudes.Where(x => x.os_id == estado.os_id).FirstOrDefault();
-                os.fh_cierre = DateTime.Today;
+
+                if(estado.estado_sk == 3)
+                {
+                    os.fh_cierre = DateTime.Today;
+                    db.SaveChanges();
+
+                    notificacion_desc = string.Concat("Solicitud ", estado.os_id.ToString(), " finalizada");
+                    notificacion_texto = string.Concat("La solicitud ", estado.os_id.ToString(), " ha sido resuelta, ante cualquier consulta no dude en informarnos");
+                }
+                else
+                {
+                    // EN CURSO
+                    
+                    notificacion_desc = string.Concat("Solicitud ", estado.os_id.ToString(), " en curso");
+                    notificacion_texto = "";// string.Concat("El reclamo ", estado.ot_id.ToString(), " esta en curso");
+                }
+                
 
                 // Doy de alta la notificacion en la LK
                 Data.lk_notificacion noti = new Data.lk_notificacion();
-                noti.notificacion_desc = string.Concat("Solicitud ", estado.os_id.ToString(), " finalizada");
-                noti.notificacion_texto = string.Concat("La solicitud ", estado.os_id.ToString(), " ha sido resuelta, ante cualquier consulta no dude en informarnos");
+                noti.notificacion_desc = notificacion_desc;
+                noti.notificacion_texto = notificacion_texto;
                 noti.notificacion_tipo = "OT y OS";
                 db.lk_notificacion.Add(noti);
+                db.SaveChanges();
 
                 // Busco los usuarios del cliente de la OT
                 List<usuario> usuarios = _clienteService.findUsersByClient(os.cliente_sk);
@@ -80,8 +98,8 @@ namespace Netmefy.Api.Controllers.api
                     bt_not.ot_id = estado.os_id;
 
                     db.bt_notificaciones.Add(bt_not);
-                    db.SaveChanges();
                 }
+                db.SaveChanges();
 
                 // Mando Notificacion Push
                 Service.FirebaseService.notificacion_mensaje m = new Service.FirebaseService.notificacion_mensaje();

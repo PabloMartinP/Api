@@ -43,6 +43,8 @@ namespace Netmefy.Api.Controllers.api
         [ResponseType(typeof(Models.ot_statusModel))]
         public IHttpActionResult Postbt_ot_status(Models.ot_statusModel estado)
         {
+            string notificacion_desc = "";
+            string notificacion_texto = "";
             bt_ot_status bt_ot_status = Models.ot_statusModel.ConvertToBD(estado);
             db.bt_ot_status.Add(bt_ot_status);
             db.SaveChanges();
@@ -52,17 +54,44 @@ namespace Netmefy.Api.Controllers.api
             estado.timestamp = string.Concat(bt_ot_status.tiempo_sk.ToString("yyyy-MM-dd"), " ", bt_ot_status.hh_mm_ss);
             
             
-            if(estado.estado_sk == 3)
+            if(estado.estado_sk == 3 || estado.estado_sk == 2 )
             {
                 // actualizo el estado de cierre de la OT
                 Data.bt_ord_trabajo ot = db.bt_ord_trabajo.Where(x => x.ot_id == estado.ot_id).FirstOrDefault();
-                ot.fh_cierre = DateTime.Today;
-                db.SaveChanges();
+                
+                if(estado.estado_sk == 3)
+                {
+                    //FINALIZADA
+                    ot.fh_cierre = DateTime.Today;
+                    db.SaveChanges();
+
+                    notificacion_desc = string.Concat("Reclamo ", estado.ot_id.ToString(), " resuelto");
+                    notificacion_texto = string.Concat("El reclamo ", estado.ot_id.ToString(), " ha sido resuelto, ante cualquier consulta no dude en informarnos");
+                }
+                else
+                {
+                    // EN CURSO
+                    tecnico t = null;
+                    int tecnico_sk;
+                    if (ot.tecnico_sk != null) {
+                        tecnico_sk = (int)ot.tecnico_sk;
+                        t = (from tec in db.tecnicos
+                                     where tec.tecnico_sk == tecnico_sk
+                                     select tec).FirstOrDefault();
+                    }
+                        
+
+                    
+
+                    notificacion_desc = string.Concat("Reclamo ", estado.ot_id.ToString(), " en curso");
+                    if(t != null)
+                        notificacion_texto = "Técnico asignado: " + t.tecnico_desc;// string.Concat("El reclamo ", estado.ot_id.ToString(), " esta en curso");
+                }
 
                 // Doy de alta la notificacion en la LK
                 Data.lk_notificacion noti = new Data.lk_notificacion();
-                noti.notificacion_desc = string.Concat("Reclamo ",estado.ot_id.ToString()," resuelto");
-                noti.notificacion_texto = string.Concat("El reclamo ", estado.ot_id.ToString(), " ha sido resuelto, ante cualquier consulta no dude en informarnos");
+                noti.notificacion_desc = notificacion_desc;
+                noti.notificacion_texto = notificacion_texto;
                 noti.notificacion_tipo = "OT y OS";
                 db.lk_notificacion.Add(noti);
                 db.SaveChanges();
@@ -81,8 +110,8 @@ namespace Netmefy.Api.Controllers.api
                     bt_not.ot_id = estado.ot_id;
 
                     db.bt_notificaciones.Add(bt_not);
-                    db.SaveChanges();
                 }
+                db.SaveChanges();
 
                 // Mando Notificacion Push
                 Service.FirebaseService.notificacion_mensaje m = new Service.FirebaseService.notificacion_mensaje();
@@ -92,6 +121,8 @@ namespace Netmefy.Api.Controllers.api
                 fb.EnviarAFCM(m);
 
             }
+
+            
 
             return CreatedAtRoute("DefaultApi", new { id = estado.ot_id }, estado);
 
