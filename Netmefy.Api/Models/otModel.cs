@@ -5,6 +5,13 @@ using System.Web;
 
 namespace Netmefy.Api.Models
 {
+    public class ot_edit_TecnicoModel
+    {
+        public int ot_id { get; set; }
+        public int tecnico_sk { get; set; }
+    }
+
+
     public class otModel
     {
 

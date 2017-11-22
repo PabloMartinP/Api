@@ -57,6 +57,7 @@
         <button ng-click="OT_agregar_estado()">OT_agregar_estado</button> 
         <button ng-click="finalizar_OT()">finalizar_orden</button> 
         <button ng-click="tipo_ot()">tipo_ot</button>
+        <button ng-click="modificar_tecnico()">modificar_tecnico</button>
         <hr />
         <h3>Router</h3>
         <button ng-click="get_router()">get_router</button>  
@@ -131,6 +132,7 @@
         var URL_SOLICITUDES = url_root + "/api/solicitudes";
         var URL_OS_STATUS = url_root + "/api/os_status";
         var URL_OT = url_root + "/api/ot";
+        var URL_OT_EDIT_TECNICO = url_root + "/api/ot_edit_Tecnico";
         var URL_OT_STATUS = url_root + "/api/ot_status";
         var URL_LK_WEB = url_root + "/api/web";
         var URL_ROUTER = url_root + "/api/routers";
@@ -733,7 +735,18 @@
                     });
             }
 
-
+            $scope.modificar_tecnico = function () {
+                var data = { ot_id: 1, tecnico_sk: 2 };
+                var url = URL_OT_EDIT_TECNICO;
+                $http.post(url, data)
+                    .then(function (response) {
+                        console.log(url + 'ok ' + url, response)
+                        alert("OK " + url + "response:" + JSON.stringify(response.data));
+                    })
+                    .catch(function (data) {
+                        alert("ERR" + url + " catch");
+                    });
+            }
 
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////

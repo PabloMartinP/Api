@@ -253,6 +253,7 @@
     <Compile Include="Controllers\api\logsController.cs" />
     <Compile Include="Controllers\api\notificacionesController.cs" />
     <Compile Include="Controllers\api\notificaciones_zonaController.cs" />
+    <Compile Include="Controllers\api\ot_edit_TecnicoController.cs" />
     <Compile Include="Controllers\api\ot_statusController.cs" />
     <Compile Include="Controllers\api\os_statusController.cs" />
     <Compile Include="Controllers\api\paginasController.cs" />
