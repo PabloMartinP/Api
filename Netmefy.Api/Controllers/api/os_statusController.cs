@@ -95,7 +95,8 @@ namespace Netmefy.Api.Controllers.api
                     bt_not.cliente_sk = u.cliente_sk;
                     bt_not.notificacion_sk = noti.notificacion_sk;
                     bt_not.tiempo_sk = DateTime.Today;
-                    bt_not.ot_id = estado.os_id;
+                    //bt_not.ot_id = estado.os_id;
+                    bt_not.ot_id = 0;//PORQUE ES UNA SOLICITUD
 
                     db.bt_notificaciones.Add(bt_not);
                 }
