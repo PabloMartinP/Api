@@ -50,7 +50,6 @@ namespace Netmefy.Data
         public virtual DbSet<vw_calificacion_tecnico> vw_calificacion_tecnico { get; set; }
         public virtual DbSet<vw_ot_porc_quejas> vw_ot_porc_quejas { get; set; }
         public virtual DbSet<bt_tests> bt_tests { get; set; }
-        public virtual DbSet<vw_isp_ots> vw_isp_ots { get; set; }
         public virtual DbSet<vw_notificaciones> vw_notificaciones { get; set; }
         public virtual DbSet<vw_stats_x_zona> vw_stats_x_zona { get; set; }
         public virtual DbSet<vw_ot_x_fh_creacion> vw_ot_x_fh_creacion { get; set; }
@@ -61,5 +60,6 @@ namespace Netmefy.Data
         public virtual DbSet<vw_alertas> vw_alertas { get; set; }
         public virtual DbSet<lk_notificacion> lk_notificacion { get; set; }
         public virtual DbSet<vw_isp_oss> vw_isp_oss { get; set; }
+        public virtual DbSet<vw_isp_ots> vw_isp_ots { get; set; }
     }
 }

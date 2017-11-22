@@ -21,6 +21,7 @@ namespace Netmefy.Data
         public string fechaCreacion { get; set; }
         public string fechaFinalizacion { get; set; }
         public string nombreTecnicoAsignado { get; set; }
+        public Nullable<int> tecnico_sk { get; set; }
         public Nullable<decimal> calificacionOT { get; set; }
         public string estado { get; set; }
     }

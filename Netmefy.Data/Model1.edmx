@@ -333,6 +333,7 @@ warning 6002: The table/view 'NETMEFY.dbo.vw_isp_ots' does not have a primary ke
           <Property Name="fechaCreacion" Type="varchar" MaxLength="39" Nullable="false" />
           <Property Name="fechaFinalizacion" Type="varchar" MaxLength="39" />
           <Property Name="nombreTecnicoAsignado" Type="varchar" MaxLength="100" />
+          <Property Name="tecnico_sk" Type="int" />
           <Property Name="calificacionOT" Type="decimal" Precision="5" Scale="1" />
           <Property Name="estado" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -852,6 +853,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
     [vw_isp_ots].[fechaCreacion] AS [fechaCreacion], 
     [vw_isp_ots].[fechaFinalizacion] AS [fechaFinalizacion], 
     [vw_isp_ots].[nombreTecnicoAsignado] AS [nombreTecnicoAsignado], 
+    [vw_isp_ots].[tecnico_sk] AS [tecnico_sk], 
     [vw_isp_ots].[calificacionOT] AS [calificacionOT], 
     [vw_isp_ots].[estado] AS [estado]
     FROM [dbo].[vw_isp_ots] AS [vw_isp_ots]</DefiningQuery>
@@ -1175,7 +1177,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <End Role="lk_tiempo" EntitySet="lk_tiempo" />
             <End Role="bt_tests" EntitySet="bt_tests" />
           </AssociationSet>
-          <EntitySet Name="vw_isp_ots" EntityType="NETMEFYModel.vw_isp_ots" />
           <EntitySet Name="vw_notificaciones" EntityType="NETMEFYModel.vw_notificaciones" />
           <EntitySet Name="vw_stats_x_zona" EntityType="NETMEFYModel.vw_stats_x_zona" />
           <EntitySet Name="vw_ot_x_fh_creacion" EntityType="NETMEFYModel.vw_ot_x_fh_creacion" />
@@ -1190,6 +1191,7 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <End Role="bt_notificaciones" EntitySet="bt_notificaciones" />
           </AssociationSet>
           <EntitySet Name="vw_isp_oss" EntityType="NETMEFYModel.vw_isp_oss" />
+          <EntitySet Name="vw_isp_ots" EntityType="NETMEFYModel.vw_isp_ots" />
           </EntityContainer>
         <EntityType Name="bt_notificaciones">
           <Key>
@@ -1785,23 +1787,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vw_isp_ots">
-          <Key>
-            <PropertyRef Name="id" />
-            <PropertyRef Name="numeroDeCliente" />
-            <PropertyRef Name="tipoDeOrden" />
-            <PropertyRef Name="fechaCreacion" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="numeroDeCliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="nombreDeCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="tipoDeOrden" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fechaCreacion" Type="String" Nullable="false" MaxLength="39" FixedLength="false" Unicode="false" />
-          <Property Name="fechaFinalizacion" Type="String" MaxLength="39" FixedLength="false" Unicode="false" />
-          <Property Name="nombreTecnicoAsignado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="calificacionOT" Type="Decimal" Precision="5" Scale="1" />
-          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="vw_notificaciones">
           <Key>
             <PropertyRef Name="tipo" />
@@ -1937,6 +1922,24 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
           <Property Name="tipoDeOrden" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="fechaCreacion" Type="String" Nullable="false" MaxLength="39" FixedLength="false" Unicode="false" />
           <Property Name="fechaFinalizacion" Type="String" MaxLength="39" FixedLength="false" Unicode="false" />
+          <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="vw_isp_ots">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="numeroDeCliente" />
+            <PropertyRef Name="tipoDeOrden" />
+            <PropertyRef Name="fechaCreacion" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="numeroDeCliente" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombreDeCliente" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tipoDeOrden" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fechaCreacion" Type="String" Nullable="false" MaxLength="39" FixedLength="false" Unicode="false" />
+          <Property Name="fechaFinalizacion" Type="String" MaxLength="39" FixedLength="false" Unicode="false" />
+          <Property Name="nombreTecnicoAsignado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="tecnico_sk" Type="Int32" />
+          <Property Name="calificacionOT" Type="Decimal" Precision="5" Scale="1" />
           <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         </Schema>
@@ -2257,21 +2260,6 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="vw_isp_ots">
-            <EntityTypeMapping TypeName="NETMEFYModel.vw_isp_ots">
-              <MappingFragment StoreEntitySet="vw_isp_ots">
-                <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="calificacionOT" ColumnName="calificacionOT" />
-                <ScalarProperty Name="nombreTecnicoAsignado" ColumnName="nombreTecnicoAsignado" />
-                <ScalarProperty Name="fechaFinalizacion" ColumnName="fechaFinalizacion" />
-                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
-                <ScalarProperty Name="tipoDeOrden" ColumnName="tipoDeOrden" />
-                <ScalarProperty Name="nombreDeCliente" ColumnName="nombreDeCliente" />
-                <ScalarProperty Name="numeroDeCliente" ColumnName="numeroDeCliente" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="vw_notificaciones">
             <EntityTypeMapping TypeName="NETMEFYModel.vw_notificaciones">
               <MappingFragment StoreEntitySet="vw_notificaciones">
@@ -2382,6 +2370,22 @@ warning 6002: The table/view 'NETMEFY.dbo.VW_Usuarios_App' does not have a prima
             <EntityTypeMapping TypeName="NETMEFYModel.vw_isp_oss">
               <MappingFragment StoreEntitySet="vw_isp_oss">
                 <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fechaFinalizacion" ColumnName="fechaFinalizacion" />
+                <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
+                <ScalarProperty Name="tipoDeOrden" ColumnName="tipoDeOrden" />
+                <ScalarProperty Name="nombreDeCliente" ColumnName="nombreDeCliente" />
+                <ScalarProperty Name="numeroDeCliente" ColumnName="numeroDeCliente" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_isp_ots">
+            <EntityTypeMapping TypeName="NETMEFYModel.vw_isp_ots">
+              <MappingFragment StoreEntitySet="vw_isp_ots">
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="calificacionOT" ColumnName="calificacionOT" />
+                <ScalarProperty Name="tecnico_sk" ColumnName="tecnico_sk" />
+                <ScalarProperty Name="nombreTecnicoAsignado" ColumnName="nombreTecnicoAsignado" />
                 <ScalarProperty Name="fechaFinalizacion" ColumnName="fechaFinalizacion" />
                 <ScalarProperty Name="fechaCreacion" ColumnName="fechaCreacion" />
                 <ScalarProperty Name="tipoDeOrden" ColumnName="tipoDeOrden" />
