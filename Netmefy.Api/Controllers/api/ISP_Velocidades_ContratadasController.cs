@@ -20,7 +20,7 @@ namespace Netmefy.Api.Controllers.api
         [ResponseType(typeof(List<Models.ISP_VelocidadesContratadas>))]
         public IHttpActionResult GetVelocidades_Contratadas(string id)
         {
-            List<vw_porc_vel> velocidades = db.vw_porc_vel.Where(x => x.zona == id).ToList();
+            List<vw_porc_vel> velocidades = db.vw_porc_vel.Where(x => x.zona == id).OrderByDescending(x => x.porc).ToList();
             if (velocidades == null)
             {
                 return NotFound();
