@@ -70,7 +70,7 @@ namespace Netmefy.Api.Controllers
 
 
                 // Chequeo si es un reclamo y la cantidad por zona, y dependiendo eso genero las notificaciones
-                if(orden.tipo_id == 1)
+                if(orden.tipo_id != 1)
                 {
                     Data.cliente cli = _clienteService.findClientBySK(orden.cliente_sk);
                     Data.vw_ot_porc_quejas porc_quejas = db.vw_ot_porc_quejas.Where(x => x.localidad_sk == cli.localidad_sk).FirstOrDefault();

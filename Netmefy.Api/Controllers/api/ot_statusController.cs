@@ -65,8 +65,8 @@ namespace Netmefy.Api.Controllers.api
                     ot.fh_cierre = DateTime.Today;
                     db.SaveChanges();
 
-                    notificacion_desc = string.Concat("Reclamo ", estado.ot_id.ToString(), " resuelto");
-                    notificacion_texto = string.Concat("El reclamo ", estado.ot_id.ToString(), " ha sido resuelto, ante cualquier consulta no dude en informarnos");
+                    notificacion_desc = string.Concat("Orden ", estado.ot_id.ToString(), " resuelta");
+                    notificacion_texto = string.Concat("La orden ", estado.ot_id.ToString(), " ha sido resuelta, ante cualquier consulta no dude en informarnos");
                 }
                 else
                 {
@@ -83,7 +83,7 @@ namespace Netmefy.Api.Controllers.api
 
                     
 
-                    notificacion_desc = string.Concat("Reclamo ", estado.ot_id.ToString(), " en curso");
+                    notificacion_desc = string.Concat("Orden ", estado.ot_id.ToString(), " en curso");
                     if(t != null)
                         notificacion_texto = "Técnico asignado: " + t.tecnico_desc;// string.Concat("El reclamo ", estado.ot_id.ToString(), " esta en curso");
                 }
