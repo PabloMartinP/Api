@@ -21,7 +21,7 @@ namespace Netmefy.Api.Controllers.api
         [ResponseType(typeof(List<Models.webModel>))]
         public IHttpActionResult Getweb()
         {
-            List<Data.lk_web> webs = db.lk_web.ToList();
+            List<Data.lk_web> webs = db.lk_web.OrderByDescending(z => z.web_imagen).ToList();
 
             List<Models.webModel> websModel = new List<Models.webModel>();
             foreach (var w in webs)

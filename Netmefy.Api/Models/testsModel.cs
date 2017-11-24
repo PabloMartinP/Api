@@ -55,8 +55,13 @@ namespace Netmefy.Api.Models
             Data.bt_tests t = new Data.bt_tests();
 
             //t.test_id = test.test_id;
-            t.cliente_sk = test.cliente_sk;
-            if(test.ot_id == -1)
+
+            if(test.cliente_sk == -1)
+                t.cliente_sk = test.cliente_sk;
+            else
+                t.cliente_sk = test.cliente_sk;
+
+            if (test.ot_id == -1)
                 t.ot_id = null;
             else
                 t.ot_id = test.ot_id;
